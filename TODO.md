@@ -7,7 +7,8 @@ Tasks to track development, scalability, polish, and UX improvements.
 ## 1. Architecture & Scalability
 
 ### [HIGH] Reorganize and prepare for scale
-- [ ] Re-arrange folder/file architecture for better separation of concerns and readability
+- [X] Re-arrange folder/file architecture for better separation of concerns and readability
+- [ ] Rename files for a more professional, readable, and clean structure
 - [ ] Set up a reducer (and optionally use context hooks) to manage state more cleanly
 - [ ] [BLOCKED: requires DB setup] Implement CRUD functionality
 - [ ] Set up a proper database to move vendor information out of hardcoded/static files
