@@ -7,15 +7,15 @@ A specialized search engine for logistics professionals that helps match freight
 ## Tech Stack
 
 - **Frontend**
- - `React.js` for UI design  
- - `Bootstrap` for styling and visuals  
- - `HTML`  
- - `CSS`  
- - `JavaScript`  
+    - `React.js` for UI design  
+    - `Bootstrap` for styling and visuals  
+    - `HTML`  
+    - `CSS`  
+    - `JavaScript`  
 
 - **Backend & Tooling**
- - `Node.js`  
- - `Vite.js`  
+    - `Node.js`  
+    - `Vite.js`  
 
 ## Getting Started
 
