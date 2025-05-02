@@ -1,0 +1,44 @@
+import { AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT } from '../variables';
+import { AL, AK, AZ, AR, CA, CO, CT, DC, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, PR } from '../variables';
+import { AGS, BCN, BCS, CAM, CHP, CHH, CMX, COA, COL, DGO, GTO, GRO, HGO, JAL, EMX, MCH, MOR, NAY, NLE, OAX, PUE, QRO, ROO, SLP, SIN, SON, TAB, TAM, TLA, VER, YUC, ZAC } from '../variables';
+
+const geoTree = {
+    CAN: {
+        "Pacific": [BC],
+        "Prairies": [AB, MB, SK],
+        "Northern": [NT, NU, YT],
+        "Ontario": [ON],
+        "Quebec": [QC],
+        "Atlantic": [NB, NL, NS, PE]
+    },
+    USA: {
+        "West Coast": [CA, NV, OR, WA],
+        "Rocky Mountains": [CO, ID, MT, UT, WY],
+        "Sounthwest": [AZ, NM, OK, TX],
+        "Midwest": [IA, IL, IN, KS, MI, MN, MO, ND, NE, OH, SD, WI],
+        "Southeast": [AL, AR, FL, GA, KY, LA, MS, NC, SC, TN, VA, WV],
+        "Mid-Atlantic": [DC, DE, MD, NJ, NY, PA],
+        "New England": [CT, MA, ME, NH, RI, VT],
+        "Non-Contiguous": [AK, HI, PR]
+    },
+    MEX: {
+        "Frontera Norte": [BCN, CHH, COA, NLE, SON, TAM],
+        "Centro-Norte": [BCS, DGO, SIN, ZAC],
+        "Bajio": [AGS, GTO, QRO, SLP],
+        "Occidente": [COL, JAL, MCH, NAY],
+        "Centro": [CMX, HGO, EMX, MOR, PUE, TLA],
+        "Sur-Sureste": [CAM, CHP, GRO, OAX, ROO, TAB, VER, VER, YUC]
+    },
+};
+
+const geoLookup = {};
+
+for (let country in geoTree) {
+    for (let region in geoTree[country]) {
+        for (let state of geoTree[country][region]) {
+            geoLookup[state] = { region, country }
+        };
+    };
+};
+
+export default geoLookup;

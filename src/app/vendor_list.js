@@ -1,0 +1,572 @@
+import { Truckload, ReeferTruckload, Flatbed, StepDeck, Specialized, Partial, ReeferPartial, LTL, ReeferLTL, Intermodal, Expedited, Drayage } from './variables';
+import { AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT } from './variables';
+import { AL, AK, AZ, AR, CA, CO, CT, DC, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, PR } from './variables';
+import { AGS, BCN, BCS, CAM, CHP, CHH, CMX, COA, COL, DGO, GTO, GRO, HGO, JAL, EMX, MCH, MOR, NAY, NLE, OAX, PUE, QRO, ROO, SLP, SIN, SON, TAB, TAM, TLA, VER, YUC, ZAC } from './variables';
+import { notApplicable, Otay, Calexico, Nogales, ElPaso, Laredo, Hidalgo, Brownsville } from './variables';
+
+export const vendors = [
+    {
+        id: 1,
+        vendorName: "Totran Transportation",
+        vendorType: {
+            asset_based: true,
+            freight_broker: false
+        },
+        vendorContact: "Scott Pottie",
+        vendorEmail: "scottp@totran.ca",
+        vendorPhone: "587-254-2390",
+        vendorDomicile: {
+            country: "CAN",
+            state: AB,
+        },
+        vendorModes: [Flatbed, StepDeck, Specialized],
+        vendorHazmat: false,
+        vendorTeamDrivers: false,
+        vendorUSBonded: false,
+        vendorCanadaBonded: false,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [WA, OR, CA, TX, OK]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: []
+            },
+        ],
+        vendorBorder: [notApplicable],
+        vendorFavLanes: ["AB:Anywhere", "BC:AB", "Edmonton, AB:Vancouver, BC"],
+        vendorBlockedLanes: ["USA:USA", "BC:TX", "CAN:MEX"],
+    },
+    {
+        id: 2,
+        vendorName: "Maven Transport",
+        vendorType: {
+            asset_based: true,
+            freight_broker: false
+        },
+        vendorContact: "Rick D",
+        vendorEmail: "rick.d@maventransport.com",
+        vendorPhone: "604-287-1300",
+        vendorDomicile: {
+            country: "CAN",
+            state: BC,
+        },
+        vendorModes: [Truckload, Flatbed, StepDeck, Specialized],
+        vendorHazmat: true,
+        vendorTeamDrivers: true,
+        vendorUSBonded: true,
+        vendorCanadaBonded: true,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [BC, ON, QC]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [OH, IL, IN]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: []
+            },
+        ],
+        vendorBorder: [notApplicable],
+        vendorFavLanes: [],
+        vendorBlockedLanes: [],
+    },
+    {
+        id: 3,
+        vendorName: "Gigg Express",
+        vendorType: {
+            asset_based: true,
+            freight_broker: false
+        },
+        vendorContact: "Pricing Team",
+        vendorEmail: "pricing@giggexpress.ca",
+        vendorPhone: "905-614-0544",
+        vendorDomicile: {
+            country: "CAN",
+            state: ON,
+        },
+        vendorModes: [Truckload],
+        vendorHazmat: true,
+        vendorTeamDrivers: true,
+        vendorUSBonded: true,
+        vendorCanadaBonded: true,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [ON, QC]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [TX]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [NLE, EMX, PUE, JAL]
+            },
+        ],
+        vendorBorder: [notApplicable, Laredo],
+        vendorFavLanes: [],
+        vendorBlockedLanes: [],
+    },
+    {
+        id: 4,
+        vendorName: "CFI Logistica",
+        vendorType: {
+            asset_based: true,
+            freight_broker: true
+        },
+        vendorContact: "Jorge Delgadillo",
+        vendorEmail: "jorge.delgadillo@cfidrive.com",
+        vendorPhone: "+52-867-136-0123",
+        vendorDomicile: {
+            country: "MEX",
+            state: JAL,
+        },
+        vendorModes: [Truckload, LTL],
+        vendorHazmat: true,
+        vendorTeamDrivers: true,
+        vendorUSBonded: true,
+        vendorCanadaBonded: true,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: []
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [TX]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [NLE, EMX, PUE, JAL, COA]
+            },
+        ],
+        vendorBorder: [notApplicable, Laredo],
+        vendorFavLanes: [],
+        vendorBlockedLanes: [],
+    },
+    {
+        id: 5,
+        vendorName: "Melton Truck",
+        vendorType: {
+            asset_based: true,
+            freight_broker: false
+        },
+        vendorContact: "Pricing Team",
+        vendorEmail: "MexicoQuotes@meltontruck.com",
+        vendorPhone: "918-270-9672",
+        vendorDomicile: {
+            country: "USA",
+            state: OK,
+        },
+        vendorModes: [Flatbed, StepDeck, Specialized],
+        vendorHazmat: true,
+        vendorTeamDrivers: true,
+        vendorUSBonded: true,
+        vendorCanadaBonded: true,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [ON, QC]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [TX, OK, IL, OH, IN, TN, CA]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [NLE, EMX, PUE, JAL, COA]
+            },
+        ],
+        vendorBorder: [notApplicable, Otay, Calexico, Calexico, ElPaso, Laredo, Hidalgo],
+        vendorFavLanes: [],
+        vendorBlockedLanes: [],
+    }
+
+];
+
+export const vendors2 = [
+    {
+        id: 2,
+        vendorName: "Gigg Express Inc",
+        vendorType: {
+            asset_based: true,
+            freight_broker: true
+        },
+        vendorContact: "Karen Lee",
+        vendorEmail: "klee@giggexpress.com",
+        vendorPhone: "905-123-4567",
+        vendorDomicile: {
+            country: "CAN",
+            state: ON,
+        },
+        vendorModes: [Truckload, ReeferTruckload, Expedited],
+        vendorHazmat: true,
+        vendorTeamDrivers: false,
+        vendorUSBonded: true,
+        vendorCanadaBonded: true,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [ON, QC, MB]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [NY, PA, OH, MI]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [NLE, CHH]
+            }
+        ],
+        vendorBorder: [notApplicable, Laredo, Hidalgo],
+        vendorFavLanes: ["ON:NY", "Montreal, QC:Chicago, IL", "CAN:USA"],
+        vendorBlockedLanes: ["MEX:CAN"]
+    },
+    {
+        id: 3,
+        vendorName: "Titanium Transportation",
+        vendorType: {
+            asset_based: true,
+            freight_broker: false
+        },
+        vendorContact: "Lucas Meyer",
+        vendorEmail: "lmeyer@titaniumtrans.com",
+        vendorPhone: "519-555-7890",
+        vendorDomicile: {
+            country: "CAN",
+            state: ON,
+        },
+        vendorModes: [Flatbed, Truckload, Partial],
+        vendorHazmat: false,
+        vendorTeamDrivers: true,
+        vendorUSBonded: false,
+        vendorCanadaBonded: true,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [ON, QC, MB, SK]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [MI, OH, IN]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: []
+            }
+        ],
+        vendorBorder: [notApplicable],
+        vendorFavLanes: ["Toronto, ON:Detroit, MI", "QC:ON", "CAN:USA"],
+        vendorBlockedLanes: ["MEX:USA", "MEX:CAN"]
+    },
+    {
+        id: 4,
+        vendorName: "TA Logistics, Inc",
+        vendorType: {
+            asset_based: false,
+            freight_broker: true
+        },
+        vendorContact: "Samantha Taylor",
+        vendorEmail: "staylor@talogistics.com",
+        vendorPhone: "312-456-7891",
+        vendorDomicile: {
+            country: "USA",
+            state: IL,
+        },
+        vendorModes: [LTL, Intermodal, Drayage],
+        vendorHazmat: false,
+        vendorTeamDrivers: false,
+        vendorUSBonded: true,
+        vendorCanadaBonded: false,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [ON, QC]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [IL, WI, IN, OH]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [TAM, COA]
+            }
+        ],
+        vendorBorder: [notApplicable, Laredo],
+        vendorFavLanes: ["Chicago, IL:Toronto, ON", "USA:CAN", "IL:OH"],
+        vendorBlockedLanes: ["MEX:CAN"]
+    },
+    {
+        id: 5,
+        vendorName: "CAT Inc",
+        vendorType: {
+            asset_based: true,
+            freight_broker: true
+        },
+        vendorContact: "Michel Fortier",
+        vendorEmail: "mfortier@cat.ca",
+        vendorPhone: "+1-450-123-4567",
+        vendorDomicile: {
+            country: "CAN",
+            state: QC,
+        },
+        vendorModes: [Truckload, ReeferTruckload, LTL],
+        vendorHazmat: true,
+        vendorTeamDrivers: true,
+        vendorUSBonded: true,
+        vendorCanadaBonded: true,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [QC, ON, NB]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [NY, MA, PA]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: []
+            }
+        ],
+        vendorBorder: [notApplicable],
+        vendorFavLanes: ["Montreal, QC:Boston, MA", "QC:NY", "Atlantic:Mid-Atlantic"],
+        vendorBlockedLanes: ["MEX:CAN"]
+    },
+    {
+        id: 6,
+        vendorName: "Trucking Experts LLC",
+        vendorType: {
+            asset_based: true,
+            freight_broker: false
+        },
+        vendorContact: "Juan Morales",
+        vendorEmail: "jmorales@truckingexperts.com",
+        vendorPhone: "956-123-9988",
+        vendorDomicile: {
+            country: "USA",
+            state: TX,
+        },
+        vendorModes: [Truckload, ReeferTruckload, Drayage],
+        vendorHazmat: true,
+        vendorTeamDrivers: false,
+        vendorUSBonded: true,
+        vendorCanadaBonded: false,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: []
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [TX, OK, LA]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [TAM, NLE]
+            }
+        ],
+        vendorBorder: [notApplicable, Laredo, Hidalgo],
+        vendorFavLanes: ["TX:TAM", "Anywhere:NLE", "USA:MEX"],
+        vendorBlockedLanes: ["CAN:USA", "CAN:MEX"]
+    },
+    {
+        id: 7,
+        vendorName: "Blue River Logistics",
+        vendorType: {
+            asset_based: false,
+            freight_broker: true
+        },
+        vendorContact: "Angela Cox",
+        vendorEmail: "acox@blueriverlogistics.com",
+        vendorPhone: "303-234-5678",
+        vendorDomicile: {
+            country: "USA",
+            state: CO,
+        },
+        vendorModes: [Intermodal, LTL, Partial],
+        vendorHazmat: false,
+        vendorTeamDrivers: false,
+        vendorUSBonded: false,
+        vendorCanadaBonded: false,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: []
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [CO, UT, KS, NE]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: []
+            }
+        ],
+        vendorBorder: [notApplicable],
+        vendorFavLanes: ["CO:UT", "CO:KS"],
+        vendorBlockedLanes: ["MEX:CAN", "CAN:USA"]
+    },
+    {
+        id: 8,
+        vendorName: "Pacific Haulers",
+        vendorType: {
+            asset_based: true,
+            freight_broker: false
+        },
+        vendorContact: "Jared Lee",
+        vendorEmail: "jlee@pacifichaulers.com",
+        vendorPhone: "209-345-6789",
+        vendorDomicile: {
+            country: "USA",
+            state: CA,
+        },
+        vendorModes: [Flatbed, Specialized, Drayage],
+        vendorHazmat: true,
+        vendorTeamDrivers: false,
+        vendorUSBonded: true,
+        vendorCanadaBonded: false,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [BC]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [CA, OR, WA]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [BCN, SON]
+            }
+        ],
+        vendorBorder: [notApplicable, Otay, Nogales],
+        vendorFavLanes: ["CA:BCN", "BC:WA", "Vancouver, BC:Los Angeles, CA"],
+        vendorBlockedLanes: ["TX:NLE"]
+    },
+    {
+        id: 9,
+        vendorName: "NorthPoint Logistics",
+        vendorType: {
+            asset_based: false,
+            freight_broker: true
+        },
+        vendorContact: "Brad Keller",
+        vendorEmail: "bkeller@northpointlog.com",
+        vendorPhone: "816-456-1234",
+        vendorDomicile: {
+            country: "USA",
+            state: MO,
+        },
+        vendorModes: [Truckload, Partial, ReeferPartial],
+        vendorHazmat: false,
+        vendorTeamDrivers: true,
+        vendorUSBonded: true,
+        vendorCanadaBonded: false,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [MB, ON]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [MO, IL, IN, KS]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: []
+            }
+        ],
+        vendorBorder: [notApplicable],
+        vendorFavLanes: ["MO:ON", "Midwest:Ontario", "USA:CAN"],
+        vendorBlockedLanes: ["MEX:USA", "MEX:CAN"]
+    },
+    {
+        id: 10,
+        vendorName: "Rapid Cargo Transport",
+        vendorType: {
+            asset_based: true,
+            freight_broker: true
+        },
+        vendorContact: "Isabel Ruiz",
+        vendorEmail: "iruiz@rapidcargo.mx",
+        vendorPhone: "+52-81-5555-1234",
+        vendorDomicile: {
+            country: "MEX",
+            state: NLE,
+        },
+        vendorModes: [Truckload, ReeferTruckload, Expedited],
+        vendorHazmat: true,
+        vendorTeamDrivers: true,
+        vendorUSBonded: true,
+        vendorCanadaBonded: false,
+        vendorCoverage: [
+            {
+                coverageCountry: "Canada",
+                coverageCountryAlias: "CAN",
+                coverageContent: [ON, QC]
+            },
+            {
+                coverageCountry: "United States",
+                coverageCountryAlias: "USA",
+                coverageContent: [TX, OK, IL]
+            },
+            {
+                coverageCountry: "Mexico",
+                coverageCountryAlias: "MEX",
+                coverageContent: [NLE, COA, CHH]
+            }
+        ],
+        vendorBorder: [notApplicable, Laredo, Hidalgo],
+        vendorFavLanes: ["Monterrey, NLE:Chicago, IL", "MEX:USA", "USA:CAN"],
+        vendorBlockedLanes: ["BC:TX", "MEX:BC"]
+    }
+];
