@@ -4,6 +4,12 @@
 
 A specialized search engine for logistics professionals that helps match freight transportation needs with suitable vendors. Designed to streamline vendor look-up based on multiple criteria like origin and destination, transportation mode, and load specifications. The current scope of its functionality is for loads and carriers in Canada, U.S., and Mexico only.
 
+> **!! IMPORTANT DISCLAIMER !!**
+> Please note that at this stage of development,  
+> the vendors displayed with current searches are
+> mock vendors, they're not real or the information
+> shown is very likely made up or extremely inaccurate.
+
 ## Tech Stack
 
 - **Frontend**  
