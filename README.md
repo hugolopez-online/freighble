@@ -7,6 +7,6 @@ This project is a specialized industry-specific search engine, which aims to exp
 ## Technologies used
 
  - Basic stack: `HTML`, `CSS`, `JavaScript`
- - `Vite.js` as development environment (run `npm install` to install dependencies)
+ - `Node.js` and `Vite.js` for development environment (run `npm install` to install dependencies)
  - `React.js` for UI design
  - `Bootstrap` for styling and visuals
