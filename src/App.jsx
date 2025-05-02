@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Navbar from './app/components/Navbar';
 import Search from './app/components/Search';
-import Vendors from './app/components/Vendors';
+import Directory from './app/components/Directory';
 //import './App.css';
 
 const defaultSpecs = {
@@ -50,7 +50,7 @@ function App() {
     <div className='row m-0'>
       {/* <Navbar /> */}
       <Search formData={formData} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
-      <Vendors specs={specs} defaultSpecs={defaultSpecs} resetSpecs={resetSpecs} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
+      <Directory specs={specs} defaultSpecs={defaultSpecs} resetSpecs={resetSpecs} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
     </div>
   )
 };

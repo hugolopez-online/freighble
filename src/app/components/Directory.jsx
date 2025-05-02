@@ -1,8 +1,8 @@
-import { vendors, vendors2 } from "../vendor_list";
+import { vendors, vendors2 } from "../vendors";
 import { useState } from "react";
-import VendorCard from "./VendorCard";
+import Vendor from "./Vendor";
 
-const Vendors = (props) => {
+const Directory = (props) => {
     const [vendorList, setVendorList] = useState(vendors2);
 
     const enoughData = props.specs.mode && props.specs.origin.country && props.specs.destination.country;    
@@ -36,7 +36,7 @@ const Vendors = (props) => {
                 {vendorList.map((vendor, index) => {
 
                     return (
-                        <VendorCard
+                        <Vendor
                             key={vendor.vendorName.replace(/ /g, "-").concat("-", index)}
                             vendorKey={vendor.vendorName.replace(/ /g, "-").concat("-", index)}
                             {...vendor}
@@ -49,4 +49,4 @@ const Vendors = (props) => {
     );
 };
 
-export default Vendors;
+export default Directory;

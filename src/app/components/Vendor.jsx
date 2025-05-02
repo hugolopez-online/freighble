@@ -2,7 +2,7 @@ import VendorCoverage from "./VendorCoverage";
 import specsWeight from "../handlers/suitabilityMeta";
 import { useState, useEffect } from "react";
 
-const VendorCard = (props) => {
+const Vendor = (props) => {
     const [suitability, setSuitability] = useState(0);
     const modeW = specsWeight.mandatory.modeW;
     const oCountryW = specsWeight.mandatory.oCountryW;
@@ -150,4 +150,4 @@ const VendorCard = (props) => {
     );
 };
 
-export default VendorCard;
+export default Vendor;
