@@ -2,18 +2,18 @@
 
 ## Description
 
-A specialized search engine for logistics professionals that helps match freight transportation needs with suitable vendors. Designed to streamline vendor look-up based on multiple criteria like origin and destination, transportation mode, and load specifications.
+A specialized search engine for logistics professionals that helps match freight transportation needs with suitable vendors. Designed to streamline vendor look-up based on multiple criteria like origin and destination, transportation mode, and load specifications. The current scope of its functionality is for loads and carriers in Canada, U.S., and Mexico only.
 
 ## Tech Stack
 
-- **Frontend**
+- **Frontend**  
     - `React.js` for UI design  
     - `Bootstrap` for styling and visuals  
     - `HTML`  
     - `CSS`  
     - `JavaScript`  
 
-- **Backend & Tooling**
+- **Backend & Tooling**  
     - `Node.js`  
     - `Vite.js`  
 
@@ -25,8 +25,21 @@ A specialized search engine for logistics professionals that helps match freight
 
 ## Features
 
-- Vendor search by origin, destination, and transport mode
-- Suitability scoring based on custom criteria
-- Vendor cards with key information
-- Favorite and blocked lane recognition (WIP)
-- Email preparation for vendor outreach (planned)
+### Current
+
+- Search form with fields for:  
+    - Transportation mode  
+    - Origin (city and state/province)  
+    - Destination (city and state/province)  
+    - Border crossing, if applicable  
+    - Additional load specs (hazmat, team drivers, bond)  
+- Dynamic banner that displays the details of the load whose results are currently visible, and includes buttons to clear the results and to template the current search for a new one.  
+- Results area that displays the vendors that best match the searched criteria.  
+- Vendor cards displaying important key information about the company, matching offered services, and suitability score.  
+
+### Planned
+
+- Autocomplete function for location fields in the search form  
+- Ergonomic feedback for user's actions  
+- Recognition and scoring of favorite and blocked lanes  
+- Button to prepare and send emails for vendor outreach  
