@@ -13,8 +13,6 @@ const Vendor = (props) => {
     const teamW = specsWeight.mandatory.teamW;
     const usbondW = specsWeight.mandatory.usbondW;
     const canadabondW = specsWeight.mandatory.canadabondW;
-
-    console.log(props.vendorCoverage.map((country) => country.coverageContent[0] && country.coverageCountryAlias));
     
     const placeholder = "AB:Anywhere";
     const placeholder2 = "BC:TX";
@@ -75,13 +73,14 @@ const Vendor = (props) => {
 
     }, [props.specs.mode, props.specs.origin, props.specs.destination, props.specs.border, props.specs.hazmat, props.specs.team, props.specs.usbond, props.specs.canadabond]);
 
-    // if (suitability < Math.round(Object.values(specsWeight.mandatory).reduce((sum, value) => sum + value, 0))) {
-    //     return false
-    // };
-
-    if (suitability < 0) {
+    if (suitability < Math.round(Object.values(specsWeight.mandatory).reduce((sum, value) => sum + value, 0))) {
         return false
     };
+
+    // TEST ONLY: visualize all carriers regardless of score
+    // if (suitability < 0) {
+    //     return false
+    // };
 
     return (
         <div className="col-md-5 p-1 m-1 card">
