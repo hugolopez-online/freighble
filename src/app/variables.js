@@ -233,7 +233,7 @@ export const [
     ZAC] = mexDivisions;
 
 export const borderCrossingPorts = [
-    "Not Applicable",
+    "N/A",
     "Otay, CA",
     "Calexico, CA",
     "Nogales, AZ",

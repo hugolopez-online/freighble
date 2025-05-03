@@ -29,7 +29,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 ## 3. User Interaction Enhancements
 
 ### [MEDIUM] Input UX and interaction polish
-- [ ] Simplify suitability visualization on carrier cards (maybe icons, bar, or color tags)
+- [X] Simplify suitability visualization on carrier cards
 - [ ] Implement autofill functionality for Origin/Destination input fields
 - [ ] Improve state selectors:
   - [ ] Allow typed input
