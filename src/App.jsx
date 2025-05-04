@@ -48,12 +48,28 @@ function App() {
   };
 
   return (
-    <div className='row m-0'>
-      {/* <Navbar /> */}
-      <Search formData={formData} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
-      {/* <Banner /> */}
-      <Directory specs={specs} defaultSpecs={defaultSpecs} resetSpecs={resetSpecs} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
-    </div>
+    <>
+      <div className="row justify-content-md-center text-bg-dark">
+        <div className="col-12 col-md-10">
+          <Navbar />
+        </div>
+      </div>
+      <div className="row justify-content-md-center">
+        <div className="col-12 col-md-3">
+          <Search formData={formData} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
+        </div>
+        <div className="col-12 col-md-7">
+          <div className="row justify-content-md-center">
+            <div className="col-12">
+              <Banner specs={specs} />
+            </div>
+          </div>
+          <div className="row g-3">
+            <Directory specs={specs} defaultSpecs={defaultSpecs} resetSpecs={resetSpecs} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
+          </div>
+        </div>
+      </div>
+    </>
   )
 };
 
