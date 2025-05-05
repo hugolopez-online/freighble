@@ -2,22 +2,7 @@ import { useEffect, useState } from "react";
 import { transportationModes, canDivisions, usaDivisions, mexDivisions, borderCrossingPorts } from "../variables";
 import geoLookup from "../handlers/geoMeta";
 
-// const defaultFormData = {
-//     mode: "void",
-//     originCity: "",
-//     originState: "void",
-//     destinationCity: "",
-//     destinationState: "void",
-//     border: "Not Applicable",
-//     hazmat: false,
-//     team: false,
-//     usbond: false,
-//     canadabond: false
-// };
-
 const Search = (props) => {
-    // const [formData, setFormData] = useState(defaultFormData);
-
     const handleSpecs = (e) => {
         e.preventDefault();
         const originCity = document.getElementById("originCity").value;

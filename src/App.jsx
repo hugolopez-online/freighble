@@ -3,7 +3,6 @@ import Navbar from './app/components/Navbar';
 import Search from './app/components/Search';
 import Directory from './app/components/Directory';
 import Banner from './app/components/Banner'
-//import './App.css';
 
 const defaultSpecs = {
   mode: "",

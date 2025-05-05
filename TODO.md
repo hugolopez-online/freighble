@@ -31,11 +31,8 @@ Tasks to track development, scalability, polish, and UX improvements.
 ### [MEDIUM] Input UX and interaction polish
 - [X] Simplify suitability visualization on carrier cards
 - [ ] Implement autofill functionality for Origin/Destination input fields
-- [ ] Improve state selectors:
-  - [ ] Allow typed input
-  - [ ] Still restrict input to valid values only
 - [ ] Improve form interaction feedback:
-  - [ ] Highlight invalid or incomplete fields on submit
+  - [X] Highlight invalid or incomplete fields on submit
   - [ ] Scroll to the first field that needs user attention
 
 ---
@@ -45,14 +42,14 @@ Tasks to track development, scalability, polish, and UX improvements.
 ### [MEDIUM] Data flow & coordination
 - [ ] Refactor the banner component logic:
   - [ ] Improve communication between banner and other components
-  - [ ] Possibly move banner to be a sibling of Search and Vendors, not a child
+  - [X] Possibly move banner to be a sibling of Search and Vendors, not a child
 
 ---
 
 ## 5. Polish & Visual Presentation
 
 ### [LOW] Make it visually deliverable
-- [ ] Style the page to look presentable (use Bootstrap as the main styling library)
+- [X] Style the page to look presentable (use Bootstrap as the main styling library)
 - [ ] Message and button on carrier cards to prepare/send an email to that vendor
 
 ---
@@ -60,16 +57,14 @@ Tasks to track development, scalability, polish, and UX improvements.
 ## 6. Code Cleanup & QA
 
 ### [LOW] Maintainability and testability
-- [ ] Clean up or standardize all test `console.log()` messages to allow easy global removal
-- [ ] Clean up and standardize in-code comments
+- [X] Clean up and standardize all test `console.log()` messages to allow easy global removal
+- [X] Clean up and standardize in-code comments
 
 ---
 
-## Notes & Tips
+## Notes
 
-- [TIP] Prefer splitting compound tasks for easier progress tracking and commit history.
-- [TIP] Use GitHub Issues or Trello to migrate this list into a visual Kanban format.
-- [TIP] You can install the VSCode extension **"Todo Tree"** to view all `// TODO:` comments in a sidebar.
+- All the app keeps re-rendering with every change in the search form.
 
 ---
 
