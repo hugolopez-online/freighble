@@ -49,22 +49,22 @@ function App() {
 
   return (
     <>
-      <div className="row justify-content-md-center text-bg-dark">
+      <div className="row justify-content-md-center text-bg-dark mb-4">
         <div className="col-12 col-md-10">
           <Navbar />
         </div>
       </div>
-      <div className="row justify-content-md-center">
-        <div className="col-12 col-md-3">
+      <div id="searchForm" className="row justify-content-md-center mb-3">
+        <div className="col-12 col-md-3 mb-3">
           <Search formData={formData} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
         </div>
-        <div className="col-12 col-md-7">
-          <div className="row justify-content-md-center">
+        <div className="col-12 col-md-7 mb-3">
+          <div id="informativeBanner" className="row justify-content-md-center">
             <div className="col-12">
               <Banner specs={specs} />
             </div>
           </div>
-          <div className="row g-3">
+          <div className="row g-3 mb-3">
             <Directory specs={specs} defaultSpecs={defaultSpecs} resetSpecs={resetSpecs} setFormData={setFormData} defaultFormData={defaultFormData} setSpecs={setSpecs} />
           </div>
         </div>
