@@ -2,15 +2,12 @@
 
 ## Description
 
-Specialized search engine for logistics professionals to match freight transportation needs with suitable vendors. Designed to expedite vendor look-up, based on multiple criteria such as:  
-- Origin and destination  
-- Transportation mode  
-- Load specifications  
+Specialized search engine for logistics professionals to match freight transportation needs with suitable vendors.
 
 The current scope of its functionality is for loads and carriers within Canada, U.S., and Mexico only.
 
-> **!! IMPORTANT DISCLAIMER !!**  
-> Please note that at this stage of development, it's mock vendors that are being used for testing - they're not real or the information shown is likely made up or extremely inaccurate.  
+> **IMPORTANT DISCLAIMER**  
+> At this stage of development, it's mock vendors that are being used for testing -either they're not real or the information shown is likely made up or extremely inaccurate.  
 
 ## Tech Stack
 
@@ -39,11 +36,11 @@ The current scope of its functionality is for loads and carriers within Canada, 
     - Transportation mode  
     - Origin (city and state/province)  
     - Destination (city and state/province)  
-    - Border crossing, if applicable  
+    - Border crossing port, if applicable  
     - Additional load specs (hazmat, team drivers, bond)  
-- Dynamic banner that displays the details of the load whose results are currently visible, and includes buttons to clear the results and to template the current search for a new one.  
+- Dynamic banner that displays the details of the load whose results are currently visible, including buttons to clear the results and to template the current search for a new one.  
 - Results area that displays the vendors that best match the searched criteria.  
-- Vendor cards displaying important key information about the company, matching offered services, and suitability score.  
+- Vendor cards displaying key information about the company, matching variables, and suitability score.  
 
 ### Planned
 
