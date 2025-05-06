@@ -10,21 +10,7 @@ const Banner = (props) => {
                     </p>
                     <p>
                         <button className="btn btn-outline-danger" type="button" onClick={() => props.setSpecs(props.defaultSpecs)}>Clear results</button>
-                        <button className="btn btn-dark ms-2" type="button" onClick={() => props.setFormData((prev) => {
-                            return ({
-                                ...prev,
-                                mode: props.specs.mode,
-                                originCity: props.specs.origin.city,
-                                originState: props.specs.origin.state,
-                                destinationCity: props.specs.destination.city,
-                                destinationState: props.specs.destination.state,
-                                border: props.specs.border,
-                                hazmat: props.specs.hazmat,
-                                team: props.specs.team,
-                                usbond: props.specs.usbond,
-                                canadabond: props.specs.canadabond
-                            });
-                        })}>Template for new search</button>
+                        <button className="btn btn-dark ms-2" type="button" onClick={() => props.templateSpecs(props.specs)}>Template for new search</button>
                     </p>
                 </div> :
                 <div className="alert alert-warning" role="alert">

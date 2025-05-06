@@ -18,6 +18,9 @@ const defaultFormData = {
 const Search = (props) => {
     const [formData, setFormData] = useState(defaultFormData);
 
+    //TEST LOG, delete when done testing
+    console.log("TESTING");    
+
     const handleSpecs = (e) => {
         e.preventDefault();
         const originCity = document.getElementById("originCity").value;
@@ -54,7 +57,26 @@ const Search = (props) => {
         });
 
         setFormData(defaultFormData);
+        document.getElementById("informativeBanner").scrollIntoView({ block: "start", behavior: "instant" });
     };
+
+    const callTemplate = (factorData) => {
+        setFormData((prev) => {
+          return ({
+            ...prev,
+            mode: factorData.mode,
+            originCity: factorData.origin.city,
+            originState: factorData.origin.state,
+            destinationCity: factorData.destination.city,
+            destinationState: factorData.destination.state,
+            border: factorData.border,
+            hazmat: factorData.hazmat,
+            team: factorData.team,
+            usbond: factorData.usbond,
+            canadabond: factorData.canadabond
+          });
+        });
+      };
 
     return (
         <form className="border rounded-3 p-3 text-bg-light" onSubmit={handleSpecs}>

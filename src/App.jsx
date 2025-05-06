@@ -46,8 +46,29 @@ function App() {
     setSpecs(defaultSpecs);
   };
 
-  const templateSpecs = () => {
+  // const callTemplate = (factorData) => {
+  //   setFormData((prev) => {
+  //     return ({
+  //       ...prev,
+  //       mode: factorData.mode,
+  //       originCity: factorData.origin.city,
+  //       originState: factorData.origin.state,
+  //       destinationCity: factorData.destination.city,
+  //       destinationState: factorData.destination.state,
+  //       border: factorData.border,
+  //       hazmat: factorData.hazmat,
+  //       team: factorData.team,
+  //       usbond: factorData.usbond,
+  //       canadabond: factorData.canadabond
+  //     });
+  //   });
+  // };
+
+  const templateSpecs = (retrievedTemplate) => {
     //RETRIEVE TEMPLATED SEARCH FORM DATA
+    //TEST LOGS: DELETE AFTER TESTING
+    console.log("I retrieved this, now how do I send it down to Search.jsx");
+    console.log(retrievedTemplate);
   };
 
   return (
@@ -57,14 +78,14 @@ function App() {
           <Navbar />
         </div>
       </div>
-      <div id="searchForm" className="row justify-content-md-center mb-3">
-        <div className="col-12 col-md-3 mb-3">
+      <div className="row justify-content-md-center mb-3">
+        <div id="searchForm" className="col-12 col-md-3 mb-3">
           <Search setSpecs={setSpecs} />
         </div>
         <div className="col-12 col-md-7 mb-3">
-          <div id="informativeBanner" className="row justify-content-md-center">
-            <div className="col-12">
-              <Banner specs={specs} defaultSpecs={defaultSpecs} resetSpecs={resetSpecs} setSpecs={setSpecs} />
+          <div className="row justify-content-md-center">
+            <div id="informativeBanner" className="col-12">
+              <Banner specs={specs} defaultSpecs={defaultSpecs} resetSpecs={resetSpecs} setSpecs={setSpecs} templateSpecs={templateSpecs} />
             </div>
           </div>
           <div className="row g-3 mb-3">

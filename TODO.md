@@ -31,9 +31,9 @@ Tasks to track development, scalability, polish, and UX improvements.
 ### [MEDIUM] Input UX and interaction polish
 - [X] Simplify suitability visualization on carrier cards
 - [ ] Implement autofill functionality for Origin/Destination input fields
-- [ ] Improve form interaction feedback:
+- [X] Improve form interaction feedback:
   - [X] Highlight invalid or incomplete fields on submit
-  - [ ] Scroll to the first field that needs user attention
+  - [X] Scroll to the first field that needs user attention
 
 ---
 
