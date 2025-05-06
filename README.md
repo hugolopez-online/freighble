@@ -17,7 +17,7 @@ The current scope of its functionality is for loads and carriers within Canada, 
     - `HTML`  
     - `CSS`  
     - `JavaScript`  
-    - ![React.js](http://www.react.dev/)
+    - `React.js`
 
 - **Backend & Tooling**  
     - `Node.js`  
