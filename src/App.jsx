@@ -73,7 +73,7 @@ function App() {
 
   return (
     <>
-      <div className="row justify-content-md-center text-bg-dark mb-4">
+      <div className="row justify-content-md-center text-bg-dark shadow mb-4">
         <div className="col-12 col-md-10">
           <Navbar />
         </div>

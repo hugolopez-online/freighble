@@ -16,10 +16,7 @@ const defaultFormData = {
 };
 
 const Search = (props) => {
-    const [formData, setFormData] = useState(defaultFormData);
-
-    //TEST LOG, delete when done testing
-    console.log("TESTING");    
+    const [formData, setFormData] = useState(defaultFormData);  
 
     const handleSpecs = (e) => {
         e.preventDefault();
@@ -57,7 +54,7 @@ const Search = (props) => {
         });
 
         setFormData(defaultFormData);
-        document.getElementById("informativeBanner").scrollIntoView({ block: "start", behavior: "instant" });
+        document.getElementById("informativeBanner").scrollIntoView({ block: "start", behavior: "smooth" });
     };
 
     const callTemplate = (factorData) => {
@@ -79,7 +76,7 @@ const Search = (props) => {
       };
 
     return (
-        <form className="border rounded-3 p-3 text-bg-light" onSubmit={handleSpecs}>
+        <form className="shadow-sm border rounded-3 p-3 text-bg-light" onSubmit={handleSpecs}>
             <div className="row">
                 <div className="col-12">
                     <h4 className="fw-bold">Load details</h4>
@@ -206,8 +203,10 @@ const Search = (props) => {
                     </div>
                 </div>
             </fieldset>
-            <button type="button" className="btn btn-sm btn-outline-danger mb-2" onClick={() => setFormData(defaultFormData)}>Reset fields</button>
-            <button type="submit" className="btn btn-dark w-100 fw-bold">
+            <button type="button" className="btn btn-sm btn-warning shadow-sm w-100 mb-2" onClick={() => setFormData(defaultFormData)}>
+                Reset fields
+            </button>
+            <button type="submit" className="btn btn-lg btn-dark shadow-sm fw-bold w-100">
                 Search
             </button>
         </form>

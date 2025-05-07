@@ -83,8 +83,8 @@ const Vendor = (props) => {
     // };
 
     return (
-        <div className="col-12 col-md-6">
-            <div className="card">
+        <div className="col-12">
+            <div className="card bg-light-subtle shadow-sm">
                 <div className="position-absolute" style={{ top: "-0.5em", right: "-0.25em"}}>
                     <span className="badge border border-primary text-bg-info"><i className="bi bi-crosshair"></i> {suitability}%</span>
                 </div>

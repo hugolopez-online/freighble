@@ -17,6 +17,8 @@ const Directory = (props) => {
                     />
                 );
             })}
+            {/* DIV BELOW MUST BE REMOVED EVENTUALLY, IT'S ONLY FOR TESTING PUSRPOSES (CREATES SPACE FOR AUTO-SCROLLING TO BE POSSIBLE) */}
+            <div style={{height: "1000px"}}></div>
         </>
     );
 };
