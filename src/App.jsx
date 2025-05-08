@@ -48,7 +48,10 @@ function App() {
                 </div>
             </div>
             <div className="row justify-content-md-center mb-3">
-                <div id="searchForm" className="col-12 col-md-3 mb-3">
+                <div
+                    id="searchForm"
+                    className="col-12 col-md-3 mb-3"
+                >
                     <Search
                         setSpecs={setSpecs}
                         template={template}
@@ -64,7 +67,10 @@ function App() {
                             zIndex: 1000,
                         }}
                     >
-                        <div id="informativeBanner" className="col-12">
+                        <div
+                            id="informativeBanner"
+                            className="col-12"
+                        >
                             <Banner
                                 specs={specs}
                                 defaultSpecs={defaultSpecs}
