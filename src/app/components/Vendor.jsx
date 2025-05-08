@@ -14,9 +14,6 @@ const Vendor = (props) => {
     const usbondW = specsWeight.mandatory.usbondW;
     const canadabondW = specsWeight.mandatory.canadabondW;
 
-    const placeholder = "AB:Anywhere";
-    const placeholder2 = "BC:TX";
-
     useEffect(() => {
         setSuitability(0);
         let updatedScore = 0;
@@ -214,7 +211,7 @@ const Vendor = (props) => {
                                     )
                                     .includes(true)
                                     ? "check-circle-fill"
-                                    : "circle"
+                                    : "x-circle"
                             } ms-2`}
                         ></i>
                     </span>
