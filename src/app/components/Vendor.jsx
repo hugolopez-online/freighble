@@ -257,7 +257,7 @@ const Vendor = (props) => {
                                     )
                                     .includes(true)
                                     ? "check-circle-fill"
-                                    : "circle"
+                                    : "x-circle"
                             } ms-2`}
                         ></i>
                     </span>
