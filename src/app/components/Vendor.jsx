@@ -1,12 +1,15 @@
 import specsWeight from "../handlers/suitabilityMeta";
 import { useState, useEffect } from "react";
 
-const baseSuitabilityScore = 70;
+const baseSuitabilityScore = specsWeight.mandatory;
 
 const Vendor = (props) => {
     const [suitability, setSuitability] = useState(baseSuitabilityScore);
     const oStateW = specsWeight.desirable.oStateW;
     const dStateW = specsWeight.desirable.dStateW;
+
+    console.log(oStateW, dStateW);
+    
 
     useEffect(() => {
         setSuitability(baseSuitabilityScore);
@@ -44,23 +47,6 @@ const Vendor = (props) => {
 
         setSuitability(baseSuitabilityScore + Math.round(updatedScore));
     }, [props.specs]);
-
-    // if (
-    //     suitability <
-    //     Math.round(
-    //         Object.values(specsWeight.mandatory).reduce(
-    //             (sum, value) => sum + value,
-    //             0
-    //         )
-    //     )
-    // ) {
-    //     return false;
-    // }
-
-    // TEST ONLY: visualize all carriers regardless of score
-    // if (suitability < 0) {
-    //     return false;
-    // }
 
     return (
         <div className="col-11 col-md-10">

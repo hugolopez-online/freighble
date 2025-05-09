@@ -1,19 +1,21 @@
 const specsWeight = {
-    mandatory: {
-        modeW: 0,
-        oCountryW: 0,
-        dCountryW: 0,
-        borderW: 0,
-        hazmatW: 0,
-        teamW: 0,
-        usbondW: 0,
-        canadabondW: 0,
-    },
+    mandatory: 70,
     desirable: {
-        oStateW: 14.5,
-        dStateW: 14.5,
+        oStateW: 0,
+        dStateW: 0,
     },
     additional: {},
 };
+
+const computeWeight = () => {
+    const maxScore = 99;
+    for (let spec in specsWeight.desirable) {
+        console.log((maxScore - specsWeight.mandatory)/Object.keys(specsWeight.desirable).length);
+        
+        specsWeight.desirable[spec] = (maxScore - specsWeight.mandatory)/Object.keys(specsWeight.desirable).length;
+    }
+};
+
+computeWeight();
 
 export default specsWeight;

@@ -6,9 +6,6 @@ const Directory = (props) => {
     const [vendorList, setVendorList] = useState(vendors2);
     const [filteredVendorList, setFilteredVendorList] = useState([]);
 
-    // TEST LOG; delete when done testing
-    console.log(filteredVendorList);
-
     useEffect(() => {
         setFilteredVendorList(
             vendorList.filter((vendor) => {
@@ -32,6 +29,7 @@ const Directory = (props) => {
                         (vendor.vendorCoverage[2].coverageContent[0] &&
                             vendor.vendorCoverage[2].coverageCountryAlias ==
                                 props.specs.destination.country)) &&
+                    vendor.vendorBorder.includes(props.specs.border) &&
                     (!props.specs.hazmat
                         ? true
                         : vendor.vendorHazmat == props.specs.hazmat) &&
