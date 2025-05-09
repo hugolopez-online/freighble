@@ -96,11 +96,6 @@ const Search = (props) => {
         <form
             className="shadow-sm border rounded-3 p-3 text-bg-light"
             onSubmit={handleSpecs}
-            style={{
-                position: "sticky",
-                top: "0px",
-                zIndex: 999,
-            }}
         >
             <div className="row">
                 <div className="col-12">
@@ -129,7 +124,10 @@ const Search = (props) => {
                         }
                         required
                     >
-                        <option value="" style={{ display: "none" }}>
+                        <option
+                            value=""
+                            style={{ display: "none" }}
+                        >
                             {/* TODO: verify that leaving this empty is ok*/}
                             Transportation mode
                         </option>
@@ -182,7 +180,10 @@ const Search = (props) => {
                         }
                         required
                     >
-                        <option value="" style={{ display: "none" }}>
+                        <option
+                            value=""
+                            style={{ display: "none" }}
+                        >
                             State/Province
                         </option>
                         <option disabled>Canada</option>
@@ -265,7 +266,10 @@ const Search = (props) => {
                         }
                         required
                     >
-                        <option value="" style={{ display: "none" }}>
+                        <option
+                            value=""
+                            style={{ display: "none" }}
+                        >
                             State/Province
                         </option>
                         <option disabled>Canada</option>
@@ -378,7 +382,10 @@ const Search = (props) => {
                                 })
                             }
                         />
-                        <label className="form-check-label" htmlFor="hazmat">
+                        <label
+                            className="form-check-label"
+                            htmlFor="hazmat"
+                        >
                             Hazmat
                         </label>
                     </div>
@@ -418,7 +425,10 @@ const Search = (props) => {
                                 })
                             }
                         />
-                        <label className="form-check-label" htmlFor="usBonded">
+                        <label
+                            className="form-check-label"
+                            htmlFor="usBonded"
+                        >
                             U.S. Bonded
                         </label>
                     </div>

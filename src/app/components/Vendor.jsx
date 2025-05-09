@@ -1,26 +1,16 @@
 import specsWeight from "../handlers/suitabilityMeta";
 import { useState, useEffect } from "react";
 
+const baseSuitabilityScore = 70;
+
 const Vendor = (props) => {
-    const [suitability, setSuitability] = useState(0);
-    const modeW = specsWeight.mandatory.modeW;
-    const oCountryW = specsWeight.mandatory.oCountryW;
-    const dCountryW = specsWeight.mandatory.dCountryW;
+    const [suitability, setSuitability] = useState(baseSuitabilityScore);
     const oStateW = specsWeight.desirable.oStateW;
     const dStateW = specsWeight.desirable.dStateW;
-    const borderW = specsWeight.mandatory.borderW;
-    const hazmatW = specsWeight.mandatory.hazmatW;
-    const teamW = specsWeight.mandatory.teamW;
-    const usbondW = specsWeight.mandatory.usbondW;
-    const canadabondW = specsWeight.mandatory.canadabondW;
 
     useEffect(() => {
-        setSuitability(0);
+        setSuitability(baseSuitabilityScore);
         let updatedScore = 0;
-
-        if (props.vendorModes.includes(props.specs.mode)) {
-            updatedScore += modeW;
-        }
 
         for (let countryLookup of props.vendorCoverage) {
             if (
@@ -28,7 +18,6 @@ const Vendor = (props) => {
                     props.specs.origin.country &&
                 countryLookup.coverageContent.length != 0
             ) {
-                updatedScore += oCountryW;
                 if (
                     countryLookup.coverageContent.includes(
                         props.specs.origin.state
@@ -43,7 +32,6 @@ const Vendor = (props) => {
                     props.specs.destination.country &&
                 countryLookup.coverageContent.length != 0
             ) {
-                updatedScore += dCountryW;
                 if (
                     countryLookup.coverageContent.includes(
                         props.specs.destination.state
@@ -54,62 +42,25 @@ const Vendor = (props) => {
             }
         }
 
-        if (props.vendorBorder.includes(props.specs.border)) {
-            updatedScore += borderW;
-        }
+        setSuitability(baseSuitabilityScore + Math.round(updatedScore));
+    }, [props.specs]);
 
-        if (!props.specs.hazmat) {
-            updatedScore += hazmatW;
-        } else if (props.specs.hazmat == props.vendorHazmat) {
-            updatedScore += hazmatW;
-        }
-
-        if (!props.specs.team) {
-            updatedScore += teamW;
-        } else if (props.specs.team == props.vendorTeamDrivers) {
-            updatedScore += teamW;
-        }
-
-        if (!props.specs.usbond) {
-            updatedScore += usbondW;
-        } else if (props.specs.usbond == props.vendorUSBonded) {
-            updatedScore += usbondW;
-        }
-
-        if (!props.specs.canadabond) {
-            updatedScore += canadabondW;
-        } else if (props.specs.canadabond == props.vendorCanadaBonded) {
-            updatedScore += canadabondW;
-        }
-
-        setSuitability(Math.round(updatedScore));
-    }, [
-        props.specs.mode,
-        props.specs.origin,
-        props.specs.destination,
-        props.specs.border,
-        props.specs.hazmat,
-        props.specs.team,
-        props.specs.usbond,
-        props.specs.canadabond,
-    ]);
-
-    if (
-        suitability <
-        Math.round(
-            Object.values(specsWeight.mandatory).reduce(
-                (sum, value) => sum + value,
-                0
-            )
-        )
-    ) {
-        return false;
-    }
+    // if (
+    //     suitability <
+    //     Math.round(
+    //         Object.values(specsWeight.mandatory).reduce(
+    //             (sum, value) => sum + value,
+    //             0
+    //         )
+    //     )
+    // ) {
+    //     return false;
+    // }
 
     // TEST ONLY: visualize all carriers regardless of score
     // if (suitability < 0) {
-    //     return false
-    // };
+    //     return false;
+    // }
 
     return (
         <div className="col-11 col-md-10">
@@ -308,7 +259,10 @@ const Vendor = (props) => {
                         </span>
                     )}
                 </div>
-                <button className="btn btn-primary m-2" type="button">
+                <button
+                    className="btn btn-primary m-2"
+                    type="button"
+                >
                     Request pricing
                 </button>
             </div>

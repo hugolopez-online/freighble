@@ -60,16 +60,33 @@ const Banner = (props) => {
                             Clear results
                         </button>
                         <button
-                            className="btn btn-dark shadow-sm"
+                            className="btn btn-dark shadow-sm me-2"
                             type="button"
                             onClick={() => props.templateSpecs(props.specs)}
                         >
                             Template new search
                         </button>
+                        <button
+                            className="btn btn-outline-dark shadow-sm me-2"
+                            type="button"
+                            onClick={() => {
+                                document
+                                    .getElementById("navbar")
+                                    .scrollIntoView({
+                                        block: "start",
+                                        behavior: "smooth",
+                                    });
+                            }}
+                        >
+                            <i className="bi bi-chevron-up"></i>
+                        </button>
                     </p>
                 </div>
             ) : (
-                <div className="alert alert-warning" role="alert">
+                <div
+                    className="alert alert-warning"
+                    role="alert"
+                >
                     Enter details to display suitable vendors.
                 </div>
             )}
