@@ -1,7 +1,7 @@
 const Navbar = () => {
     return (
         <nav className="navbar">
-            <h1 className="fw-bold"><i className="bi bi-bullseye"></i> ultimate quoter</h1>
+            <h1 className="fw-bold"><i className="bi bi-crosshair2"></i> Accuquote</h1>
         </nav>
     )
 };
