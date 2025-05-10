@@ -8,21 +8,21 @@ import {
 } from "../variables";
 import geoLookup from "../handlers/geoMeta";
 
-const defaultFormData = {
+const default_form_data = {
     mode: "",
-    originCity: "",
-    originState: "",
-    destinationCity: "",
-    destinationState: "",
+    origin_city: "",
+    origin_territory: "",
+    destination_city: "",
+    destination_territory: "",
     border: "N/A",
     hazmat: false,
-    team: false,
-    usbond: false,
-    canadabond: false,
+    team_drivers: false,
+    usa_bonded: false,
+    can_bonded: false,
 };
 
 const Search = (props) => {
-    const [formData, setFormData] = useState(defaultFormData);
+    const [formData, setFormData] = useState(default_form_data);
 
     useEffect(() => {
         if (props.template) {
@@ -30,15 +30,15 @@ const Search = (props) => {
                 return {
                     ...prev,
                     mode: props.template.mode,
-                    originCity: props.template.origin.city,
-                    originState: props.template.origin.state,
-                    destinationCity: props.template.destination.city,
-                    destinationState: props.template.destination.state,
+                    origin_city: props.template.origin.city,
+                    origin_territory: props.template.origin.territory,
+                    destination_city: props.template.destination.city,
+                    destination_territory: props.template.destination.territory,
                     border: props.template.border,
                     hazmat: props.template.hazmat,
-                    team: props.template.team,
-                    usbond: props.template.usbond,
-                    canadabond: props.template.canadabond,
+                    team_drivers: props.template.team_drivers,
+                    usa_bonded: props.template.usa_bonded,
+                    can_bonded: props.template.can_bonded,
                 };
             });
 
@@ -51,42 +51,44 @@ const Search = (props) => {
 
     const handleSpecs = (e) => {
         e.preventDefault();
-        const originCity = document.getElementById("originCity").value;
-        const originState = document.getElementById("originState").value;
-        const originRegion = geoLookup[originState].region;
-        const originCountry = geoLookup[originState].country;
-        const destinationCity =
-            document.getElementById("destinationCity").value;
-        const destinationState =
-            document.getElementById("destinationState").value;
-        const destinationRegion = geoLookup[destinationState].region;
-        const destinationCountry = geoLookup[destinationState].country;
+        const origin_city = document.getElementById("origin_city").value;
+        const origin_territory =
+            document.getElementById("origin_territory").value;
+        const origin_region = geoLookup[origin_territory].region;
+        const origin_country = geoLookup[origin_territory].country;
+        const destination_city =
+            document.getElementById("destination_city").value;
+        const destination_territory = document.getElementById(
+            "destination_territory"
+        ).value;
+        const destination_region = geoLookup[destination_territory].region;
+        const destination_country = geoLookup[destination_territory].country;
 
         props.setSpecs((prev) => {
             return {
                 ...prev,
                 mode: document.getElementById("mode").value,
                 origin: {
-                    city: originCity,
-                    state: originState,
-                    region: originRegion,
-                    country: originCountry,
+                    city: origin_city,
+                    territory: origin_territory,
+                    region: origin_region,
+                    country: origin_country,
                 },
                 destination: {
-                    city: destinationCity,
-                    state: destinationState,
-                    region: destinationRegion,
-                    country: destinationCountry,
+                    city: destination_city,
+                    territory: destination_territory,
+                    region: destination_region,
+                    country: destination_country,
                 },
-                border: document.getElementById("borderPort").value,
+                border: document.getElementById("border").value,
                 hazmat: document.getElementById("hazmat").checked,
-                team: document.getElementById("teamDrivers").checked,
-                usbond: document.getElementById("usBonded").checked,
-                canadabond: document.getElementById("canadaBonded").checked,
+                team_drivers: document.getElementById("team_drivers").checked,
+                usa_bonded: document.getElementById("usa_bonded").checked,
+                can_bonded: document.getElementById("can_bonded").checked,
             };
         });
 
-        setFormData(defaultFormData);
+        setFormData(default_form_data);
         document
             .getElementById("informativeBanner")
             .scrollIntoView({ block: "start", behavior: "smooth" });
@@ -148,7 +150,7 @@ const Search = (props) => {
             {/* Origin */}
             <fieldset className="row mb-2">
                 <label
-                    htmlFor="originCity"
+                    htmlFor="origin_city"
                     className="fw-bold text-secondary"
                     style={{ fontSize: "0.85em" }}
                 >
@@ -159,23 +161,26 @@ const Search = (props) => {
                         type="text"
                         className="form-control col-8"
                         placeholder="City (optional)"
-                        id="originCity"
-                        name="originCity"
-                        value={formData.originCity}
+                        id="origin_city"
+                        name="origin_city"
+                        value={formData.origin_city}
                         onChange={(e) =>
                             setFormData((prev) => {
-                                return { ...prev, originCity: e.target.value };
+                                return { ...prev, origin_city: e.target.value };
                             })
                         }
                     />
                     <select
                         className="form-select col-4"
-                        id="originState"
-                        name="originState"
-                        value={formData.originState}
+                        id="origin_territory"
+                        name="origin_territory"
+                        value={formData.origin_territory}
                         onChange={(e) =>
                             setFormData((prev) => {
-                                return { ...prev, originState: e.target.value };
+                                return {
+                                    ...prev,
+                                    origin_territory: e.target.value,
+                                };
                             })
                         }
                         required
@@ -187,37 +192,46 @@ const Search = (props) => {
                             State/Province
                         </option>
                         <option disabled>Canada</option>
-                        {canDivisions.map((state, index) => {
+                        {canDivisions.map((territory, index) => {
                             return (
                                 <option
-                                    key={state.concat("-originState-", index)}
-                                    value={state}
+                                    key={territory.concat(
+                                        "-origin_territory-",
+                                        index
+                                    )}
+                                    value={territory}
                                 >
-                                    {state}
+                                    {territory}
                                 </option>
                             );
                         })}
                         <option disabled></option>
                         <option disabled>United States</option>
-                        {usaDivisions.map((state, index) => {
+                        {usaDivisions.map((territory, index) => {
                             return (
                                 <option
-                                    key={state.concat("-originState-", index)}
-                                    value={state}
+                                    key={territory.concat(
+                                        "-origin_territory-",
+                                        index
+                                    )}
+                                    value={territory}
                                 >
-                                    {state}
+                                    {territory}
                                 </option>
                             );
                         })}
                         <option disabled></option>
                         <option disabled>Mexico</option>
-                        {mexDivisions.map((state, index) => {
+                        {mexDivisions.map((territory, index) => {
                             return (
                                 <option
-                                    key={state.concat("-originState-", index)}
-                                    value={state}
+                                    key={territory.concat(
+                                        "-origin_territory-",
+                                        index
+                                    )}
+                                    value={territory}
                                 >
-                                    {state}
+                                    {territory}
                                 </option>
                             );
                         })}
@@ -228,7 +242,7 @@ const Search = (props) => {
             {/* Destination */}
             <fieldset className="row mb-2">
                 <label
-                    htmlFor="destinationCity"
+                    htmlFor="destination_city"
                     className="fw-bold text-secondary"
                     style={{ fontSize: "0.85em" }}
                 >
@@ -239,28 +253,28 @@ const Search = (props) => {
                         type="text"
                         className="form-control col-8"
                         placeholder="City (optional)"
-                        id="destinationCity"
-                        name="destinationCity"
-                        value={formData.destinationCity}
+                        id="destination_city"
+                        name="destination_city"
+                        value={formData.destination_city}
                         onChange={(e) =>
                             setFormData((prev) => {
                                 return {
                                     ...prev,
-                                    destinationCity: e.target.value,
+                                    destination_city: e.target.value,
                                 };
                             })
                         }
                     />
                     <select
                         className="form-select col-4"
-                        id="destinationState"
-                        name="destinationState"
-                        value={formData.destinationState}
+                        id="destination_territory"
+                        name="destination_territory"
+                        value={formData.destination_territory}
                         onChange={(e) =>
                             setFormData((prev) => {
                                 return {
                                     ...prev,
-                                    destinationState: e.target.value,
+                                    destination_territory: e.target.value,
                                 };
                             })
                         }
@@ -273,46 +287,46 @@ const Search = (props) => {
                             State/Province
                         </option>
                         <option disabled>Canada</option>
-                        {canDivisions.map((state, index) => {
+                        {canDivisions.map((territory, index) => {
                             return (
                                 <option
-                                    key={state.concat(
-                                        "-destinationState-",
+                                    key={territory.concat(
+                                        "-destination_territory-",
                                         index
                                     )}
-                                    value={state}
+                                    value={territory}
                                 >
-                                    {state}
+                                    {territory}
                                 </option>
                             );
                         })}
                         <option disabled></option>
                         <option disabled>United States</option>
-                        {usaDivisions.map((state, index) => {
+                        {usaDivisions.map((territory, index) => {
                             return (
                                 <option
-                                    key={state.concat(
-                                        "-destinationState-",
+                                    key={territory.concat(
+                                        "-destination_territory-",
                                         index
                                     )}
-                                    value={state}
+                                    value={territory}
                                 >
-                                    {state}
+                                    {territory}
                                 </option>
                             );
                         })}
                         <option disabled></option>
                         <option disabled>Mexico</option>
-                        {mexDivisions.map((state, index) => {
+                        {mexDivisions.map((territory, index) => {
                             return (
                                 <option
-                                    key={state.concat(
-                                        "-destinationState-",
+                                    key={territory.concat(
+                                        "-destination_territory-",
                                         index
                                     )}
-                                    value={state}
+                                    value={territory}
                                 >
-                                    {state}
+                                    {territory}
                                 </option>
                             );
                         })}
@@ -324,7 +338,7 @@ const Search = (props) => {
             <div className="row mb-2">
                 <div className="col-12">
                     <label
-                        htmlFor="borderPort"
+                        htmlFor="border"
                         className="fw-bold text-secondary"
                         style={{ fontSize: "0.85em" }}
                     >
@@ -332,7 +346,7 @@ const Search = (props) => {
                     </label>
                     <select
                         className="form-select"
-                        id="borderPort"
+                        id="border"
                         value={formData.border}
                         onChange={(e) =>
                             setFormData((prev) => {
@@ -393,8 +407,8 @@ const Search = (props) => {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            id="teamDrivers"
-                            name="teamDrivers"
+                            id="team_drivers"
+                            name="team_drivers"
                             checked={formData.team}
                             onChange={(e) =>
                                 setFormData((prev) => {
@@ -404,7 +418,7 @@ const Search = (props) => {
                         />
                         <label
                             className="form-check-label"
-                            htmlFor="teamDrivers"
+                            htmlFor="team_drivers"
                         >
                             Team Drivers
                         </label>
@@ -413,8 +427,8 @@ const Search = (props) => {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            id="usBonded"
-                            name="usBonded"
+                            id="usa_bonded"
+                            name="usa_bonded"
                             checked={formData.usbond}
                             onChange={(e) =>
                                 setFormData((prev) => {
@@ -427,7 +441,7 @@ const Search = (props) => {
                         />
                         <label
                             className="form-check-label"
-                            htmlFor="usBonded"
+                            htmlFor="usa_bonded"
                         >
                             U.S. Bonded
                         </label>
@@ -436,8 +450,8 @@ const Search = (props) => {
                         <input
                             className="form-check-input"
                             type="checkbox"
-                            id="canadaBonded"
-                            name="canadaBonded"
+                            id="can_bonded"
+                            name="can_bonded"
                             checked={formData.canadabond}
                             onChange={(e) =>
                                 setFormData((prev) => {
@@ -450,7 +464,7 @@ const Search = (props) => {
                         />
                         <label
                             className="form-check-label"
-                            htmlFor="canadaBonded"
+                            htmlFor="can_bonded"
                         >
                             Canada Bonded
                         </label>
@@ -460,7 +474,7 @@ const Search = (props) => {
             <button
                 type="button"
                 className="btn btn-sm btn-warning shadow-sm w-100 mb-2"
-                onClick={() => setFormData(defaultFormData)}
+                onClick={() => setFormData(default_form_data)}
             >
                 Reset fields
             </button>

@@ -4,33 +4,33 @@ import Search from "./app/components/Search";
 import Directory from "./app/components/Directory";
 import Banner from "./app/components/Banner";
 
-const defaultSpecs = {
+const default_specs = {
     mode: "",
     origin: {
         city: "",
-        state: "",
+        territory: "",
         region: "",
         country: "",
     },
     destination: {
         city: "",
-        state: "",
+        territory: "",
         region: "",
         country: "",
     },
     border: "N/A",
     hazmat: false,
-    team: false,
-    usbond: false,
-    canadabond: false,
+    team_drivers: false,
+    usa_bonded: false,
+    can_bonded: false,
 };
 
 function App() {
-    const [specs, setSpecs] = useState(defaultSpecs);
+    const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
 
     const resetSpecs = () => {
-        setSpecs(defaultSpecs);
+        setSpecs(default_specs);
     };
 
     const templateSpecs = (retrievedTemplate) => {
@@ -73,7 +73,7 @@ function App() {
                         >
                             <Banner
                                 specs={specs}
-                                defaultSpecs={defaultSpecs}
+                                default_specs={default_specs}
                                 resetSpecs={resetSpecs}
                                 setSpecs={setSpecs}
                                 templateSpecs={templateSpecs}

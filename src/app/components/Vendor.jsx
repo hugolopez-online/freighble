@@ -1,51 +1,50 @@
 import specsWeight from "../handlers/suitabilityMeta";
 import { useState, useEffect } from "react";
 
-const baseSuitabilityScore = specsWeight.mandatory;
+const base_score = specsWeight.mandatory;
 
 const Vendor = (props) => {
-    const [suitability, setSuitability] = useState(baseSuitabilityScore);
+    const [suitability, setSuitability] = useState(base_score);
     const oStateW = specsWeight.desirable.oStateW;
     const dStateW = specsWeight.desirable.dStateW;
 
     console.log(oStateW, dStateW);
-    
 
     useEffect(() => {
-        setSuitability(baseSuitabilityScore);
-        let updatedScore = 0;
+        setSuitability(base_score);
+        let new_score = 0;
 
-        for (let countryLookup of props.vendorCoverage) {
+        for (let country_lookup of Object.keys(props.coverage)) {
             if (
-                countryLookup.coverageCountryAlias ==
+                props.coverage[country_lookup].country_code ==
                     props.specs.origin.country &&
-                countryLookup.coverageContent.length != 0
+                country_lookup.territory.length != 0
             ) {
                 if (
-                    countryLookup.coverageContent.includes(
-                        props.specs.origin.state
+                    props.coverage[country_lookup].territory.includes(
+                        props.specs.origin.territory
                     )
                 ) {
-                    updatedScore += oStateW;
+                    new_score += oStateW;
                 }
             }
 
             if (
-                countryLookup.coverageCountryAlias ==
+                props.coverage[country_lookup].country_code ==
                     props.specs.destination.country &&
-                countryLookup.coverageContent.length != 0
+                country_lookup.territory.length != 0
             ) {
                 if (
-                    countryLookup.coverageContent.includes(
-                        props.specs.destination.state
+                    props.coverage[country_lookup].territory.includes(
+                        props.specs.destination.territory
                     )
                 ) {
-                    updatedScore += dStateW;
+                    new_score += dStateW;
                 }
             }
         }
 
-        setSuitability(baseSuitabilityScore + Math.round(updatedScore));
+        setSuitability(base_score + Math.round(new_score));
     }, [props.specs]);
 
     return (
@@ -61,12 +60,12 @@ const Vendor = (props) => {
                 </div>
                 <div className="card-body">
                     <h4 className="card-title text-dark">
-                        {props.vendorName}
+                        {props.company}
                         <span className="text-success">
-                            {props.vendorType.asset_based && (
+                            {props.type.asset_based && (
                                 <i className="bi bi-truck ms-2"></i>
                             )}
-                            {props.vendorType.freight_broker && (
+                            {props.type.freight_broker && (
                                 <i className="bi bi-share ms-2"></i>
                             )}
                         </span>
@@ -75,55 +74,41 @@ const Vendor = (props) => {
                             style={{ fontSize: "0.75rem" }}
                         >
                             (
-                            {props.vendorDomicile.state.concat(
+                            {props.domicile.state.concat(
                                 ", ",
-                                props.vendorDomicile.country
+                                props.domicile.country
                             )}
                             )
                         </span>
                     </h4>
                     <p className="card-text m-0 text-secondary">
-                        <i className="bi bi-people-fill"></i>{" "}
-                        {props.vendorContact}:{" "}
+                        <i className="bi bi-people-fill"></i> {props.contact}:{" "}
                         <em>
-                            <a href={`tel:${props.vendorPhone}`}>
-                                {props.vendorPhone}
-                            </a>
+                            <a href={`tel:${props.phone}`}>{props.phone}</a>
                         </em>
                     </p>
                     <p className="card-text mb-2 text-secondary">
                         <i className="bi bi-envelope-fill"></i>{" "}
-                        <a href={`mailto:${props.vendorEmail}`}>
-                            {props.vendorEmail}
-                        </a>
+                        <a href={`mailto:${props.email}`}>{props.email}</a>
                     </p>
-                    {props.vendorModes.includes(props.specs.mode) && (
-                        <span
-                            className="badge rounded-pill text-bg-success me-1"
-                            style={{ fontSize: "0.75rem" }}
-                        >
-                            {props.specs.mode}
-                            <i className="bi bi-check-circle-fill ms-2"></i>
-                        </span>
-                    )}
-                    {props.vendorCoverage
-                        .map(
-                            (country) =>
-                                country.coverageContent[0] &&
-                                country.coverageCountryAlias
-                        )
-                        .includes(props.specs.origin.country) && (
-                        <span
-                            className="badge rounded-pill text-bg-success me-1"
-                            style={{ fontSize: "0.75rem" }}
-                        >
-                            Origin: {props.specs.origin.country}
-                            <i className="bi bi-check-circle-fill ms-2"></i>
-                        </span>
-                    )}
+                    <span
+                        className="badge rounded-pill text-bg-success me-1"
+                        style={{ fontSize: "0.75rem" }}
+                    >
+                        {props.specs.mode}
+                        <i className="bi bi-check-circle-fill ms-2"></i>
+                    </span>
+
+                    <span
+                        className="badge rounded-pill text-bg-success me-1"
+                        style={{ fontSize: "0.75rem" }}
+                    >
+                        Origin: {props.specs.origin.country}
+                        <i className="bi bi-check-circle-fill ms-2"></i>
+                    </span>
                     <span
                         className={`badge rounded-pill ${
-                            props.vendorCoverage
+                            props.coverage
                                 .map(
                                     (country) =>
                                         country.coverageContent.includes(
@@ -139,7 +124,7 @@ const Vendor = (props) => {
                         Origin: {props.specs.origin.state}
                         <i
                             className={`bi bi-${
-                                props.vendorCoverage
+                                props.coverage
                                     .map(
                                         (country) =>
                                             country.coverageContent.includes(
@@ -152,7 +137,7 @@ const Vendor = (props) => {
                             } ms-2`}
                         ></i>
                     </span>
-                    {props.vendorCoverage
+                    {props.coverage
                         .map(
                             (country) =>
                                 country.coverageContent[0] &&
@@ -169,7 +154,7 @@ const Vendor = (props) => {
                     )}
                     <span
                         className={`badge rounded-pill ${
-                            props.vendorCoverage
+                            props.coverage
                                 .map(
                                     (country) =>
                                         country.coverageContent.includes(
@@ -185,7 +170,7 @@ const Vendor = (props) => {
                         Destination: {props.specs.destination.state}
                         <i
                             className={`bi bi-${
-                                props.vendorCoverage
+                                props.coverage
                                     .map(
                                         (country) =>
                                             country.coverageContent.includes(

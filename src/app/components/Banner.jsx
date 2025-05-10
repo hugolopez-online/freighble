@@ -1,17 +1,17 @@
 const Banner = (props) => {
-    const enoughData =
+    const min_data =
         props.specs.mode &&
         props.specs.origin.country &&
         props.specs.destination.country;
     return (
         <div className="border-bottom bg-body mb-3">
             <h1 className="fw-bold">Search results</h1>
-            {enoughData ? (
+            {min_data ? (
                 <div>
                     <p>
                         <strong>Details: </strong>
-                        {`${props.specs.usbond ? "U.S. bonded " : ""}
-                            ${props.specs.canadabond ? "Canada bonded " : ""}
+                        {`${props.specs.usa_bonded ? "U.S. bonded " : ""}
+                            ${props.specs.can_bonded ? "Canada bonded " : ""}
                             ${props.specs.hazmat ? "Hazmat " : ""}
                             ${props.specs.mode} from 
                             ${
@@ -20,7 +20,7 @@ const Banner = (props) => {
                                     : ""
                             }
                             ${
-                                props.specs.origin.state +
+                                props.specs.origin.territory +
                                 " (" +
                                 props.specs.origin.country +
                                 ")"
@@ -31,7 +31,7 @@ const Banner = (props) => {
                                     : ""
                             }
                             ${
-                                props.specs.destination.state +
+                                props.specs.destination.territory +
                                 " (" +
                                 props.specs.destination.country +
                                 ")"
@@ -48,7 +48,7 @@ const Banner = (props) => {
                             className="btn btn-warning shadow-sm me-2"
                             type="button"
                             onClick={() => {
-                                props.setSpecs(props.defaultSpecs);
+                                props.setSpecs(props.default_specs);
                                 document
                                     .getElementById("navbar")
                                     .scrollIntoView({

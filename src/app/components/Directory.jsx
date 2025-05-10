@@ -3,45 +3,45 @@ import { useEffect, useState } from "react";
 import Vendor from "./Vendor";
 
 const Directory = (props) => {
-    const [vendorList, setVendorList] = useState(vendors2);
+    const [vendorList, setVendorList] = useState(vendors);
     const [filteredVendorList, setFilteredVendorList] = useState([]);
 
     useEffect(() => {
         setFilteredVendorList(
             vendorList.filter((vendor) => {
                 return (
-                    vendor.vendorModes.includes(props.specs.mode) &&
-                    ((vendor.vendorCoverage[0].coverageContent[0] &&
-                        vendor.vendorCoverage[0].coverageCountryAlias ==
+                    vendor.modes.includes(props.specs.mode) &&
+                    ((vendor.coverage["Canada"].territory[0] &&
+                        vendor.coverage["Canada"].country_code ==
                             props.specs.origin.country) ||
-                        (vendor.vendorCoverage[1].coverageContent[0] &&
-                            vendor.vendorCoverage[1].coverageCountryAlias ==
+                        (vendor.coverage["United States"].territory[0] &&
+                            vendor.coverage["United States"].country_code ==
                                 props.specs.origin.country) ||
-                        (vendor.vendorCoverage[2].coverageContent[0] &&
-                            vendor.vendorCoverage[2].coverageCountryAlias ==
+                        (vendor.coverage["Mexico"].territory[0] &&
+                            vendor.coverage["Mexico"].country_code ==
                                 props.specs.origin.country)) &&
-                    ((vendor.vendorCoverage[0].coverageContent[0] &&
-                        vendor.vendorCoverage[0].coverageCountryAlias ==
+                    ((vendor.coverage["Canada"].territory[0] &&
+                        vendor.coverage["Canada"].country_code ==
                             props.specs.destination.country) ||
-                        (vendor.vendorCoverage[1].coverageContent[0] &&
-                            vendor.vendorCoverage[1].coverageCountryAlias ==
+                        (vendor.coverage["United States"].territory[0] &&
+                            vendor.coverage["United States"].country_code ==
                                 props.specs.destination.country) ||
-                        (vendor.vendorCoverage[2].coverageContent[0] &&
-                            vendor.vendorCoverage[2].coverageCountryAlias ==
+                        (vendor.coverage["Mexico"].territory[0] &&
+                            vendor.coverage["Mexico"].country_code ==
                                 props.specs.destination.country)) &&
-                    vendor.vendorBorder.includes(props.specs.border) &&
+                    vendor.borders.includes(props.specs.border) &&
                     (!props.specs.hazmat
                         ? true
-                        : vendor.vendorHazmat == props.specs.hazmat) &&
+                        : vendor.hazmat == props.specs.hazmat) &&
                     (!props.specs.team
                         ? true
-                        : vendor.vendorTeamDrivers == props.specs.team) &&
-                    (!props.specs.usbond
+                        : vendor.team_drivers == props.specs.team_drivers) &&
+                    (!props.specs.usa_bonded
                         ? true
-                        : vendor.vendorUSBonded == props.specs.usbond) &&
-                    (!props.specs.canadabond
+                        : vendor.usa_bonded == props.specs.usa_bonded) &&
+                    (!props.specs.can_bonded
                         ? true
-                        : vendor.vendorCanadaBonded == props.specs.canadabond)
+                        : vendor.can_bonded == props.specs.can_bonded)
                 );
             })
         );
@@ -52,10 +52,10 @@ const Directory = (props) => {
             {filteredVendorList.map((vendor, index) => {
                 return (
                     <Vendor
-                        key={vendor.vendorName
+                        key={vendor.company
                             .replace(/ /g, "-")
                             .concat("-", index)}
-                        vendorKey={vendor.vendorName
+                        vendorKey={vendor.company
                             .replace(/ /g, "-")
                             .concat("-", index)}
                         {...vendor}
