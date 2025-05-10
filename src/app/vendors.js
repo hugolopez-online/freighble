@@ -1,56 +1,176 @@
-import { Truckload, ReeferTruckload, Flatbed, StepDeck, Specialized, Partial, ReeferPartial, LTL, ReeferLTL, Intermodal, Expedited, Drayage } from './variables';
-import { AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT } from './variables';
-import { AL, AK, AZ, AR, CA, CO, CT, DC, DE, FL, GA, HI, ID, IL, IN, IA, KS, KY, LA, ME, MD, MA, MI, MN, MS, MO, MT, NE, NV, NH, NJ, NM, NY, NC, ND, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VT, VA, WA, WV, WI, WY, PR } from './variables';
-import { AGS, BCN, BCS, CAM, CHP, CHH, CMX, COA, COL, DGO, GTO, GRO, HGO, JAL, EMX, MCH, MOR, NAY, NLE, OAX, PUE, QRO, ROO, SLP, SIN, SON, TAB, TAM, TLA, VER, YUC, ZAC } from './variables';
-import { notApplicable, Otay, Calexico, Nogales, ElPaso, Laredo, Hidalgo, Brownsville } from './variables';
+import {
+    Truckload,
+    ReeferTruckload,
+    Flatbed,
+    StepDeck,
+    Specialized,
+    Partial,
+    ReeferPartial,
+    LTL,
+    ReeferLTL,
+    Intermodal,
+    Expedited,
+    Drayage,
+} from "./variables";
+import {
+    AB,
+    BC,
+    MB,
+    NB,
+    NL,
+    NS,
+    NT,
+    NU,
+    ON,
+    PE,
+    QC,
+    SK,
+    YT,
+} from "./variables";
+import {
+    AL,
+    AK,
+    AZ,
+    AR,
+    CA,
+    CO,
+    CT,
+    DC,
+    DE,
+    FL,
+    GA,
+    HI,
+    ID,
+    IL,
+    IN,
+    IA,
+    KS,
+    KY,
+    LA,
+    ME,
+    MD,
+    MA,
+    MI,
+    MN,
+    MS,
+    MO,
+    MT,
+    NE,
+    NV,
+    NH,
+    NJ,
+    NM,
+    NY,
+    NC,
+    ND,
+    OH,
+    OK,
+    OR,
+    PA,
+    RI,
+    SC,
+    SD,
+    TN,
+    TX,
+    UT,
+    VT,
+    VA,
+    WA,
+    WV,
+    WI,
+    WY,
+    PR,
+} from "./variables";
+import {
+    AGS,
+    BCN,
+    BCS,
+    CAM,
+    CHP,
+    CHH,
+    CMX,
+    COA,
+    COL,
+    DGO,
+    GTO,
+    GRO,
+    HGO,
+    JAL,
+    EMX,
+    MCH,
+    MOR,
+    NAY,
+    NLE,
+    OAX,
+    PUE,
+    QRO,
+    ROO,
+    SLP,
+    SIN,
+    SON,
+    TAB,
+    TAM,
+    TLA,
+    VER,
+    YUC,
+    ZAC,
+} from "./variables";
+import {
+    notApplicable,
+    Otay,
+    Calexico,
+    Nogales,
+    ElPaso,
+    Laredo,
+    Hidalgo,
+    Brownsville,
+} from "./variables";
 
 export const vendors = [
     {
         id: 1,
-        vendorName: "Totran Transportation",
-        vendorType: {
+        company: "Totran Transportation",
+        type: {
             asset_based: true,
-            freight_broker: false
+            freight_broker: false,
         },
-        vendorContact: "Scott Pottie",
-        vendorEmail: "scottp@totran.ca",
-        vendorPhone: "587-254-2390",
-        vendorDomicile: {
-            country: "CAN",
+        contact: "Scott Pottie",
+        email: "scottp@totran.ca",
+        phone: "587-254-2390",
+        domicile: {
+            city: "Edmonton",
             state: AB,
+            country: "Canada",
         },
-        vendorModes: [Flatbed, StepDeck, Specialized],
-        vendorHazmat: false,
-        vendorTeamDrivers: false,
-        vendorUSBonded: false,
-        vendorCanadaBonded: false,
-        vendorCoverage: [
-            {
-                coverageCountry: "Canada",
-                coverageCountryAlias: "CAN",
-                coverageContent: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT]
+        modes: [Flatbed, StepDeck, Specialized],
+        hazmat: false,
+        team_drivers: false,
+        usa_bonded: false,
+        can_bonded: false,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT],
             },
-            {
-                coverageCountry: "United States",
-                coverageCountryAlias: "USA",
-                coverageContent: [WA, OR, CA, TX, OK]
+            "United States": {
+                country_code: "USA",
+                territory: [WA, OR, CA, TX, OK],
             },
-            {
-                coverageCountry: "Mexico",
-                coverageCountryAlias: "MEX",
-                coverageContent: []
+            Mexico: {
+                country_code: "MEX",
+                territory: [],
             },
-        ],
-        vendorBorder: [notApplicable],
-        vendorFavLanes: ["AB:Anywhere", "BC:AB", "Edmonton, AB:Vancouver, BC"],
-        vendorBlockedLanes: ["USA:USA", "BC:TX", "CAN:MEX"],
+        },
+        border: [notApplicable],
+        core_lanes: ["AB:Anywhere", "BC:AB", "Edmonton, AB:Vancouver, BC"],
+        banned_lanes: ["USA:USA", "BC:TX", "CAN:MEX"],
     },
     {
         id: 2,
         vendorName: "Maven Transport",
         vendorType: {
             asset_based: true,
-            freight_broker: false
+            freight_broker: false,
         },
         vendorContact: "Rick D",
         vendorEmail: "rick.d@maventransport.com",
@@ -68,17 +188,17 @@ export const vendors = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [BC, ON, QC]
+                coverageContent: [BC, ON, QC],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [OH, IL, IN]
+                coverageContent: [OH, IL, IN],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: []
+                coverageContent: [],
             },
         ],
         vendorBorder: [notApplicable],
@@ -90,7 +210,7 @@ export const vendors = [
         vendorName: "Gigg Express",
         vendorType: {
             asset_based: true,
-            freight_broker: false
+            freight_broker: false,
         },
         vendorContact: "Pricing Team",
         vendorEmail: "pricing@giggexpress.ca",
@@ -108,17 +228,17 @@ export const vendors = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [ON, QC]
+                coverageContent: [ON, QC],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [TX]
+                coverageContent: [TX],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [NLE, EMX, PUE, JAL]
+                coverageContent: [NLE, EMX, PUE, JAL],
             },
         ],
         vendorBorder: [notApplicable, Laredo],
@@ -130,7 +250,7 @@ export const vendors = [
         vendorName: "CFI Logistica",
         vendorType: {
             asset_based: true,
-            freight_broker: true
+            freight_broker: true,
         },
         vendorContact: "Jorge Delgadillo",
         vendorEmail: "jorge.delgadillo@cfidrive.com",
@@ -148,17 +268,17 @@ export const vendors = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: []
+                coverageContent: [],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [TX]
+                coverageContent: [TX],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [NLE, EMX, PUE, JAL, COA]
+                coverageContent: [NLE, EMX, PUE, JAL, COA],
             },
         ],
         vendorBorder: [notApplicable, Laredo],
@@ -170,7 +290,7 @@ export const vendors = [
         vendorName: "Melton Truck",
         vendorType: {
             asset_based: true,
-            freight_broker: false
+            freight_broker: false,
         },
         vendorContact: "Pricing Team",
         vendorEmail: "MexicoQuotes@meltontruck.com",
@@ -188,24 +308,31 @@ export const vendors = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [ON, QC]
+                coverageContent: [ON, QC],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [TX, OK, IL, OH, IN, TN, CA]
+                coverageContent: [TX, OK, IL, OH, IN, TN, CA],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [NLE, EMX, PUE, JAL, COA]
+                coverageContent: [NLE, EMX, PUE, JAL, COA],
             },
         ],
-        vendorBorder: [notApplicable, Otay, Calexico, Calexico, ElPaso, Laredo, Hidalgo],
+        vendorBorder: [
+            notApplicable,
+            Otay,
+            Calexico,
+            Calexico,
+            ElPaso,
+            Laredo,
+            Hidalgo,
+        ],
         vendorFavLanes: [],
         vendorBlockedLanes: [],
-    }
-
+    },
 ];
 
 export const vendors2 = [
@@ -214,7 +341,7 @@ export const vendors2 = [
         vendorName: "Gigg Express Inc",
         vendorType: {
             asset_based: true,
-            freight_broker: true
+            freight_broker: true,
         },
         vendorContact: "Karen Lee",
         vendorEmail: "klee@giggexpress.com",
@@ -232,29 +359,29 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [ON, QC, MB]
+                coverageContent: [ON, QC, MB],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [NY, PA, OH, MI]
+                coverageContent: [NY, PA, OH, MI],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [NLE, CHH]
-            }
+                coverageContent: [NLE, CHH],
+            },
         ],
         vendorBorder: [notApplicable, Laredo, Hidalgo],
         vendorFavLanes: ["ON:NY", "Montreal, QC:Chicago, IL", "CAN:USA"],
-        vendorBlockedLanes: ["MEX:CAN"]
+        vendorBlockedLanes: ["MEX:CAN"],
     },
     {
         id: 3,
         vendorName: "Titanium Transportation",
         vendorType: {
             asset_based: true,
-            freight_broker: false
+            freight_broker: false,
         },
         vendorContact: "Lucas Meyer",
         vendorEmail: "lmeyer@titaniumtrans.com",
@@ -272,29 +399,29 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [ON, QC, MB, SK]
+                coverageContent: [ON, QC, MB, SK],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [MI, OH, IN]
+                coverageContent: [MI, OH, IN],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: []
-            }
+                coverageContent: [],
+            },
         ],
         vendorBorder: [notApplicable],
         vendorFavLanes: ["Toronto, ON:Detroit, MI", "QC:ON", "CAN:USA"],
-        vendorBlockedLanes: ["MEX:USA", "MEX:CAN"]
+        vendorBlockedLanes: ["MEX:USA", "MEX:CAN"],
     },
     {
         id: 4,
         vendorName: "TA Logistics, Inc",
         vendorType: {
             asset_based: false,
-            freight_broker: true
+            freight_broker: true,
         },
         vendorContact: "Samantha Taylor",
         vendorEmail: "staylor@talogistics.com",
@@ -312,29 +439,29 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [ON, QC]
+                coverageContent: [ON, QC],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [IL, WI, IN, OH]
+                coverageContent: [IL, WI, IN, OH],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [TAM, COA]
-            }
+                coverageContent: [TAM, COA],
+            },
         ],
         vendorBorder: [notApplicable, Laredo],
         vendorFavLanes: ["Chicago, IL:Toronto, ON", "USA:CAN", "IL:OH"],
-        vendorBlockedLanes: ["MEX:CAN"]
+        vendorBlockedLanes: ["MEX:CAN"],
     },
     {
         id: 5,
         vendorName: "CAT Inc",
         vendorType: {
             asset_based: true,
-            freight_broker: true
+            freight_broker: true,
         },
         vendorContact: "Michel Fortier",
         vendorEmail: "mfortier@cat.ca",
@@ -352,29 +479,33 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [QC, ON, NB]
+                coverageContent: [QC, ON, NB],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [NY, MA, PA]
+                coverageContent: [NY, MA, PA],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: []
-            }
+                coverageContent: [],
+            },
         ],
         vendorBorder: [notApplicable],
-        vendorFavLanes: ["Montreal, QC:Boston, MA", "QC:NY", "Atlantic:Mid-Atlantic"],
-        vendorBlockedLanes: ["MEX:CAN"]
+        vendorFavLanes: [
+            "Montreal, QC:Boston, MA",
+            "QC:NY",
+            "Atlantic:Mid-Atlantic",
+        ],
+        vendorBlockedLanes: ["MEX:CAN"],
     },
     {
         id: 6,
         vendorName: "Trucking Experts LLC",
         vendorType: {
             asset_based: true,
-            freight_broker: false
+            freight_broker: false,
         },
         vendorContact: "Juan Morales",
         vendorEmail: "jmorales@truckingexperts.com",
@@ -392,29 +523,29 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: []
+                coverageContent: [],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [TX, OK, LA]
+                coverageContent: [TX, OK, LA],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [TAM, NLE]
-            }
+                coverageContent: [TAM, NLE],
+            },
         ],
         vendorBorder: [notApplicable, Laredo, Hidalgo],
         vendorFavLanes: ["TX:TAM", "Anywhere:NLE", "USA:MEX"],
-        vendorBlockedLanes: ["CAN:USA", "CAN:MEX"]
+        vendorBlockedLanes: ["CAN:USA", "CAN:MEX"],
     },
     {
         id: 7,
         vendorName: "Blue River Logistics",
         vendorType: {
             asset_based: false,
-            freight_broker: true
+            freight_broker: true,
         },
         vendorContact: "Angela Cox",
         vendorEmail: "acox@blueriverlogistics.com",
@@ -432,29 +563,29 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: []
+                coverageContent: [],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [CO, UT, KS, NE]
+                coverageContent: [CO, UT, KS, NE],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: []
-            }
+                coverageContent: [],
+            },
         ],
         vendorBorder: [notApplicable],
         vendorFavLanes: ["CO:UT", "CO:KS"],
-        vendorBlockedLanes: ["MEX:CAN", "CAN:USA"]
+        vendorBlockedLanes: ["MEX:CAN", "CAN:USA"],
     },
     {
         id: 8,
         vendorName: "Pacific Haulers",
         vendorType: {
             asset_based: true,
-            freight_broker: false
+            freight_broker: false,
         },
         vendorContact: "Jared Lee",
         vendorEmail: "jlee@pacifichaulers.com",
@@ -472,29 +603,29 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [BC]
+                coverageContent: [BC],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [CA, OR, WA]
+                coverageContent: [CA, OR, WA],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [BCN, SON]
-            }
+                coverageContent: [BCN, SON],
+            },
         ],
         vendorBorder: [notApplicable, Otay, Nogales],
         vendorFavLanes: ["CA:BCN", "BC:WA", "Vancouver, BC:Los Angeles, CA"],
-        vendorBlockedLanes: ["TX:NLE"]
+        vendorBlockedLanes: ["TX:NLE"],
     },
     {
         id: 9,
         vendorName: "NorthPoint Logistics",
         vendorType: {
             asset_based: false,
-            freight_broker: true
+            freight_broker: true,
         },
         vendorContact: "Brad Keller",
         vendorEmail: "bkeller@northpointlog.com",
@@ -512,29 +643,29 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [MB, ON]
+                coverageContent: [MB, ON],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [MO, IL, IN, KS]
+                coverageContent: [MO, IL, IN, KS],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: []
-            }
+                coverageContent: [],
+            },
         ],
         vendorBorder: [notApplicable],
         vendorFavLanes: ["MO:ON", "Midwest:Ontario", "USA:CAN"],
-        vendorBlockedLanes: ["MEX:USA", "MEX:CAN"]
+        vendorBlockedLanes: ["MEX:USA", "MEX:CAN"],
     },
     {
         id: 10,
         vendorName: "Rapid Cargo Transport",
         vendorType: {
             asset_based: true,
-            freight_broker: true
+            freight_broker: true,
         },
         vendorContact: "Isabel Ruiz",
         vendorEmail: "iruiz@rapidcargo.mx",
@@ -552,21 +683,21 @@ export const vendors2 = [
             {
                 coverageCountry: "Canada",
                 coverageCountryAlias: "CAN",
-                coverageContent: [ON, QC]
+                coverageContent: [ON, QC],
             },
             {
                 coverageCountry: "United States",
                 coverageCountryAlias: "USA",
-                coverageContent: [TX, OK, IL]
+                coverageContent: [TX, OK, IL],
             },
             {
                 coverageCountry: "Mexico",
                 coverageCountryAlias: "MEX",
-                coverageContent: [NLE, COA, CHH]
-            }
+                coverageContent: [NLE, COA, CHH],
+            },
         ],
         vendorBorder: [notApplicable, Laredo, Hidalgo],
         vendorFavLanes: ["Monterrey, NLE:Chicago, IL", "MEX:USA", "USA:CAN"],
-        vendorBlockedLanes: ["BC:TX", "MEX:BC"]
-    }
+        vendorBlockedLanes: ["BC:TX", "MEX:BC"],
+    },
 ];
