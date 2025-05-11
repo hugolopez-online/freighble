@@ -48,13 +48,13 @@ const Banner = (props) => {
                             className="btn btn-warning shadow-sm me-2"
                             type="button"
                             onClick={() => {
-                                props.setSpecs(props.default_specs);
                                 document
                                     .getElementById("navbar")
                                     .scrollIntoView({
                                         block: "start",
                                         behavior: "smooth",
                                     });
+                                props.setSpecs(props.default_specs);
                             }}
                         >
                             Clear results

@@ -128,7 +128,7 @@ import {
 
 export const vendors = [
     {
-        id: 1,
+        id: 0,
         company: "Totran Transportation",
         type: {
             asset_based: true,
@@ -139,7 +139,7 @@ export const vendors = [
         phone: "587-254-2390",
         domicile: {
             city: "Edmonton",
-            state: AB,
+            territory: AB,
             country: "Canada",
         },
         modes: [Flatbed, StepDeck, Specialized],
@@ -166,7 +166,7 @@ export const vendors = [
         banned_lanes: ["USA:USA", "BC:TX", "CAN:MEX"],
     },
     {
-        id: 2,
+        id: 1,
         company: "Gigg Express",
         type: {
             asset_based: true,
@@ -177,7 +177,7 @@ export const vendors = [
         phone: "943-129-7834",
         domicile: {
             city: "Mississauga",
-            state: ON,
+            territory: ON,
             country: "Canada",
         },
         modes: [Truckload, LTL, Partial],
@@ -202,5 +202,385 @@ export const vendors = [
         borders: [notApplicable, Laredo],
         core_lanes: ["ON:Anywhere", "CAN:MEX"],
         banned_lanes: ["USA:USA", "MEX:MEX"],
+    },
+    {
+        id: 2,
+        company: "Maple Freight Systems",
+        type: {
+            asset_based: true,
+            freight_broker: false,
+        },
+        contact: "Jessica Moore",
+        email: "jmoore@maplefreight.ca",
+        phone: "416-555-1122",
+        domicile: {
+            city: "Toronto",
+            territory: ON,
+            country: "Canada",
+        },
+        modes: [Truckload, LTL],
+        hazmat: false,
+        team_drivers: true,
+        usa_bonded: true,
+        can_bonded: true,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [ON, QC, MB],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [MI, NY, OH, PA],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [],
+            },
+        },
+        borders: [notApplicable],
+        core_lanes: ["ON:QC", "Toronto, ON:Montreal, QC", "ON:NY"],
+        banned_lanes: ["MEX:USA", "ON:TX"],
+    },
+    {
+        id: 3,
+        company: "TexStar Logistics",
+        type: {
+            asset_based: false,
+            freight_broker: true,
+        },
+        contact: "Luis Herrera",
+        email: "luis.h@texstarlog.com",
+        phone: "210-777-3434",
+        domicile: {
+            city: "San Antonio",
+            territory: TX,
+            country: "United States",
+        },
+        modes: [Flatbed, StepDeck, Partial],
+        hazmat: true,
+        team_drivers: false,
+        usa_bonded: true,
+        can_bonded: false,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [MB, SK],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [TX, OK, NM, LA],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [TAM, NLE, COA],
+            },
+        },
+        borders: [notApplicable, Laredo, Hidalgo],
+        core_lanes: ["TX:TAM", "San Antonio, TX:Monterrey, NLE", "OK:SK"],
+        banned_lanes: ["CA:NM", "MEX:CAN"],
+    },
+    {
+        id: 4,
+        company: "Northern Haul",
+        type: {
+            asset_based: true,
+            freight_broker: false,
+        },
+        contact: "Emily Zhang",
+        email: "e.zhang@northernhaul.ca",
+        phone: "780-222-9876",
+        domicile: {
+            city: "Calgary",
+            territory: AB,
+            country: "Canada",
+        },
+        modes: [ReeferTruckload, Intermodal],
+        hazmat: false,
+        team_drivers: false,
+        usa_bonded: false,
+        can_bonded: true,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [AB, BC, SK],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [WA, OR],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [],
+            },
+        },
+        borders: [notApplicable],
+        core_lanes: ["Calgary, AB:Vancouver, BC", "AB:SK"],
+        banned_lanes: ["AB:TX", "CAN:MEX"],
+    },
+    {
+        id: 5,
+        company: "Pacific Cross Logistics",
+        type: {
+            asset_based: false,
+            freight_broker: true,
+        },
+        contact: "David Kim",
+        email: "dkim@pacificcrosslog.com",
+        phone: "503-888-4433",
+        domicile: {
+            city: "Portland",
+            territory: OR,
+            country: "United States",
+        },
+        modes: [Drayage, Intermodal],
+        hazmat: true,
+        team_drivers: false,
+        usa_bonded: true,
+        can_bonded: false,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [BC],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [WA, OR, CA],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [],
+            },
+        },
+        borders: [notApplicable],
+        core_lanes: ["OR:WA", "Portland, OR:Seattle, WA", "WA:BC"],
+        banned_lanes: ["OR:NM", "CAN:MEX"],
+    },
+    {
+        id: 6,
+        company: "Hidalgo Express",
+        type: {
+            asset_based: true,
+            freight_broker: false,
+        },
+        contact: "Mariana Torres",
+        email: "mtorres@hidalgoexpress.mx",
+        phone: "+52 899 123 4567",
+        domicile: {
+            city: "Reynosa",
+            territory: TAM,
+            country: "Mexico",
+        },
+        modes: [Truckload, ReeferTruckload, Expedited],
+        hazmat: false,
+        team_drivers: true,
+        usa_bonded: true,
+        can_bonded: false,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [TX],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [TAM, NLE, VER],
+            },
+        },
+        borders: [notApplicable, Hidalgo],
+        core_lanes: ["TAM:TX", "Reynosa, TAM:Laredo, TX"],
+        banned_lanes: ["MEX:CAN", "TX:BC"],
+    },
+    {
+        id: 7,
+        company: "Great Plains Freight",
+        type: {
+            asset_based: true,
+            freight_broker: false,
+        },
+        contact: "Robert Green",
+        email: "rgreen@greatplainsfreight.com",
+        phone: "701-555-0198",
+        domicile: {
+            city: "Fargo",
+            territory: ND,
+            country: "United States",
+        },
+        modes: [Truckload, ReeferTruckload],
+        hazmat: true,
+        team_drivers: false,
+        usa_bonded: true,
+        can_bonded: true,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [MB, SK],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [ND, SD, MN],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [],
+            },
+        },
+        borders: [notApplicable],
+        core_lanes: ["ND:MB", "Fargo, ND:Winnipeg, MB"],
+        banned_lanes: ["TX:SK", "MEX:CAN"],
+    },
+    {
+        id: 8,
+        company: "Laredo Border Carriers",
+        type: {
+            asset_based: true,
+            freight_broker: false,
+        },
+        contact: "Jorge Salinas",
+        email: "jsalinas@laredobc.com",
+        phone: "956-555-2288",
+        domicile: {
+            city: "Laredo",
+            territory: TX,
+            country: "United States",
+        },
+        modes: [Truckload, Partial],
+        hazmat: false,
+        team_drivers: false,
+        usa_bonded: true,
+        can_bonded: false,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [TX],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [NLE, TAM],
+            },
+        },
+        borders: [notApplicable, Laredo],
+        core_lanes: ["TX:NLE", "Laredo, TX:Monterrey, NLE"],
+        banned_lanes: ["MEX:CAN", "TX:CA"],
+    },
+    {
+        id: 9,
+        company: "Blue Ridge Logistics",
+        type: {
+            asset_based: false,
+            freight_broker: true,
+        },
+        contact: "Katherine Miles",
+        email: "kmiles@blueridgelog.com",
+        phone: "828-555-3344",
+        domicile: {
+            city: "Asheville",
+            territory: NC,
+            country: "United States",
+        },
+        modes: [LTL, Expedited],
+        hazmat: true,
+        team_drivers: false,
+        usa_bonded: false,
+        can_bonded: false,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [NC, SC, TN, GA],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [],
+            },
+        },
+        borders: [notApplicable],
+        core_lanes: ["NC:SC", "Asheville, NC:Atlanta, GA"],
+        banned_lanes: ["NC:TX", "USA:MEX"],
+    },
+    {
+        id: 10,
+        company: "Baja Norte Freight",
+        type: {
+            asset_based: true,
+            freight_broker: false,
+        },
+        contact: "Carlos Méndez",
+        email: "c.mendez@bajanortefreight.mx",
+        phone: "+52 664 777 1111",
+        domicile: {
+            city: "Tijuana",
+            territory: BCN,
+            country: "Mexico",
+        },
+        modes: [Flatbed, Drayage],
+        hazmat: false,
+        team_drivers: true,
+        usa_bonded: true,
+        can_bonded: false,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [CA],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [BCN, BCS],
+            },
+        },
+        borders: [notApplicable, Otay, Calexico],
+        core_lanes: ["BCN:CA", "Tijuana, BCN:San Diego, CA"],
+        banned_lanes: ["MEX:CAN", "CA:TX"],
+    },
+    {
+        id: 11,
+        company: "True North Carriers",
+        type: {
+            asset_based: true,
+            freight_broker: false,
+        },
+        contact: "Rachel Young",
+        email: "ryoung@truenorthcarriers.ca",
+        phone: "204-555-7890",
+        domicile: {
+            city: "Winnipeg",
+            territory: MB,
+            country: "Canada",
+        },
+        modes: [Truckload, ReeferTruckload, StepDeck],
+        hazmat: true,
+        team_drivers: true,
+        usa_bonded: true,
+        can_bonded: true,
+        coverage: {
+            Canada: {
+                country_code: "CAN",
+                territory: [MB, SK, AB],
+            },
+            "United States": {
+                country_code: "USA",
+                territory: [ND, MN, WI],
+            },
+            Mexico: {
+                country_code: "MEX",
+                territory: [],
+            },
+        },
+        borders: [notApplicable],
+        core_lanes: ["MB:SK", "Winnipeg, MB:Fargo, ND", "SK:ND"],
+        banned_lanes: ["MB:TX", "CAN:MEX"],
     },
 ];

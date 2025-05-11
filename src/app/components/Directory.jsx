@@ -1,4 +1,4 @@
-import { vendors, vendors2 } from "../vendors";
+import { vendors } from "../vendors";
 import { useEffect, useState } from "react";
 import Vendor from "./Vendor";
 
@@ -47,6 +47,12 @@ const Directory = (props) => {
         );
     }, [props.specs]);
 
+    // creates array to iterate and render the cards placeholders
+    let placeholder_array = [];
+    for (let i = 0; i <= 15; i++) {
+        placeholder_array.push(i);
+    }
+
     return (
         <>
             {filteredVendorList.map((vendor, index) => {
@@ -63,8 +69,35 @@ const Directory = (props) => {
                     />
                 );
             })}
-            {/* DIV BELOW MUST BE REMOVED EVENTUALLY, IT'S ONLY FOR TESTING PUSRPOSES (CREATES SPACE FOR AUTO-SCROLLING TO BE POSSIBLE) */}
-            <div style={{ height: "1000px" }}></div>
+            {!props.specs.mode &&
+                !props.specs.origin.country &&
+                !props.specs.destination.country &&
+                placeholder_array.map(() => {
+                    return (
+                        <div className="col-11 col-md-10">
+                            <div className="card bg-light-subtle shadow-sm">
+                                <div className="card-body">
+                                    <h4 className="card-title placeholder-glow">
+                                        <span className="placeholder col-7"></span>
+                                    </h4>
+                                    <p className="card-text placeholder-glow">
+                                        <span className="placeholder col-3 me-2"></span>
+                                        <span className="placeholder col-5"></span>
+                                    </p>
+                                    <p className="card-text placeholder-glow">
+                                        <span className="placeholder col-6"></span>
+                                    </p>
+                                </div>
+                                <button
+                                    className="btn btn-primary disabled placeholder m-2"
+                                    aria-disabled="true"
+                                ></button>
+                            </div>
+                        </div>
+                    );
+                })}
+            {/*THE DIV BELOW MUST BE DELETED AND FIND A NEW WAY TO DEAL WITH THE AUTO SCROLLING*/}
+            <div style={{ height: "600px" }}></div>
         </>
     );
 };

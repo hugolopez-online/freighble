@@ -18,7 +18,7 @@ const Vendor = (props) => {
             if (
                 props.coverage[country_lookup].country_code ==
                     props.specs.origin.country &&
-                country_lookup.territory.length != 0
+                props.coverage[country_lookup].territory.length != 0
             ) {
                 if (
                     props.coverage[country_lookup].territory.includes(
@@ -32,7 +32,7 @@ const Vendor = (props) => {
             if (
                 props.coverage[country_lookup].country_code ==
                     props.specs.destination.country &&
-                country_lookup.territory.length != 0
+                props.coverage[country_lookup].territory.length != 0
             ) {
                 if (
                     props.coverage[country_lookup].territory.includes(
@@ -74,7 +74,7 @@ const Vendor = (props) => {
                             style={{ fontSize: "0.75rem" }}
                         >
                             (
-                            {props.domicile.state.concat(
+                            {props.domicile.territory.concat(
                                 ", ",
                                 props.domicile.country
                             )}
@@ -98,7 +98,6 @@ const Vendor = (props) => {
                         {props.specs.mode}
                         <i className="bi bi-check-circle-fill ms-2"></i>
                     </span>
-
                     <span
                         className="badge rounded-pill text-bg-success me-1"
                         style={{ fontSize: "0.75rem" }}
@@ -108,12 +107,11 @@ const Vendor = (props) => {
                     </span>
                     <span
                         className={`badge rounded-pill ${
-                            props.coverage
-                                .map(
-                                    (country) =>
-                                        country.coverageContent.includes(
-                                            props.specs.origin.state
-                                        ) && true
+                            Object.keys(props.coverage)
+                                .map((country) =>
+                                    props.coverage[country].territory.includes(
+                                        props.specs.origin.territory
+                                    )
                                 )
                                 .includes(true)
                                 ? "text-bg-success"
@@ -121,15 +119,16 @@ const Vendor = (props) => {
                         } me-1`}
                         style={{ fontSize: "0.75rem" }}
                     >
-                        Origin: {props.specs.origin.state}
+                        Origin: {props.specs.origin.territory}
                         <i
                             className={`bi bi-${
-                                props.coverage
-                                    .map(
-                                        (country) =>
-                                            country.coverageContent.includes(
-                                                props.specs.origin.state
-                                            ) && true
+                                Object.keys(props.coverage)
+                                    .map((country) =>
+                                        props.coverage[
+                                            country
+                                        ].territory.includes(
+                                            props.specs.origin.territory
+                                        )
                                     )
                                     .includes(true)
                                     ? "check-circle-fill"
@@ -137,29 +136,20 @@ const Vendor = (props) => {
                             } ms-2`}
                         ></i>
                     </span>
-                    {props.coverage
-                        .map(
-                            (country) =>
-                                country.coverageContent[0] &&
-                                country.coverageCountryAlias
-                        )
-                        .includes(props.specs.destination.country) && (
-                        <span
-                            className="badge rounded-pill text-bg-success me-1"
-                            style={{ fontSize: "0.75rem" }}
-                        >
-                            Destination: {props.specs.destination.country}
-                            <i className="bi bi-check-circle-fill ms-2"></i>
-                        </span>
-                    )}
+                    <span
+                        className="badge rounded-pill text-bg-success me-1"
+                        style={{ fontSize: "0.75rem" }}
+                    >
+                        Destination: {props.specs.destination.country}
+                        <i className="bi bi-check-circle-fill ms-2"></i>
+                    </span>
                     <span
                         className={`badge rounded-pill ${
-                            props.coverage
-                                .map(
-                                    (country) =>
-                                        country.coverageContent.includes(
-                                            props.specs.destination.state
-                                        ) && true
+                            Object.keys(props.coverage)
+                                .map((country) =>
+                                    props.coverage[country].territory.includes(
+                                        props.specs.destination.territory
+                                    )
                                 )
                                 .includes(true)
                                 ? "text-bg-success"
@@ -167,15 +157,16 @@ const Vendor = (props) => {
                         } me-1`}
                         style={{ fontSize: "0.75rem" }}
                     >
-                        Destination: {props.specs.destination.state}
+                        Destination: {props.specs.destination.territory}
                         <i
                             className={`bi bi-${
-                                props.coverage
-                                    .map(
-                                        (country) =>
-                                            country.coverageContent.includes(
-                                                props.specs.destination.state
-                                            ) && true
+                                Object.keys(props.coverage)
+                                    .map((country) =>
+                                        props.coverage[
+                                            country
+                                        ].territory.includes(
+                                            props.specs.destination.territory
+                                        )
                                     )
                                     .includes(true)
                                     ? "check-circle-fill"
@@ -183,7 +174,7 @@ const Vendor = (props) => {
                             } ms-2`}
                         ></i>
                     </span>
-                    {props.vendorBorder.includes(props.specs.border) &&
+                    {props.borders.includes(props.specs.border) &&
                         props.specs.border !== "N/A" && (
                             <span
                                 className="badge rounded-pill text-bg-success me-1"
@@ -193,7 +184,7 @@ const Vendor = (props) => {
                                 <i className="bi bi-check-circle-fill ms-2"></i>
                             </span>
                         )}
-                    {props.vendorHazmat && props.specs.hazmat && (
+                    {props.hazmat && props.specs.hazmat && (
                         <span
                             className="badge rounded-pill text-bg-success me-1"
                             style={{ fontSize: "0.75rem" }}
@@ -202,7 +193,7 @@ const Vendor = (props) => {
                             <i className="bi bi-check-circle-fill ms-2"></i>
                         </span>
                     )}
-                    {props.vendorTeamDrivers && props.specs.team && (
+                    {props.team_drivers && props.specs.team_drivers && (
                         <span
                             className="badge rounded-pill text-bg-success me-1"
                             style={{ fontSize: "0.75rem" }}
@@ -211,16 +202,16 @@ const Vendor = (props) => {
                             <i className="bi bi-check-circle-fill ms-2"></i>
                         </span>
                     )}
-                    {props.vendorUSBonded && props.specs.usbond && (
+                    {props.usa_bonded && props.specs.usa_bonded && (
                         <span
                             className="badge rounded-pill text-bg-success me-1"
                             style={{ fontSize: "0.75rem" }}
                         >
-                            U.S. bond
+                            U.S. bonded
                             <i className="bi bi-check-circle-fill ms-2"></i>
                         </span>
                     )}
-                    {props.vendorCanadaBonded && props.specs.canadabond && (
+                    {props.can_bonded && props.specs.can_bonded && (
                         <span
                             className="badge rounded-pill text-bg-success me-1"
                             style={{ fontSize: "0.75rem" }}

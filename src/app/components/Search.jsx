@@ -26,6 +26,11 @@ const Search = (props) => {
 
     useEffect(() => {
         if (props.template) {
+            document
+                .getElementById("navbar")
+                .scrollIntoView({ block: "start", behavior: "smooth" });
+            props.setTemplate(null);
+
             setFormData((prev) => {
                 return {
                     ...prev,
@@ -41,11 +46,6 @@ const Search = (props) => {
                     can_bonded: props.template.can_bonded,
                 };
             });
-
-            document
-                .getElementById("navbar")
-                .scrollIntoView({ block: "start", behavior: "smooth" });
-            props.setTemplate(null);
         }
     }, [props.template]);
 
@@ -63,6 +63,12 @@ const Search = (props) => {
         ).value;
         const destination_region = geoLookup[destination_territory].region;
         const destination_country = geoLookup[destination_territory].country;
+
+        document
+            .getElementById("informativeBanner")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+
+        setFormData(default_form_data);
 
         props.setSpecs((prev) => {
             return {
@@ -87,11 +93,6 @@ const Search = (props) => {
                 can_bonded: document.getElementById("can_bonded").checked,
             };
         });
-
-        setFormData(default_form_data);
-        document
-            .getElementById("informativeBanner")
-            .scrollIntoView({ block: "start", behavior: "smooth" });
     };
 
     return (
@@ -409,10 +410,13 @@ const Search = (props) => {
                             type="checkbox"
                             id="team_drivers"
                             name="team_drivers"
-                            checked={formData.team}
+                            checked={formData.team_drivers}
                             onChange={(e) =>
                                 setFormData((prev) => {
-                                    return { ...prev, team: e.target.checked };
+                                    return {
+                                        ...prev,
+                                        team_drivers: e.target.checked,
+                                    };
                                 })
                             }
                         />
@@ -429,12 +433,12 @@ const Search = (props) => {
                             type="checkbox"
                             id="usa_bonded"
                             name="usa_bonded"
-                            checked={formData.usbond}
+                            checked={formData.usa_bonded}
                             onChange={(e) =>
                                 setFormData((prev) => {
                                     return {
                                         ...prev,
-                                        usbond: e.target.checked,
+                                        usa_bonded: e.target.checked,
                                     };
                                 })
                             }
@@ -452,12 +456,12 @@ const Search = (props) => {
                             type="checkbox"
                             id="can_bonded"
                             name="can_bonded"
-                            checked={formData.canadabond}
+                            checked={formData.can_bonded}
                             onChange={(e) =>
                                 setFormData((prev) => {
                                     return {
                                         ...prev,
-                                        canadabond: e.target.checked,
+                                        can_bonded: e.target.checked,
                                     };
                                 })
                             }
