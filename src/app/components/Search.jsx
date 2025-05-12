@@ -177,12 +177,23 @@ const Search = (props) => {
                         name="origin_territory"
                         value={formData.origin_territory}
                         onChange={(e) => {
-                            if (geoLookup[e.target.value].country != "MEX") {
+                            if (
+                                formData.origin_territory &&
+                                formData.destination_territory &&
+                                ((geoLookup[e.target.value].country != "MEX" &&
+                                    geoLookup[formData.destination_territory]
+                                        .country == "MEX") ||
+                                    (geoLookup[e.target.value].country ==
+                                        "MEX" &&
+                                        geoLookup[
+                                            formData.destination_territory
+                                        ].country != "MEX"))
+                            ) {
                                 setFormData((prev) => {
                                     return {
                                         ...prev,
                                         origin_territory: e.target.value,
-                                        border: "N/A",
+                                        border: "",
                                     };
                                 });
                                 return;
@@ -191,7 +202,7 @@ const Search = (props) => {
                                 return {
                                     ...prev,
                                     origin_territory: e.target.value,
-                                    border: "",
+                                    border: "N/A",
                                 };
                             });
                         }}
@@ -283,12 +294,22 @@ const Search = (props) => {
                         name="destination_territory"
                         value={formData.destination_territory}
                         onChange={(e) => {
-                            if (geoLookup[e.target.value].country != "MEX") {
+                            if (
+                                formData.origin_territory &&
+                                formData.destination_territory &&
+                                ((geoLookup[e.target.value].country != "MEX" &&
+                                    geoLookup[formData.origin_territory]
+                                        .country == "MEX") ||
+                                    (geoLookup[e.target.value].country ==
+                                        "MEX" &&
+                                        geoLookup[formData.origin_territory]
+                                            .country != "MEX"))
+                            ) {
                                 setFormData((prev) => {
                                     return {
                                         ...prev,
                                         destination_territory: e.target.value,
-                                        border: "N/A",
+                                        border: "",
                                     };
                                 });
                                 return;
@@ -297,7 +318,7 @@ const Search = (props) => {
                                 return {
                                     ...prev,
                                     destination_territory: e.target.value,
-                                    border: "",
+                                    border: "N/A",
                                 };
                             });
                         }}
@@ -397,18 +418,38 @@ const Search = (props) => {
                             value=""
                             style={{ display: "none" }}
                         ></option>
-                        {borderCrossingPorts.map((border) => {
-                            return (
-                                <option
-                                    key={border
-                                        .replace(/ /g, "-")
-                                        .replace(/,/g, "_")}
-                                    value={border}
-                                >
-                                    {border}
-                                </option>
-                            );
-                        })}
+                        <option
+                            value="N/A"
+                            hidden={
+                                formData.origin_territory &&
+                                formData.destination_territory &&
+                                ((geoLookup[formData.origin_territory]
+                                    .country != "MEX" &&
+                                    geoLookup[formData.destination_territory]
+                                        .country == "MEX") ||
+                                    (geoLookup[formData.origin_territory]
+                                        .country == "MEX" &&
+                                        geoLookup[
+                                            formData.destination_territory
+                                        ].country != "MEX"))
+                            }
+                        >
+                            N/A
+                        </option>
+                        {borderCrossingPorts
+                            .filter((border) => border != "N/A")
+                            .map((border) => {
+                                return (
+                                    <option
+                                        key={border
+                                            .replace(/ /g, "-")
+                                            .replace(/,/g, "_")}
+                                        value={border}
+                                    >
+                                        {border}
+                                    </option>
+                                );
+                            })}
                     </select>
                 </div>
             </div>
