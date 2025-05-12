@@ -178,16 +178,12 @@ const Search = (props) => {
                         value={formData.origin_territory}
                         onChange={(e) => {
                             if (
-                                formData.origin_territory &&
-                                formData.destination_territory &&
-                                ((geoLookup[e.target.value].country != "MEX" &&
+                                (geoLookup[e.target.value].country != "MEX" &&
                                     geoLookup[formData.destination_territory]
                                         .country == "MEX") ||
-                                    (geoLookup[e.target.value].country ==
-                                        "MEX" &&
-                                        geoLookup[
-                                            formData.destination_territory
-                                        ].country != "MEX"))
+                                (geoLookup[e.target.value].country == "MEX" &&
+                                    geoLookup[formData.destination_territory]
+                                        .country != "MEX")
                             ) {
                                 setFormData((prev) => {
                                     return {
@@ -295,15 +291,12 @@ const Search = (props) => {
                         value={formData.destination_territory}
                         onChange={(e) => {
                             if (
-                                formData.origin_territory &&
-                                formData.destination_territory &&
-                                ((geoLookup[e.target.value].country != "MEX" &&
+                                (geoLookup[e.target.value].country != "MEX" &&
                                     geoLookup[formData.origin_territory]
                                         .country == "MEX") ||
-                                    (geoLookup[e.target.value].country ==
-                                        "MEX" &&
-                                        geoLookup[formData.origin_territory]
-                                            .country != "MEX"))
+                                (geoLookup[e.target.value].country == "MEX" &&
+                                    geoLookup[formData.origin_territory]
+                                        .country != "MEX")
                             ) {
                                 setFormData((prev) => {
                                     return {

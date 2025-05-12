@@ -131,7 +131,12 @@ const geoTree = {
     },
 };
 
-const geoLookup = {};
+const geoLookup = {
+    "": {
+        region: "",
+        country: "",
+    },
+};
 
 for (let country in geoTree) {
     for (let region in geoTree[country]) {

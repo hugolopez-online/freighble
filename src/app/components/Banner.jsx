@@ -5,10 +5,10 @@ const Banner = (props) => {
         props.specs.destination.country;
     return (
         <div className="border-bottom bg-body mb-3">
-            <h1 className="fw-bold">Search results</h1>
+            <h3 className="fw-bold">Search results</h3>
             {min_data ? (
                 <div>
-                    <p>
+                    <p className="mb-1">
                         <strong>Details: </strong>
                         {`${props.specs.usa_bonded ? "U.S. bonded " : ""}
                             ${props.specs.can_bonded ? "Canada bonded " : ""}
@@ -45,7 +45,7 @@ const Banner = (props) => {
                     </p>
                     <p>
                         <button
-                            className="btn btn-warning shadow-sm me-2"
+                            className="btn btn-sm btn-warning shadow-sm me-2"
                             type="button"
                             onClick={() => {
                                 document
@@ -60,14 +60,14 @@ const Banner = (props) => {
                             Clear results
                         </button>
                         <button
-                            className="btn btn-dark shadow-sm me-2"
+                            className="btn btn-sm btn-dark shadow-sm me-2"
                             type="button"
                             onClick={() => props.templateSpecs(props.specs)}
                         >
                             Template new search
                         </button>
                         <button
-                            className="btn btn-outline-dark shadow-sm me-2"
+                            className="btn btn-sm btn-outline-dark shadow-sm me-2"
                             type="button"
                             onClick={() => {
                                 document
