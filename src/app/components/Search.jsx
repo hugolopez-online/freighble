@@ -97,7 +97,7 @@ const Search = (props) => {
 
     return (
         <form
-            className="shadow-sm border rounded-3 p-3 text-bg-light"
+            className="shadow-sm border rounded-3 p-3 text-bg-light needs-validation"
             onSubmit={handleSpecs}
         >
             <div className="row">
@@ -176,14 +176,25 @@ const Search = (props) => {
                         id="origin_territory"
                         name="origin_territory"
                         value={formData.origin_territory}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                            if (geoLookup[e.target.value].country != "MEX") {
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        origin_territory: e.target.value,
+                                        border: "N/A",
+                                    };
+                                });
+                                return;
+                            }
                             setFormData((prev) => {
                                 return {
                                     ...prev,
                                     origin_territory: e.target.value,
+                                    border: "",
                                 };
-                            })
-                        }
+                            });
+                        }}
                         required
                     >
                         <option
@@ -271,14 +282,25 @@ const Search = (props) => {
                         id="destination_territory"
                         name="destination_territory"
                         value={formData.destination_territory}
-                        onChange={(e) =>
+                        onChange={(e) => {
+                            if (geoLookup[e.target.value].country != "MEX") {
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        destination_territory: e.target.value,
+                                        border: "N/A",
+                                    };
+                                });
+                                return;
+                            }
                             setFormData((prev) => {
                                 return {
                                     ...prev,
                                     destination_territory: e.target.value,
+                                    border: "",
                                 };
-                            })
-                        }
+                            });
+                        }}
                         required
                     >
                         <option
@@ -354,8 +376,27 @@ const Search = (props) => {
                                 return { ...prev, border: e.target.value };
                             })
                         }
+                        disabled={
+                            !(
+                                formData.origin_territory &&
+                                formData.destination_territory &&
+                                ((geoLookup[formData.origin_territory]
+                                    .country != "MEX" &&
+                                    geoLookup[formData.destination_territory]
+                                        .country == "MEX") ||
+                                    (geoLookup[formData.origin_territory]
+                                        .country == "MEX" &&
+                                        geoLookup[
+                                            formData.destination_territory
+                                        ].country != "MEX"))
+                            )
+                        }
                         required
                     >
+                        <option
+                            value=""
+                            style={{ display: "none" }}
+                        ></option>
                         {borderCrossingPorts.map((border) => {
                             return (
                                 <option
