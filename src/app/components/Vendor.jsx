@@ -8,7 +8,8 @@ const Vendor = (props) => {
     const oStateW = specsWeight.desirable.oStateW;
     const dStateW = specsWeight.desirable.dStateW;
 
-    console.log(oStateW, dStateW);
+    //LOG FOR TESTS, DELETE ONCE DONE
+    console.log(props);
 
     useEffect(() => {
         setSuitability(base_score);
@@ -60,7 +61,7 @@ const Vendor = (props) => {
                         </span>
                     </div>
                     <div className="card-body">
-                        <h5 className="card-title fw-bold text-dark">
+                        <h5 className="card-title fw-bold text-dark m-0">
                             {props.company}
                             <span style={{ fontSize: "0.7em" }}>
                                 {props.type.asset_based && (
@@ -81,8 +82,22 @@ const Vendor = (props) => {
                                 )}
                                 )
                             </span>
+                            <button
+                                type="button"
+                                className="btn btn-sm btn-outline-secondary ms-2 py-0 ps-1 pe-2 rounded-5"
+                                data-bs-toggle="collapse"
+                                data-bs-target={`#${props.vendorKey}-extra-info`}
+                                aria-expanded="false"
+                                aria-controls={`${props.vendorKey}-extra-info`}
+                            >
+                                +info
+                            </button>
                         </h5>
-                        <div className="collapse">
+                        <div
+                            className="collapse"
+                            id={`${props.vendorKey}-extra-info`}
+                        >
+                            <hr />
                             <p className="card-text m-0 text-secondary">
                                 <i className="bi bi-people-fill"></i>{" "}
                                 {props.contact}:{" "}
@@ -98,6 +113,7 @@ const Vendor = (props) => {
                                     {props.email}
                                 </a>
                             </p>
+                            <hr />
                             <span
                                 className="badge rounded-pill text-bg-success me-1"
                                 style={{ fontSize: "0.75rem" }}
@@ -236,12 +252,13 @@ const Vendor = (props) => {
                         </div>
                     </div>
                 </div>
-                <button
-                    type="button"
-                    className="btn btn-dark rounded-end-3"
+                <a
+                    href={`mailto:${props.email}`}
+                    className="btn btn-primary rounded-end-3"
+                    role="button"
                 >
                     <i className="bi bi-envelope"></i> Contact
-                </button>
+                </a>
             </div>
         </div>
     );

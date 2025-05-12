@@ -146,6 +146,4 @@ for (let country in geoTree) {
     }
 }
 
-console.log(geoLookup);
-
 export default geoLookup;
