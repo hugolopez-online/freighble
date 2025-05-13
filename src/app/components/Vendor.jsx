@@ -8,9 +8,6 @@ const Vendor = (props) => {
     const oStateW = specsWeight.desirable.oStateW;
     const dStateW = specsWeight.desirable.dStateW;
 
-    //LOG FOR TESTS, DELETE ONCE DONE
-    console.log(props);
-
     useEffect(() => {
         setSuitability(base_score);
         let new_score = 0;
@@ -54,7 +51,7 @@ const Vendor = (props) => {
                 <div className="card bg-light-subtle col rounded-start-3">
                     <div
                         className="position-absolute"
-                        style={{ top: "-0.5em", right: "0.25em" }}
+                        style={{ top: "-0.75em", right: "0.25em" }}
                     >
                         <span className="badge border border-primary text-bg-info">
                             <i className="bi bi-crosshair"></i> {suitability}%
@@ -62,26 +59,15 @@ const Vendor = (props) => {
                     </div>
                     <div className="card-body">
                         <h5 className="card-title fw-bold text-dark m-0">
-                            {props.company}
                             <span style={{ fontSize: "0.7em" }}>
                                 {props.type.asset_based && (
-                                    <i className="bi bi-patch-check-fill text-primary ms-2"></i>
+                                    <i className="bi bi-patch-check-fill text-primary me-2"></i>
                                 )}
                                 {props.type.freight_broker && (
-                                    <i className="bi bi-patch-exclamation text-danger ms-2"></i>
+                                    <i className="bi bi-exclamation-triangle-fill text-warning me-2"></i>
                                 )}
                             </span>
-                            <span
-                                className="fw-light text-secondary ms-2"
-                                style={{ fontSize: "0.7rem" }}
-                            >
-                                (
-                                {props.domicile.territory.concat(
-                                    ", ",
-                                    props.domicile.country
-                                )}
-                                )
-                            </span>
+                            {props.company}
                             <button
                                 type="button"
                                 className="btn btn-sm btn-outline-secondary ms-2 py-0 ps-1 pe-2 rounded-5"
@@ -99,15 +85,15 @@ const Vendor = (props) => {
                         >
                             <hr />
                             <p className="card-text m-0 text-secondary">
+                                <i className="bi bi-house-fill"></i>{" "}
+                                {`${props.domicile.territory}, ${props.domicile.country}`}
+                            </p>
+                            <p className="card-text m-0 text-secondary">
                                 <i className="bi bi-people-fill"></i>{" "}
                                 {props.contact}:{" "}
-                                <em>
-                                    <a href={`tel:${props.phone}`}>
-                                        {props.phone}
-                                    </a>
-                                </em>
+                                <a href={`tel:${props.phone}`}>{props.phone}</a>
                             </p>
-                            <p className="card-text mb-2 text-secondary">
+                            <p className="card-text m-0 text-secondary">
                                 <i className="bi bi-envelope-fill"></i>{" "}
                                 <a href={`mailto:${props.email}`}>
                                     {props.email}
@@ -252,13 +238,9 @@ const Vendor = (props) => {
                         </div>
                     </div>
                 </div>
-                <a
-                    href={`mailto:${props.email}`}
-                    className="btn btn-primary rounded-end-3"
-                    role="button"
-                >
-                    <i className="bi bi-envelope"></i> Contact
-                </a>
+                <button className="btn btn-primary rounded-end-3 px-4">
+                    <i className="bi bi-envelope-fill"></i>
+                </button>
             </div>
         </div>
     );
