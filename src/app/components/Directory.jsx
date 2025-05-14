@@ -97,10 +97,8 @@ const Directory = (props) => {
                     );
                 })}
             {/*THE DIV BELOW MUST BE DELETED AND FIND A NEW WAY TO DEAL WITH THE AUTO SCROLLING*/}
-            <div>
-                <code className="text-bg-dark">
-                    {JSON.stringify(vendorList)}
-                </code>
+            <div className="text-bg-dark">
+                {/* <code>{JSON.stringify(vendorList)}</code> */}
             </div>
         </>
     );
