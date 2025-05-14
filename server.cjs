@@ -3,11 +3,9 @@ const http = require("http");
 const vendors = require("./vendors_module.cjs");
 
 const server = http.createServer((req, res) => {
-    if (req.url === "/api") {
-        console.log(`Server hit at "${req.url}"`);
-        res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(vendors));
-    }
+    console.log(`Server hit at "${req.url}"`);
+    res.writeHead(200, { "Content-Type": "application/json" });
+    return res.end(JSON.stringify(vendors));
 });
 
 const PORT = process.env.PORT || 8080;
