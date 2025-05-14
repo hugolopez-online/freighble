@@ -97,7 +97,9 @@ const Directory = (props) => {
                     );
                 })}
             {/*THE DIV BELOW MUST BE DELETED AND FIND A NEW WAY TO DEAL WITH THE AUTO SCROLLING*/}
-            <div style={{ height: "600px" }}></div>
+            <div>
+                <code>{JSON.stringify(vendorList)}</code>
+            </div>
         </>
     );
 };

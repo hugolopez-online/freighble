@@ -563,6 +563,21 @@ const Search = (props) => {
             >
                 Search
             </button>
+            {/* Button to test API, delete later */}
+            <button
+                type="button"
+                className="btn btn-danger mt-3"
+                onClick={() => {
+                    fetch("/api")
+                        .then((res) => res.json())
+                        .then((data) => console.log(data))
+                        .catch((err) =>
+                            console.log("something went wrong: ", err)
+                        );
+                }}
+            >
+                TEST API
+            </button>
         </form>
     );
 };
