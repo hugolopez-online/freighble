@@ -1,12 +1,14 @@
-import specsWeight from "../handlers/suitabilityMeta";
+import suitability_weight from "../handlers/suitability_meta";
 import { useState, useEffect } from "react";
 
-const base_score = specsWeight.mandatory;
+const base_score = suitability_weight.mandatory;
 
 const Vendor = (props) => {
     const [suitability, setSuitability] = useState(base_score);
-    const oStateW = specsWeight.desirable.oStateW;
-    const dStateW = specsWeight.desirable.dStateW;
+    const origin_territory_weight =
+        suitability_weight.desirable.origin_territory_weight;
+    const destination_territory_weight =
+        suitability_weight.desirable.destination_territory_weight;
 
     useEffect(() => {
         setSuitability(base_score);
@@ -23,7 +25,7 @@ const Vendor = (props) => {
                         props.specs.origin.territory
                     )
                 ) {
-                    new_score += oStateW;
+                    new_score += origin_territory_weight;
                 }
             }
 
@@ -37,7 +39,7 @@ const Vendor = (props) => {
                         props.specs.destination.territory
                     )
                 ) {
-                    new_score += dStateW;
+                    new_score += destination_territory_weight;
                 }
             }
         }

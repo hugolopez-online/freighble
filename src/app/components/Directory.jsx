@@ -75,23 +75,16 @@ const Directory = (props) => {
                 placeholder_array.map(() => {
                     return (
                         <div className="col-11 col-md-10">
-                            <div className="card bg-light-subtle shadow-sm">
-                                <div className="card-body">
-                                    <h4 className="card-title placeholder-glow">
-                                        <span className="placeholder col-7"></span>
-                                    </h4>
-                                    <p className="card-text placeholder-glow">
-                                        <span className="placeholder col-3 me-2"></span>
-                                        <span className="placeholder col-5"></span>
-                                    </p>
-                                    <p className="card-text placeholder-glow">
-                                        <span className="placeholder col-6"></span>
-                                    </p>
+                            <div className="input-group shadow-sm rounded-3">
+                                <div className="card bg-light-subtle col shadow-sm">
+                                    <div className="card-body">
+                                        <h5 className="card-title placeholder-glow">
+                                            <span className="placeholder bg-secondary col-6"></span>
+                                            <span className="placeholder bg-secondary col-1 ms-2"></span>
+                                        </h5>
+                                    </div>
                                 </div>
-                                <button
-                                    className="btn btn-primary disabled placeholder m-2"
-                                    aria-disabled="true"
-                                ></button>
+                                <button className="btn btn-primary rounded-end-3 disabled placeholder px-4"></button>
                             </div>
                         </div>
                     );

@@ -102,7 +102,7 @@ import {
     ZAC,
 } from "../variables";
 
-const geoTree = {
+const geo_tree = {
     CAN: {
         Pacific: [BC],
         Prairies: [AB, MB, SK],
@@ -131,19 +131,19 @@ const geoTree = {
     },
 };
 
-const geoLookup = {
+const geo_lookup = {
     "": {
         region: "",
         country: "",
     },
 };
 
-for (let country in geoTree) {
-    for (let region in geoTree[country]) {
-        for (let state of geoTree[country][region]) {
-            geoLookup[state] = { region, country };
+for (let country in geo_tree) {
+    for (let region in geo_tree[country]) {
+        for (let state of geo_tree[country][region]) {
+            geo_lookup[state] = { region, country };
         }
     }
 }
 
-export default geoLookup;
+export default geo_lookup;

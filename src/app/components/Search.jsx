@@ -6,7 +6,7 @@ import {
     mexDivisions,
     borderCrossingPorts,
 } from "../variables";
-import geoLookup from "../handlers/geoMeta";
+import geo_lookup from "../handlers/geo_meta";
 
 const default_form_data = {
     mode: "",
@@ -20,6 +20,9 @@ const default_form_data = {
     usa_bonded: false,
     can_bonded: false,
 };
+
+const isCrossBorder = (o, d) =>
+    (geo_lookup[o].country === "MEX") !== (geo_lookup[d].country === "MEX");
 
 const Search = (props) => {
     const [formData, setFormData] = useState(default_form_data);
@@ -54,15 +57,15 @@ const Search = (props) => {
         const origin_city = document.getElementById("origin_city").value;
         const origin_territory =
             document.getElementById("origin_territory").value;
-        const origin_region = geoLookup[origin_territory].region;
-        const origin_country = geoLookup[origin_territory].country;
+        const origin_region = geo_lookup[origin_territory].region;
+        const origin_country = geo_lookup[origin_territory].country;
         const destination_city =
             document.getElementById("destination_city").value;
         const destination_territory = document.getElementById(
             "destination_territory"
         ).value;
-        const destination_region = geoLookup[destination_territory].region;
-        const destination_country = geoLookup[destination_territory].country;
+        const destination_region = geo_lookup[destination_territory].region;
+        const destination_country = geo_lookup[destination_territory].country;
 
         document
             .getElementById("informativeBanner")
@@ -131,7 +134,6 @@ const Search = (props) => {
                             value=""
                             style={{ display: "none" }}
                         >
-                            {/* TODO: verify that leaving this empty is ok*/}
                             Transportation mode
                         </option>
                         {transportationModes.map((mode, index) => {
@@ -177,28 +179,20 @@ const Search = (props) => {
                         name="origin_territory"
                         value={formData.origin_territory}
                         onChange={(e) => {
-                            if (
-                                (geoLookup[e.target.value].country != "MEX" &&
-                                    geoLookup[formData.destination_territory]
-                                        .country == "MEX") ||
-                                (geoLookup[e.target.value].country == "MEX" &&
-                                    geoLookup[formData.destination_territory]
-                                        .country != "MEX")
-                            ) {
-                                setFormData((prev) => {
-                                    return {
-                                        ...prev,
-                                        origin_territory: e.target.value,
-                                        border: "",
-                                    };
-                                });
-                                return;
-                            }
+                            const origin_territory = e.target.value;
+                            const destination_territory =
+                                formData.destination_territory;
+
                             setFormData((prev) => {
                                 return {
                                     ...prev,
-                                    origin_territory: e.target.value,
-                                    border: "N/A",
+                                    origin_territory,
+                                    border: isCrossBorder(
+                                        origin_territory,
+                                        destination_territory
+                                    )
+                                        ? ""
+                                        : "N/A",
                                 };
                             });
                         }}
@@ -256,6 +250,18 @@ const Search = (props) => {
                         })}
                     </select>
                 </div>
+                {/* <div className="col mt-1">
+                    // TODO: fix date input to be controlled by React, and to have a functional effect
+                    <input
+                        type="date"
+                        className="form-control"
+                        value={`${String(new Date().getFullYear())}-${String(
+                            new Date().getMonth() + 1
+                        ).padStart(2, "0")}-${String(
+                            new Date().getDate()
+                        ).padStart(2, "0")}`}
+                    />
+                </div> */}
             </fieldset>
 
             {/* Destination */}
@@ -290,28 +296,19 @@ const Search = (props) => {
                         name="destination_territory"
                         value={formData.destination_territory}
                         onChange={(e) => {
-                            if (
-                                (geoLookup[e.target.value].country != "MEX" &&
-                                    geoLookup[formData.origin_territory]
-                                        .country == "MEX") ||
-                                (geoLookup[e.target.value].country == "MEX" &&
-                                    geoLookup[formData.origin_territory]
-                                        .country != "MEX")
-                            ) {
-                                setFormData((prev) => {
-                                    return {
-                                        ...prev,
-                                        destination_territory: e.target.value,
-                                        border: "",
-                                    };
-                                });
-                                return;
-                            }
+                            const origin_territory = formData.origin_territory;
+                            const destination_territory = e.target.value;
+
                             setFormData((prev) => {
                                 return {
                                     ...prev,
-                                    destination_territory: e.target.value,
-                                    border: "N/A",
+                                    destination_territory,
+                                    border: isCrossBorder(
+                                        origin_territory,
+                                        destination_territory
+                                    )
+                                        ? ""
+                                        : "N/A",
                                 };
                             });
                         }}
@@ -369,10 +366,26 @@ const Search = (props) => {
                         })}
                     </select>
                 </div>
+                {/* <div className="col mt-1">
+                    // TODO: fix date input to be controlled by React, and to have a functional effect
+                    <input
+                        type="date"
+                        className="form-control"
+                        value={`${String(new Date().getFullYear())}-${String(
+                            new Date().getMonth() + 1
+                        ).padStart(2, "0")}-${String(
+                            new Date().getDate() + 2
+                        ).padStart(2, "0")}`}
+                    />
+                </div> */}
             </fieldset>
 
             {/* Border Crossing */}
-            <div className="row mb-2">
+            <div
+                className={`row mb-2 ${
+                    formData.border !== "N/A" ? "" : "d-none"
+                }`}
+            >
                 <div className="col-12">
                     <label
                         htmlFor="border"
@@ -394,15 +407,10 @@ const Search = (props) => {
                             !(
                                 formData.origin_territory &&
                                 formData.destination_territory &&
-                                ((geoLookup[formData.origin_territory]
-                                    .country != "MEX" &&
-                                    geoLookup[formData.destination_territory]
-                                        .country == "MEX") ||
-                                    (geoLookup[formData.origin_territory]
-                                        .country == "MEX" &&
-                                        geoLookup[
-                                            formData.destination_territory
-                                        ].country != "MEX"))
+                                isCrossBorder(
+                                    formData.origin_territory,
+                                    formData.destination_territory
+                                )
                             )
                         }
                         required
@@ -416,13 +424,13 @@ const Search = (props) => {
                             hidden={
                                 formData.origin_territory &&
                                 formData.destination_territory &&
-                                ((geoLookup[formData.origin_territory]
+                                ((geo_lookup[formData.origin_territory]
                                     .country != "MEX" &&
-                                    geoLookup[formData.destination_territory]
+                                    geo_lookup[formData.destination_territory]
                                         .country == "MEX") ||
-                                    (geoLookup[formData.origin_territory]
+                                    (geo_lookup[formData.origin_territory]
                                         .country == "MEX" &&
-                                        geoLookup[
+                                        geo_lookup[
                                             formData.destination_territory
                                         ].country != "MEX"))
                             }
@@ -447,15 +455,31 @@ const Search = (props) => {
                 </div>
             </div>
 
-            {/* Additional Requirements */}
+            {/* Special Requirements */}
             <fieldset className="row mb-2">
-                <legend
-                    className="fw-bold text-secondary"
-                    style={{ fontSize: "0.85em" }}
-                >
-                    Additional requirements
-                </legend>
                 <div className="col-12">
+                    <button
+                        type="button"
+                        className={`btn btn-sm ${
+                            formData.hazmat ||
+                            formData.team_drivers ||
+                            formData.usa_bonded ||
+                            formData.can_bonded
+                                ? "btn-primary"
+                                : "btn-outline-secondary border"
+                        } rounded-5 w-100`}
+                        data-bs-toggle="collapse"
+                        data-bs-target="#special-requirements"
+                        aria-expanded="false"
+                        aria-controls="special-requirements"
+                    >
+                        Special requirements
+                    </button>
+                </div>
+                <div
+                    id="special-requirements"
+                    className="col-12 collapse"
+                >
                     <div className="form-check form-check-inline">
                         <input
                             className="form-check-input"
@@ -550,33 +574,47 @@ const Search = (props) => {
                     </div>
                 </div>
             </fieldset>
+
+            {/* Additional Instructions */}
+            <div className="row mb-2">
+                <div className="col">
+                    <div className="col-12 mb-2">
+                        <button
+                            type="button"
+                            className="btn btn-sm btn-outline-secondary border rounded-5 w-100"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#additional-instructions-wrapper"
+                            aria-expanded="false"
+                            aria-controls="additional-instructions-wrapper"
+                        >
+                            Additional instructions
+                        </button>
+                    </div>
+                    <div
+                        id="additional-instructions-wrapper"
+                        className="col-12 collapse"
+                    >
+                        <textarea
+                            name="additional-instructions"
+                            id="additional-instructions"
+                            className="form-control"
+                            rows="2"
+                        ></textarea>
+                    </div>
+                </div>
+            </div>
             <button
                 type="button"
-                className="btn btn-sm btn-warning shadow-sm w-100 mb-2"
+                className="btn btn-sm btn-outline-danger shadow-sm fw-bold w-100 mb-2"
                 onClick={() => setFormData(default_form_data)}
             >
                 Reset fields
             </button>
             <button
                 type="submit"
-                className="btn btn-lg btn-dark shadow-sm fw-bold w-100"
+                className="btn btn-dark shadow-sm fw-bold w-100"
             >
                 Search
-            </button>
-            {/* Button to test API, delete later */}
-            <button
-                type="button"
-                className="btn btn-danger mt-3"
-                onClick={() => {
-                    fetch("/api")
-                        .then((res) => res.json())
-                        .then((data) => console.log(data))
-                        .catch((err) =>
-                            console.log("something went wrong: ", err)
-                        );
-                }}
-            >
-                TEST API
             </button>
         </form>
     );

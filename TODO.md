@@ -6,19 +6,20 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 ## 1. Architecture & Scalability
 
-### [HIGH] Reorganize and prepare for scale
-
 -   [x] Re-arrange folder/file architecture for better separation of concerns and readability
 -   [x] Rename files for a more professional, readable, and clean structure
 -   [ ] Set up a reducer (and optionally use context hooks) to manage state more cleanly
 -   [ ] [BLOCKED: requires DB setup] Implement CRUD functionality
 -   [ ] Set up a proper database to move vendor information out of hardcoded/static files
+    -   [ ] Build full API to access all data dynamically
+-   [ ] Capture and store user-specific search data for analysis. Use it to:
+    -   Compare searches against the available carrier database
+    -   Generate a visual dashboard to identify carrier development priorities
+    -   Build a personalized task tracker for the user
 
 ---
 
 ## 2. Core Functionality & Performance
-
-### [HIGH] Core interactions and data logic
 
 -   [x] Assess and potentially modify the method used to display searched carriers (improve performance or structure)
 -   [ ] Fix key ID assignment for iterated items to avoid React key warning and improve diffing
@@ -30,13 +31,15 @@ Tasks to track development, scalability, polish, and UX improvements.
     -   TWIC
     -   TSA
     -   FAST
--   [ ] Implement an open field to optionally type additional custom cargo specifications
+-   [x] Implement an open field to optionally type additional custom cargo instructions
+-   [ ] Make additional cargo instructions functional
+-   [ ] Include and make functional origin and destination dates
+-   [ ] Message and button on carrier cards to prepare/send an email to that vendor
+-   [ ] Make a "searches" dashboard to mark a status for each serch and keep track of work
 
 ---
 
 ## 3. User Interaction Enhancements
-
-### [MEDIUM] Input UX and interaction polish
 
 -   [x] Simplify suitability visualization on carrier cards
 -   [ ] Implement autofill functionality for Origin/Destination input fields
@@ -48,8 +51,6 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 ## 4. Communication Between Components
 
-### [MEDIUM] Data flow & coordination
-
 -   [x] Refactor the banner component logic:
     -   [x] Improve communication between banner and other components
     -   [x] Possibly move banner to be a sibling of Search and Vendors, not a child
@@ -58,16 +59,12 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 ## 5. Polish & Visual Presentation
 
-### [LOW] Make it visually deliverable
-
 -   [x] Style the page to look presentable (use Bootstrap as the main styling library)
--   [ ] Message and button on carrier cards to prepare/send an email to that vendor
+-   [ ] Desgin a proper header/navbar
 
 ---
 
 ## 6. Code Cleanup & QA
-
-### [LOW] Maintainability and testability
 
 -   [x] Clean up and standardize all test `console.log()` messages to allow easy global removal
 -   [x] Clean up and standardize in-code comments

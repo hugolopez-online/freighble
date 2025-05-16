@@ -10,38 +10,36 @@ const Banner = (props) => {
                 <div>
                     <p className="mb-1">
                         <strong>Details: </strong>
-                        {`${props.specs.usa_bonded ? "U.S. bonded " : ""}
-                            ${props.specs.can_bonded ? "Canada bonded " : ""}
-                            ${props.specs.hazmat ? "Hazmat " : ""}
-                            ${props.specs.mode} from 
-                            ${
-                                props.specs.origin.city
-                                    ? props.specs.origin.city + ", "
-                                    : ""
-                            }
-                            ${
-                                props.specs.origin.territory +
-                                " (" +
-                                props.specs.origin.country +
-                                ")"
-                            } to 
+                        {`${props.specs.usa_bonded ? "U.S. bonded " : ""}${
+                            props.specs.can_bonded ? "Canada bonded " : ""
+                        }${props.specs.hazmat ? "Hazmat " : ""}${
+                            props.specs.mode
+                        } from ${
+                            props.specs.origin.city
+                                ? props.specs.origin.city + ", "
+                                : ""
+                        }${
+                            props.specs.origin.territory +
+                            " (" +
+                            props.specs.origin.country +
+                            ")"
+                        } to 
                             ${
                                 props.specs.destination.city
                                     ? props.specs.destination.city + ", "
                                     : ""
-                            }
-                            ${
-                                props.specs.destination.territory +
-                                " (" +
-                                props.specs.destination.country +
-                                ")"
-                            }
-                            ${props.specs.team ? " with Team Drivers" : ""}
-                            ${
-                                props.specs.border !== "N/A"
-                                    ? ", crossing through " + props.specs.border
-                                    : ""
-                            }`}
+                            }${
+                            props.specs.destination.territory +
+                            " (" +
+                            props.specs.destination.country +
+                            ")"
+                        }${
+                            props.specs.team_drivers ? " with Team Drivers" : ""
+                        }${
+                            props.specs.border !== "N/A"
+                                ? ", crossing through " + props.specs.border
+                                : ""
+                        }`}
                     </p>
                     <p>
                         <button
@@ -87,7 +85,7 @@ const Banner = (props) => {
                     className="alert alert-warning"
                     role="alert"
                 >
-                    Enter details to display suitable vendors.
+                    Enter load details to display suitable vendors.
                 </div>
             )}
         </div>
