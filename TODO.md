@@ -16,6 +16,7 @@ Tasks to track development, scalability, polish, and UX improvements.
     -   Compare searches against the available carrier database
     -   Generate a visual dashboard to identify carrier development priorities
     -   Build a personalized task tracker for the user
+-   Migrate the server to Express.js for API handling
 
 ---
 
