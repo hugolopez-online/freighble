@@ -1,4 +1,4 @@
-# Project TODO – Magic Rolodex (placeholder name)
+# Project TODO – Freighble
 
 Tasks to track development, scalability, polish, and UX improvements.
 

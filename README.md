@@ -1,4 +1,4 @@
-# Magic Rolodex (placeholder name)
+# Freighble
 
 ## Description
 
