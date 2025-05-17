@@ -7,7 +7,7 @@ Specialized search engine for logistics professionals to match freight transport
 The current scope of its functionality is for loads and carriers within Canada, U.S., and Mexico only.
 
 > **IMPORTANT DISCLAIMER!**  
-> At this stage of development, it's mock vendors that are being used for testing -either they're not real or the information shown is likely made up or extremely inaccurate.
+> At this stage of development, it's mock vendors being used for testing - either they're not real companies or the displayed information is made up and extremely inaccurate.
 
 ## Tech Stack
 
