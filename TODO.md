@@ -1,4 +1,4 @@
-# Project TODO – Magic Rolodex
+# Project TODO – Magic Rolodex (placeholder name)
 
 Tasks to track development, scalability, polish, and UX improvements.
 
