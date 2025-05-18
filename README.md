@@ -21,6 +21,7 @@ The current scope of its functionality is for loads and carriers within Canada, 
 
 -   **Backend & Tooling**
     -   `Node.js`
+    -   `Express.js`
     -   `Vite.js`
 
 ## Getting Started

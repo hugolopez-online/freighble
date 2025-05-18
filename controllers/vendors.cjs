@@ -48,9 +48,6 @@ const getSearchedVendors = (req, res, next) => {
         );
     });
 
-    // TEST LOG, delete later
-    console.log(searched_vendors.length);
-
     return res.status(200).json({ searched_vendors });
 };
 
