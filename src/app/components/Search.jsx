@@ -42,7 +42,7 @@ const Search = (props) => {
                     origin_territory: props.template.origin.territory,
                     destination_city: props.template.destination.city,
                     destination_territory: props.template.destination.territory,
-                    border: props.template.border,
+                    border: props.template.border.split("+").join(" "),
                     hazmat: props.template.hazmat,
                     team_drivers: props.template.team_drivers,
                     usa_bonded: props.template.usa_bonded,

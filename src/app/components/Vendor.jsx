@@ -69,7 +69,12 @@ const Vendor = (props) => {
                                     <i className="bi bi-exclamation-triangle-fill text-warning me-2"></i>
                                 )}
                             </span>
-                            {props.company}
+                            <span
+                                className="text-truncate d-inline-block position-relative"
+                                style={{ maxWidth: "150px", top: "5px" }}
+                            >
+                                {props.company}
+                            </span>
                             <button
                                 type="button"
                                 className="btn btn-sm btn-outline-secondary ms-2 py-0 ps-1 pe-2 rounded-5"
