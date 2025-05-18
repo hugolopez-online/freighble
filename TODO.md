@@ -9,14 +9,14 @@ Tasks to track development, scalability, polish, and UX improvements.
 -   [x] Re-arrange folder/file architecture for better separation of concerns and readability
 -   [x] Rename files for a more professional, readable, and clean structure
 -   [ ] Set up a reducer (and optionally use context hooks) to manage state more cleanly
--   [ ] [BLOCKED: requires DB setup] Implement CRUD functionality
--   [ ] Set up a proper database to move vendor information out of hardcoded/static files
-    -   [ ] Build full API to access all data dynamically
+-   [ ] Implement CRUD functionality
+-   [x] Set up a proper database to move vendor information out of hardcoded/static files
+    -   [x] Build full API to access all data dynamically
 -   [ ] Capture and store user-specific search data for analysis. Use it to:
     -   Compare searches against the available carrier database
     -   Generate a visual dashboard to identify carrier development priorities
     -   Build a personalized task tracker for the user
--   Migrate the server to Express.js for API handling
+-   [x] Migrate the server to Express.js for API handling
 
 ---
 
