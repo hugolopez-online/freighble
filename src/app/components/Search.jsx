@@ -14,7 +14,7 @@ const default_form_data = {
     origin_territory: "",
     destination_city: "",
     destination_territory: "",
-    border: "N/A",
+    border: "None",
     hazmat: false,
     team_drivers: false,
     usa_bonded: false,
@@ -89,7 +89,10 @@ const Search = (props) => {
                     region: destination_region,
                     country: destination_country,
                 },
-                border: document.getElementById("border").value,
+                border: document
+                    .getElementById("border")
+                    .value.split(" ")
+                    .join("+"),
                 hazmat: document.getElementById("hazmat").checked,
                 team_drivers: document.getElementById("team_drivers").checked,
                 usa_bonded: document.getElementById("usa_bonded").checked,
@@ -192,7 +195,7 @@ const Search = (props) => {
                                         destination_territory
                                     )
                                         ? ""
-                                        : "N/A",
+                                        : "None",
                                 };
                             });
                         }}
@@ -308,7 +311,7 @@ const Search = (props) => {
                                         destination_territory
                                     )
                                         ? ""
-                                        : "N/A",
+                                        : "None",
                                 };
                             });
                         }}
@@ -383,7 +386,7 @@ const Search = (props) => {
             {/* Border Crossing */}
             <div
                 className={`row mb-2 ${
-                    formData.border !== "N/A" ? "" : "d-none"
+                    formData.border !== "None" ? "" : "d-none"
                 }`}
             >
                 <div className="col-12">
@@ -420,7 +423,7 @@ const Search = (props) => {
                             style={{ display: "none" }}
                         ></option>
                         <option
-                            value="N/A"
+                            value="None"
                             hidden={
                                 formData.origin_territory &&
                                 formData.destination_territory &&
@@ -435,10 +438,10 @@ const Search = (props) => {
                                         ].country != "MEX"))
                             }
                         >
-                            N/A
+                            None
                         </option>
                         {borderCrossingPorts
-                            .filter((border) => border != "N/A")
+                            .filter((border) => border != "None")
                             .map((border) => {
                                 return (
                                     <option

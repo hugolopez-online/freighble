@@ -36,8 +36,9 @@ const Banner = (props) => {
                         }${
                             props.specs.team_drivers ? " with Team Drivers" : ""
                         }${
-                            props.specs.border !== "N/A"
-                                ? ", crossing through " + props.specs.border
+                            props.specs.border !== "None"
+                                ? ", crossing through " +
+                                  props.specs.border.split("+").join(" ")
                                 : ""
                         }`}
                     </p>

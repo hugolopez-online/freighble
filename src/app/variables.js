@@ -10,7 +10,8 @@ export const transportationModes = [
     "Reefer LTL",
     "Intermodal",
     "Expedited",
-    "Drayage"];
+    "Drayage",
+];
 
 export const [
     Truckload,
@@ -24,7 +25,8 @@ export const [
     ReeferLTL,
     Intermodal,
     Expedited,
-    Drayage] = transportationModes;
+    Drayage,
+] = transportationModes;
 
 export const canDivisions = [
     "AB",
@@ -39,22 +41,11 @@ export const canDivisions = [
     "PE",
     "QC",
     "SK",
-    "YT"];
+    "YT",
+];
 
-export const [
-    AB,
-    BC,
-    MB,
-    NB,
-    NL,
-    NS,
-    NT,
-    NU,
-    ON,
-    PE,
-    QC,
-    SK,
-    YT] = canDivisions;
+export const [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT] =
+    canDivisions;
 
 export const usaDivisions = [
     "AL",
@@ -108,7 +99,8 @@ export const usaDivisions = [
     "WV",
     "WI",
     "WY",
-    "PR"];
+    "PR",
+];
 
 export const [
     AL,
@@ -162,7 +154,8 @@ export const [
     WV,
     WI,
     WY,
-    PR] = usaDivisions;
+    PR,
+] = usaDivisions;
 
 export const mexDivisions = [
     "AGS",
@@ -196,7 +189,8 @@ export const mexDivisions = [
     "TLA",
     "VER",
     "YUC",
-    "ZAC"];
+    "ZAC",
+];
 
 export const [
     AGS,
@@ -230,24 +224,27 @@ export const [
     TLA,
     VER,
     YUC,
-    ZAC] = mexDivisions;
+    ZAC,
+] = mexDivisions;
 
 export const borderCrossingPorts = [
-    "N/A",
+    "None",
     "Otay, CA",
     "Calexico, CA",
     "Nogales, AZ",
     "El Paso, TX",
     "Laredo, TX",
     "Hidalgo, TX",
-    "Brownsville, TX"];
+    "Brownsville, TX",
+];
 
 export const [
-    notApplicable,
+    None,
     Otay,
     Calexico,
     Nogales,
     ElPaso,
     Laredo,
     Hidalgo,
-    Brownsville] = borderCrossingPorts;
+    Brownsville,
+] = borderCrossingPorts;
