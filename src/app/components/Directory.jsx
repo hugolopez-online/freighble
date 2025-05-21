@@ -14,16 +14,22 @@ const Directory = (props) => {
             ) {
                 // async func to search vendors through API
                 const searched_vendors_promise = await fetch(
-                    `/api/vendors/${props.specs.mode}/${
+                    `/api/vendors?mode=${props.specs.mode}&o_country=${
                         props.specs.origin.country
-                    }/${props.specs.origin.territory}/${
-                        props.specs.destination.country
-                    }/${props.specs.destination.territory}/${
+                    }&d_country=${props.specs.destination.country}&border=${
                         props.specs.border
-                    }/${Number(props.specs.hazmat)}/${Number(
+                    }&hazmat=${Number(
+                        props.specs.hazmat
+                    )}&team_drivers=${Number(
                         props.specs.team_drivers
-                    )}/${Number(props.specs.usa_bonded)}/${Number(
+                    )}&usa_bonded=${Number(
+                        props.specs.usa_bonded
+                    )}&can_bonded=${Number(
                         props.specs.can_bonded
+                    )}&ctpat=${Number(props.specs.ctpat)}&twic=${Number(
+                        props.specs.twic
+                    )}&tsa=${Number(props.specs.tsa)}&fast=${Number(
+                        props.specs.fast
                     )}`
                 );
                 const searched_vendors = await searched_vendors_promise.json();

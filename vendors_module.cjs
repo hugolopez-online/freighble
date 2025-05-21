@@ -12,6 +12,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: {
                 country_code: "CAN",
@@ -54,6 +58,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["ON", "QC"] },
             "United States": { country_code: "USA", territory: ["TX"] },
@@ -76,6 +84,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["ON", "QC", "MB"] },
             "United States": {
@@ -105,6 +117,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["MB", "SK"] },
             "United States": {
@@ -130,6 +146,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["AB", "BC", "SK"] },
             "United States": { country_code: "USA", territory: ["WA", "OR"] },
@@ -156,6 +176,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["BC"] },
             "United States": {
@@ -181,6 +205,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX"] },
@@ -203,6 +231,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["MB", "SK"] },
             "United States": {
@@ -228,6 +260,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX"] },
@@ -254,6 +290,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -279,6 +319,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["CA"] },
@@ -301,6 +345,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["MB", "SK", "AB"] },
             "United States": {
@@ -330,6 +378,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["ON", "QC"] },
             "United States": {
@@ -355,6 +407,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX"] },
@@ -377,6 +433,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["ON", "MB", "QC"] },
             "United States": { country_code: "USA", territory: ["MN", "WI"] },
@@ -403,6 +463,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["CA"] },
@@ -425,6 +489,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["AZ"] },
@@ -447,6 +515,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: {
                 country_code: "CAN",
@@ -475,6 +547,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["CA", "AZ"] },
@@ -497,6 +573,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["YT", "NT", "BC"] },
             "United States": { country_code: "USA", territory: [] },
@@ -519,6 +599,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -544,6 +628,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["NL", "NS", "QC"] },
             "United States": { country_code: "USA", territory: ["ME"] },
@@ -566,6 +654,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["BC", "AB", "SK"] },
             "United States": { country_code: "USA", territory: ["WA", "OR"] },
@@ -588,6 +680,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -613,6 +709,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["MB", "SK", "ON"] },
             "United States": {
@@ -642,6 +742,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -667,6 +771,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["QC", "ON", "NB"] },
             "United States": {
@@ -696,6 +804,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["BC"] },
             "United States": {
@@ -721,6 +833,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX", "CA"] },
@@ -746,6 +862,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["YT", "NT", "BC"] },
             "United States": { country_code: "USA", territory: [] },
@@ -768,6 +888,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX", "LA"] },
@@ -794,6 +918,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["ON", "QC"] },
             "United States": {
@@ -819,6 +947,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["MB", "SK", "ON"] },
             "United States": { country_code: "USA", territory: ["ND", "MN"] },
@@ -841,6 +973,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["NS", "NB", "PE"] },
             "United States": { country_code: "USA", territory: ["ME", "MA"] },
@@ -863,6 +999,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -888,6 +1028,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["NT", "NU", "YT"] },
             "United States": { country_code: "USA", territory: [] },
@@ -914,6 +1058,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -943,6 +1091,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["BC"] },
             "United States": {
@@ -968,6 +1120,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX"] },
@@ -994,6 +1150,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -1019,6 +1179,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX", "CA"] },
@@ -1048,6 +1212,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["AB", "BC"] },
             "United States": { country_code: "USA", territory: [] },
@@ -1074,6 +1242,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["ON", "QC"] },
             "United States": {
@@ -1099,6 +1271,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["CA"] },
@@ -1121,6 +1297,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -1146,6 +1326,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["QC", "ON", "NB"] },
             "United States": {
@@ -1171,6 +1355,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -1196,6 +1384,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["BC", "AB", "SK"] },
             "United States": { country_code: "USA", territory: ["WA", "OR"] },
@@ -1218,6 +1410,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -1243,6 +1439,10 @@ const vendors = [
         team_drivers: false,
         usa_bonded: false,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": {
@@ -1268,6 +1468,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: false,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: [] },
             "United States": { country_code: "USA", territory: ["TX", "LA"] },
@@ -1290,6 +1494,10 @@ const vendors = [
         team_drivers: true,
         usa_bonded: true,
         can_bonded: true,
+        ctpat: true,
+        twic: true,
+        tsa: true,
+        fast: true,
         coverage: {
             Canada: { country_code: "CAN", territory: ["ON", "QC", "MB"] },
             "United States": {

@@ -70,8 +70,11 @@ const Vendor = (props) => {
                                 )}
                             </span>
                             <span
-                                className="text-truncate d-inline-block position-relative"
-                                style={{ maxWidth: "150px", top: "5px" }}
+                                className={`text-truncate d-inline-block position-relative`}
+                                style={{
+                                    maxWidth: "60%",
+                                    top: "4px",
+                                }}
                             >
                                 {props.company}
                             </span>
@@ -197,7 +200,7 @@ const Vendor = (props) => {
                                 ></i>
                             </span>
                             {props.borders.includes(props.specs.border) &&
-                                props.specs.border !== "N/A" && (
+                                props.specs.border !== "None" && (
                                     <span
                                         className="badge rounded-pill text-bg-success me-1"
                                         style={{ fontSize: "0.75rem" }}
@@ -239,6 +242,42 @@ const Vendor = (props) => {
                                     style={{ fontSize: "0.75rem" }}
                                 >
                                     Canada bond
+                                    <i className="bi bi-check-circle-fill ms-2"></i>
+                                </span>
+                            )}
+                            {props.ctpat && props.specs.ctpat && (
+                                <span
+                                    className="badge rounded-pill text-bg-success me-1"
+                                    style={{ fontSize: "0.75rem" }}
+                                >
+                                    C-TPAT
+                                    <i className="bi bi-check-circle-fill ms-2"></i>
+                                </span>
+                            )}
+                            {props.twic && props.specs.twic && (
+                                <span
+                                    className="badge rounded-pill text-bg-success me-1"
+                                    style={{ fontSize: "0.75rem" }}
+                                >
+                                    TWIC
+                                    <i className="bi bi-check-circle-fill ms-2"></i>
+                                </span>
+                            )}
+                            {props.tsa && props.specs.tsa && (
+                                <span
+                                    className="badge rounded-pill text-bg-success me-1"
+                                    style={{ fontSize: "0.75rem" }}
+                                >
+                                    TSA
+                                    <i className="bi bi-check-circle-fill ms-2"></i>
+                                </span>
+                            )}
+                            {props.fast && props.specs.fast && (
+                                <span
+                                    className="badge rounded-pill text-bg-success me-1"
+                                    style={{ fontSize: "0.75rem" }}
+                                >
+                                    FAST
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}

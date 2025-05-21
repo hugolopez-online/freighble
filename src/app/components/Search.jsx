@@ -19,6 +19,10 @@ const default_form_data = {
     team_drivers: false,
     usa_bonded: false,
     can_bonded: false,
+    ctpat: false,
+    twic: false,
+    tsa: false,
+    fast: false,
 };
 
 const isCrossBorder = (o, d) =>
@@ -47,6 +51,10 @@ const Search = (props) => {
                     team_drivers: props.template.team_drivers,
                     usa_bonded: props.template.usa_bonded,
                     can_bonded: props.template.can_bonded,
+                    ctpat: props.template.ctpat,
+                    twic: props.template.twic,
+                    tsa: props.template.tsa,
+                    fast: props.template.fast,
                 };
             });
         }
@@ -97,6 +105,10 @@ const Search = (props) => {
                 team_drivers: document.getElementById("team_drivers").checked,
                 usa_bonded: document.getElementById("usa_bonded").checked,
                 can_bonded: document.getElementById("can_bonded").checked,
+                ctpat: document.getElementById("ctpat").checked,
+                twic: document.getElementById("twic").checked,
+                tsa: document.getElementById("tsa").checked,
+                fast: document.getElementById("fast").checked,
             };
         });
     };
@@ -467,7 +479,11 @@ const Search = (props) => {
                             formData.hazmat ||
                             formData.team_drivers ||
                             formData.usa_bonded ||
-                            formData.can_bonded
+                            formData.can_bonded ||
+                            formData.ctpat ||
+                            formData.twic ||
+                            formData.tsa ||
+                            formData.fast
                                 ? "btn-primary"
                                 : "btn-outline-secondary border"
                         } rounded-5 w-100`}
@@ -573,6 +589,98 @@ const Search = (props) => {
                             htmlFor="can_bonded"
                         >
                             Canada Bonded
+                        </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="ctpat"
+                            name="ctpat"
+                            checked={formData.ctpat}
+                            onChange={(e) =>
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        ctpat: e.target.checked,
+                                    };
+                                })
+                            }
+                        />
+                        <label
+                            className="form-check-label"
+                            htmlFor="ctpat"
+                        >
+                            C-TPAT
+                        </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="twic"
+                            name="twic"
+                            checked={formData.twic}
+                            onChange={(e) =>
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        twic: e.target.checked,
+                                    };
+                                })
+                            }
+                        />
+                        <label
+                            className="form-check-label"
+                            htmlFor="twic"
+                        >
+                            TWIC
+                        </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="tsa"
+                            name="tsa"
+                            checked={formData.tsa}
+                            onChange={(e) =>
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        tsa: e.target.checked,
+                                    };
+                                })
+                            }
+                        />
+                        <label
+                            className="form-check-label"
+                            htmlFor="tsa"
+                        >
+                            TSA
+                        </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="fast"
+                            name="fast"
+                            checked={formData.fast}
+                            onChange={(e) =>
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        fast: e.target.checked,
+                                    };
+                                })
+                            }
+                        />
+                        <label
+                            className="form-check-label"
+                            htmlFor="fast"
+                        >
+                            FAST
                         </label>
                     </div>
                 </div>

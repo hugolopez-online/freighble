@@ -23,6 +23,10 @@ const default_specs = {
     team_drivers: false,
     usa_bonded: false,
     can_bonded: false,
+    ctpat: false,
+    twic: false,
+    tsa: false,
+    fast: false,
 };
 
 function App() {

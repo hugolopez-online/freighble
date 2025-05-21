@@ -27,7 +27,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 -   [ ] Add favorite/blocked lanes to the suitability assessment algorithm
 -   [x] Modify suitability percentage formula:
     -   [x] Scale “basic” scores better when more comparison variables are available
--   [ ] Include the following additional specs to Search and to suitability filtering:
+-   [x] Include the following additional specs to Search and to suitability filtering:
     -   C-TPAT
     -   TWIC
     -   TSA

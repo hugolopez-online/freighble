@@ -40,6 +40,18 @@ const Banner = (props) => {
                                 ? ", crossing through " +
                                   props.specs.border.split("+").join(" ")
                                 : ""
+                        }${
+                            props.specs.ctpat ||
+                            props.specs.twic ||
+                            props.specs.tsa ||
+                            props.specs.fast
+                                ? " - (Extras:" +
+                                  (props.specs.ctpat ? " C-TPAT," : "") +
+                                  (props.specs.twic ? " TWIC," : "") +
+                                  (props.specs.tsa ? " TSA," : "") +
+                                  (props.specs.fast ? " FAST," : "") +
+                                  " certified)"
+                                : ""
                         }`}
                     </p>
                     <p>
