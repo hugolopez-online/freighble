@@ -70,10 +70,11 @@ const Directory = ({ specs }) => {
                       );
                   })
                 : vendorList.map((vendor, index) => {
+                      const key = String(vendor.id) + String(index);
                       return (
                           <Vendor
-                              key={String(vendor.id) + String(index)}
-                              dispatched_key={String(vendor.id) + String(index)}
+                              key={key}
+                              dispatched_key={key}
                               {...vendor}
                               specs={specs}
                           />
