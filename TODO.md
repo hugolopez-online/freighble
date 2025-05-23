@@ -23,7 +23,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 ## 2. Core Functionality & Performance
 
 -   [x] Assess and potentially modify the method used to display searched carriers (improve performance or structure)
--   [ ] Fix key ID assignment for iterated items to avoid React key warning and improve diffing
+-   [x] Fix key ID assignment for iterated items to avoid React key warning and improve diffing
 -   [ ] Add favorite/blocked lanes to the suitability assessment algorithm
 -   [x] Modify suitability percentage formula:
     -   [x] Scale “basic” scores better when more comparison variables are available

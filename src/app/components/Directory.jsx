@@ -1,57 +1,59 @@
 import { useEffect, useState } from "react";
 import Vendor from "./Vendor";
 
-const Directory = (props) => {
+const Directory = ({ specs }) => {
     const [vendorList, setVendorList] = useState([]);
 
     useEffect(() => {
         setVendorList([]);
         const searchVendors = async () => {
             if (
-                props.specs.mode &&
-                props.specs.origin.country &&
-                props.specs.destination.country
+                specs.mode &&
+                specs.origin.country &&
+                specs.destination.country
             ) {
                 // async func to search vendors through API
                 const searched_vendors_promise = await fetch(
-                    `/api/vendors?mode=${props.specs.mode}&o_country=${
-                        props.specs.origin.country
-                    }&d_country=${props.specs.destination.country}&border=${
-                        props.specs.border
-                    }&hazmat=${Number(
-                        props.specs.hazmat
-                    )}&team_drivers=${Number(
-                        props.specs.team_drivers
+                    `/api/vendors?mode=${specs.mode}&o_country=${
+                        specs.origin.country
+                    }&d_country=${specs.destination.country}&border=${
+                        specs.border
+                    }&hazmat=${Number(specs.hazmat)}&team_drivers=${Number(
+                        specs.team_drivers
                     )}&usa_bonded=${Number(
-                        props.specs.usa_bonded
-                    )}&can_bonded=${Number(
-                        props.specs.can_bonded
-                    )}&ctpat=${Number(props.specs.ctpat)}&twic=${Number(
-                        props.specs.twic
-                    )}&tsa=${Number(props.specs.tsa)}&fast=${Number(
-                        props.specs.fast
-                    )}`
+                        specs.usa_bonded
+                    )}&can_bonded=${Number(specs.can_bonded)}&ctpat=${Number(
+                        specs.ctpat
+                    )}&twic=${Number(specs.twic)}&tsa=${Number(
+                        specs.tsa
+                    )}&fast=${Number(specs.fast)}`
                 );
                 const searched_vendors = await searched_vendors_promise.json();
+                // searched_vendors.sort((a, b) =>
+                //     a.company.localeCompare(b.company)
+                // );
                 setVendorList(searched_vendors.searched_vendors);
             }
         };
 
         searchVendors();
-    }, [props.specs]);
+    }, [specs]);
 
     // creates array to iterate and render the cards placeholders
-    let placeholder_array = [];
+    let placeholders = [];
     for (let i = 0; i <= 5; i++) {
-        placeholder_array.push(i);
+        placeholders.push(i);
     }
 
     return (
         <>
             {!vendorList.length
-                ? placeholder_array.map(() => {
+                ? placeholders.map((placeholder, index) => {
                       return (
-                          <div className="col-11 col-md-10">
+                          <div
+                              key={"placeholder-" + String(index)}
+                              className="col-11 col-md-10"
+                          >
                               <div className="input-group shadow-sm rounded-3">
                                   <div className="card bg-light-subtle col shadow-sm">
                                       <div className="card-body">
@@ -69,14 +71,10 @@ const Directory = (props) => {
                 : vendorList.map((vendor, index) => {
                       return (
                           <Vendor
-                              key={vendor.company
-                                  .replace(/ /g, "-")
-                                  .concat("-", index)}
-                              vendorKey={vendor.company
-                                  .replace(/ /g, "-")
-                                  .concat("-", index)}
+                              key={String(vendor.id) + String(index)}
+                              dispatched_key={String(vendor.id) + String(index)}
                               {...vendor}
-                              specs={props.specs}
+                              specs={specs}
                           />
                       );
                   })}

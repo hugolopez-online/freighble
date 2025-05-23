@@ -82,16 +82,16 @@ const Vendor = (props) => {
                                 type="button"
                                 className="btn btn-sm btn-outline-secondary ms-2 py-0 ps-1 pe-2 rounded-5"
                                 data-bs-toggle="collapse"
-                                data-bs-target={`#${props.vendorKey}-extra-info`}
+                                data-bs-target={`#${props.dispatched_key}-extra-info`}
                                 aria-expanded="false"
-                                aria-controls={`${props.vendorKey}-extra-info`}
+                                aria-controls={`${props.dispatched_key}-extra-info`}
                             >
                                 +info
                             </button>
                         </h5>
                         <div
                             className="collapse"
-                            id={`${props.vendorKey}-extra-info`}
+                            id={`${props.dispatched_key}-extra-info`}
                         >
                             <hr />
                             <p className="card-text m-0 text-secondary">
