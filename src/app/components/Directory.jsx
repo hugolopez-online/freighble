@@ -29,10 +29,11 @@ const Directory = ({ specs }) => {
                     )}&fast=${Number(specs.fast)}`
                 );
                 const searched_vendors = await searched_vendors_promise.json();
-                // searched_vendors.sort((a, b) =>
-                //     a.company.localeCompare(b.company)
-                // );
-                setVendorList(searched_vendors.searched_vendors);
+                const found_vendors = searched_vendors.searched_vendors;
+                found_vendors.sort((a, b) =>
+                    a.company.localeCompare(b.company)
+                );
+                setVendorList(found_vendors);
             }
         };
 
