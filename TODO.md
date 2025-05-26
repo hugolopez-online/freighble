@@ -8,7 +8,6 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 -   [x] Re-arrange folder/file architecture for better separation of concerns and readability
 -   [x] Rename files for a more professional, readable, and clean structure
--   [ ] Set up a reducer (and optionally use context hooks) to manage state more cleanly
 -   [ ] Implement CRUD functionality
 -   [x] Set up a proper database to move vendor information out of hardcoded/static files
     -   [x] Build full API to access all data dynamically
