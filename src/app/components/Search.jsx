@@ -7,6 +7,7 @@ import {
     borderCrossingPorts,
 } from "../variables";
 import geo_lookup from "../handlers/geo_meta";
+import { search_options } from "../handlers/search_options";
 
 const default_form_data = {
     mode: "",
@@ -114,6 +115,7 @@ const Search = (props) => {
     };
 
     const handleAutocomplete = (e, drop_menu) => {
+        search_options.filter((opt) => opt.search.startsWith(e.target.value));
         e.preventDefault();
         if (e.target.value.length >= 3) {
             e.target.classList.add("show");
