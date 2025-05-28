@@ -71,14 +71,14 @@ const Banner = (props) => {
                             Clear results
                         </button>
                         <button
-                            className="btn btn-sm btn-dark shadow-sm me-2"
+                            className="btn btn-sm btn-dark shadow-sm fw-bold me-2"
                             type="button"
                             onClick={() => props.templateSpecs(props.specs)}
                         >
                             Template new search
                         </button>
                         <button
-                            className="btn btn-sm btn-outline-dark shadow-sm me-2"
+                            className="btn btn-sm btn-outline-secondary shadow-sm me-2"
                             type="button"
                             onClick={() => {
                                 document

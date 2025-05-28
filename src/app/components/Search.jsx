@@ -113,6 +113,21 @@ const Search = (props) => {
         });
     };
 
+    const handleAutocomplete = (e, drop_menu) => {
+        e.preventDefault();
+        if (e.target.value.length >= 3) {
+            e.target.classList.add("show");
+            document.getElementById(drop_menu).classList.add("show");
+        } else {
+            e.target.classList.remove("show");
+            document.getElementById(drop_menu).classList.remove("show");
+        }
+
+        return setFormData((prev) => {
+            return { ...prev, origin_city: e.target.value };
+        });
+    };
+
     return (
         <form
             className="shadow-sm border rounded-3 p-3 text-bg-light needs-validation"
@@ -174,7 +189,7 @@ const Search = (props) => {
                 >
                     Origin
                 </label>
-                <div className="input-group col-12">
+                <div className="input-group dropdown col-12">
                     <input
                         type="text"
                         className="form-control col-8"
@@ -183,11 +198,24 @@ const Search = (props) => {
                         name="origin_city"
                         value={formData.origin_city}
                         onChange={(e) =>
-                            setFormData((prev) => {
-                                return { ...prev, origin_city: e.target.value };
-                            })
+                            handleAutocomplete(e, "origin_search_options")
                         }
+                        autoComplete="off"
                     />
+                    <ul
+                        id="origin_search_options"
+                        className="dropdown-menu"
+                        style={{ top: "2.5em" }}
+                    >
+                        <li>
+                            <a
+                                className="dropdown-item"
+                                href="#"
+                            >
+                                use: "{formData.origin_city}"
+                            </a>
+                        </li>
+                    </ul>
                     <select
                         className="form-select col-4"
                         id="origin_territory"
@@ -716,7 +744,7 @@ const Search = (props) => {
             </div>
             <button
                 type="button"
-                className="btn btn-sm btn-outline-danger shadow-sm fw-bold w-100 mb-2"
+                className="btn btn-sm btn-warning shadow-sm w-100 mb-2"
                 onClick={() => setFormData(default_form_data)}
             >
                 Reset fields
