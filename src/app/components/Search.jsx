@@ -26,11 +26,16 @@ const default_form_data = {
     fast: false,
 };
 
+const default_location_suggestions = [];
+
 const isCrossBorder = (o, d) =>
     (geo_lookup[o].country === "MEX") !== (geo_lookup[d].country === "MEX");
 
 const Search = (props) => {
     const [formData, setFormData] = useState(default_form_data);
+    const [locationSuggestions, setLocationSuggestions] = useState(
+        default_location_suggestions
+    );
 
     useEffect(() => {
         if (props.template) {
@@ -115,18 +120,29 @@ const Search = (props) => {
     };
 
     const handleAutocomplete = (e, drop_menu) => {
-        search_options.filter((opt) => opt.search.startsWith(e.target.value));
-        e.preventDefault();
+        const drop_down_options = search_options
+            .filter((opt) => {
+                const input_lowercase = e.target.value.toLowerCase();
+                const opt_lowercase = opt.search.toLowerCase();
+
+                return opt_lowercase.startsWith(input_lowercase);
+            })
+            .slice(0, 5);
+
         if (e.target.value.length >= 3) {
             e.target.classList.add("show");
             document.getElementById(drop_menu).classList.add("show");
+            setLocationSuggestions(drop_down_options);
         } else {
             e.target.classList.remove("show");
             document.getElementById(drop_menu).classList.remove("show");
+            setLocationSuggestions(default_location_suggestions);
         }
 
-        return setFormData((prev) => {
-            return { ...prev, origin_city: e.target.value };
+        e.target.addEventListener("focusout", () => {
+            e.target.classList.remove("show");
+            document.getElementById(drop_menu).classList.remove("show");
+            setLocationSuggestions(default_location_suggestions);
         });
     };
 
@@ -199,9 +215,12 @@ const Search = (props) => {
                         id="origin_city"
                         name="origin_city"
                         value={formData.origin_city}
-                        onChange={(e) =>
-                            handleAutocomplete(e, "origin_search_options")
-                        }
+                        onChange={(e) => {
+                            setFormData((prev) => {
+                                return { ...prev, origin_city: e.target.value };
+                            });
+                            handleAutocomplete(e, "origin_search_options");
+                        }}
                         autoComplete="off"
                     />
                     <ul
@@ -217,6 +236,19 @@ const Search = (props) => {
                                 use: "{formData.origin_city}"
                             </a>
                         </li>
+                        {locationSuggestions[0] &&
+                            locationSuggestions.map((suggestion, index) => {
+                                return (
+                                    <li key={index}>
+                                        <a
+                                            className="dropdown-item"
+                                            href="#"
+                                        >
+                                            {suggestion.search}
+                                        </a>
+                                    </li>
+                                );
+                            })}
                     </ul>
                     <select
                         className="form-select col-4"
