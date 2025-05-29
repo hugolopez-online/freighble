@@ -5,6 +5,7 @@ const app = express();
 const router = require("./routes/vendors.cjs");
 
 // middleware
+app.use(express.static("dist"));
 app.use("/api/vendors", router);
 
 // server
