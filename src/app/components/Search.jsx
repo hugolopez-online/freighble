@@ -1,3 +1,5 @@
+// imports
+
 import { useEffect, useState } from "react";
 import {
     transportationModes,
@@ -7,7 +9,9 @@ import {
     borderCrossingPorts,
 } from "../variables";
 import geo_lookup from "../handlers/geo_meta";
-import { search_options } from "../handlers/search_options";
+import { search_options } from "../../../search_options";
+
+// module
 
 const default_form_data = {
     mode: "",
@@ -31,11 +35,92 @@ const default_location_suggestions = [];
 const isCrossBorder = (o, d) =>
     (geo_lookup[o].country === "MEX") !== (geo_lookup[d].country === "MEX");
 
+// component
+
 const Search = (props) => {
+    // states
+
     const [formData, setFormData] = useState(default_form_data);
     const [locationSuggestions, setLocationSuggestions] = useState(
         default_location_suggestions
     );
+
+    // handlers
+
+    const handleSpecs = (e) => {
+        e.preventDefault();
+
+        const origin_region = geo_lookup[formData.origin_territory].region;
+        const origin_country = geo_lookup[formData.origin_territory].country;
+
+        const destination_region =
+            geo_lookup[formData.destination_territory].region;
+        const destination_country =
+            geo_lookup[formData.destination_territory].country;
+
+        const banner = document.getElementById("informativeBanner");
+
+        props.setSpecs((prev) => {
+            return {
+                ...prev,
+                mode: formData.mode,
+                origin: {
+                    city: formData.origin_city,
+                    territory: formData.origin_territory,
+                    region: origin_region,
+                    country: origin_country,
+                },
+                destination: {
+                    city: formData.destination_city,
+                    territory: formData.destination_territory,
+                    region: destination_region,
+                    country: destination_country,
+                },
+                border: formData.border.split(" ").join("+"),
+                hazmat: formData.hazmat,
+                team_drivers: formData.team_drivers,
+                usa_bonded: formData.usa_bonded,
+                can_bonded: formData.can_bonded,
+                ctpat: formData.ctpat,
+                twic: formData.twic,
+                tsa: formData.tsa,
+                fast: formData.fast,
+            };
+        });
+
+        setFormData(default_form_data);
+
+        banner.scrollIntoView({ block: "start", behavior: "smooth" });
+    };
+
+    const handleLocationSuggestions = (e, drop_menu) => {
+        const suggestions = search_options
+            .filter((opt) => {
+                const input_lowercase = e.target.value.toLowerCase();
+                const opt_lowercase = opt.search.toLowerCase();
+
+                return opt_lowercase.startsWith(input_lowercase);
+            })
+            .slice(0, 5);
+
+        if (e.target.value.length >= 3) {
+            setLocationSuggestions(suggestions);
+            e.target.classList.add("show");
+            document.getElementById(drop_menu).classList.add("show");
+        } else {
+            setLocationSuggestions(default_location_suggestions);
+            e.target.classList.remove("show");
+            document.getElementById(drop_menu).classList.remove("show");
+        }
+
+        e.target.addEventListener("focusout", () => {
+            setLocationSuggestions(default_location_suggestions);
+            e.target.classList.remove("show");
+            document.getElementById(drop_menu).classList.remove("show");
+        });
+    };
+
+    // effects
 
     useEffect(() => {
         if (props.template) {
@@ -66,85 +151,7 @@ const Search = (props) => {
         }
     }, [props.template]);
 
-    const handleSpecs = (e) => {
-        e.preventDefault();
-        const origin_city = document.getElementById("origin_city").value;
-        const origin_territory =
-            document.getElementById("origin_territory").value;
-        const origin_region = geo_lookup[origin_territory].region;
-        const origin_country = geo_lookup[origin_territory].country;
-        const destination_city =
-            document.getElementById("destination_city").value;
-        const destination_territory = document.getElementById(
-            "destination_territory"
-        ).value;
-        const destination_region = geo_lookup[destination_territory].region;
-        const destination_country = geo_lookup[destination_territory].country;
-
-        document
-            .getElementById("informativeBanner")
-            .scrollIntoView({ block: "start", behavior: "smooth" });
-
-        setFormData(default_form_data);
-
-        props.setSpecs((prev) => {
-            return {
-                ...prev,
-                mode: document.getElementById("mode").value,
-                origin: {
-                    city: origin_city,
-                    territory: origin_territory,
-                    region: origin_region,
-                    country: origin_country,
-                },
-                destination: {
-                    city: destination_city,
-                    territory: destination_territory,
-                    region: destination_region,
-                    country: destination_country,
-                },
-                border: document
-                    .getElementById("border")
-                    .value.split(" ")
-                    .join("+"),
-                hazmat: document.getElementById("hazmat").checked,
-                team_drivers: document.getElementById("team_drivers").checked,
-                usa_bonded: document.getElementById("usa_bonded").checked,
-                can_bonded: document.getElementById("can_bonded").checked,
-                ctpat: document.getElementById("ctpat").checked,
-                twic: document.getElementById("twic").checked,
-                tsa: document.getElementById("tsa").checked,
-                fast: document.getElementById("fast").checked,
-            };
-        });
-    };
-
-    const handleAutocomplete = (e, drop_menu) => {
-        const drop_down_options = search_options
-            .filter((opt) => {
-                const input_lowercase = e.target.value.toLowerCase();
-                const opt_lowercase = opt.search.toLowerCase();
-
-                return opt_lowercase.startsWith(input_lowercase);
-            })
-            .slice(0, 5);
-
-        if (e.target.value.length >= 3) {
-            e.target.classList.add("show");
-            document.getElementById(drop_menu).classList.add("show");
-            setLocationSuggestions(drop_down_options);
-        } else {
-            e.target.classList.remove("show");
-            document.getElementById(drop_menu).classList.remove("show");
-            setLocationSuggestions(default_location_suggestions);
-        }
-
-        e.target.addEventListener("focusout", () => {
-            e.target.classList.remove("show");
-            document.getElementById(drop_menu).classList.remove("show");
-            setLocationSuggestions(default_location_suggestions);
-        });
-    };
+    // render
 
     return (
         <form
@@ -219,7 +226,10 @@ const Search = (props) => {
                             setFormData((prev) => {
                                 return { ...prev, origin_city: e.target.value };
                             });
-                            handleAutocomplete(e, "origin_search_options");
+                            handleLocationSuggestions(
+                                e,
+                                "origin_search_options"
+                            );
                         }}
                         autoComplete="off"
                     />
