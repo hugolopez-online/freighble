@@ -26,9 +26,10 @@ The current scope of its functionality is for loads and carriers within Canada, 
 
 ## Getting Started
 
-1. Clone the repository
-2. Run `npm install` to install dependencies
-3. Run `npm run dev` to start the development server
+1. Fork and clone the repo
+2. Run `npm install` to install dependencies (pointing to root directory)
+3. Run `npm run dev` to start Vute's development environment (pointing to root directory)
+4. In a separate terminal run `nodemon server.cjs` to boot up the Express.js server (pointing to root directory)
 
 ## Features
 
