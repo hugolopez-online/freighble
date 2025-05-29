@@ -108,16 +108,47 @@ const Search = (props) => {
             e.target.classList.add("show");
             document.getElementById(drop_menu).classList.add("show");
         } else {
-            setLocationSuggestions(default_location_suggestions);
             e.target.classList.remove("show");
             document.getElementById(drop_menu).classList.remove("show");
+            setLocationSuggestions(default_location_suggestions);
         }
 
         e.target.addEventListener("focusout", () => {
-            setLocationSuggestions(default_location_suggestions);
-            e.target.classList.remove("show");
-            document.getElementById(drop_menu).classList.remove("show");
+            setTimeout(() => {
+                e.target.classList.remove("show");
+                document.getElementById(drop_menu).classList.remove("show");
+                setLocationSuggestions(default_location_suggestions);
+            }, 225);
         });
+    };
+
+    const handleSuggestionSelect = (e, city, territory) => {
+        const origin = "origin_search_options";
+        const destination = "destination_search_options";
+
+        const location_type = e.target.parentElement.parentElement.id;
+
+        if (location_type === origin) {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    origin_city: city,
+                    origin_territory: territory,
+                };
+            });
+        } else if (location_type === destination) {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    destination_city: city,
+                    destination_territory: territory,
+                };
+            });
+        } else {
+            console.error(
+                "Fatal error: autocomplete tried to handle a bad request."
+            );
+        }
     };
 
     // effects
@@ -238,21 +269,27 @@ const Search = (props) => {
                         className="dropdown-menu"
                         style={{ top: "2.5em" }}
                     >
-                        <li>
-                            <a
-                                className="dropdown-item"
-                                href="#"
-                            >
+                        <li style={{ cursor: "pointer" }}>
+                            <a className="dropdown-item">
                                 use: "{formData.origin_city}"
                             </a>
                         </li>
                         {locationSuggestions[0] &&
                             locationSuggestions.map((suggestion, index) => {
                                 return (
-                                    <li key={index}>
+                                    <li
+                                        style={{ cursor: "pointer" }}
+                                        key={index}
+                                    >
                                         <a
                                             className="dropdown-item"
-                                            href="#"
+                                            onClick={(e) =>
+                                                handleSuggestionSelect(
+                                                    e,
+                                                    suggestion.city,
+                                                    suggestion.territory
+                                                )
+                                            }
                                         >
                                             {suggestion.search}
                                         </a>
@@ -368,15 +405,53 @@ const Search = (props) => {
                         id="destination_city"
                         name="destination_city"
                         value={formData.destination_city}
-                        onChange={(e) =>
+                        onChange={(e) => {
                             setFormData((prev) => {
                                 return {
                                     ...prev,
                                     destination_city: e.target.value,
                                 };
-                            })
-                        }
+                            });
+                            handleLocationSuggestions(
+                                e,
+                                "destination_search_options"
+                            );
+                        }}
+                        autoComplete="off"
                     />
+                    <ul
+                        id="destination_search_options"
+                        className="dropdown-menu"
+                        style={{ top: "2.5em" }}
+                    >
+                        <li style={{ cursor: "pointer" }}>
+                            <a className="dropdown-item">
+                                use: "{formData.destination_city}"
+                            </a>
+                        </li>
+                        {locationSuggestions[0] &&
+                            locationSuggestions.map((suggestion, index) => {
+                                return (
+                                    <li
+                                        style={{ cursor: "pointer" }}
+                                        key={index}
+                                    >
+                                        <a
+                                            className="dropdown-item"
+                                            onClick={(e) =>
+                                                handleSuggestionSelect(
+                                                    e,
+                                                    suggestion.city,
+                                                    suggestion.territory
+                                                )
+                                            }
+                                        >
+                                            {suggestion.search}
+                                        </a>
+                                    </li>
+                                );
+                            })}
+                    </ul>
                     <select
                         className="form-select col-4"
                         id="destination_territory"
