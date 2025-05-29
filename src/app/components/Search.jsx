@@ -287,8 +287,8 @@ const Search = (props) => {
                         style={{ top: "2.5em" }}
                     >
                         <li style={{ cursor: "pointer" }}>
-                            <a className="dropdown-item">
-                                use: "{formData.origin_city}"
+                            <a className="dropdown-item text-secondary">
+                                city: "{formData.origin_city}"
                             </a>
                         </li>
                         {locationSuggestions[0] &&
@@ -299,7 +299,7 @@ const Search = (props) => {
                                         key={index}
                                     >
                                         <a
-                                            className="dropdown-item"
+                                            className="dropdown-item fw-bold text-primary"
                                             onClick={(e) =>
                                                 handleSuggestionSelect(
                                                     e,
@@ -442,8 +442,8 @@ const Search = (props) => {
                         style={{ top: "2.5em" }}
                     >
                         <li style={{ cursor: "pointer" }}>
-                            <a className="dropdown-item">
-                                use: "{formData.destination_city}"
+                            <a className="dropdown-item text-secondary">
+                                city: "{formData.destination_city}"
                             </a>
                         </li>
                         {locationSuggestions[0] &&
@@ -454,7 +454,7 @@ const Search = (props) => {
                                         key={index}
                                     >
                                         <a
-                                            className="dropdown-item"
+                                            className="dropdown-item fw-bold text-primary"
                                             onClick={(e) =>
                                                 handleSuggestionSelect(
                                                     e,

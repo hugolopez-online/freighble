@@ -42,7 +42,8 @@ Tasks to track development, scalability, polish, and UX improvements.
 ## 3. User Interaction Enhancements
 
 -   [x] Simplify suitability visualization on carrier cards
--   [ ] Implement autofill functionality for Origin/Destination input fields
+-   [x] Implement autofill functionality for Origin/Destination input fields
+    -   [ ] Include full data for suggestion fetching
 -   [x] Improve form interaction feedback:
     -   [x] Highlight invalid or incomplete fields on submit
     -   [x] Scroll to the first field that needs user attention
@@ -77,4 +78,4 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 ---
 
-Last updated: 2024-05-02
+Last updated: 2024-05-29
