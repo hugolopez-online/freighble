@@ -32,8 +32,16 @@ const default_form_data = {
 
 const default_location_suggestions = [];
 
-const isCrossBorder = (o, d) =>
-    (geo_lookup[o].country === "MEX") !== (geo_lookup[d].country === "MEX");
+const isCrossBorder = (o, d) => {
+    if (o && d) {
+        return (
+            (geo_lookup[d].country === "MEX") !==
+            (geo_lookup[o].country === "MEX")
+        );
+    } else {
+        return false;
+    }
+};
 
 // component
 
@@ -134,6 +142,12 @@ const Search = (props) => {
                     ...prev,
                     origin_city: city,
                     origin_territory: territory,
+                    border: isCrossBorder(
+                        territory,
+                        formData.destination_territory
+                    )
+                        ? ""
+                        : "None",
                 };
             });
         } else if (location_type === destination) {
@@ -142,6 +156,9 @@ const Search = (props) => {
                     ...prev,
                     destination_city: city,
                     destination_territory: territory,
+                    border: isCrossBorder(formData.origin_territory, territory)
+                        ? ""
+                        : "None",
                 };
             });
         } else {
@@ -544,6 +561,7 @@ const Search = (props) => {
 
             {/* Border Crossing */}
             <div
+                id="border-fieldset"
                 className={`row mb-2 ${
                     formData.border !== "None" ? "" : "d-none"
                 }`}
@@ -586,15 +604,10 @@ const Search = (props) => {
                             hidden={
                                 formData.origin_territory &&
                                 formData.destination_territory &&
-                                ((geo_lookup[formData.origin_territory]
-                                    .country != "MEX" &&
-                                    geo_lookup[formData.destination_territory]
-                                        .country == "MEX") ||
-                                    (geo_lookup[formData.origin_territory]
-                                        .country == "MEX" &&
-                                        geo_lookup[
-                                            formData.destination_territory
-                                        ].country != "MEX"))
+                                isCrossBorder(
+                                    formData.origin_territory,
+                                    formData.destination_territory
+                                )
                             }
                         >
                             None
