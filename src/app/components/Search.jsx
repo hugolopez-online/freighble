@@ -265,7 +265,7 @@ const Search = (props) => {
                 <div className="input-group dropdown col-12">
                     <input
                         type="text"
-                        className="form-control col-8"
+                        className="form-control"
                         placeholder="City (optional)"
                         id="origin_city"
                         name="origin_city"
@@ -287,10 +287,14 @@ const Search = (props) => {
                         style={{ top: "2.5em" }}
                     >
                         <li style={{ cursor: "pointer" }}>
-                            <a className="dropdown-item text-secondary">
-                                city: "{formData.origin_city}"
+                            <a className="dropdown-item text-dark">
+                                <span className="text-secondary">city: </span>
+                                <i>{formData.origin_city}</i>
                             </a>
                         </li>
+                        {locationSuggestions[0] && (
+                            <li className="dropdown-divider"></li>
+                        )}
                         {locationSuggestions[0] &&
                             locationSuggestions.map((suggestion, index) => {
                                 return (
@@ -299,7 +303,7 @@ const Search = (props) => {
                                         key={index}
                                     >
                                         <a
-                                            className="dropdown-item fw-bold text-primary"
+                                            className="dropdown-item text-primary"
                                             onClick={(e) =>
                                                 handleSuggestionSelect(
                                                     e,
@@ -308,6 +312,7 @@ const Search = (props) => {
                                                 )
                                             }
                                         >
+                                            <i className="bi bi-lightning-charge-fill"></i>{" "}
                                             {suggestion.search}
                                         </a>
                                     </li>
@@ -343,7 +348,7 @@ const Search = (props) => {
                             value=""
                             style={{ display: "none" }}
                         >
-                            State/Province
+                            Territory
                         </option>
                         <option disabled>Canada</option>
                         {canDivisions.map((territory, index) => {
@@ -417,7 +422,7 @@ const Search = (props) => {
                 <div className="input-group col-12">
                     <input
                         type="text"
-                        className="form-control col-8"
+                        className="form-control"
                         placeholder="City (optional)"
                         id="destination_city"
                         name="destination_city"
@@ -442,10 +447,14 @@ const Search = (props) => {
                         style={{ top: "2.5em" }}
                     >
                         <li style={{ cursor: "pointer" }}>
-                            <a className="dropdown-item text-secondary">
-                                city: "{formData.destination_city}"
+                            <a className="dropdown-item text-dark">
+                                <span className="text-secondary">city: </span>
+                                <i>{formData.destination_city}</i>
                             </a>
                         </li>
+                        {locationSuggestions[0] && (
+                            <li className="dropdown-divider"></li>
+                        )}
                         {locationSuggestions[0] &&
                             locationSuggestions.map((suggestion, index) => {
                                 return (
@@ -454,7 +463,7 @@ const Search = (props) => {
                                         key={index}
                                     >
                                         <a
-                                            className="dropdown-item fw-bold text-primary"
+                                            className="dropdown-item text-primary"
                                             onClick={(e) =>
                                                 handleSuggestionSelect(
                                                     e,
@@ -463,6 +472,7 @@ const Search = (props) => {
                                                 )
                                             }
                                         >
+                                            <i className="bi bi-lightning-charge-fill"></i>{" "}
                                             {suggestion.search}
                                         </a>
                                     </li>
@@ -497,7 +507,7 @@ const Search = (props) => {
                             value=""
                             style={{ display: "none" }}
                         >
-                            State/Province
+                            Territory
                         </option>
                         <option disabled>Canada</option>
                         {canDivisions.map((territory, index) => {
