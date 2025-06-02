@@ -45,9 +45,9 @@ function App() {
         <>
             <div
                 id="navbar"
-                className="row justify-content-md-center text-bg-dark shadow mb-4"
+                className="row justify-content-center mb-3"
             >
-                <div className="col-12 col-md-10">
+                <div className="col-12 col-md-6">
                     <Navbar />
                 </div>
             </div>
