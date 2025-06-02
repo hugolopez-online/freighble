@@ -44,10 +44,10 @@ The current scope of its functionality is for loads and carriers within Canada, 
 -   Dynamic banner that displays the details of the load whose results are currently visible, including buttons to clear the results and to template the current search for a new one.
 -   Results area that displays the vendors that best match the searched criteria.
 -   Vendor cards displaying key information about the company, matching variables, and suitability score.
+-   Autocomplete function for location fields in the search form
 
 ### Planned
 
--   Autocomplete function for location fields in the search form
 -   Ergonomic feedback for user's actions
 -   Recognition and scoring of favorite and blocked lanes
 -   Button to prepare and send emails for vendor outreach
