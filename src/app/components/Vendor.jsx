@@ -48,9 +48,9 @@ const Vendor = (props) => {
     }, [props.specs]);
 
     return (
-        <div className="col-11 col-md-10">
-            <div className="input-group shadow-sm rounded-3">
-                <div className="card bg-light-subtle col rounded-start-3">
+        <div className="col-12">
+            <div className="input-group shadow-sm rounded-4">
+                <div className="card border bg-light bg-gradient col rounded-start-4">
                     <div
                         className="position-absolute"
                         style={{ top: "-0.75em", right: "0.25em" }}
@@ -284,7 +284,7 @@ const Vendor = (props) => {
                         </div>
                     </div>
                 </div>
-                <button className="btn btn-primary rounded-end-3 px-4">
+                <button className="btn btn-primary rounded-end-4 px-4">
                     <i className="bi bi-envelope-fill"></i>
                 </button>
             </div>

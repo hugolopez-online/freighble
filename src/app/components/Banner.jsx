@@ -4,8 +4,13 @@ const Banner = (props) => {
         props.specs.origin.country &&
         props.specs.destination.country;
     return (
-        <div className="border-bottom bg-body mb-3">
-            <h3 className="fw-bold">Search results</h3>
+        <div className="card text-bg-warning bg-gradient rounded-4 p-4">
+            <h6 className="display-6">search results</h6>
+            <code className="text-bg-dark fs-6 p-2 rounded-1">
+                <span className="text-warning">C:\...\Banner.jsx&gt;</span> test
+                component for dev purposes only _
+            </code>
+            <hr />
             {min_data ? (
                 <div>
                     <p className="mb-1">
@@ -56,7 +61,7 @@ const Banner = (props) => {
                     </p>
                     <p>
                         <button
-                            className="btn btn-sm btn-warning shadow-sm me-2"
+                            className="btn btn-sm btn-danger shadow-sm me-2"
                             type="button"
                             onClick={() => {
                                 document
@@ -71,14 +76,14 @@ const Banner = (props) => {
                             Clear results
                         </button>
                         <button
-                            className="btn btn-sm btn-dark shadow-sm fw-bold me-2"
+                            className="btn btn-sm btn-dark shadow-sm me-2"
                             type="button"
                             onClick={() => props.templateSpecs(props.specs)}
                         >
-                            Template new search
+                            Template
                         </button>
                         <button
-                            className="btn btn-sm btn-outline-secondary shadow-sm me-2"
+                            className="btn btn-sm btn-dark shadow-sm me-2"
                             type="button"
                             onClick={() => {
                                 document

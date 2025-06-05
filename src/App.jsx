@@ -60,8 +60,13 @@ function App() {
                         setTemplate={setTemplate}
                     />
                 </div>
-                <div className="col-12 col-md-7 mb-3">
-                    <div className="row justify-content-md-center">
+                <div className="col-12 col-md-6 mb-3">
+                    <div className="row justify-content-center g-3 mb-3">
+                        <Directory specs={specs} />
+                    </div>
+                </div>
+                <div className="col-12 col-md-3">
+                    <div className="row sticky-top under-navbar">
                         <div
                             id="informativeBanner"
                             className="col-12"
@@ -74,9 +79,6 @@ function App() {
                                 templateSpecs={templateSpecs}
                             />
                         </div>
-                    </div>
-                    <div className="row justify-content-center g-3 mb-3">
-                        <Directory specs={specs} />
                     </div>
                 </div>
             </div>

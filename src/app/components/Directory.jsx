@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import Vendor from "./Vendor";
+import Placeholder from "./Placeholder";
 
 const Directory = ({ specs }) => {
     const [vendorList, setVendorList] = useState([]);
+    const [isFetching, setIsFetching] = useState(false);
 
     useEffect(() => {
         setVendorList([]);
@@ -13,6 +15,7 @@ const Directory = ({ specs }) => {
                 specs.destination.country
             ) {
                 // async func to search vendors through API
+                setIsFetching(true);
                 const searched_vendors_promise = await fetch(
                     `/api/vendors?mode=${specs.mode}&o_country=${
                         specs.origin.country
@@ -34,6 +37,7 @@ const Directory = ({ specs }) => {
                     a.company.localeCompare(b.company)
                 );
                 setVendorList(found_vendors);
+                setIsFetching(false);
             }
         };
 
@@ -42,44 +46,43 @@ const Directory = ({ specs }) => {
 
     // creates array to iterate and render the cards placeholders
     let placeholders = [];
-    for (let i = 0; i <= 5; i++) {
+    for (let i = 0; i <= 10; i++) {
         placeholders.push(i);
     }
 
     return (
         <>
-            {!vendorList.length
-                ? placeholders.map((placeholder, index) => {
-                      return (
-                          <div
-                              key={"placeholder-" + String(index)}
-                              className="col-11 col-md-10"
-                          >
-                              <div className="input-group shadow-sm rounded-3">
-                                  <div className="card bg-light-subtle col shadow-sm">
-                                      <div className="card-body">
-                                          <h5 className="card-title placeholder-glow">
-                                              <span className="placeholder bg-secondary col-6"></span>
-                                              <span className="placeholder bg-secondary col-1 ms-2"></span>
-                                          </h5>
-                                      </div>
-                                  </div>
-                                  <button className="btn btn-primary rounded-end-3 disabled placeholder px-4"></button>
-                              </div>
-                          </div>
-                      );
-                  })
-                : vendorList.map((vendor, index) => {
-                      const key = String(vendor.id) + String(index);
-                      return (
-                          <Vendor
-                              key={key}
-                              dispatched_key={key}
-                              {...vendor}
-                              specs={specs}
-                          />
-                      );
-                  })}
+            {!vendorList.length ? (
+                !isFetching ? (
+                    <div className="col-12">
+                        <h1 className="display-1 text-black-50">
+                            nothing to show
+                        </h1>
+                        <hr className="border border-secondary" />
+                        <h6 className="display-6 text-body-tertiary">
+                            make a load search to display suitable vendors here
+                        </h6>
+                    </div>
+                ) : (
+                    placeholders.map((placeholder) => {
+                        return (
+                            <Placeholder key={`placeholder-${placeholder}`} />
+                        );
+                    })
+                )
+            ) : (
+                vendorList.map((vendor, index) => {
+                    const key = String(vendor.id) + String(index);
+                    return (
+                        <Vendor
+                            key={key}
+                            dispatched_key={key}
+                            {...vendor}
+                            specs={specs}
+                        />
+                    );
+                })
+            )}
             {/*THE DIV BELOW MUST BE DELETED AND FIND A NEW WAY TO DEAL WITH THE AUTO SCROLLING*/}
             <div className="text-bg-dark">
                 {/* <code>{JSON.stringify(vendorList)}</code> */}

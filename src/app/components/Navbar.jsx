@@ -23,7 +23,7 @@ const Navbar = () => {
                         </div>
                         {/* @hugolopez-online: make dynamic depending on search status and amount of vendors in db */}
                         <div className="rounded-4 border bg-body p-2 px-3 mx-3">
-                            <code className="text-dark">
+                            <code className="text-secondary">
                                 Vendor directory: 52 vendors
                             </code>
                         </div>

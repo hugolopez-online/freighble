@@ -203,12 +203,13 @@ const Search = (props) => {
 
     return (
         <form
-            className="shadow-sm border rounded-3 p-3 text-bg-light needs-validation"
+            id="search"
+            className="shadow-sm border rounded-4 p-4 bg-light bg-gradient needs-validation sticky-top under-navbar"
             onSubmit={handleSpecs}
         >
-            <div className="row">
+            <div className="row border-bottom mb-2">
                 <div className="col-12">
-                    <h4 className="fw-bold">Load details</h4>
+                    <h4 className="display-6 text-secondary">load details</h4>
                 </div>
             </div>
 
@@ -217,10 +218,10 @@ const Search = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="mode"
-                        className="fw-bold text-secondary"
+                        className="fw-normal text-secondary"
                         style={{ fontSize: "0.85em" }}
                     >
-                        Mode
+                        mode
                     </label>
                     <select
                         className="form-select"
@@ -257,10 +258,10 @@ const Search = (props) => {
             <fieldset className="row mb-2">
                 <label
                     htmlFor="origin_city"
-                    className="fw-bold text-secondary"
+                    className="fw-normal text-secondary"
                     style={{ fontSize: "0.85em" }}
                 >
-                    Origin
+                    origin
                 </label>
                 <div className="input-group dropdown col-12">
                     <input
@@ -414,10 +415,10 @@ const Search = (props) => {
             <fieldset className="row mb-2">
                 <label
                     htmlFor="destination_city"
-                    className="fw-bold text-secondary"
+                    className="fw-normal text-secondary"
                     style={{ fontSize: "0.85em" }}
                 >
-                    Destination
+                    destination
                 </label>
                 <div className="input-group col-12">
                     <input
@@ -579,10 +580,10 @@ const Search = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="border"
-                        className="fw-bold text-secondary"
+                        className="fw-normal text-secondary"
                         style={{ fontSize: "0.85em" }}
                     >
-                        Border crossing port
+                        border crossing port
                     </label>
                     <select
                         className="form-select"
@@ -656,7 +657,7 @@ const Search = (props) => {
                             formData.fast
                                 ? "btn-primary"
                                 : "btn-outline-secondary border"
-                        } rounded-5 w-100`}
+                        } rounded-2 w-100`}
                         data-bs-toggle="collapse"
                         data-bs-target="#special-requirements"
                         aria-expanded="false"
@@ -862,7 +863,7 @@ const Search = (props) => {
                     <div className="col-12 mb-2">
                         <button
                             type="button"
-                            className="btn btn-sm btn-outline-secondary border rounded-5 w-100"
+                            className="btn btn-sm btn-outline-secondary border rounded-2 w-100"
                             data-bs-toggle="collapse"
                             data-bs-target="#additional-instructions-wrapper"
                             aria-expanded="false"
@@ -884,16 +885,16 @@ const Search = (props) => {
                     </div>
                 </div>
             </div>
-            <button
+            {/*<button
                 type="button"
                 className="btn btn-sm btn-warning shadow-sm w-100 mb-2"
                 onClick={() => setFormData(default_form_data)}
             >
                 Reset fields
-            </button>
+            </button>*/}
             <button
                 type="submit"
-                className="btn btn-dark shadow-sm fw-bold w-100"
+                className="btn btn-dark bg-gradient shadow-sm fw-bold w-100 rounded-pill"
             >
                 Search
             </button>
