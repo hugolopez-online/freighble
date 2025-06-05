@@ -49,7 +49,7 @@ function App() {
             >
                 <Navbar />
             </div>
-            <div className="row justify-content-md-center mb-3">
+            <div className="row justify-content-md-center">
                 <div
                     id="searchForm"
                     className="col-12 col-md-3 mb-3"

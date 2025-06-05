@@ -55,7 +55,7 @@ const Vendor = (props) => {
                         className="position-absolute"
                         style={{ top: "-0.75em", right: "0.25em" }}
                     >
-                        <span className="badge border border-primary text-bg-info">
+                        <span className="badge text-bg-dark bg-gradient">
                             <i className="bi bi-crosshair"></i> {suitability}%
                         </span>
                     </div>
@@ -284,7 +284,7 @@ const Vendor = (props) => {
                         </div>
                     </div>
                 </div>
-                <button className="btn btn-primary rounded-end-4 px-4">
+                <button className="btn btn-primary bg-gradient rounded-end-4 px-4">
                     <i className="bi bi-envelope-fill"></i>
                 </button>
             </div>

@@ -1,3 +1,11 @@
+:root {
+    --gradient-deep: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.3),
+        rgba(0, 0, 0, 0)
+    );
+}
+
 #navbar {
     background: rgba(250, 250, 250, 0.4);
     box-shadow: 0 1px 10px rgba(124, 124, 124, 0.1);
@@ -8,4 +16,12 @@
 
 .under-navbar {
     top: 5.9rem;
+}
+
+.bg-gradient-deep {
+    background-image: var(--gradient-deep) !important;
+}
+
+.tight-pocket {
+    padding: 0.1rem;
 }
