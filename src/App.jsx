@@ -45,11 +45,9 @@ function App() {
         <>
             <div
                 id="navbar"
-                className="row justify-content-center mb-3"
+                className="row justify-content-center sticky-top mb-3"
             >
-                <div className="col-12 col-md-6">
-                    <Navbar />
-                </div>
+                <Navbar />
             </div>
             <div className="row justify-content-md-center mb-3">
                 <div
@@ -63,14 +61,7 @@ function App() {
                     />
                 </div>
                 <div className="col-12 col-md-7 mb-3">
-                    <div
-                        className="row justify-content-md-center"
-                        style={{
-                            position: "sticky",
-                            top: "0px",
-                            zIndex: 1000,
-                        }}
-                    >
+                    <div className="row justify-content-md-center">
                         <div
                             id="informativeBanner"
                             className="col-12"
