@@ -107,6 +107,7 @@ feat/ui/@experimental/grid-layout-alternative
 | `form`   | Form validation, layout, input UX             |
 | `auth`   | Authentication, session, user management      |
 | `api`    | API interaction, request/response logic       |
+| `db`     | Database-related change                       |
 | `srv`    | Backend logic modifications/improvements      |
 | `deps`   | Dependencies and package changes              |
 | `config` | ESLint, Prettier, Git, Docker, etc. config    |
