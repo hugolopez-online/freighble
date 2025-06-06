@@ -1,14 +1,24 @@
-import suitability_weight from "../handlers/suitability_meta";
+// imports
+
 import { useState, useEffect } from "react";
+import suitability_weight from "../handlers/suitability_meta";
+
+// module
 
 const base_score = suitability_weight.mandatory;
 
+// component
+
 const Vendor = (props) => {
+    // states
+
     const [suitability, setSuitability] = useState(base_score);
     const origin_territory_weight =
         suitability_weight.desirable.origin_territory_weight;
     const destination_territory_weight =
         suitability_weight.desirable.destination_territory_weight;
+
+    // effects
 
     useEffect(() => {
         setSuitability(base_score);
@@ -46,6 +56,8 @@ const Vendor = (props) => {
 
         setSuitability(base_score + Math.round(new_score));
     }, [props.specs]);
+
+    // render
 
     return (
         <div className="col-12">

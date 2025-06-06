@@ -1,8 +1,12 @@
+// imports
+
 import { useState } from "react";
 import Navbar from "./app/components/Navbar";
 import Search from "./app/components/Search";
 import Directory from "./app/components/Directory";
 import Banner from "./app/components/Banner";
+
+// module
 
 const default_specs = {
     mode: "",
@@ -29,10 +33,14 @@ const default_specs = {
     fast: false,
 };
 
+// component
+
 function App() {
+    // states
     const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
 
+    // handlers
     const resetSpecs = () => {
         setSpecs(default_specs);
     };
@@ -40,6 +48,8 @@ function App() {
     const templateSpecs = (retrievedTemplate) => {
         setTemplate(retrievedTemplate);
     };
+
+    // render
 
     return (
         <>

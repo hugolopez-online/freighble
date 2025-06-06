@@ -3,6 +3,7 @@ const Banner = (props) => {
         props.specs.mode &&
         props.specs.origin.country &&
         props.specs.destination.country;
+
     return (
         <div className="card text-bg-warning bg-gradient rounded-4 p-4">
             <h6 className="display-6">search results</h6>

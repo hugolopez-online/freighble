@@ -1,10 +1,18 @@
+// imports
+
 import { useEffect, useState } from "react";
 import Vendor from "./Vendor";
 import Placeholder from "./Placeholder";
 
+// component
+
 const Directory = ({ specs }) => {
+    // states
+
     const [vendorList, setVendorList] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
+
+    // effects
 
     useEffect(() => {
         setVendorList([]);
@@ -33,6 +41,7 @@ const Directory = ({ specs }) => {
                 );
                 const searched_vendors = await searched_vendors_promise.json();
                 const found_vendors = searched_vendors.searched_vendors;
+                // @hugolopez-online: testing sort by suitability. Delete block when that's done
                 found_vendors.sort((a, b) =>
                     a.company.localeCompare(b.company)
                 );
@@ -44,11 +53,15 @@ const Directory = ({ specs }) => {
         searchVendors();
     }, [specs]);
 
-    // creates array to iterate and render the cards placeholders
+    // utils
+
+    const placeholder_amount = 10;
     let placeholders = [];
-    for (let i = 0; i <= 10; i++) {
+    for (let i = 0; i <= placeholder_amount; i++) {
         placeholders.push(i);
     }
+
+    // render
 
     return (
         <>
