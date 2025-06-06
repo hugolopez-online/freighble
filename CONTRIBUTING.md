@@ -1,103 +1,133 @@
-# Contributing guide
+# Contributing Guide
 
-## Commit and Issue Guidelines
+Thank you for considering contributing to this project!  
+To ensure clarity and consistency across contributions, we follow a standardized format for:
 
-To maintain a clean and consistent history, we follow a strict format for **commit messages** and **issue titles**. Please read carefully and refer to the examples provided below.
+-   Commit messages
+-   Issue titles
+-   Branch names
 
----
+All of these share the same **types** and **scopes**. Below you'll find the complete guide.
 
-### Commit Message Format
+> 📝 In the format templates below:
+>
+> -   **Curly braces `{...}`** indicate optional parts — do **not** include the braces.
+> -   **Angle brackets `<...>`** represent placeholders — also to be replaced, **not** typed literally.
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard:
+## Format Overview
 
-```
-<type>(<scope>): <description>
-```
-
-#### 🔹 Examples (Correct)
-
-```
-feat(auth): add signup form validation
-fix(api): prevent crash on empty payload
-chore(ci): update GitHub workflow for linting
-refactor(styles): simplify theme switcher logic
-```
-
-#### 🔸 Examples (Incorrect)
+### Conventional Commit Format
 
 ```
-fixed bug in login page
-added feature
-update code
-chore: fix
+<type>{(<scope>)}: short description
+```
+
+**Examples:**
+
+```
+feat(ui): improve accessibility for modal buttons
+
+docs: correct typos in README.md
 ```
 
 ---
 
 ### Issue Title Format
 
-Each issue title should reflect the type and scope, written in this format:
+Using the same **types** and **scopes** as commits, only in uppercase and between square brackets.
 
 ```
-[TYPE][SCOPE] Short description of the problem or request
+[<TYPE>]{[<SCOPE>]} short description
 ```
 
-#### 🔹 Examples (Correct)
+**Examples:**
 
--   `[BUG][FORM] Whitespace in first name field causes error`
--   `[FEAT][AUTH] Allow login with GitHub OAuth`
--   `[CHORE][CONFIG] Update ESLint rules for consistency`
+```
+[FIX][AUTH] handle expired token redirects
 
-#### 🔸 Examples (Incorrect)
-
--   `bug in form`
--   `add github login`
--   `fix it pls`
+[DOCS] update TODO.md
+```
 
 ---
 
-### Allowed Types
+### Branch Name Format
 
-Use lowercase for commits, uppercase (in brackets) for issues.
+```
+<type>/<scope>/{#<issue-number>/}{@<edge-or-special-case>/}short-description
+```
 
-| Type       | Purpose                                       |
-| ---------- | --------------------------------------------- |
-| `feat`     | New feature                                   |
-| `fix`      | Bug fix                                       |
-| `chore`    | Maintenance (no user-facing change)           |
-| `docs`     | Documentation updates                         |
-| `refactor` | Code change without altering behavior         |
-| `style`    | Formatting, whitespace, etc. (non-functional) |
-| `test`     | Adding or fixing tests                        |
-| `ci`       | Continuous integration or tooling             |
-| `perf`     | Performance improvement                       |
+**Examples:**
 
----
+```
+feat/form/#42/add-password-validation
 
-### Allowed Scopes
+fix/ui/#61/make-input-heights-consistent
 
-Use one of these to describe **where** the change applies. If unsure, choose the most specific relevant one.
+feat/perf/@serverless/create-serverless-alternative
+```
 
-| Scope    | Description                       |
-| -------- | --------------------------------- |
-| `auth`   | Authentication and user login     |
-| `form`   | Forms and form validation         |
-| `api`    | API routes and related logic      |
-| `db`     | Database setup or schema          |
-| `styles` | CSS, Tailwind, or UI-related code |
-| `config` | Configuration files or tooling    |
-| `ci`     | CI/CD pipelines, GitHub Actions   |
-| `deps`   | Dependencies and packages         |
-| `docs`   | Markdown files and documentation  |
-| `layout` | General layout structure          |
-| `utils`  | Utility functions                 |
+#### 🧪 Edge Cases & Special Tags
+
+If your branch has a unique situation (e.g., an experiment, alternative direction, migration), use the optional `@` symbol in the branch name.
+
+**Example:**
+
+```
+feat/ui/@experimental/grid-layout-alternative
+```
 
 ---
 
-### Tips
+## 🧾 Guide reference
 
--   Keep descriptions short but meaningful.
--   Use the **imperative mood** (“add”, not “added” or “adds”).
--   Your commit and issue formats help automate changelogs, releases, and improve readability.
+### Accepted Types
 
-Thank you for keeping the project tidy and consistent.
+| Type       | Description                                            |
+| ---------- | ------------------------------------------------------ |
+| `feat`     | A new feature or enhancement                           |
+| `fix`      | A bug fix                                              |
+| `chore`    | Maintenance tasks (rarely affects behavior)            |
+| `docs`     | Documentation-only changes                             |
+| `refactor` | Code cleanup that doesn't change behavior              |
+| `style`    | Code formatting, white-space, linting (non-functional) |
+| `perf`     | Performance improvements                               |
+| `infra`    | Build tools, CI/CD, environment config                 |
+| `build`    | Changes that affect the build system or dependencies   |
+| `revert`   | Reverts a previous commit                              |
+| `wip`      | Work in progress (not yet ready for merging)           |
+| `test`     | Adding/editing tests                                   |
+
+---
+
+### Accepted Scopes
+
+| Scope    | Description                                   |
+| -------- | --------------------------------------------- |
+| `ui`     | User interface components or styling          |
+| `form`   | Form validation, layout, input UX             |
+| `auth`   | Authentication, session, user management      |
+| `api`    | API interaction, request/response logic       |
+| `srv`    | Backend logic modifications/improvements      |
+| `deps`   | Dependencies and package changes              |
+| `config` | ESLint, Prettier, Git, Docker, etc. config    |
+| `ci`     | GitHub Actions, pipelines, deployment scripts |
+
+> You can suggest new scopes if needed. Use concise and meaningful terms.
+
+### Descriptions style
+
+A verb describing what the modification/feature/fix does, which must be in its imperative form (`create`✅ instead of `creation`❌ or `created`❌), followed by a short sentence of its target or effect (e.g: `chore(ci): delete unused classes`).
+
+---
+
+## Examples: Good vs. Bad
+
+| Context     | Correct                                        | Wrong                       |
+| ----------- | ---------------------------------------------- | --------------------------- |
+| Commit      | `fix(ui): align card titles properly`          | `fix cards`                 |
+| Issue Title | `[FEAT][form]: add password strength meter`    | `add meter`                 |
+| Branch Name | `refactor/api/#34/remove-deprecated-endpoints` | `issue-34-fix-endpoint-bug` |
+
+---
+
+Thank you for helping keep our project organized and maintainable!
