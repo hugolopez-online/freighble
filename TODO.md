@@ -23,7 +23,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 -   [x] Assess and potentially modify the method used to display searched carriers (improve performance or structure)
 -   [x] Fix key ID assignment for iterated items to avoid React key warning and improve diffing
--   [ ] Add favorite/blocked lanes to the suitability assessment algorithm
+-   [x] Add favorite/blocked lanes to the suitability assessment algorithm
 -   [x] Modify suitability percentage formula:
     -   [x] Scale “basic” scores better when more comparison variables are available
 -   [x] Include the following additional specs to Search and to suitability filtering:
@@ -43,7 +43,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 -   [x] Simplify suitability visualization on carrier cards
 -   [x] Implement autofill functionality for Origin/Destination input fields
-    -   [ ] Include full data for suggestion fetching
+    -   [x] Include full data for suggestion fetching
 -   [x] Improve form interaction feedback:
     -   [x] Highlight invalid or incomplete fields on submit
     -   [x] Scroll to the first field that needs user attention
@@ -61,7 +61,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 ## 5. Polish & Visual Presentation
 
 -   [x] Style the page to look presentable (use Bootstrap as the main styling library)
--   [ ] Desgin a proper header/navbar
+-   [x] Desgin a proper header/navbar
 
 ---
 
