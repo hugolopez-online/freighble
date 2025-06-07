@@ -3,25 +3,33 @@
 import { useEffect, useState } from "react";
 import Vendor from "./Vendor";
 import Placeholder from "./Placeholder";
+import suitability_weight from "../handlers/suitability_meta";
 
 // component
 
-const Directory = ({ specs }) => {
+const Directory = ({ specs, routes }) => {
     // states
 
     const [vendorList, setVendorList] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
 
+    // module
+
+    const base_score = suitability_weight.mandatory;
+    const origin_territory_weight =
+        suitability_weight.desirable.origin_territory_weight;
+    const destination_territory_weight =
+        suitability_weight.desirable.destination_territory_weight;
+    let additional_score = suitability_weight.additional;
+
     // effects
 
     useEffect(() => {
+        const min_info =
+            specs.mode && specs.origin.country && specs.destination.country;
         setVendorList([]);
         const searchVendors = async () => {
-            if (
-                specs.mode &&
-                specs.origin.country &&
-                specs.destination.country
-            ) {
+            if (min_info) {
                 // async func to search vendors through API
                 setIsFetching(true);
                 const searched_vendors_promise = await fetch(
@@ -41,17 +49,70 @@ const Directory = ({ specs }) => {
                 );
                 const searched_vendors = await searched_vendors_promise.json();
                 const found_vendors = searched_vendors.searched_vendors;
-                // @hugolopez-online: testing sort by suitability. Delete block when that's done
-                found_vendors.sort((a, b) =>
-                    a.company.localeCompare(b.company)
-                );
-                setVendorList(found_vendors);
+                const scored_vendors = found_vendors.map((vendor) => {
+                    const coverage = vendor.coverage;
+                    const core_lanes = vendor.core_lanes;
+                    const banned_lanes = vendor.banned_lanes;
+
+                    let adjusted_score = 0;
+
+                    for (let country_lookup of Object.keys(coverage)) {
+                        if (
+                            coverage[country_lookup].country_code ==
+                                specs.origin.country &&
+                            coverage[country_lookup].territory.length != 0
+                        ) {
+                            if (
+                                coverage[country_lookup].territory.includes(
+                                    specs.origin.territory
+                                )
+                            ) {
+                                adjusted_score += origin_territory_weight;
+                            }
+                        }
+
+                        if (
+                            coverage[country_lookup].country_code ==
+                                specs.destination.country &&
+                            coverage[country_lookup].territory.length != 0
+                        ) {
+                            if (
+                                coverage[country_lookup].territory.includes(
+                                    specs.destination.territory
+                                )
+                            ) {
+                                adjusted_score += destination_territory_weight;
+                            }
+                        }
+                    }
+
+                    for (let route of routes) {
+                        if (core_lanes.includes(route)) {
+                            adjusted_score += additional_score;
+                            break;
+                        }
+                        if (additional_score > 0) additional_score--;
+                    }
+
+                    return {
+                        ...vendor,
+                        score: base_score + Math.round(adjusted_score),
+                    };
+                });
+
+                scored_vendors.sort((a, b) => b.score - a.score);
+
+                if (!scored_vendors[0]) {
+                    window.alert("No suitable vendors found in our database.");
+                }
+
+                setVendorList(scored_vendors);
                 setIsFetching(false);
             }
         };
 
         searchVendors();
-    }, [specs]);
+    }, [specs, routes]);
 
     // utils
 

@@ -1,64 +1,4 @@
-// imports
-
-import { useState, useEffect } from "react";
-import suitability_weight from "../handlers/suitability_meta";
-
-// module
-
-const base_score = suitability_weight.mandatory;
-
-// component
-
 const Vendor = (props) => {
-    // states
-
-    const [suitability, setSuitability] = useState(base_score);
-    const origin_territory_weight =
-        suitability_weight.desirable.origin_territory_weight;
-    const destination_territory_weight =
-        suitability_weight.desirable.destination_territory_weight;
-
-    // effects
-
-    useEffect(() => {
-        setSuitability(base_score);
-        let new_score = 0;
-
-        for (let country_lookup of Object.keys(props.coverage)) {
-            if (
-                props.coverage[country_lookup].country_code ==
-                    props.specs.origin.country &&
-                props.coverage[country_lookup].territory.length != 0
-            ) {
-                if (
-                    props.coverage[country_lookup].territory.includes(
-                        props.specs.origin.territory
-                    )
-                ) {
-                    new_score += origin_territory_weight;
-                }
-            }
-
-            if (
-                props.coverage[country_lookup].country_code ==
-                    props.specs.destination.country &&
-                props.coverage[country_lookup].territory.length != 0
-            ) {
-                if (
-                    props.coverage[country_lookup].territory.includes(
-                        props.specs.destination.territory
-                    )
-                ) {
-                    new_score += destination_territory_weight;
-                }
-            }
-        }
-
-        setSuitability(base_score + Math.round(new_score));
-    }, [props.specs]);
-
-    // render
-
     return (
         <div className="col-12">
             <div className="input-group shadow-sm rounded-4">
@@ -68,7 +8,7 @@ const Vendor = (props) => {
                         style={{ top: "-0.75em", right: "0.25em" }}
                     >
                         <span className="badge text-bg-dark bg-gradient">
-                            <i className="bi bi-crosshair"></i> {suitability}%
+                            <i className="bi bi-crosshair"></i> {props.score}%
                         </span>
                     </div>
                     <div className="card-body">

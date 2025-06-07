@@ -1,6 +1,6 @@
 // imports
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./app/components/Navbar";
 import Search from "./app/components/Search";
 import Directory from "./app/components/Directory";
@@ -37,10 +37,13 @@ const default_specs = {
 
 function App() {
     // states
+
     const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
+    const [routes, setRoutes] = useState([]);
 
     // handlers
+
     const resetSpecs = () => {
         setSpecs(default_specs);
     };
@@ -49,10 +52,39 @@ function App() {
         setTemplate(retrievedTemplate);
     };
 
+    // effects
+
+    useEffect(() => {
+        const origin_scopes = [
+            `${specs.origin.city}, ${specs.origin.territory}`,
+            specs.origin.territory,
+            specs.origin.region,
+            specs.origin.country,
+            "Anywhere",
+        ];
+        const destination_scopes = [
+            `${specs.destination.city}, ${specs.destination.territory}`,
+            specs.destination.territory,
+            specs.destination.region,
+            specs.destination.country,
+            "Anywhere",
+        ];
+
+        let route_aliases = [];
+
+        for (let scope_o of origin_scopes) {
+            for (let scope_d of destination_scopes) {
+                route_aliases.push(scope_o.concat(":", scope_d));
+            }
+        }
+
+        setRoutes(route_aliases);
+    }, [specs]);
+
     // render
 
     return (
-        <>
+        <React.Fragment>
             <div
                 id="navbar"
                 className="row justify-content-center sticky-top mb-3"
@@ -72,7 +104,10 @@ function App() {
                 </div>
                 <div className="col-12 col-md-6 mb-3">
                     <div className="row justify-content-center g-3 mb-3">
-                        <Directory specs={specs} />
+                        <Directory
+                            specs={specs}
+                            routes={routes}
+                        />
                     </div>
                 </div>
                 <div className="col-12 col-md-3">
@@ -92,7 +127,7 @@ function App() {
                     </div>
                 </div>
             </div>
-        </>
+        </React.Fragment>
     );
 }
 
