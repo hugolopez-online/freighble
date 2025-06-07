@@ -36,6 +36,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 -   [ ] Include and make functional origin and destination dates
 -   [ ] Message and button on carrier cards to prepare/send an email to that vendor
 -   [ ] Make a "searches" dashboard to mark a status for each serch and keep track of work
+-   [ ] Register/login implementation
 
 ---
 
@@ -78,4 +79,4 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 ---
 
-Last updated: 2024-05-29
+Last updated: 2024-06-06
