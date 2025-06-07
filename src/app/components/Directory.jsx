@@ -48,7 +48,9 @@ const Directory = ({ specs, routes }) => {
                     )}&fast=${Number(specs.fast)}`
                 );
                 const searched_vendors = await searched_vendors_promise.json();
-                const found_vendors = searched_vendors.searched_vendors;
+                const found_vendors = searched_vendors.searched_vendors.sort(
+                    (a, b) => a.company.localeCompare(b.company)
+                );
                 const scored_vendors = found_vendors.map((vendor) => {
                     const coverage = vendor.coverage;
                     const core_lanes = vendor.core_lanes;

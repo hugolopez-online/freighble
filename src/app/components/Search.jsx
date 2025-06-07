@@ -126,7 +126,7 @@ const Search = (props) => {
                 e.target.classList.remove("show");
                 document.getElementById(drop_menu).classList.remove("show");
                 setLocationSuggestions(default_location_suggestions);
-            }, 225);
+            }, 400);
         });
     };
 
