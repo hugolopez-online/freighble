@@ -89,7 +89,13 @@ function App() {
                 id="navbar"
                 className="row justify-content-center sticky-top mb-3"
             >
-                <Navbar />
+                <Navbar
+                    specs={specs}
+                    default_specs={default_specs}
+                    resetSpecs={resetSpecs}
+                    setSpecs={setSpecs}
+                    templateSpecs={templateSpecs}
+                />
             </div>
             <div className="row justify-content-md-center">
                 <div

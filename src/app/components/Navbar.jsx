@@ -1,6 +1,12 @@
 import Console from "./Console";
 
-const Navbar = () => {
+const Navbar = ({
+    specs,
+    default_specs,
+    resetSpecs,
+    setSpecs,
+    templateSpecs,
+}) => {
     return (
         <nav className="navbar">
             <div className="container-fluid">
@@ -14,7 +20,13 @@ const Navbar = () => {
                         alt="Freighble"
                     />
                 </a>
-                <Console />
+                <Console
+                    specs={specs}
+                    default_specs={default_specs}
+                    resetSpecs={resetSpecs}
+                    setSpecs={setSpecs}
+                    templateSpecs={templateSpecs}
+                />
                 <div className="navbar">
                     <div className="container-fluid">
                         <button className="btn btn-secondary bg-gradient rounded-pill px-3 mx-1">

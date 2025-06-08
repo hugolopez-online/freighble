@@ -57,6 +57,8 @@ const Directory = ({ specs, routes }) => {
                     const banned_lanes = vendor.banned_lanes;
 
                     let adjusted_score = 0;
+                    let matched_core_lane = "";
+                    let matched_banned_lane = "";
 
                     for (let country_lookup of Object.keys(coverage)) {
                         if (
@@ -91,14 +93,27 @@ const Directory = ({ specs, routes }) => {
                     for (let route of routes) {
                         if (core_lanes.includes(route)) {
                             adjusted_score += additional_score;
+                            matched_core_lane = route;
                             break;
                         }
                         if (additional_score > 0) additional_score--;
                     }
 
+                    for (let route of routes) {
+                        if (banned_lanes.includes(route)) {
+                            adjusted_score -= base_score;
+                            matched_banned_lane = route;
+                            break;
+                        }
+                    }
+
+                    additional_score = suitability_weight.additional;
+
                     return {
                         ...vendor,
                         score: base_score + Math.round(adjusted_score),
+                        matched_core_lane,
+                        matched_banned_lane,
                     };
                 });
 

@@ -8,7 +8,7 @@ const Banner = (props) => {
         <div className="card text-bg-warning bg-gradient rounded-4 p-4">
             <h6 className="display-6">search results</h6>
             <code className="text-bg-dark fs-6 p-2 rounded-1">
-                <span className="text-warning">C:\...\Banner.jsx&gt;</span> test
+                <span className="text-info">C:\...\Banner.jsx&gt;</span> test
                 component for dev purposes only _
             </code>
             <hr />
