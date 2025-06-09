@@ -17,7 +17,7 @@
 }
 
 .under-navbar {
-    top: 5.9rem;
+    top: 5.9rem !important;
 }
 
 .bg-gradient-deep {
@@ -33,4 +33,26 @@
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
+}
+
+.marquee-container {
+    max-width: 350px; /* adjust to your needs */
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.marquee-item {
+    display: inline-block;
+    padding-left: 100%;
+    animation: scroll-left 7s linear infinite;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }

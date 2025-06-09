@@ -11,12 +11,22 @@ const Navbar = ({
         <nav className="navbar">
             <div className="container-fluid">
                 <a
-                    className="navbar-brand"
+                    className="navbar-brand d-none d-md-block"
                     href="#"
                 >
                     <img
                         height={30}
                         src="src/assets/img/logo_206x40.webp"
+                        alt="Freighble"
+                    />
+                </a>
+                <a
+                    className="navbar-brand d-block d-md-none"
+                    href="#"
+                >
+                    <img
+                        height={30}
+                        src="src/assets/img/logo-icon_40x40.webp"
                         alt="Freighble"
                     />
                 </a>
@@ -29,13 +39,13 @@ const Navbar = ({
                 />
                 <div className="navbar">
                     <div className="container-fluid">
-                        <button className="btn btn-secondary bg-gradient rounded-pill px-3 mx-1">
+                        <button className="btn btn-light border bg-gradient text-secondary rounded-pill px-3 me-1">
                             ?
                         </button>
-                        <button className="btn btn-secondary bg-gradient rounded-pill px-3 mx-1">
+                        <button className="btn btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
                             ...
                         </button>
-                        <button className="btn btn-warning bg-gradient rounded-pill px-3 mx-1">
+                        <button className="btn btn-warning bg-gradient rounded-pill px-3 ms-1">
                             sign out
                         </button>
                     </div>

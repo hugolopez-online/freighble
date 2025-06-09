@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 const Console = (props) => {
+    // states
+
     const [minData, setMinData] = useState(false);
 
     // effects
@@ -18,7 +20,7 @@ const Console = (props) => {
     }, [props.specs]);
 
     return (
-        <div className="navbar bg-light p-2 rounded-pill border border-tertiary">
+        <div className="navbar bg-light p-2 rounded-pill border border-tertiary d-none d-md-block">
             <div className="container-fluid px-1">
                 {/* @hugolopez-online: make dynamic depending on search status */}
                 {/*<div className="bg-secondary bg-gradient-deep tight-pocket rounded-pill">
@@ -30,67 +32,15 @@ const Console = (props) => {
                 {/* @hugolopez-online: make dynamic depending on search status and amount of vendors in db */}
                 <div
                     id="console-display"
-                    className="rounded-pill border border-white bg-secondary bg-gradient-deep p-1 px-3 ms-0 me-3"
+                    className={`rounded-pill border border-white bg-secondary bg-gradient-deep${
+                        minData ? " marquee-container" : ""
+                    } p-1 px-3 ms-0 me-2`}
                     style={{ fontSize: "0.75rem" }}
                 >
                     <span
-                        className="font-monospace text-light d-inline-block text-truncate"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="bottom"
-                        data-bs-title={
-                            minData
-                                ? `${
-                                      props.specs.usa_bonded
-                                          ? "U.S. bonded "
-                                          : ""
-                                  }${
-                                      props.specs.can_bonded
-                                          ? "Canada bonded "
-                                          : ""
-                                  }${props.specs.hazmat ? "Hazmat " : ""}${
-                                      props.specs.mode
-                                  } from ${
-                                      props.specs.origin.city
-                                          ? props.specs.origin.city + ", "
-                                          : ""
-                                  }${props.specs.origin.territory} to 
-                            ${
-                                props.specs.destination.city
-                                    ? props.specs.destination.city + ", "
-                                    : ""
-                            }${props.specs.destination.territory}${
-                                      props.specs.team_drivers
-                                          ? " with Team Drivers"
-                                          : ""
-                                  }${
-                                      props.specs.border !== "None"
-                                          ? ", crossing through " +
-                                            props.specs.border
-                                                .split("+")
-                                                .join(" ")
-                                          : ""
-                                  }${
-                                      props.specs.ctpat ||
-                                      props.specs.twic ||
-                                      props.specs.tsa ||
-                                      props.specs.fast
-                                          ? " - (Extras:" +
-                                            (props.specs.ctpat
-                                                ? " C-TPAT,"
-                                                : "") +
-                                            (props.specs.twic ? " TWIC," : "") +
-                                            (props.specs.tsa ? " TSA," : "") +
-                                            (props.specs.fast ? " FAST," : "") +
-                                            " certified)"
-                                          : ""
-                                  }`
-                                : "plop"
-                        }
-                        style={{
-                            position: "relative",
-                            top: "0.2rem",
-                            maxWidth: "350px",
-                        }}
+                        className={`font-monospace text-light${
+                            minData ? " marquee-item" : ""
+                        }`}
                     >
                         {minData ? (
                             <>{`${
@@ -120,7 +70,7 @@ const Console = (props) => {
                                 props.specs.twic ||
                                 props.specs.tsa ||
                                 props.specs.fast
-                                    ? " - (Extras:" +
+                                    ? " (Extras:" +
                                       (props.specs.ctpat ? " C-TPAT," : "") +
                                       (props.specs.twic ? " TWIC," : "") +
                                       (props.specs.tsa ? " TSA," : "") +
@@ -133,8 +83,7 @@ const Console = (props) => {
                         )}
                     </span>
                 </div>
-                {/* @hugolopez-online: migrate `Banner.jsx` functionality here */}
-                <div className="btn-group">
+                <div className="btn-group me-2">
                     <button
                         type="button"
                         className={`btn btn-sm bg-gradient rounded-pill rounded-end px-3 fw-bold${
@@ -161,6 +110,15 @@ const Console = (props) => {
                         clear
                     </button>
                 </div>
+                <button
+                    className="btn btn-sm btn-light shadow-sm text-secondary bg-gradient rounded-pill"
+                    type="button"
+                    onClick={() => {
+                        window.scrollTo(0, 0);
+                    }}
+                >
+                    <i className="bi bi-chevron-up"></i>
+                </button>
             </div>
         </div>
     );

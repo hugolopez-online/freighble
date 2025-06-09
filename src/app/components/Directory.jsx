@@ -174,10 +174,6 @@ const Directory = ({ specs, routes }) => {
                     );
                 })
             )}
-            {/*THE DIV BELOW MUST BE DELETED AND FIND A NEW WAY TO DEAL WITH THE AUTO SCROLLING*/}
-            <div className="text-bg-dark">
-                {/* <code>{JSON.stringify(vendorList)}</code> */}
-            </div>
         </>
     );
 };

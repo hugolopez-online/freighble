@@ -66,8 +66,6 @@ const Search = (props) => {
         const destination_country =
             geo_lookup[formData.destination_territory].country;
 
-        const banner = document.getElementById("informativeBanner");
-
         props.setSpecs((prev) => {
             return {
                 ...prev,
@@ -97,8 +95,6 @@ const Search = (props) => {
         });
 
         setFormData(default_form_data);
-
-        banner.scrollIntoView({ block: "start", behavior: "smooth" });
     };
 
     const handleLocationSuggestions = (e, drop_menu) => {
@@ -204,7 +200,7 @@ const Search = (props) => {
     return (
         <form
             id="search"
-            className="shadow-sm border rounded-4 p-4 bg-light bg-gradient needs-validation sticky-top under-navbar"
+            className="shadow-sm border rounded-4 p-4 bg-light bg-gradient needs-validation sticky-md-top under-navbar"
             onSubmit={handleSpecs}
         >
             <div className="row border-bottom mb-2">
