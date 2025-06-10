@@ -30,13 +30,15 @@ const Navbar = ({
                         alt="Freighble"
                     />
                 </a>
-                <Console
-                    specs={specs}
-                    default_specs={default_specs}
-                    resetSpecs={resetSpecs}
-                    setSpecs={setSpecs}
-                    templateSpecs={templateSpecs}
-                />
+                <div className="d-none d-md-block">
+                    <Console
+                        specs={specs}
+                        default_specs={default_specs}
+                        resetSpecs={resetSpecs}
+                        setSpecs={setSpecs}
+                        templateSpecs={templateSpecs}
+                    />
+                </div>
                 <div className="navbar">
                     <div className="container-fluid">
                         <button className="btn btn-light border bg-gradient text-secondary rounded-pill px-3 me-1">

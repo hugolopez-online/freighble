@@ -5,6 +5,7 @@ import Navbar from "./app/components/Navbar";
 import Search from "./app/components/Search";
 import Directory from "./app/components/Directory";
 import Banner from "./app/components/Banner";
+import Console from "./app/components/Console";
 
 // module
 
@@ -31,6 +32,7 @@ const default_specs = {
     twic: false,
     tsa: false,
     fast: false,
+    instructions: "",
 };
 
 // component
@@ -106,6 +108,15 @@ function App() {
                         setSpecs={setSpecs}
                         template={template}
                         setTemplate={setTemplate}
+                    />
+                </div>
+                <div className="col-12 d-block d-md-none mb-3 sticky-top under-navbar-sm">
+                    <Console
+                        specs={specs}
+                        default_specs={default_specs}
+                        resetSpecs={resetSpecs}
+                        setSpecs={setSpecs}
+                        templateSpecs={templateSpecs}
                     />
                 </div>
                 <div className="col-12 col-md-6 mb-3">

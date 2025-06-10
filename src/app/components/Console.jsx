@@ -20,7 +20,7 @@ const Console = (props) => {
     }, [props.specs]);
 
     return (
-        <div className="navbar bg-light p-2 rounded-pill border border-tertiary d-none d-md-block">
+        <div className="navbar bg-light p-2 rounded-pill border border-tertiary">
             <div className="container-fluid px-1">
                 {/* @hugolopez-online: make dynamic depending on search status */}
                 {/*<div className="bg-secondary bg-gradient-deep tight-pocket rounded-pill">
@@ -32,7 +32,7 @@ const Console = (props) => {
                 {/* @hugolopez-online: make dynamic depending on search status and amount of vendors in db */}
                 <div
                     id="console-display"
-                    className={`rounded-pill border border-white bg-secondary bg-gradient-deep${
+                    className={`rounded-pill border border-white bg-secondary bg-gradient-deep d-none d-md-block${
                         minData ? " marquee-container" : ""
                     } p-1 px-3 ms-0 me-2`}
                     style={{ fontSize: "0.75rem" }}

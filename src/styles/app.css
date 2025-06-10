@@ -20,6 +20,10 @@
     top: 5.9rem !important;
 }
 
+.under-navbar-sm {
+    top: 5rem !important;
+}
+
 .bg-gradient-deep {
     background-image: var(--gradient-deep) !important;
 }

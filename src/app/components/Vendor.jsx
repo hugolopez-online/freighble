@@ -1,4 +1,46 @@
 const Vendor = (props) => {
+    const greeting = encodeURIComponent(
+        `Hello team ${props.company},\n\nPlease help pricing and confirming availability for the shipment below.\n\n`
+    );
+    const origin_info = encodeURIComponent(
+        `Origin: ${props.specs.origin.city}, ${props.specs.origin.territory}\n`
+    );
+    const destination_info = encodeURIComponent(
+        `Desination: ${props.specs.destination.city}, ${props.specs.destination.territory}\n\n`
+    );
+    // @hugolopez-online: additional information missing (weight, unit type, etc.)
+    const specs_info = encodeURIComponent(
+        `Mode: ${props.specs.mode}${
+            props.specs.border !== "None"
+                ? "\nBorder crossing through: " +
+                  props.specs.border.split("+").join(" ")
+                : ""
+        }\n\n`
+    );
+    // @hugolopez-online: special services still missing
+    const instructions_info = encodeURIComponent(
+        `${
+            props.specs.instructions &&
+            "Additional instructions: " + props.specs.instructions + "\n\n"
+        }`
+    );
+    const signature = encodeURIComponent(
+        `Let me know if you have any questions.\n\nKind regards!`
+    );
+
+    const EMAIL_SUBJECT = encodeURIComponent(
+        `Pricing request // ${props.specs.mode} from ${props.specs.origin.city}, ${props.specs.origin.territory} to ${props.specs.destination.city}, ${props.specs.destination.territory} [${props.company}]`
+    );
+    const EMAIL_BODY =
+        greeting +
+        origin_info +
+        destination_info +
+        specs_info +
+        instructions_info +
+        signature;
+
+    const MAILTO_LINK = `mailto:${props.email}?subject=${EMAIL_SUBJECT}&body=${EMAIL_BODY}`;
+
     return (
         <div className="col-12">
             <div className="input-group shadow-sm rounded-4">
@@ -52,7 +94,10 @@ const Vendor = (props) => {
                                     {props.score}%
                                 </button>
                             </h5>
-                            <button className="btn btn-primary bg-gradient rounded-3 px-3 m-0">
+                            <a
+                                href={MAILTO_LINK}
+                                className="btn btn-primary bg-gradient rounded-3 px-3 m-0"
+                            >
                                 <svg
                                     width="24"
                                     height="24"
@@ -65,7 +110,7 @@ const Vendor = (props) => {
                                         fill="white"
                                     />
                                 </svg>
-                            </button>
+                            </a>
                         </div>
                         <div
                             className="collapse"

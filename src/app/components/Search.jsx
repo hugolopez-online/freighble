@@ -28,6 +28,7 @@ const default_form_data = {
     twic: false,
     tsa: false,
     fast: false,
+    instructions: "",
 };
 
 const default_location_suggestions = [];
@@ -91,6 +92,7 @@ const Search = (props) => {
                 twic: formData.twic,
                 tsa: formData.tsa,
                 fast: formData.fast,
+                instructions: formData.instructions,
             };
         });
 
@@ -190,6 +192,7 @@ const Search = (props) => {
                     twic: props.template.twic,
                     tsa: props.template.tsa,
                     fast: props.template.fast,
+                    instructions: props.template.instructions,
                 };
             });
         }
@@ -309,7 +312,7 @@ const Search = (props) => {
                                                 )
                                             }
                                         >
-                                            <i className="bi bi-lightning-charge-fill"></i>{" "}
+                                            <i className="bi bi-stars"></i>{" "}
                                             {suggestion.search}
                                         </a>
                                     </li>
@@ -469,7 +472,7 @@ const Search = (props) => {
                                                 )
                                             }
                                         >
-                                            <i className="bi bi-lightning-charge-fill"></i>{" "}
+                                            <i className="bi bi-stars"></i>{" "}
                                             {suggestion.search}
                                         </a>
                                     </li>
@@ -859,7 +862,11 @@ const Search = (props) => {
                     <div className="col-12 mb-2">
                         <button
                             type="button"
-                            className="btn btn-sm btn-outline-secondary border rounded-2 w-100"
+                            className={`btn btn-sm ${
+                                formData.instructions
+                                    ? "btn-primary"
+                                    : "btn-outline-secondary border"
+                            } rounded-2 w-100`}
                             data-bs-toggle="collapse"
                             data-bs-target="#additional-instructions-wrapper"
                             aria-expanded="false"
@@ -877,6 +884,15 @@ const Search = (props) => {
                             id="additional-instructions"
                             className="form-control"
                             rows="2"
+                            value={formData.instructions}
+                            onChange={(e) => {
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        instructions: e.target.value,
+                                    };
+                                });
+                            }}
                         ></textarea>
                     </div>
                 </div>
