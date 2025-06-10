@@ -89,7 +89,10 @@ const Console = (props) => {
                         className={`btn btn-sm bg-gradient rounded-pill rounded-end px-3 fw-bold${
                             minData ? " btn-primary" : " btn-secondary disabled"
                         }`}
-                        onClick={() => props.templateSpecs(props.specs)}
+                        onClick={() => {
+                            props.templateSpecs(props.specs);
+                            document.getElementById("mode").focus();
+                        }}
                     >
                         template
                     </button>

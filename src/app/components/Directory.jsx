@@ -125,6 +125,7 @@ const Directory = ({ specs, routes }) => {
 
                 setVendorList(scored_vendors);
                 setIsFetching(false);
+                window.scrollTo(0, 0);
             }
         };
 

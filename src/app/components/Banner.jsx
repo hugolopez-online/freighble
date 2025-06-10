@@ -87,12 +87,7 @@ const Banner = (props) => {
                             className="btn btn-sm btn-dark shadow-sm me-2"
                             type="button"
                             onClick={() => {
-                                document
-                                    .getElementById("navbar")
-                                    .scrollIntoView({
-                                        block: "start",
-                                        behavior: "smooth",
-                                    });
+                                window.scrollTo(0, 0);
                             }}
                         >
                             <i className="bi bi-chevron-up"></i>
