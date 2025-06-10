@@ -97,6 +97,11 @@ const Search = (props) => {
         });
 
         setFormData(default_form_data);
+
+        if (window.innerWidth < 768) {
+            const search = document.getElementById("search");
+            search.classList.add("d-none");
+        }
     };
 
     const handleLocationSuggestions = (e, drop_menu) => {
