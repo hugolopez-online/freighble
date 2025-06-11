@@ -32,9 +32,9 @@ Tasks to track development, scalability, polish, and UX improvements.
     -   TSA
     -   FAST
 -   [x] Implement an open field to optionally type additional custom cargo instructions
--   [ ] Make additional cargo instructions functional
+-   [x] Make additional cargo instructions functional
 -   [ ] Include and make functional origin and destination dates
--   [ ] Message and button on carrier cards to prepare/send an email to that vendor
+-   [x] Message and button on carrier cards to prepare/send an email to that vendor
 -   [ ] Make a "searches" dashboard to mark a status for each serch and keep track of work
 -   [ ] Register/login implementation
 
@@ -79,4 +79,4 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 ---
 
-Last updated: 2024-06-06
+Last updated: 2025-06-10

@@ -46,7 +46,10 @@ The current scope of its functionality is for loads and carriers within Canada, 
 -   Vendor cards displaying key information about the company, matching variables, and suitability score.
 -   Autocomplete function for location fields in the search form
 -   Recognition and scoring of favorite and blocked lanes
+-   Button to prepare and send emails for vendor outreach
 
 ### Planned
 
--   Button to prepare and send emails for vendor outreach
+-   Search log and history
+-   Vendor rating
+-   Strategic data visualization: statistics on user searches vs. matching results
