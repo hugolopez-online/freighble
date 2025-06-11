@@ -902,13 +902,6 @@ const Search = (props) => {
                     </div>
                 </div>
             </div>
-            {/*<button
-                type="button"
-                className="btn btn-sm btn-warning shadow-sm w-100 mb-2"
-                onClick={() => setFormData(default_form_data)}
-            >
-                Reset fields
-            </button>*/}
             <button
                 type="submit"
                 className="btn btn-dark bg-gradient shadow-sm fw-bold w-100 rounded-pill"
