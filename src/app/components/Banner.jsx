@@ -5,103 +5,143 @@ const Banner = (props) => {
         props.specs.destination.country;
 
     return (
-        <div className="card text-bg-warning bg-gradient rounded-4 p-4">
-            <h6 className="display-6">search results</h6>
-            <code className="text-bg-dark fs-6 p-2 rounded-1">
-                <span className="text-info">C:\...\Banner.jsx&gt;</span> test
-                component for dev purposes only _
-            </code>
-            <hr />
-            {min_data ? (
-                <div>
-                    <p className="mb-1">
-                        <strong>Details: </strong>
-                        {`${props.specs.usa_bonded ? "U.S. bonded " : ""}${
-                            props.specs.can_bonded ? "Canada bonded " : ""
-                        }${props.specs.hazmat ? "Hazmat " : ""}${
-                            props.specs.mode
-                        } from ${
-                            props.specs.origin.city
-                                ? props.specs.origin.city + ", "
-                                : ""
-                        }${
-                            props.specs.origin.territory +
-                            " (" +
-                            props.specs.origin.country +
-                            ")"
-                        } to 
-                            ${
-                                props.specs.destination.city
-                                    ? props.specs.destination.city + ", "
-                                    : ""
-                            }${
-                            props.specs.destination.territory +
-                            " (" +
-                            props.specs.destination.country +
-                            ")"
-                        }${
-                            props.specs.team_drivers ? " with Team Drivers" : ""
-                        }${
-                            props.specs.border !== "None"
-                                ? ", crossing through " +
-                                  props.specs.border.split("+").join(" ")
-                                : ""
-                        }${
-                            props.specs.ctpat ||
-                            props.specs.twic ||
-                            props.specs.tsa ||
-                            props.specs.fast
-                                ? " - (Extras:" +
-                                  (props.specs.ctpat ? " C-TPAT," : "") +
-                                  (props.specs.twic ? " TWIC," : "") +
-                                  (props.specs.tsa ? " TSA," : "") +
-                                  (props.specs.fast ? " FAST," : "") +
-                                  " certified)"
-                                : ""
-                        }`}
-                    </p>
-                    <p>
-                        <button
-                            className="btn btn-sm btn-danger shadow-sm me-2"
-                            type="button"
-                            onClick={() => {
-                                document
-                                    .getElementById("navbar")
-                                    .scrollIntoView({
-                                        block: "start",
-                                        behavior: "smooth",
-                                    });
-                                props.setSpecs(props.default_specs);
-                            }}
-                        >
-                            Clear results
-                        </button>
-                        <button
-                            className="btn btn-sm btn-dark shadow-sm me-2"
-                            type="button"
-                            onClick={() => props.templateSpecs(props.specs)}
-                        >
-                            Template
-                        </button>
-                        <button
-                            className="btn btn-sm btn-dark shadow-sm me-2"
-                            type="button"
-                            onClick={() => {
-                                window.scrollTo(0, 0);
-                            }}
-                        >
-                            <i className="bi bi-chevron-up"></i>
-                        </button>
+        <div className="card border text-bg-light bg-gradient shadow-sm rounded-4 p-4">
+            <div className="row border-bottom mb-2">
+                <div className="col-12">
+                    <h4 className="display-6 text-secondary fs-2">
+                        additional info
+                    </h4>
+                    <p className="text-secondary fw-light">
+                        (optional but encouraged)
                     </p>
                 </div>
-            ) : (
-                <div
-                    className="alert alert-warning"
-                    role="alert"
+            </div>
+            <div className="row mb-2">
+                <label
+                    htmlFor="origin_date"
+                    className="fw-normal text-secondary col-6"
+                    style={{ fontSize: "0.85em" }}
                 >
-                    Enter load details to display suitable vendors.
+                    pick-up date
+                </label>
+                <label
+                    htmlFor="destination_date"
+                    className="fw-normal text-secondary col-6 ps-0"
+                    style={{ fontSize: "0.85em" }}
+                >
+                    delivery date
+                </label>
+                <div className="input-group">
+                    <input
+                        id="origin_date"
+                        type="date"
+                        className="form-control form-control-sm"
+                        value={props.specs.origin_date}
+                        onChange={(e) => {
+                            props.setSpecs((prev) => {
+                                return { ...prev, origin_date: e.target.value };
+                            });
+                        }}
+                        disabled={!min_data}
+                    />
+                    <input
+                        id="destination_date"
+                        type="date"
+                        className="form-control form-control-sm"
+                        value={props.specs.destination_date}
+                        onChange={(e) => {
+                            props.setSpecs((prev) => {
+                                return {
+                                    ...prev,
+                                    destination_date: e.target.value,
+                                };
+                            });
+                        }}
+                        disabled={!min_data}
+                    />
                 </div>
-            )}
+            </div>
+            <div className="row mb-2">
+                <div className="col-12">
+                    <label
+                        htmlFor="unit_type"
+                        className="fw-normal text-secondary"
+                        style={{ fontSize: "0.85em" }}
+                    >
+                        unit/trailer type
+                    </label>
+                    <input
+                        id="unit_type"
+                        type="text"
+                        placeholder="e.g., 53 ft dry van"
+                        className="form-control form-control-sm"
+                        value={props.specs.unit_type}
+                        onChange={(e) => {
+                            props.setSpecs((prev) => {
+                                return { ...prev, unit_type: e.target.value };
+                            });
+                        }}
+                        autoComplete="off"
+                        disabled={!min_data}
+                    />
+                </div>
+            </div>
+            <div className="row mb-2">
+                <div className="col-12">
+                    <label
+                        htmlFor="cargo_details"
+                        className="fw-normal text-secondary"
+                        style={{ fontSize: "0.85em" }}
+                    >
+                        cargo details
+                    </label>
+                    <textarea
+                        name="cargo_details"
+                        id="cargo_details"
+                        placeholder="e.g., 20 pallets / 44,000 lbs"
+                        className="form-control form-control-sm"
+                        rows="2"
+                        value={props.specs.cargo_details}
+                        onChange={(e) => {
+                            props.setSpecs((prev) => {
+                                return {
+                                    ...prev,
+                                    cargo_details: e.target.value,
+                                };
+                            });
+                        }}
+                        disabled={!min_data}
+                    ></textarea>
+                </div>
+            </div>
+            <div className="row mb-2">
+                <div className="col-12">
+                    <label
+                        htmlFor="instructions"
+                        className="fw-normal text-secondary"
+                        style={{ fontSize: "0.85em" }}
+                    >
+                        instructions
+                    </label>
+                    <textarea
+                        name="instructions"
+                        id="instructions"
+                        placeholder="e.g., Call prior to arrival"
+                        className="form-control form-control-sm"
+                        rows="2"
+                        value={props.specs.instructions}
+                        onChange={(e) => {
+                            props.setSpecs((prev) => {
+                                return {
+                                    ...prev,
+                                    instructions: e.target.value,
+                                };
+                            });
+                        }}
+                        disabled={!min_data}
+                    ></textarea>
+                </div>
+            </div>
         </div>
     );
 };

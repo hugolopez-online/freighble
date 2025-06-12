@@ -27,7 +27,9 @@ const Directory = ({ specs, routes }) => {
     useEffect(() => {
         const min_info =
             specs.mode && specs.origin.country && specs.destination.country;
+
         setVendorList([]);
+
         const searchVendors = async () => {
             if (min_info) {
                 // async func to search vendors through API
@@ -130,7 +132,7 @@ const Directory = ({ specs, routes }) => {
         };
 
         searchVendors();
-    }, [specs, routes]);
+    }, [specs.mode, specs.origin.country, specs.destination.country, routes]);
 
     // utils
 

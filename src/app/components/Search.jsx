@@ -97,6 +97,11 @@ const Search = (props) => {
         });
 
         setFormData(default_form_data);
+
+        if (window.innerWidth < 768) {
+            const search = document.getElementById("searchForm");
+            search.classList.add("d-none");
+        }
     };
 
     const handleLocationSuggestions = (e, drop_menu) => {
@@ -396,18 +401,6 @@ const Search = (props) => {
                         })}
                     </select>
                 </div>
-                {/* <div className="col mt-1">
-                    // TODO: fix date input to be controlled by React, and to have a functional effect
-                    <input
-                        type="date"
-                        className="form-control"
-                        value={`${String(new Date().getFullYear())}-${String(
-                            new Date().getMonth() + 1
-                        ).padStart(2, "0")}-${String(
-                            new Date().getDate()
-                        ).padStart(2, "0")}`}
-                    />
-                </div> */}
             </fieldset>
 
             {/* Destination */}
@@ -855,55 +848,6 @@ const Search = (props) => {
                     </div>
                 </div>
             </fieldset>
-
-            {/* Additional Instructions */}
-            <div className="row mb-2">
-                <div className="col">
-                    <div className="col-12 mb-2">
-                        <button
-                            type="button"
-                            className={`btn btn-sm ${
-                                formData.instructions
-                                    ? "btn-primary"
-                                    : "btn-outline-secondary border"
-                            } rounded-2 w-100`}
-                            data-bs-toggle="collapse"
-                            data-bs-target="#additional-instructions-wrapper"
-                            aria-expanded="false"
-                            aria-controls="additional-instructions-wrapper"
-                        >
-                            Additional instructions
-                        </button>
-                    </div>
-                    <div
-                        id="additional-instructions-wrapper"
-                        className="col-12 collapse"
-                    >
-                        <textarea
-                            name="additional-instructions"
-                            id="additional-instructions"
-                            className="form-control"
-                            rows="2"
-                            value={formData.instructions}
-                            onChange={(e) => {
-                                setFormData((prev) => {
-                                    return {
-                                        ...prev,
-                                        instructions: e.target.value,
-                                    };
-                                });
-                            }}
-                        ></textarea>
-                    </div>
-                </div>
-            </div>
-            {/*<button
-                type="button"
-                className="btn btn-sm btn-warning shadow-sm w-100 mb-2"
-                onClick={() => setFormData(default_form_data)}
-            >
-                Reset fields
-            </button>*/}
             <button
                 type="submit"
                 className="btn btn-dark bg-gradient shadow-sm fw-bold w-100 rounded-pill"

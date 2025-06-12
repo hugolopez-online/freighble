@@ -1,22 +1,29 @@
 const Vendor = (props) => {
     const greeting = encodeURIComponent(
-        `Hello team ${props.company},\n\nPlease help pricing and confirming availability for the shipment below.\n\n`
+        `Hello team ${props.company},\n\nPlease help with pricing and confirming availability for the shipment below.\n\n`
     );
     const origin_info = encodeURIComponent(
-        `Origin: ${props.specs.origin.city}, ${props.specs.origin.territory}\n`
+        `Origin: ${props.specs.origin.city}, ${props.specs.origin.territory} (${
+            props.specs.origin_date || "date TBD"
+        })\n`
     );
     const destination_info = encodeURIComponent(
-        `Desination: ${props.specs.destination.city}, ${props.specs.destination.territory}\n\n`
-    );
-    // @hugolopez-online: additional information missing (weight, unit type, etc.)
-    const specs_info = encodeURIComponent(
-        `Mode: ${props.specs.mode}${
+        `Destination: ${props.specs.destination.city}, ${
+            props.specs.destination.territory
+        } (${props.specs.destination_date || "date TBD"})${
             props.specs.border !== "None"
                 ? "\nBorder crossing through: " +
                   props.specs.border.split("+").join(" ")
                 : ""
         }\n\n`
     );
+
+    const specs_info = encodeURIComponent(
+        `Mode: ${props.specs.mode}\nUnit type: ${
+            props.specs.unit_type || "(not defined)"
+        }\nCargo details: ${props.specs.cargo_details || "(not defined)"}\n\n`
+    );
+
     // @hugolopez-online: special services still missing
     const instructions_info = encodeURIComponent(
         `${
@@ -29,7 +36,7 @@ const Vendor = (props) => {
     );
 
     const EMAIL_SUBJECT = encodeURIComponent(
-        `Pricing request // ${props.specs.mode} from ${props.specs.origin.city}, ${props.specs.origin.territory} to ${props.specs.destination.city}, ${props.specs.destination.territory} [${props.company}]`
+        `${props.specs.mode} (${props.specs.origin.city}, ${props.specs.origin.territory} to ${props.specs.destination.city}, ${props.specs.destination.territory}) [${props.company}]`
     );
     const EMAIL_BODY =
         greeting +
@@ -40,6 +47,8 @@ const Vendor = (props) => {
         signature;
 
     const MAILTO_LINK = `mailto:${props.email}?subject=${EMAIL_SUBJECT}&body=${EMAIL_BODY}`;
+
+    console.log(MAILTO_LINK.length);
 
     return (
         <div className="col-12">
@@ -96,6 +105,7 @@ const Vendor = (props) => {
                             </h5>
                             <a
                                 href={MAILTO_LINK}
+                                target="_blank"
                                 className="btn btn-primary bg-gradient rounded-3 px-3 m-0"
                             >
                                 <svg

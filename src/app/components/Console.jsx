@@ -90,6 +90,9 @@ const Console = (props) => {
                             minData ? " btn-primary" : " btn-secondary disabled"
                         }`}
                         onClick={() => {
+                            document
+                                .getElementById("searchForm")
+                                .classList.remove("d-none");
                             props.templateSpecs(props.specs);
                             document.getElementById("mode").focus();
                         }}
@@ -102,6 +105,9 @@ const Console = (props) => {
                             minData ? " btn-danger" : " btn-secondary disabled"
                         }`}
                         onClick={() => {
+                            document
+                                .getElementById("searchForm")
+                                .classList.remove("d-none");
                             window.scrollTo({
                                 top: 0,
                                 left: 0,
@@ -113,15 +119,37 @@ const Console = (props) => {
                         clear
                     </button>
                 </div>
-                <button
-                    className="btn btn-sm btn-light shadow-sm text-secondary bg-gradient rounded-pill"
-                    type="button"
-                    onClick={() => {
-                        window.scrollTo(0, 0);
-                    }}
-                >
-                    <i className="bi bi-chevron-up"></i>
-                </button>
+                <div className="btn-group">
+                    <button
+                        className="btn btn-sm btn-light shadow-sm text-secondary bg-gradient rounded-pill d-inline-block d-md-none me-2"
+                        type="button"
+                        onClick={() => {
+                            document
+                                .getElementById("searchForm")
+                                .classList.remove("d-none");
+                            window.scrollTo({
+                                top: 0,
+                                left: 0,
+                                behavior: "smooth",
+                            });
+                        }}
+                    >
+                        <i className="bi bi-search"></i>
+                    </button>
+                    <button
+                        className="btn btn-sm btn-light shadow-sm text-secondary bg-gradient rounded-pill"
+                        type="button"
+                        onClick={() => {
+                            window.scrollTo({
+                                top: 0,
+                                left: 0,
+                                behavior: "smooth",
+                            });
+                        }}
+                    >
+                        <i className="bi bi-chevron-up"></i>
+                    </button>
+                </div>
             </div>
         </div>
     );

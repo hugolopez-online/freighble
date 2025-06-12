@@ -32,6 +32,10 @@ const default_specs = {
     twic: false,
     tsa: false,
     fast: false,
+    origin_date: "",
+    destination_date: "",
+    unit_type: "",
+    cargo_details: "",
     instructions: "",
 };
 
@@ -81,7 +85,7 @@ function App() {
         }
 
         setRoutes(route_aliases);
-    }, [specs]);
+    }, [specs.mode, specs.origin.country, specs.destination.country]);
 
     // render
 
@@ -99,7 +103,7 @@ function App() {
                     templateSpecs={templateSpecs}
                 />
             </div>
-            <div className="row justify-content-md-center">
+            <div className="row">
                 <div
                     id="searchForm"
                     className="col-12 col-md-3 mb-3"
@@ -109,6 +113,29 @@ function App() {
                         template={template}
                         setTemplate={setTemplate}
                     />
+                </div>
+                <div
+                    className={`col-12 col-md-3 mb-3${
+                        !(
+                            specs.mode &&
+                            specs.origin.country &&
+                            specs.destination.country
+                        )
+                            ? " d-none"
+                            : ""
+                    }`}
+                >
+                    <div className="row sticky-top under-navbar">
+                        <div
+                            id="informativeBanner"
+                            className="col-12"
+                        >
+                            <Banner
+                                specs={specs}
+                                setSpecs={setSpecs}
+                            />
+                        </div>
+                    </div>
                 </div>
                 <div className="col-12 d-block d-md-none mb-3 sticky-top under-navbar-sm">
                     <Console
@@ -120,27 +147,11 @@ function App() {
                     />
                 </div>
                 <div className="col-12 col-md-6 mb-3">
-                    <div className="row justify-content-center g-3 mb-3">
+                    <div className="row g-3 mb-3">
                         <Directory
                             specs={specs}
                             routes={routes}
                         />
-                    </div>
-                </div>
-                <div className="col-12 col-md-3">
-                    <div className="row sticky-top under-navbar">
-                        <div
-                            id="informativeBanner"
-                            className="col-12"
-                        >
-                            <Banner
-                                specs={specs}
-                                default_specs={default_specs}
-                                resetSpecs={resetSpecs}
-                                setSpecs={setSpecs}
-                                templateSpecs={templateSpecs}
-                            />
-                        </div>
                     </div>
                 </div>
             </div>
