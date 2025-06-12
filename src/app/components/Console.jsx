@@ -91,7 +91,7 @@ const Console = (props) => {
                         }`}
                         onClick={() => {
                             document
-                                .getElementById("search")
+                                .getElementById("searchForm")
                                 .classList.remove("d-none");
                             props.templateSpecs(props.specs);
                             document.getElementById("mode").focus();
@@ -106,7 +106,7 @@ const Console = (props) => {
                         }`}
                         onClick={() => {
                             document
-                                .getElementById("search")
+                                .getElementById("searchForm")
                                 .classList.remove("d-none");
                             window.scrollTo({
                                 top: 0,
@@ -125,7 +125,7 @@ const Console = (props) => {
                         type="button"
                         onClick={() => {
                             document
-                                .getElementById("search")
+                                .getElementById("searchForm")
                                 .classList.remove("d-none");
                             window.scrollTo({
                                 top: 0,
