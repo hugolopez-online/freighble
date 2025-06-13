@@ -1512,4 +1512,4 @@ const vendors = [
     },
 ];
 
-module.exports = vendors;
+export default vendors;

@@ -1,7 +1,10 @@
-// TODO: replace module import with a fs readFile approach, so it reads from a .json file
-const vendors = require("../vendors_module.cjs");
+// imports
 
-const getVendors = (req, res, next) => {
+import vendors from "../vendors.js";
+
+// controllers
+
+export const getVendors = (req, res, next) => {
     const {
         mode,
         o_country,
@@ -64,5 +67,3 @@ const getVendors = (req, res, next) => {
     }
     return res.status(200).json({ vendors });
 };
-
-module.exports = { getVendors };
