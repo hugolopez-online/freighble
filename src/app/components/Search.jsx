@@ -7,9 +7,9 @@ import {
     usaDivisions,
     mexDivisions,
     borderCrossingPorts,
-} from "../variables";
+} from "../../data/variables";
 import geo_lookup from "../handlers/geo_meta";
-import { search_options } from "../../../search_options";
+import { search_options } from "../../data/search_options";
 
 // module
 

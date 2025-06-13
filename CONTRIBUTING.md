@@ -1,5 +1,7 @@
 # Contributing Guide
 
+## Naming Conventions
+
 Thank you for considering contributing to this project!  
 To ensure clarity and consistency across contributions, we follow a standardized format for:
 
@@ -14,9 +16,9 @@ All of these share the same **types** and **scopes**. Below you'll find the comp
 > -   **Curly braces `{...}`** indicate optional parts — do **not** include the braces.
 > -   **Angle brackets `<...>`** represent placeholders — also to be replaced, **not** typed literally.
 
-## Format Overview
+### Format Overview
 
-### Conventional Commit Format
+#### Conventional Commit Format
 
 ```
 <type>{(<scope>)}: short description
@@ -32,7 +34,7 @@ docs: correct typos in README.md
 
 ---
 
-### Issue Title Format
+#### Issue Title Format
 
 Using the same **types** and **scopes** as commits, only in uppercase and between square brackets.
 
@@ -50,7 +52,7 @@ Using the same **types** and **scopes** as commits, only in uppercase and betwee
 
 ---
 
-### Branch Name Format
+#### Branch Name Format
 
 ```
 <type>/<scope>/{#<issue-number>/}{@<edge-or-special-case>/}short-description
@@ -66,7 +68,7 @@ fix/ui/#61/make-input-heights-consistent
 feat/perf/@serverless/create-serverless-alternative
 ```
 
-#### 🧪 Edge Cases & Special Tags
+##### 🧪 Edge Cases & Special Tags
 
 If your branch has a unique situation (e.g., an experiment, alternative direction, migration), use the optional `@` symbol in the branch name.
 
@@ -78,9 +80,9 @@ feat/ui/@experimental/grid-layout-alternative
 
 ---
 
-## 🧾 Guide reference
+### 🧾 Guide reference
 
-### Accepted Types
+#### Accepted Types
 
 | Type       | Description                                            |
 | ---------- | ------------------------------------------------------ |
@@ -99,7 +101,7 @@ feat/ui/@experimental/grid-layout-alternative
 
 ---
 
-### Accepted Scopes
+#### Accepted Scopes
 
 | Scope    | Description                                   |
 | -------- | --------------------------------------------- |
@@ -115,19 +117,31 @@ feat/ui/@experimental/grid-layout-alternative
 
 > You can suggest new scopes if needed. Use concise and meaningful terms.
 
-### Descriptions style
+#### Descriptions style
 
 A verb describing what the modification/feature/fix does, which must be in its imperative form (`create`✅ instead of `creation`❌ or `created`❌), followed by a short sentence of its target or effect (e.g: `chore(ci): delete unused classes`).
 
 ---
 
-## Examples: Good vs. Bad
+### Examples: Good vs. Bad
 
 | Context     | Correct                                        | Wrong                       |
 | ----------- | ---------------------------------------------- | --------------------------- |
 | Commit      | `fix(ui): align card titles properly`          | `fix cards`                 |
 | Issue Title | `[FEAT][form]: add password strength meter`    | `add meter`                 |
 | Branch Name | `refactor/api/#34/remove-deprecated-endpoints` | `issue-34-fix-endpoint-bug` |
+
+## Code Style
+
+Please try and adhere to the code syle already in place. If you have Prettier installed in your editor, a suggestion is to create `./vscode/settings.json` with the following content:
+
+```
+{
+    "editor.formatOnSave": false
+}
+```
+
+It will prevent your Prettier formatting to accidentally kick-in, and the diretory will be untracked by default, so no need to delete it afterward.
 
 ---
 

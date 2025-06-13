@@ -12,7 +12,7 @@ import {
     QC,
     SK,
     YT,
-} from "../variables";
+} from "../../data/variables.js";
 import {
     AL,
     AK,
@@ -66,7 +66,7 @@ import {
     WI,
     WY,
     PR,
-} from "../variables";
+} from "../../data/variables.js";
 import {
     AGS,
     BCN,
@@ -100,7 +100,7 @@ import {
     VER,
     YUC,
     ZAC,
-} from "../variables";
+} from "../../data/variables.js";
 
 const geo_tree = {
     CAN: {

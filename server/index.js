@@ -1,7 +1,7 @@
 // imports
 
 import express from "express";
-import router from "./routes/vendors.js";
+import router from "../routes/vendors.js";
 
 const app = express();
 
