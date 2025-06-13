@@ -35,7 +35,7 @@ export const getVendors = (req, res, next) => {
         fast
     ) {
         const searched_vendors = vendors.filter((vendor) => {
-            return (
+            const is_qualified =
                 vendor.modes.includes(mode) &&
                 ((vendor.coverage["Canada"].territory[0] &&
                     vendor.coverage["Canada"].country_code == o_country) ||
@@ -59,8 +59,9 @@ export const getVendors = (req, res, next) => {
                 (!Number(ctpat) || vendor.ctpat) &&
                 (!Number(twic) || vendor.twic) &&
                 (!Number(tsa) || vendor.tsa) &&
-                (!Number(fast) || vendor.fast)
-            );
+                (!Number(fast) || vendor.fast);
+
+            return is_qualified;
         });
 
         return res.status(200).json({ searched_vendors });

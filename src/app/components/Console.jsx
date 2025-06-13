@@ -17,19 +17,11 @@ const Console = (props) => {
         } else {
             setMinData(false);
         }
-    }, [props.specs]);
+    }, [props.specs.mode, props.specs.origin, props.specs.destination]);
 
     return (
         <div className="navbar bg-light p-2 rounded-pill border border-tertiary">
             <div className="container-fluid px-1">
-                {/* @hugolopez-online: make dynamic depending on search status */}
-                {/*<div className="bg-secondary bg-gradient-deep tight-pocket rounded-pill">
-                    <button className="btn btn-sm btn-primary bg-gradient rounded-pill fw-bold px-3">
-                        active search
-                    </button>
-                    <span className="text-light fw-light mx-3">directory</span>
-                </div>*/}
-                {/* @hugolopez-online: make dynamic depending on search status and amount of vendors in db */}
                 <div
                     id="console-display"
                     className={`rounded-pill border border-white bg-secondary bg-gradient-deep d-none d-md-block${

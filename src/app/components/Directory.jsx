@@ -33,22 +33,23 @@ const Directory = ({ specs, routes }) => {
         const searchVendors = async () => {
             if (min_info) {
                 // async func to search vendors through API
+                const query_string = `/api/vendors?mode=${
+                    specs.mode
+                }&o_country=${specs.origin.country}&d_country=${
+                    specs.destination.country
+                }&border=${specs.border}&hazmat=${Number(
+                    specs.hazmat
+                )}&team_drivers=${Number(
+                    specs.team_drivers
+                )}&usa_bonded=${Number(specs.usa_bonded)}&can_bonded=${Number(
+                    specs.can_bonded
+                )}&ctpat=${Number(specs.ctpat)}&twic=${Number(
+                    specs.twic
+                )}&tsa=${Number(specs.tsa)}&fast=${Number(specs.fast)}`;
+
                 setIsFetching(true);
-                const searched_vendors_promise = await fetch(
-                    `/api/vendors?mode=${specs.mode}&o_country=${
-                        specs.origin.country
-                    }&d_country=${specs.destination.country}&border=${
-                        specs.border
-                    }&hazmat=${Number(specs.hazmat)}&team_drivers=${Number(
-                        specs.team_drivers
-                    )}&usa_bonded=${Number(
-                        specs.usa_bonded
-                    )}&can_bonded=${Number(specs.can_bonded)}&ctpat=${Number(
-                        specs.ctpat
-                    )}&twic=${Number(specs.twic)}&tsa=${Number(
-                        specs.tsa
-                    )}&fast=${Number(specs.fast)}`
-                );
+                const searched_vendors_promise = await fetch(query_string);
+
                 const searched_vendors = await searched_vendors_promise.json();
                 const found_vendors = searched_vendors.searched_vendors.sort(
                     (a, b) => a.company.localeCompare(b.company)
@@ -132,7 +133,21 @@ const Directory = ({ specs, routes }) => {
         };
 
         searchVendors();
-    }, [specs.mode, specs.origin.country, specs.destination.country, routes]);
+    }, [
+        specs.mode,
+        specs.origin,
+        specs.destination,
+        specs.border,
+        specs.hazmat,
+        specs.team_drivers,
+        specs.usa_bonded,
+        specs.can_bonded,
+        specs.ctpat,
+        specs.twic,
+        specs.tsa,
+        specs.fast,
+        routes,
+    ]);
 
     // utils
 

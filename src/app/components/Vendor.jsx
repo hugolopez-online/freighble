@@ -48,8 +48,6 @@ const Vendor = (props) => {
 
     const MAILTO_LINK = `mailto:${props.email}?subject=${EMAIL_SUBJECT}&body=${EMAIL_BODY}`;
 
-    console.log(MAILTO_LINK.length);
-
     return (
         <div className="col-12">
             <div className="input-group shadow-sm rounded-4">
