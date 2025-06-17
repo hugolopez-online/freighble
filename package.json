@@ -1,7 +1,7 @@
 {
     "name": "freighble",
     "private": true,
-    "version": "0.8.0",
+    "version": "0.9.5",
     "type": "module",
     "scripts": {
         "dev": "vite --host",
