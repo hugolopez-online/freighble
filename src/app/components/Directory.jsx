@@ -63,6 +63,12 @@ const Directory = ({ specs, routes }) => {
                     let matched_core_lane = "";
                     let matched_banned_lane = "";
 
+                    if (vendor.type.asset_based && vendor.type.freight_broker) {
+                        adjusted_score -= 2.5;
+                    } else if (vendor.type.freight_broker) {
+                        adjusted_score -= 5;
+                    }
+
                     for (let country_lookup of Object.keys(coverage)) {
                         if (
                             coverage[country_lookup].country_code ==
