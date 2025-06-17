@@ -329,7 +329,7 @@ const Vendor = (props) => {
                             )}
                             {props.matched_core_lane && (
                                 <span
-                                    className="badge rounded-pill text-bg-success me-1"
+                                    className="badge rounded-pill text-bg-primary bg-gradient me-1"
                                     style={{ fontSize: "0.75rem" }}
                                 >
                                     Core lane ~ {props.matched_core_lane}
