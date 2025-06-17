@@ -125,7 +125,7 @@ function App() {
                             : ""
                     }`}
                 >
-                    <div className="row sticky-top under-navbar">
+                    <div className="row sticky-md-top under-navbar">
                         <div
                             id="informativeBanner"
                             className="col-12"
@@ -146,13 +146,11 @@ function App() {
                         templateSpecs={templateSpecs}
                     />
                 </div>
-                <div className="col-12 col-md-6 mb-3">
-                    <div className="row g-3 mb-3">
-                        <Directory
-                            specs={specs}
-                            routes={routes}
-                        />
-                    </div>
+                <div className="col-12 col-md mb-3">
+                    <Directory
+                        specs={specs}
+                        routes={routes}
+                    />
                 </div>
             </div>
         </React.Fragment>

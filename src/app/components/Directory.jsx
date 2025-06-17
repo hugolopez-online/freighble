@@ -1,6 +1,6 @@
 // imports
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import Vendor from "./Vendor";
 import Placeholder from "./Placeholder";
 import suitability_weight from "../handlers/suitability_meta";
@@ -160,7 +160,7 @@ const Directory = ({ specs, routes }) => {
     // render
 
     return (
-        <>
+        <Fragment>
             {!vendorList.length ? (
                 !isFetching ? (
                     <div className="col-12">
@@ -173,26 +173,35 @@ const Directory = ({ specs, routes }) => {
                         </h6>
                     </div>
                 ) : (
-                    placeholders.map((placeholder) => {
-                        return (
-                            <Placeholder key={`placeholder-${placeholder}`} />
-                        );
-                    })
+                    <div className="row g-3 mb-3">
+                        {placeholders.map((placeholder) => {
+                            return (
+                                <Placeholder
+                                    key={`placeholder-${placeholder}`}
+                                />
+                            );
+                        })}
+                    </div>
                 )
             ) : (
-                vendorList.map((vendor, index) => {
-                    const key = String(vendor.id) + String(index);
-                    return (
-                        <Vendor
-                            key={key}
-                            dispatched_key={key}
-                            {...vendor}
-                            specs={specs}
-                        />
-                    );
-                })
+                <div className="row g-3 mb-3">
+                    <h6 className="display-6 text-secondary text-center mb-0 mt-4">
+                        Suitable vendors
+                    </h6>
+                    {vendorList.map((vendor, index) => {
+                        const key = String(vendor.id) + String(index);
+                        return (
+                            <Vendor
+                                key={key}
+                                dispatched_key={key}
+                                {...vendor}
+                                specs={specs}
+                            />
+                        );
+                    })}
+                </div>
             )}
-        </>
+        </Fragment>
     );
 };
 
