@@ -106,8 +106,13 @@ const Vendor = (props) => {
                                 target="_blank"
                                 className="btn btn-primary bg-gradient rounded-3 px-3 m-0"
                                 onClick={(e) => {
-                                    e.target.classList.replace("btn-primary", "btn-secondary");
-                                    e.target.classList.remove("bg-gradient");
+                                    e.currentTarget.classList.replace(
+                                        "btn-primary",
+                                        "btn-secondary"
+                                    );
+                                    e.currentTarget.classList.remove(
+                                        "bg-gradient"
+                                    );
                                 }}
                             >
                                 <svg
