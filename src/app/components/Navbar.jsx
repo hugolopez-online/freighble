@@ -1,4 +1,6 @@
 import Console from "./Console";
+import logo from "../../assets/img/logo_206x40.webp";
+import icon from "../../assets/img/logo-icon_40x40.webp";
 
 const Navbar = ({
     specs,
@@ -16,7 +18,7 @@ const Navbar = ({
                 >
                     <img
                         height={30}
-                        src="src/assets/img/logo_206x40.webp"
+                        src={logo}
                         alt="Freighble"
                     />
                 </a>
@@ -26,7 +28,7 @@ const Navbar = ({
                 >
                     <img
                         height={30}
-                        src="src/assets/img/logo-icon_40x40.webp"
+                        src={icon}
                         alt="Freighble"
                     />
                 </a>
