@@ -28,7 +28,6 @@ const default_form_data = {
     twic: false,
     tsa: false,
     fast: false,
-    instructions: "",
 };
 
 const default_location_suggestions = [];
@@ -58,6 +57,7 @@ const Search = (props) => {
 
     const handleSpecs = (e) => {
         e.preventDefault();
+        props.setSpecs(props.default_specs);
 
         const origin_region = geo_lookup[formData.origin_territory].region;
         const origin_country = geo_lookup[formData.origin_territory].country;
@@ -92,11 +92,11 @@ const Search = (props) => {
                 twic: formData.twic,
                 tsa: formData.tsa,
                 fast: formData.fast,
-                instructions: formData.instructions,
             };
         });
 
-        setFormData(default_form_data);
+        // @hugolopez-online: testing UX by persisting input in search
+        // setFormData(default_form_data);
 
         if (window.innerWidth < 768) {
             const search = document.getElementById("searchForm");
@@ -197,7 +197,6 @@ const Search = (props) => {
                     twic: props.template.twic,
                     tsa: props.template.tsa,
                     fast: props.template.fast,
-                    instructions: props.template.instructions,
                 };
             });
         }
@@ -271,7 +270,7 @@ const Search = (props) => {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="City (optional)"
+                        placeholder="City"
                         id="origin_city"
                         name="origin_city"
                         value={formData.origin_city}
@@ -416,7 +415,7 @@ const Search = (props) => {
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="City (optional)"
+                        placeholder="City"
                         id="destination_city"
                         name="destination_city"
                         value={formData.destination_city}

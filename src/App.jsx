@@ -109,6 +109,7 @@ function App() {
                     className="col-12 col-md-3 mb-3"
                 >
                     <Search
+                        default_specs={default_specs}
                         setSpecs={setSpecs}
                         template={template}
                         setTemplate={setTemplate}

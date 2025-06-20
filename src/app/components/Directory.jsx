@@ -54,6 +54,9 @@ const Directory = ({ specs, routes }) => {
                 const found_vendors = searched_vendors.searched_vendors.sort(
                     (a, b) => a.company.localeCompare(b.company)
                 );
+
+                // compute suitability score
+
                 const scored_vendors = found_vendors.map((vendor) => {
                     const coverage = vendor.coverage;
                     const core_lanes = vendor.core_lanes;
@@ -66,6 +69,17 @@ const Directory = ({ specs, routes }) => {
                     if (vendor.type.asset_based && vendor.type.freight_broker) {
                         adjusted_score -= 2.5;
                     } else if (vendor.type.freight_broker) {
+                        adjusted_score -= 5;
+                    }
+
+                    if (
+                        !(
+                            vendor.domicile.country_code ===
+                                specs.origin.country ||
+                            vendor.domicile.country_code ===
+                                specs.destination.country
+                        )
+                    ) {
                         adjusted_score -= 5;
                     }
 
@@ -116,7 +130,11 @@ const Directory = ({ specs, routes }) => {
                         }
                     }
 
+                    // reset additional_score value to handle next vendor
+
                     additional_score = suitability_weight.additional;
+
+                    // assign final adjusted suitability score and matching core/banned lanes
 
                     return {
                         ...vendor,
@@ -125,6 +143,8 @@ const Directory = ({ specs, routes }) => {
                         matched_banned_lane,
                     };
                 });
+
+                // sort vendors by final suitability score
 
                 scored_vendors.sort((a, b) => b.score - a.score);
 
@@ -184,6 +204,7 @@ const Directory = ({ specs, routes }) => {
                             return (
                                 <Placeholder
                                     key={`placeholder-${placeholder}`}
+                                    opacity_deduction={placeholder}
                                 />
                             );
                         })}
