@@ -3,7 +3,7 @@ const Placeholder = ({ opacity_deduction }) => {
     return (
         <div
             className="col-12"
-            style={{ opacity: opacity }}
+            style={{ opacity }}
         >
             <div className="card bg-light col shadow-sm rounded-4">
                 <div className="card-body">
