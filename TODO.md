@@ -33,7 +33,7 @@ Tasks to track development, scalability, polish, and UX improvements.
     -   FAST
 -   [x] Implement an open field to optionally type additional custom cargo instructions
 -   [x] Make additional cargo instructions functional
--   [ ] Include and make functional origin and destination dates
+-   [x] Include and make functional origin and destination dates
 -   [x] Message and button on carrier cards to prepare/send an email to that vendor
 -   [ ] Make a "searches" dashboard to mark a status for each serch and keep track of work
 -   [ ] Register/login implementation
@@ -79,4 +79,4 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 ---
 
-Last updated: 2025-06-10
+Last updated: 2025-06-19
