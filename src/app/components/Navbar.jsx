@@ -1,4 +1,4 @@
-import Console from "./Console";
+import { Console } from "./";
 import logo from "../../assets/img/logo_206x40.webp";
 import icon from "../../assets/img/logo-icon_40x40.webp";
 

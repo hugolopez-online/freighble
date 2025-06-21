@@ -1,11 +1,7 @@
 // imports
 
-import React, { useEffect, useState } from "react";
-import Navbar from "./app/components/Navbar";
-import Search from "./app/components/Search";
-import Directory from "./app/components/Directory";
-import Banner from "./app/components/Banner";
-import Console from "./app/components/Console";
+import { useEffect, useState, Fragment } from "react";
+import { Navbar, Search, Directory, Banner, Console } from "./app/components";
 
 // module
 
@@ -90,7 +86,7 @@ function App() {
     // render
 
     return (
-        <React.Fragment>
+        <Fragment>
             <div
                 id="navbar"
                 className="row justify-content-center sticky-top mb-3"
@@ -154,7 +150,7 @@ function App() {
                     />
                 </div>
             </div>
-        </React.Fragment>
+        </Fragment>
     );
 }
 

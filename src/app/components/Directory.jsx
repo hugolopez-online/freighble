@@ -1,8 +1,7 @@
 // imports
 
 import { useEffect, useState, Fragment } from "react";
-import Vendor from "./Vendor";
-import Placeholder from "./Placeholder";
+import { Vendor, Placeholder } from "./";
 import suitability_weight from "../handlers/suitability_meta";
 
 // component
