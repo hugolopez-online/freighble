@@ -35,22 +35,31 @@ export const getVendors = (req, res, next) => {
         fast
     ) {
         const searched_vendors = vendors.filter((vendor) => {
+            let country_coverage = 0;
+
+            for (let country in vendor.coverage) {
+                if (country_coverage === 2) {
+                    break;
+                }
+
+                if (
+                    vendor.coverage[country].territory[0] &&
+                    vendor.coverage[country].country_code == o_country
+                ) {
+                    country_coverage++;
+                }
+
+                if (
+                    vendor.coverage[country].territory[0] &&
+                    vendor.coverage[country].country_code == d_country
+                ) {
+                    country_coverage++;
+                }
+            }
+
             const is_qualified =
                 vendor.modes.includes(mode) &&
-                ((vendor.coverage["Canada"].territory[0] &&
-                    vendor.coverage["Canada"].country_code == o_country) ||
-                    (vendor.coverage["United States"].territory[0] &&
-                        vendor.coverage["United States"].country_code ==
-                            o_country) ||
-                    (vendor.coverage["Mexico"].territory[0] &&
-                        vendor.coverage["Mexico"].country_code == o_country)) &&
-                ((vendor.coverage["Canada"].territory[0] &&
-                    vendor.coverage["Canada"].country_code == d_country) ||
-                    (vendor.coverage["United States"].territory[0] &&
-                        vendor.coverage["United States"].country_code ==
-                            d_country) ||
-                    (vendor.coverage["Mexico"].territory[0] &&
-                        vendor.coverage["Mexico"].country_code == d_country)) &&
+                country_coverage === 2 &&
                 vendor.borders.includes(border.split("+").join(" ")) &&
                 (!Number(hazmat) || vendor.hazmat) &&
                 (!Number(team_drivers) || vendor.team_drivers) &&
@@ -66,5 +75,6 @@ export const getVendors = (req, res, next) => {
 
         return res.status(200).json({ searched_vendors });
     }
+
     return res.status(200).json({ vendors });
 };
