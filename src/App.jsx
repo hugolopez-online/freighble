@@ -23,14 +23,14 @@ function App() {
                         element={<Register />}
                     />
                     <Route
-                        path="dashboard"
-                        element={<Dashboard />}
-                    />
-                    <Route
                         path="*"
                         element={<NotFound />}
                     />
                 </Route>
+                <Route
+                    path="dashboard"
+                    element={<Dashboard />}
+                />
             </Routes>
         </BrowserRouter>
     );

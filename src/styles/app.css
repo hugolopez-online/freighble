@@ -39,8 +39,15 @@
     font-style: normal;
 }
 
+.header-menu {
+    font-family: "Antonio", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
 .marquee-container {
-    max-width: 350px; /* adjust to your needs */
+    max-width: 350px;
     overflow: hidden;
     white-space: nowrap;
     position: relative;

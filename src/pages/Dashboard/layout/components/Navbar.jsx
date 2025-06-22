@@ -22,21 +22,23 @@ const Navbar = ({
                     to="/"
                 >
                     <img
+                        className="d-block"
                         height={30}
                         src={logo}
-                        alt="Freighble"
+                        alt="Freighble logo"
                     />
                 </Link>
-                <a
+                <Link
                     className="navbar-brand d-block d-md-none"
-                    href="#"
+                    to="/"
                 >
                     <img
+                        className="d-block"
                         height={30}
                         src={icon}
-                        alt="Freighble"
+                        alt="Freighble icon"
                     />
-                </a>
+                </Link>
                 <div className="d-none d-md-block">
                     <Console
                         specs={specs}
