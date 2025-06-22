@@ -1,6 +1,11 @@
+// imports
+import { Link } from "react-router-dom";
+
 import { Console } from "./";
-import logo from "../../assets/img/logo_206x40.webp";
-import icon from "../../assets/img/logo-icon_40x40.webp";
+import logo from "../../../../assets/img/logo_206x40.webp";
+import icon from "../../../../assets/img/logo-icon_40x40.webp";
+
+// component
 
 const Navbar = ({
     specs,
@@ -12,16 +17,16 @@ const Navbar = ({
     return (
         <nav className="navbar">
             <div className="container-fluid">
-                <a
+                <Link
                     className="navbar-brand d-none d-md-block"
-                    href="#"
+                    to="/"
                 >
                     <img
                         height={30}
                         src={logo}
                         alt="Freighble"
                     />
-                </a>
+                </Link>
                 <a
                     className="navbar-brand d-block d-md-none"
                     href="#"

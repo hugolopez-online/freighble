@@ -1,6 +1,6 @@
 // imports
 
-import vendors from "../src/data/vendors.js";
+import vendors from "../src/pages/Dashboard/data/vendors.js";
 
 // controllers
 
