@@ -4,10 +4,10 @@ import { Header } from "./";
 
 const Output = () => {
     return (
-        <Fragment>
+        <div className="row bg-dark website-hero">
             <Header />
             <Outlet />
-        </Fragment>
+        </div>
     );
 };
 
