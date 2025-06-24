@@ -26,16 +26,17 @@
 
 .website-hero {
     background-image: url(../assets/img/hero-background.webp);
+    background-attachment: fixed;
     background-size: cover;
     backdrop-filter: brightness(60%);
 }
 
 .under-navbar {
-    top: 5.9rem !important;
+    top: 4.1rem !important;
 }
 
 .under-navbar-sm {
-    top: 5rem !important;
+    top: 4rem !important;
 }
 
 .bg-gradient-deep {

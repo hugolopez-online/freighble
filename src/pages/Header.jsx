@@ -21,29 +21,47 @@ const Header = () => {
                     </Link>
                     <div className="navbar text-light header-menu p-0">
                         <div className="container-fluid px-0">
-                            <Link
-                                className="btn text-light px-2"
-                                to="/"
-                            >
-                                Pricing
-                            </Link>
+                            <div className="btn-group">
+                                <Link
+                                    className="btn bg-gradient text-light rounded-start-pill ps-3"
+                                    to="/"
+                                >
+                                    Services
+                                </Link>
+                                <Link
+                                    className="btn bg-gradient text-light px-2"
+                                    to="/"
+                                >
+                                    Pricing
+                                </Link>
+                                <Link
+                                    className="btn bg-gradient text-light rounded-end-pill pe-3"
+                                    to="/"
+                                >
+                                    Contact
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="navbar header-menu p-0">
+                        <div className="container-fluid px-0">
                             <Link
                                 className="btn text-light px-2"
                                 to="register"
                             >
-                                Register
+                                register
                             </Link>
                             <Link
                                 className="btn text-light px-2"
                                 to="login"
                             >
-                                Login
+                                login
                             </Link>
                             <Link
-                                className="btn text-light px-2"
+                                className="btn btn-sm btn-primary bg-gradient rounded-pill px-2"
                                 to="dashboard"
                             >
-                                Dashboard
+                                DASHBOARD
                             </Link>
                         </div>
                     </div>

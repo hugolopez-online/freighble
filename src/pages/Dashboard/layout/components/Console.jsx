@@ -20,7 +20,7 @@ const Console = (props) => {
     }, [props.specs.mode, props.specs.origin, props.specs.destination]);
 
     return (
-        <div className="navbar bg-light p-2 rounded-pill border border-tertiary">
+        <div className="navbar bg-light p-1 rounded-pill border border-tertiary">
             <div className="container-fluid px-1">
                 <div
                     id="console-display"

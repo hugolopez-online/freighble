@@ -11,9 +11,6 @@ const Banner = (props) => {
                     <h4 className="display-6 text-secondary fs-2">
                         additional info
                     </h4>
-                    <p className="text-secondary fw-light">
-                        (optional but encouraged)
-                    </p>
                 </div>
             </div>
             <div className="row mb-2">

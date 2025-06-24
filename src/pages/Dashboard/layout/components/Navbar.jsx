@@ -15,7 +15,7 @@ const Navbar = ({
     templateSpecs,
 }) => {
     return (
-        <nav className="navbar">
+        <nav className="navbar p-0">
             <div className="container-fluid">
                 <Link
                     className="navbar-brand d-none d-md-block"
@@ -23,7 +23,7 @@ const Navbar = ({
                 >
                     <img
                         className="d-block"
-                        height={30}
+                        height={20}
                         src={logo}
                         alt="Freighble logo"
                     />
@@ -50,14 +50,11 @@ const Navbar = ({
                 </div>
                 <div className="navbar">
                     <div className="container-fluid">
-                        <button className="btn btn-light border bg-gradient text-secondary rounded-pill px-3 me-1">
-                            ?
+                        <button className="btn btn-sm btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
+                            <i className="bi bi-gear-fill"></i>
                         </button>
-                        <button className="btn btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
-                            ...
-                        </button>
-                        <button className="btn btn-warning bg-gradient rounded-pill px-3 ms-1">
-                            sign out
+                        <button className="btn btn-sm btn-secondary bg-gradient rounded-pill px-3 ms-1">
+                            <i className="bi bi-person-fill"></i>
                         </button>
                     </div>
                 </div>
