@@ -8,15 +8,11 @@ const Console = (props) => {
     // effects
 
     useEffect(() => {
-        if (
+        setMinData(
             props.specs.mode &&
-            props.specs.origin.country &&
-            props.specs.destination.country
-        ) {
-            setMinData(true);
-        } else {
-            setMinData(false);
-        }
+                props.specs.origin.country &&
+                props.specs.destination.country
+        );
     }, [props.specs.mode, props.specs.origin, props.specs.destination]);
 
     return (
@@ -86,7 +82,7 @@ const Console = (props) => {
                                 .getElementById("searchForm")
                                 .classList.remove("d-none");
                             props.templateSpecs(props.specs);
-                            document.getElementById("mode").focus();
+                            document.getElementById("origin_city").focus();
                         }}
                     >
                         template
@@ -106,6 +102,7 @@ const Console = (props) => {
                                 behavior: "smooth",
                             });
                             props.setSpecs(props.default_specs);
+                            props.templateSpecs(props.default_specs);
                         }}
                     >
                         clear

@@ -95,7 +95,7 @@ const Search = (props) => {
             };
         });
 
-        // @hugolopez-online: testing UX by persisting input in search
+        // @hugolopez-online: trying out UX by persisting search form entries
         // setFormData(default_form_data);
 
         if (window.innerWidth < 768) {
@@ -547,18 +547,6 @@ const Search = (props) => {
                         })}
                     </select>
                 </div>
-                {/* <div className="col mt-1">
-                    // TODO: fix date input to be controlled by React, and to have a functional effect
-                    <input
-                        type="date"
-                        className="form-control"
-                        value={`${String(new Date().getFullYear())}-${String(
-                            new Date().getMonth() + 1
-                        ).padStart(2, "0")}-${String(
-                            new Date().getDate() + 2
-                        ).padStart(2, "0")}`}
-                    />
-                </div> */}
             </fieldset>
 
             {/* Border Crossing */}

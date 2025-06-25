@@ -32,7 +32,8 @@ const vendors = [
             Mexico: { country_code: "MEX", territory: [] },
         },
         borders: ["None"],
-        core_lanes: ["TX:TX", "TX:Southwest", "TX:TX"],
+        core_lanes: ["TX:TX"],
+        exclusive_lanes: ["TX:TX"],
         banned_lanes: [],
     },
     {
@@ -69,6 +70,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: ["TX:TX"],
         banned_lanes: [],
     },
     {
@@ -105,6 +107,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -141,6 +144,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -243,8 +247,9 @@ const vendors = [
             },
         },
         borders: ["None", "Laredo, TX"],
-        core_lanes: ["TX:TX", "TX:Southwest"],
-        banned_lanes: ["USA:USA"],
+        core_lanes: ["Midwest:Anywhere"],
+        exclusive_lanes: ["USA:MEX", "MEX:USA"],
+        banned_lanes: [],
     },
     {
         company: "Abed Trucking",
@@ -280,6 +285,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -371,6 +377,7 @@ const vendors = [
             "Southeast:Southeast",
             "Southeast:Anywhere",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -407,6 +414,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NS:NS", "NS:Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -443,6 +451,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -493,6 +502,7 @@ const vendors = [
             "USA:MEX",
             "MEX:USA",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "USA:MEX", "MEX:USA"],
     },
     {
@@ -579,6 +589,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["PA:PA", "PA:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -632,6 +643,7 @@ const vendors = [
         },
         borders: ["None", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -668,6 +680,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -729,6 +742,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MD:MD", "MD:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -782,6 +796,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -841,6 +856,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["SC:SC", "SC:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -927,6 +943,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -963,6 +980,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IA:IA", "IA:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1016,6 +1034,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["QC:QC", "QC:Quebec"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1052,6 +1071,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1102,6 +1122,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1177,6 +1198,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["OH:OH", "OH:Midwest", "LaredoTX:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1274,6 +1296,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1325,6 +1348,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario", "USA:ON"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1411,6 +1435,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1485,6 +1510,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1571,6 +1597,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1614,6 +1641,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["QC:QC", "QC:Quebec"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1700,6 +1728,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["SK:SK", "SK:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1786,6 +1815,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1885,6 +1915,7 @@ const vendors = [
             "Midwest:Anywhere",
             "Anywhere:Midwest",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -1965,6 +1996,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2010,6 +2042,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2095,6 +2128,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2181,6 +2215,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2256,6 +2291,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2328,6 +2364,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NC:NC", "NC:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2377,6 +2414,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["SK:SK", "SK:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2445,6 +2483,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["QC:QC", "QC:Quebec", "QC:Anywhere", "Anywere:QC"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2494,6 +2533,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2565,6 +2605,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific", "BC:Anywhere", "Anywhere:BC"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2645,6 +2686,7 @@ const vendors = [
             "Midwest:Midwest",
             "Midwest:Anywhere",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2765,6 +2807,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["KS:KS", "KS:Midwest", "USA:USA", "USA:MEX", "MEX:USA"],
+        exclusive_lanes: [],
         banned_lanes: ["MEX:MEX"],
     },
     {
@@ -2801,6 +2844,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["QC:QC", "QC:Quebec"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2887,6 +2931,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -2923,6 +2968,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3008,6 +3054,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -3094,6 +3141,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AL:AL", "AL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3140,6 +3188,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["WA:WA", "WA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3285,6 +3334,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3371,6 +3421,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["GA:GA", "GA:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3407,6 +3458,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3457,6 +3509,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast", "TX:CA", "TX:BCN"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3493,6 +3546,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["PA:PA", "PA:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3543,6 +3597,7 @@ const vendors = [
             "CAN:JAL",
             "JAL:CAN",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -3579,6 +3634,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3615,6 +3671,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3651,6 +3708,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3792,6 +3850,7 @@ const vendors = [
             "Hidalgo, TX",
         ],
         core_lanes: ["IA:IA", "IA:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -3898,6 +3957,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["OR:OR", "OR:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4020,6 +4080,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:LaredoTX"],
     },
     {
@@ -4094,6 +4155,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4231,6 +4293,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4322,6 +4385,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies", "AB:Anywhere"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4394,6 +4458,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4480,6 +4545,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["SK:SK", "SK:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4590,6 +4656,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["JAL:JAL", "JAL:Occidente"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -4636,6 +4703,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4718,6 +4786,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA", "Laredo, TX"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4771,6 +4840,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["JAL:JAL", "JAL:Occidente"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4880,6 +4950,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IN:IN", "IN:Midwest", "USA:USA"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -4955,6 +5026,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific", "BC:AB"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5077,6 +5149,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5113,6 +5186,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["QC:QC", "QC:Quebec"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5149,6 +5223,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5204,6 +5279,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["BCN:BCN", "BCN:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5290,6 +5366,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5348,6 +5425,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -5449,6 +5527,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TN:TN", "TN:Southeast", "USA:USA"],
+        exclusive_lanes: [],
         banned_lanes: ["MEX:MEX"],
     },
     {
@@ -5485,6 +5564,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5521,6 +5601,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast", "TX:CA", "TX:BCN"],
+        exclusive_lanes: [],
         banned_lanes: ["TX:TX"],
     },
     {
@@ -5637,6 +5718,7 @@ const vendors = [
             "ON:USA",
             "USA:ON",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5723,6 +5805,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CO:CO", "CO:Rocky Mtns"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5815,6 +5898,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -5888,6 +5972,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NY:NY", "NY:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6014,6 +6099,7 @@ const vendors = [
             "WA:QC",
             "WA:Atlantic",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -6114,6 +6200,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NJ:NJ", "NJ:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6150,6 +6237,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -6189,6 +6277,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX"],
         core_lanes: ["CHI:CHI", "CHI:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6275,6 +6364,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6425,6 +6515,7 @@ const vendors = [
             "Laredo, TX",
         ],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6470,6 +6561,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific", "BC:AB"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6506,6 +6598,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6604,6 +6697,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -6640,6 +6734,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6676,6 +6771,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6772,6 +6868,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NY:NY", "NY:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6808,6 +6905,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -6866,6 +6964,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -6952,6 +7051,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7007,6 +7107,7 @@ const vendors = [
             "Laredo, TX",
         ],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7043,6 +7144,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7129,6 +7231,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7194,6 +7297,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7247,6 +7351,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -7359,6 +7464,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["CMX:CMX", "CMX:Centro"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "Anywhere:SON", "SON:Anywhere"],
     },
     {
@@ -7417,6 +7523,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TAM:TAM", "TAM:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -7534,6 +7641,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -7620,6 +7728,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["KS:KS", "KS:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7659,6 +7768,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7778,6 +7888,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -7831,6 +7942,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -7918,6 +8030,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8018,6 +8131,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NY:NY", "NY:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8118,6 +8232,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8154,6 +8269,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest", "CHI:TX", "TX:CHI"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8190,6 +8306,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8226,6 +8343,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8284,6 +8402,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -8370,6 +8489,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8438,6 +8558,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NJ:NJ", "NJ:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8531,6 +8652,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8590,6 +8712,7 @@ const vendors = [
             "CAN:JAL",
             "JAL:CAN",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -8642,6 +8765,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8747,6 +8871,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["PA:PA", "PA:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8783,6 +8908,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8819,6 +8945,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -8931,6 +9058,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9017,6 +9145,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9070,6 +9199,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NC:NC", "NC:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9140,6 +9270,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario", "ON:Southeast", "ON:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9176,6 +9307,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9268,6 +9400,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies", "MB:Anywhere", "BC:AB"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9372,6 +9505,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9424,6 +9558,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9524,6 +9659,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9586,6 +9722,7 @@ const vendors = [
             "RichmondBC:CalgaryAB",
             "BC:Anywhere",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9622,6 +9759,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: ["Anywhere:FL", "FL:Anywhere", "ON:AR", "AR:ON"],
     },
     {
@@ -9658,6 +9796,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9694,6 +9833,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["HoustonTX:CA"],
     },
     {
@@ -9730,6 +9870,7 @@ const vendors = [
         },
         borders: ["None", "Nogales, AZ"],
         core_lanes: ["SON:SON", "SON:Frontera Norte", "AZ:SON", "SON:AZ"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9788,6 +9929,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -9824,6 +9966,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest", "LaredoTX:MI", "MI:LaredoTX"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9860,6 +10003,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9896,6 +10040,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["CMX:CMX", "CMX:Centro"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -9994,6 +10139,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AR:AR", "AR:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10080,6 +10226,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["WA:WA", "WA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10189,6 +10336,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10275,6 +10423,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10342,6 +10491,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10378,6 +10528,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AL:AL", "AL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10487,6 +10638,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["AR:AR", "AR:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10589,6 +10741,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10625,6 +10778,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10710,6 +10864,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX", "El Paso, TX"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: ["Anywhere:AB", "AB:Anywhere"],
     },
     {
@@ -10746,6 +10901,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10799,6 +10955,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10835,6 +10992,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -10874,6 +11032,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -10910,6 +11069,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11011,6 +11171,7 @@ const vendors = [
             "Laredo, TX",
         ],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11061,6 +11222,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11161,6 +11323,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11200,6 +11363,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["CMX:CMX", "CMX:Centro"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -11346,6 +11510,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11382,6 +11547,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11487,6 +11653,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11569,6 +11736,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["CHI:CHI", "CHI:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11617,6 +11785,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11719,6 +11888,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies", "BC:AB"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11787,6 +11957,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11859,6 +12030,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CMX:CMX", "CMX:Centro"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -11945,6 +12117,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies", "AB:USA", "USA:AB"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -11981,6 +12154,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12017,6 +12191,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["VA:VA", "VA:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12113,6 +12288,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12152,6 +12328,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -12188,6 +12365,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12235,6 +12413,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12282,6 +12461,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12392,6 +12572,7 @@ const vendors = [
             "CAN:BC",
             "USA:BC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -12428,6 +12609,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12538,6 +12720,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12574,6 +12757,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12694,6 +12878,7 @@ const vendors = [
             "Hidalgo, TX",
         ],
         core_lanes: ["OK:OK", "OK:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12813,6 +12998,7 @@ const vendors = [
             "Laredo, TX",
         ],
         core_lanes: ["OK:OK", "OK:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12849,6 +13035,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12885,6 +13072,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX", "Otay, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12921,6 +13109,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -12957,6 +13146,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13001,6 +13191,7 @@ const vendors = [
             "CA:QC",
             "CA:AB",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["ON:ON"],
     },
     {
@@ -13093,6 +13284,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["KY:KY", "KY:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13164,6 +13356,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -13257,6 +13450,7 @@ const vendors = [
             "QC:LaredoTX",
             "LaredoTX:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -13343,6 +13537,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13393,6 +13588,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13429,6 +13625,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13535,6 +13732,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13634,6 +13832,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["GA:GA", "GA:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13677,6 +13876,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13764,6 +13964,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13852,6 +14053,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13888,6 +14090,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -13924,6 +14127,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14042,6 +14246,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -14100,6 +14305,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -14189,6 +14395,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14239,6 +14446,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14275,6 +14483,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14311,6 +14520,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14405,6 +14615,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14508,6 +14719,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14564,6 +14776,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["WA:WA", "WA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14663,6 +14876,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["MEX:LaredoTX", "LaredoTX:MEX"],
     },
     {
@@ -14699,6 +14913,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14808,6 +15023,7 @@ const vendors = [
             "Brownsville, TX",
         ],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -14920,6 +15136,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15006,6 +15223,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15042,6 +15260,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["OH:OH", "OH:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15134,6 +15353,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15234,6 +15454,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15334,6 +15555,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: ["CAN:CAN"],
     },
     {
@@ -15370,6 +15592,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: ["Anywhere:USA", "USA:Anywhere"],
     },
     {
@@ -15406,6 +15629,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["GA:GA", "GA:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15442,6 +15666,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15580,6 +15805,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15619,6 +15845,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["QRO:QRO", "QRO:Bajio"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -15658,6 +15885,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -15758,6 +15986,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MB:MB", "MB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15794,6 +16023,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15852,6 +16082,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15945,6 +16176,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -15994,6 +16226,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16080,6 +16313,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -16190,6 +16424,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TAM:TAM", "TAM:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -16243,6 +16478,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["WA:WA", "WA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16305,6 +16541,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest", "LaredoTX:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16344,6 +16581,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["AB:AB", "AB:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16453,6 +16691,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX", "Laredo, TX", "Hidalgo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16511,6 +16750,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["CMX:CMX", "CMX:Centro"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16641,6 +16881,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -16677,6 +16918,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific", "BC:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16713,6 +16955,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16749,6 +16992,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16807,6 +17051,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -16853,6 +17098,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -16962,6 +17208,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17084,6 +17331,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17120,6 +17368,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NE:NE", "NE:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17156,6 +17405,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17192,6 +17442,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17314,6 +17565,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17433,6 +17685,7 @@ const vendors = [
             "LaredoTX:Anywhere",
             "Anywhere:LaredoTX",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17469,6 +17722,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17529,6 +17783,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17638,6 +17893,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17699,6 +17955,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -17735,6 +17992,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17793,6 +18051,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -17899,6 +18158,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17935,6 +18195,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["GA:GA", "GA:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -17971,6 +18232,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18071,6 +18333,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["KY:KY", "KY:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18110,6 +18373,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18206,6 +18470,7 @@ const vendors = [
             "ON:Midwest",
             "Midwest:ON",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18266,6 +18531,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18316,6 +18582,7 @@ const vendors = [
             "CAN:JAL",
             "JAL:CAN",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -18383,6 +18650,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18471,6 +18739,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AK:AK", "AK:Alaska"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18507,6 +18776,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18543,6 +18813,7 @@ const vendors = [
         },
         borders: ["None", "Hidalgo, TX", "Brownsville, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18579,6 +18850,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18725,6 +18997,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18777,6 +19050,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18828,6 +19102,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18864,6 +19139,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -18936,6 +19212,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19035,6 +19312,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["MO:MO", "MO:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19071,6 +19349,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19183,6 +19462,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19293,6 +19573,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19329,6 +19610,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19365,6 +19647,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19451,6 +19734,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19545,6 +19829,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AZ:AZ", "AZ:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19658,6 +19943,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["JAL:JAL", "JAL:Occidente"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -19774,6 +20060,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -19850,6 +20137,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA", "Laredo, TX"],
         core_lanes: ["CA:CA", "CA:West Coast", "USA:BCN", "USA:CA"],
+        exclusive_lanes: [],
         banned_lanes: [
             "MexicaliBCN:CalexicoCA",
             "CalexicoCA:MexicaliBCN",
@@ -19957,6 +20245,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -19993,6 +20282,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20029,6 +20319,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20139,6 +20430,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20175,6 +20467,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20284,6 +20577,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["COA:COA", "COA:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20342,6 +20636,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -20378,6 +20673,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["DE:DE", "DE:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20488,6 +20784,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["WA:WA", "WA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20597,6 +20894,7 @@ const vendors = [
             "Prairies:Anywhere",
             "Anywhere:Prairies",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20675,6 +20973,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -20797,6 +21096,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["NLE:NLE", "NLE:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20895,6 +21195,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NJ:NJ", "NJ:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -20953,6 +21254,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -21090,6 +21392,7 @@ const vendors = [
             "Nogales, AZ",
         ],
         core_lanes: ["TAM:TAM", "TAM:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -21199,6 +21502,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["DGO:DGO", "DGO:Centro-Norte"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -21320,6 +21624,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "El Paso, TX", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -21356,6 +21661,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: ["ON:ON"],
     },
     {
@@ -21395,6 +21701,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TAM:TAM", "TAM:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -21504,6 +21811,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["JAL:JAL", "JAL:Occidente"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -21576,6 +21884,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["COA:COA", "COA:Frontera Norte"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -21626,6 +21935,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -21703,6 +22013,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX", "Hidalgo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["MEX:LaredoTX"],
     },
     {
@@ -21786,6 +22097,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["AB:AB", "AB:Prairies", "BC:AB", "AB:BC"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -21903,6 +22215,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["AGS:AGS", "AGS:Bajio"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -21962,6 +22275,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -21998,6 +22312,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["EMX:EMX", "EMX:Centro"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -22046,6 +22361,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -22132,6 +22448,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["SK:SK", "SK:Prairies"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22182,6 +22499,7 @@ const vendors = [
         },
         borders: ["None", "Hidalgo, TX", "Brownsville, TX", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22303,6 +22621,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA"],
     },
     {
@@ -22352,6 +22671,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22413,6 +22733,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22449,6 +22770,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["FL:FL", "FL:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22535,6 +22857,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22597,6 +22920,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario", "ON:Midwest", "ON:Southeast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22633,6 +22957,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22669,6 +22994,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific"],
+        exclusive_lanes: [],
         banned_lanes: ["CAN:USA", "USA:CAN", "USA:USA"],
     },
     {
@@ -22770,6 +23096,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["MI:MI", "MI:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22806,6 +23133,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22842,6 +23170,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NY:NY", "NY:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -22936,6 +23265,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23064,6 +23394,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -23176,6 +23507,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["QC:QC", "QC:Quebec"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23286,6 +23618,7 @@ const vendors = [
         },
         borders: ["None", "Otay, CA", "Calexico, CA"],
         core_lanes: ["CA:CA", "CA:West Coast", "Midwest:BCN"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23386,6 +23719,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23444,6 +23778,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario", "ON:Anywhere", "Anywhere:ON"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23480,6 +23815,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["CA:CA", "CA:West Coast"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23599,6 +23935,7 @@ const vendors = [
             "LaredoTX:Anywhere",
             "Anywhere:LaredoTX",
         ],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23653,6 +23990,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["BC:BC", "BC:Pacific", "BC:AB"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23711,6 +24049,7 @@ const vendors = [
             "QC:JAL",
             "JAL:QC",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -23796,6 +24135,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["ON:ON", "ON:Ontario", "ON:Anywhere", "Anywhere:ON"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23851,6 +24191,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IN:IN", "IN:Midwest", "IN:Anywhere", "IN:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -23950,6 +24291,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -24007,6 +24349,7 @@ const vendors = [
             "LaredoTX:MEX",
             "MEX:LaredoX",
         ],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "MEX:MEX"],
     },
     {
@@ -24060,6 +24403,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -24146,6 +24490,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["NJ:NJ", "NJ:Mid-Atlantic"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -24195,6 +24540,7 @@ const vendors = [
         },
         borders: ["None"],
         core_lanes: ["IL:IL", "IL:Midwest"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
     {
@@ -24303,6 +24649,7 @@ const vendors = [
         },
         borders: ["None", "Laredo, TX"],
         core_lanes: ["TX:TX", "TX:Southwest"],
+        exclusive_lanes: [],
         banned_lanes: ["USA:USA", "LaredoTX:MEX", "MEX:LaredoTX"],
     },
     {
@@ -24339,6 +24686,7 @@ const vendors = [
         },
         borders: ["None", "El Paso, TX"],
         core_lanes: ["TX:TX", "TX:Southwest", "CHI:TX", "TX:CHI"],
+        exclusive_lanes: [],
         banned_lanes: [],
     },
 ];

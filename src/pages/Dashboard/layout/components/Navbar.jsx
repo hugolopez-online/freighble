@@ -53,7 +53,7 @@ const Navbar = ({
                         <button className="btn btn-sm btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
                             <i className="bi bi-gear-fill"></i>
                         </button>
-                        <button className="btn btn-sm btn-secondary bg-gradient rounded-pill px-3 ms-1">
+                        <button className="btn btn-sm btn-primary bg-gradient rounded-pill px-3 ms-1">
                             <i className="bi bi-person-fill"></i>
                         </button>
                     </div>
