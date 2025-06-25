@@ -161,15 +161,19 @@ const Directory = ({ specs, routes }) => {
                     };
                 });
 
-                // sort vendors by final suitability score
+                // re-filter and sort vendors by final suitability score
 
-                scored_vendors.sort((a, b) => b.score - a.score);
+                const filtered_scored_vendors = scored_vendors.filter(
+                    (vendor) => vendor.score >= base_score
+                );
 
-                if (!scored_vendors[0]) {
+                filtered_scored_vendors.sort((a, b) => b.score - a.score);
+
+                if (!filtered_scored_vendors[0]) {
                     window.alert("No suitable vendors found in our database.");
                 }
 
-                setVendorList(scored_vendors);
+                setVendorList(filtered_scored_vendors);
                 setIsFetching(false);
                 window.scrollTo(0, 0);
             }
