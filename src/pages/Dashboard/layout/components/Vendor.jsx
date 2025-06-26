@@ -89,18 +89,21 @@ const Vendor = (props) => {
                                     {props.company}
                                 </span>
                                 <span style={{ fontSize: "0.7em" }}>
-                                    {props.type.asset_based && (
-                                        <i className="bi bi-patch-check-fill text-primary ms-2"></i>
-                                    )}
-                                    {props.type.freight_broker && (
-                                        <i className="bi bi-exclamation-triangle-fill text-warning ms-2"></i>
-                                    )}
+                                    <i
+                                        className={`bi bi-circle-fill text-${
+                                            props.type.asset_based
+                                                ? props.type.freight_broker
+                                                    ? "warning"
+                                                    : "success"
+                                                : "danger"
+                                        } ms-2`}
+                                    ></i>
                                 </span>
                                 <button
                                     type="button"
                                     className={`btn btn-sm btn-${
-                                        props.score < 60
-                                            ? "danger"
+                                        props.score < 70
+                                            ? "secondary"
                                             : "dark fw-bold"
                                     } bg-gradient ms-2 py-0 rounded-pill`}
                                     data-bs-toggle="collapse"
@@ -110,8 +113,8 @@ const Vendor = (props) => {
                                 >
                                     <i
                                         className={`bi bi-${
-                                            props.score < 60
-                                                ? "x-octagon"
+                                            props.score < 70
+                                                ? "exclamation-triangle"
                                                 : "crosshair"
                                         }`}
                                     ></i>{" "}
