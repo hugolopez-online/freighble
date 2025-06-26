@@ -27,12 +27,30 @@ const Vendor = (props) => {
     // @hugolopez-online: special services still missing
     const instructions_info = encodeURIComponent(
         `${
+            (props.specs.hazmat ||
+                props.specs.team_drivers ||
+                props.specs.usa_bonded ||
+                props.specs.can_bonded ||
+                props.specs.ctpat ||
+                props.specs.twic ||
+                props.specs.tsa ||
+                props.specs.fast) &&
+            "Special requirements:\n" +
+                (props.specs.hazmat ? "*Hazmat handling\n" : "") +
+                (props.specs.team_drivers ? "*Team drivers required\n" : "") +
+                (props.specs.usa_bonded ? "*U.S bonded\n" : "") +
+                (props.specs.can_bonded ? "*Canada bonded\n" : "") +
+                (props.specs.ctpat ? "*C-TPAT\n" : "") +
+                (props.specs.twic ? "*TWIC\n" : "") +
+                (props.specs.tsa ? "*TSA\n" : "") +
+                (props.specs.fast ? "*FAST\n" : "")
+        }${
             props.specs.instructions &&
-            "Additional instructions: " + props.specs.instructions + "\n\n"
+            "\nAdditional instructions:\n" + props.specs.instructions + "\n"
         }`
     );
     const signature = encodeURIComponent(
-        `Let me know if you have any questions.\n\nKind regards!`
+        `\nLet me know if you have any questions.\n\nKind regards!`
     );
 
     const EMAIL_SUBJECT = encodeURIComponent(
