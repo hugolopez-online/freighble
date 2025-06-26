@@ -229,7 +229,7 @@ const Directory = ({ specs, routes }) => {
                 )
             ) : (
                 <div className="row g-3 mb-3">
-                    <h6 className="display-6 text-secondary text-center mb-0 mt-4">
+                    <h6 className="display-6 text-secondary mb-0 mt-4">
                         Suitable vendors
                     </h6>
                     {vendorList.map((vendor, index) => {

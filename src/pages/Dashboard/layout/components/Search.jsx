@@ -95,9 +95,6 @@ const Search = (props) => {
             };
         });
 
-        // @hugolopez-online: trying out UX by persisting search form entries
-        // setFormData(default_form_data);
-
         if (window.innerWidth < 768) {
             const search = document.getElementById("searchForm");
             search.classList.add("d-none");

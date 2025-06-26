@@ -24,7 +24,6 @@ const Vendor = (props) => {
         }\nCargo details: ${props.specs.cargo_details || "(not defined)"}\n\n`
     );
 
-    // @hugolopez-online: special services still missing
     const instructions_info = encodeURIComponent(
         `${
             (props.specs.hazmat ||
