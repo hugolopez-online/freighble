@@ -8,9 +8,9 @@ const Banner = (props) => {
         <div className="card border text-bg-light bg-gradient shadow-sm rounded-4 p-4">
             <div className="row border-bottom mb-2">
                 <div className="col-12">
-                    <h4 className="display-6 text-secondary fs-2">
+                    <h6 className="display-6 text-secondary fs-2">
                         additional info
-                    </h4>
+                    </h6>
                 </div>
             </div>
             <div className="row mb-2">

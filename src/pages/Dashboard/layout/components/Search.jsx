@@ -209,7 +209,9 @@ const Search = (props) => {
         >
             <div className="row border-bottom mb-2">
                 <div className="col-12">
-                    <h4 className="display-6 text-secondary">load details</h4>
+                    <h6 className="display-6 text-secondary fs-2">
+                        load details
+                    </h6>
                 </div>
             </div>
 
