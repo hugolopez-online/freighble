@@ -114,7 +114,7 @@ const Vendor = (props) => {
                                     <i
                                         className={`bi bi-${
                                             props.score < 70
-                                                ? "exclamation-triangle"
+                                                ? "exclamation-triangle-fill"
                                                 : "crosshair"
                                         }`}
                                     ></i>{" "}
@@ -156,7 +156,7 @@ const Vendor = (props) => {
                             <a
                                 href={`https://www.google.com/maps/search/${props.domicile.city},+${props.domicile.territory},+${props.domicile.country}`}
                                 target="_blank"
-                                className="btn badge text-bg-secondary bg-gradient fw-normal me-1"
+                                className="btn badge text-bg-dark bg-gradient fw-normal me-1"
                             >
                                 <i className="bi bi-house-fill"></i>{" "}
                                 {`${props.domicile.city}, ${props.domicile.territory}`}
@@ -164,7 +164,7 @@ const Vendor = (props) => {
                             <a
                                 href={`tel:${props.phone}`}
                                 target="_blank"
-                                className="btn badge text-bg-secondary bg-gradient fw-normal me-1"
+                                className="btn badge text-bg-dark bg-gradient fw-normal me-1"
                             >
                                 <i className="bi bi-person-rolodex"></i>{" "}
                                 {props.contact}: {props.phone}
@@ -172,7 +172,7 @@ const Vendor = (props) => {
                             <a
                                 href={`mailto:${props.email}`}
                                 target="_blank"
-                                className="btn badge text-bg-secondary bg-gradient fw-normal"
+                                className="btn badge text-bg-dark bg-gradient fw-normal"
                             >
                                 <i className="bi bi-envelope-fill"></i>{" "}
                                 {props.email}
