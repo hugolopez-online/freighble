@@ -105,7 +105,7 @@ const Dashboard = () => {
                     templateSpecs={templateSpecs}
                 />
             </div>
-            <div className="row">
+            <div className="row pe-2">
                 <div
                     id="searchForm"
                     className="col-12 col-md-3 mb-3"

@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
-import { Fragment } from "react";
 import { Header } from "./";
 
 const Output = () => {
     return (
-        <div className="row bg-dark website-hero">
+        <div className="row pb-4">
             <Header />
             <Outlet />
         </div>

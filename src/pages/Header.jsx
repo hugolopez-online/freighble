@@ -8,8 +8,11 @@ import logo_light from "../assets/img/logo-light_206x40.svg";
 
 const Header = () => {
     return (
-        <div className="row sticky-top">
-            <nav className="col navbar rounded-4 m-3 website-header">
+        <div
+            id="website_header"
+            className="row position-fixed pe-0"
+        >
+            <nav className="col navbar rounded-4 m-3 px-3 website-header">
                 <div className="container-fluid">
                     <Link to="/">
                         <img
@@ -58,7 +61,7 @@ const Header = () => {
                                 login
                             </Link>
                             <Link
-                                className="btn btn-sm btn-primary bg-gradient rounded-pill px-2"
+                                className="btn btn-sm btn-primary bg-gradient rounded-pill px-3"
                                 to="dashboard"
                             >
                                 DASHBOARD

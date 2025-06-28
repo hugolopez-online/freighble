@@ -6,6 +6,11 @@
         rgba(0, 0, 0, 0.3),
         rgba(0, 0, 0, 0)
     );
+    --gradient-soft: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.2),
+        rgba(0, 0, 0, 0)
+    );
 }
 
 #navbar {
@@ -16,19 +21,38 @@
     border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
+#website_header {
+    z-index: 99;
+}
+
 .website-header {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 1px 10px rgba(124, 124, 124, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(29, 29, 29, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* .website-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    background: url(../assets/img/hero-background_2.webp) top center;
+    background-size: cover;
+    transform: translateZ(-1px) scale(2.1);
+    min-height: 100%;
+    z-index: -2;
+} */
+
 .website-hero {
-    background-image: url(../assets/img/hero-background.webp);
+    background-image: url(../assets/img/hero-background_2.webp);
     background-attachment: fixed;
     background-size: cover;
-    backdrop-filter: brightness(60%);
+    perspective: 1;
 }
 
 .under-navbar {
@@ -43,6 +67,10 @@
     background-image: var(--gradient-deep) !important;
 }
 
+.bg-gradient-soft {
+    background-image: var(--gradient-soft) !important;
+}
+
 .tight-pocket {
     padding: 0.1rem;
 }
@@ -52,6 +80,11 @@
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
+}
+
+.brand-font {
+    font-family: "Antonio", sans-serif !important;
+    font-optical-sizing: auto;
 }
 
 .header-menu {

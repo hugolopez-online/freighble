@@ -9,9 +9,10 @@ const origin_territory_weight =
     suitability_weight.desirable.origin_territory_weight;
 const destination_territory_weight =
     suitability_weight.desirable.destination_territory_weight;
-let additional_score = suitability_weight.additional;
 
 const $VAST = (vendor, specs, routes) => {
+    let additional_score = suitability_weight.additional;
+
     const coverage = vendor.coverage;
     const core_lanes = vendor.core_lanes;
     const exclusive_lanes = vendor.exclusive_lanes;
@@ -106,10 +107,6 @@ const $VAST = (vendor, specs, routes) => {
             break;
         }
     }
-
-    // reset additional_score value to handle next vendor
-
-    additional_score = suitability_weight.additional;
 
     // assign final adjusted suitability score and matching core/banned lanes
 
