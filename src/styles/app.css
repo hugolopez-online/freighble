@@ -26,33 +26,18 @@
 }
 
 .website-header {
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 1px 10px rgba(124, 124, 124, 0.1);
+    background: rgba(0, 0, 0, 0.75);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(100, 100, 100, 0.5);
 }
 
-/* .website-hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    background: url(../assets/img/hero-background_2.webp) top center;
-    background-size: cover;
-    transform: translateZ(-1px) scale(2.1);
-    min-height: 100%;
-    z-index: -2;
-} */
-
 .website-hero {
-    background-image: url(../assets/img/hero-background_2.webp);
-    background-attachment: fixed;
+    background-image: url("../assets/img/hero-background_2.webp");
     background-size: cover;
-    perspective: 1;
+    background-repeat: repeat;
+    background-position-y: 0px;
 }
 
 .under-navbar {

@@ -1,5 +1,6 @@
 // imports
 
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../assets/img/logo_206x40.webp";
@@ -10,59 +11,71 @@ const Header = () => {
     return (
         <div
             id="website_header"
-            className="row position-fixed pe-0"
+            className="row justify-content-center"
         >
-            <nav className="col navbar rounded-4 m-3 px-3 website-header">
+            <nav className="col-11 navbar rounded-4 website-header position-fixed mt-3">
                 <div className="container-fluid">
-                    <Link to="/">
-                        <img
-                            className="d-block"
-                            height={20}
-                            src={logo_lighter}
-                            alt="Freighble logo"
-                        />
-                    </Link>
-                    <div className="navbar text-light header-menu p-0">
-                        <div className="container-fluid px-0">
-                            <div className="btn-group">
-                                <Link
-                                    className="btn bg-gradient text-light rounded-start-pill ps-3"
-                                    to="/"
-                                >
-                                    Services
-                                </Link>
-                                <Link
-                                    className="btn bg-gradient text-light px-2"
-                                    to="/"
-                                >
-                                    Pricing
-                                </Link>
-                                <Link
-                                    className="btn bg-gradient text-light rounded-end-pill pe-3"
-                                    to="/"
-                                >
-                                    Contact
-                                </Link>
-                            </div>
-                        </div>
-                    </div>
                     <div className="navbar header-menu p-0">
                         <div className="container-fluid px-0">
                             <Link
                                 className="btn text-light px-2"
-                                to="register"
+                                to={{
+                                    pathname: "/",
+                                    hash: "#website_hero",
+                                }}
+                            >
+                                home
+                            </Link>
+                            <Link
+                                className="btn text-light px-2"
+                                to={{
+                                    pathname: "/",
+                                    hash: "#about",
+                                }}
+                            >
+                                about
+                            </Link>
+                            <Link
+                                className="btn text-light px-2"
+                                to={{
+                                    pathname: "/",
+                                    hash: "#contact",
+                                }}
+                            >
+                                contact
+                            </Link>
+                        </div>
+                    </div>
+                    <Link
+                        to={{
+                            pathname: "/",
+                            hash: "#website_hero",
+                        }}
+                    >
+                        <img
+                            className="d-block"
+                            height={25}
+                            src={logo_lighter}
+                            alt="Freighble logo"
+                        />
+                    </Link>
+                    <div className="navbar header-menu p-0">
+                        <div className="container-fluid px-0">
+                            <Link
+                                className="btn text-light px-2"
+                                to="/register"
                             >
                                 register
                             </Link>
                             <Link
                                 className="btn text-light px-2"
-                                to="login"
+                                to="/login"
                             >
                                 login
                             </Link>
                             <Link
                                 className="btn btn-sm btn-primary bg-gradient rounded-pill px-3"
-                                to="dashboard"
+                                to="/dashboard"
                             >
                                 DASHBOARD
                             </Link>

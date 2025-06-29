@@ -1,12 +1,14 @@
+// imports
+import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "./";
 
 const Output = () => {
     return (
-        <div className="row pb-4">
+        <Fragment>
             <Header />
             <Outlet />
-        </div>
+        </Fragment>
     );
 };
 
