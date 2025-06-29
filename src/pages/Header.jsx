@@ -61,9 +61,9 @@ const Header = () => {
                         </div>
                     </div>
                     <Link
-                        to={{
-                            pathname: "/",
-                            hash: "#website_hero",
+                        to="/"
+                        onClick={() => {
+                            setAnchor("website_hero");
                         }}
                     >
                         <img
