@@ -47,10 +47,10 @@ const Home = () => {
             </div>
             <div
                 id="contact"
-                className="row"
+                className="row justify-content-center pt-5"
             >
                 <div
-                    className="col-12"
+                    className="col-10 py-4"
                     style={{ minHeight: "100vh" }}
                 >
                     <h1 className="display-1">Contact</h1>

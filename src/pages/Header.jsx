@@ -8,6 +8,20 @@ import logo_lighter from "../assets/img/logo-lighter_206x40.svg";
 import logo_light from "../assets/img/logo-light_206x40.svg";
 
 const Header = () => {
+    const [anchor, setAnchor] = useState("");
+
+    // effects
+    useEffect(() => {
+        setTimeout(() => {
+            const element = document.getElementById(anchor);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+        }, 200);
+        setAnchor("");
+    }, [anchor]);
+
+    // render
     return (
         <div
             id="website_header"
@@ -19,27 +33,27 @@ const Header = () => {
                         <div className="container-fluid px-0">
                             <Link
                                 className="btn text-light px-2"
-                                to={{
-                                    pathname: "/",
-                                    hash: "#website_hero",
+                                to="/"
+                                onClick={() => {
+                                    setAnchor("website_hero");
                                 }}
                             >
                                 home
                             </Link>
                             <Link
                                 className="btn text-light px-2"
-                                to={{
-                                    pathname: "/",
-                                    hash: "#about",
+                                to="/"
+                                onClick={() => {
+                                    setAnchor("about");
                                 }}
                             >
                                 about
                             </Link>
                             <Link
                                 className="btn text-light px-2"
-                                to={{
-                                    pathname: "/",
-                                    hash: "#contact",
+                                to="/"
+                                onClick={() => {
+                                    setAnchor("contact");
                                 }}
                             >
                                 contact
@@ -64,18 +78,27 @@ const Header = () => {
                             <Link
                                 className="btn text-light px-2"
                                 to="/register"
+                                onClick={() => {
+                                    setAnchor("");
+                                }}
                             >
                                 register
                             </Link>
                             <Link
                                 className="btn text-light px-2"
                                 to="/login"
+                                onClick={() => {
+                                    setAnchor("");
+                                }}
                             >
                                 login
                             </Link>
                             <Link
                                 className="btn btn-sm btn-primary bg-gradient rounded-pill px-3"
                                 to="/dashboard"
+                                onClick={() => {
+                                    setAnchor("");
+                                }}
                             >
                                 DASHBOARD
                             </Link>
