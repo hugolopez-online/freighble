@@ -9,6 +9,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 -   [x] Re-arrange folder/file architecture for better separation of concerns and readability
 -   [x] Rename files for a more professional, readable, and clean structure
 -   [ ] Implement CRUD functionality
+-   [ ] Re-design vendor's model
 -   [x] Set up a proper database to move vendor information out of hardcoded/static files
     -   [x] Build full API to access all data dynamically
 -   [ ] Capture and store user-specific search data for analysis. Use it to:
@@ -26,16 +27,16 @@ Tasks to track development, scalability, polish, and UX improvements.
 -   [x] Add favorite/blocked lanes to the suitability assessment algorithm
 -   [x] Modify suitability percentage formula:
     -   [x] Scale “basic” scores better when more comparison variables are available
--   [x] Include the following additional specs to Search and to suitability filtering:
-    -   C-TPAT
-    -   TWIC
-    -   TSA
-    -   FAST
+-   [ ] Include the following additional specs to Search and to suitability filtering:
+    -   [x] C-TPAT
+    -   [x] TWIC
+    -   [x] TSA
+    -   [x] FAST
+    -   [ ] Tanker Endorsement
 -   [x] Implement an open field to optionally type additional custom cargo instructions
 -   [x] Make additional cargo instructions functional
 -   [x] Include and make functional origin and destination dates
 -   [x] Message and button on carrier cards to prepare/send an email to that vendor
--   [ ] Make a "searches" dashboard to mark a status for each serch and keep track of work
 -   [ ] Register/login implementation
 
 ---
@@ -70,6 +71,7 @@ Tasks to track development, scalability, polish, and UX improvements.
 
 -   [x] Clean up and standardize all test `console.log()` messages to allow easy global removal
 -   [x] Clean up and standardize in-code comments
+-   [ ] Improve conditional statements
 
 ---
 
