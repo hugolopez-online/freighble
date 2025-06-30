@@ -53,6 +53,10 @@ const Vendor = (props) => {
         `\nLet me know if you have any questions.\n\nKind regards!`
     );
 
+    const disclaimer = encodeURIComponent(
+        `\n\nThis contact was facilitated by Freighble Technologies, Ltd. Visit freighble.com/vendors for further details.`
+    );
+
     const EMAIL_SUBJECT = encodeURIComponent(
         `${props.specs.mode} (${props.specs.origin.city}, ${props.specs.origin.territory} to ${props.specs.destination.city}, ${props.specs.destination.territory}) [${props.company}]`
     );
@@ -62,7 +66,8 @@ const Vendor = (props) => {
         destination_info +
         specs_info +
         instructions_info +
-        signature;
+        signature +
+        disclaimer;
 
     const MAILTO_LINK = `mailto:${props.email}?subject=${EMAIL_SUBJECT}&body=${EMAIL_BODY}`;
 
