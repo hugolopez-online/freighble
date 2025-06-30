@@ -1,13 +1,20 @@
 // imports
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Header } from "./";
+import { Header, Footer } from "./";
 
-const Output = () => {
+const Output = ({ anchor, setAnchor }) => {
     return (
         <Fragment>
-            <Header />
+            <Header
+                anchor={anchor}
+                setAnchor={setAnchor}
+            />
             <Outlet />
+            <Footer
+                anchor={anchor}
+                setAnchor={setAnchor}
+            />
         </Fragment>
     );
 };

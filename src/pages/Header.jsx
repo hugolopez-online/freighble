@@ -7,9 +7,7 @@ import logo from "../assets/img/logo_206x40.webp";
 import logo_lighter from "../assets/img/logo-lighter_206x40.svg";
 import logo_light from "../assets/img/logo-light_206x40.svg";
 
-const Header = () => {
-    const [anchor, setAnchor] = useState("");
-
+const Header = ({ anchor, setAnchor }) => {
     // effects
     useEffect(() => {
         setTimeout(() => {
@@ -96,6 +94,7 @@ const Header = () => {
                             <Link
                                 className="btn btn-sm btn-primary bg-gradient rounded-pill px-3"
                                 to="/dashboard"
+                                target="_blank"
                                 onClick={() => {
                                     setAnchor("");
                                 }}

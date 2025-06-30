@@ -126,7 +126,7 @@ const Console = (props) => {
                         <i className="bi bi-search"></i>
                     </button>
                     <button
-                        className="btn btn-sm btn-light shadow-sm text-secondary bg-gradient rounded-pill"
+                        className="btn btn-sm btn-secondary bg-gradient rounded-pill"
                         type="button"
                         onClick={() => {
                             window.scrollTo({

@@ -1,30 +1,58 @@
 //imports
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Dashboard, Home, Login, Output, Register, NotFound } from "./pages";
 
 function App() {
+    const [anchor, setAnchor] = useState("");
+
     return (
         <BrowserRouter>
             <Routes>
                 <Route
                     path="/"
-                    element={<Output />}
+                    element={
+                        <Output
+                            anchor={anchor}
+                            setAnchor={setAnchor}
+                        />
+                    }
                 >
                     <Route
                         index
-                        element={<Home />}
+                        element={
+                            <Home
+                                anchor={anchor}
+                                setAnchor={setAnchor}
+                            />
+                        }
                     />
                     <Route
                         path="login"
-                        element={<Login />}
+                        element={
+                            <Login
+                                anchor={anchor}
+                                setAnchor={setAnchor}
+                            />
+                        }
                     />
                     <Route
                         path="register"
-                        element={<Register />}
+                        element={
+                            <Register
+                                anchor={anchor}
+                                setAnchor={setAnchor}
+                            />
+                        }
                     />
                     <Route
                         path="*"
-                        element={<NotFound />}
+                        element={
+                            <NotFound
+                                anchor={anchor}
+                                setAnchor={setAnchor}
+                            />
+                        }
                     />
                 </Route>
                 <Route

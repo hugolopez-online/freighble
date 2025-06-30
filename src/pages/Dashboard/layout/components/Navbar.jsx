@@ -20,6 +20,7 @@ const Navbar = ({
                 <Link
                     className="navbar-brand d-none d-md-block"
                     to="/"
+                    target="_blank"
                 >
                     <img
                         className="d-block"
@@ -31,6 +32,7 @@ const Navbar = ({
                 <Link
                     className="navbar-brand d-block d-md-none"
                     to="/"
+                    target="_blank"
                 >
                     <img
                         className="d-block"

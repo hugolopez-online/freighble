@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
-const Home = () => {
+const Home = ({ anchor, setAnchor }) => {
     return (
         <Fragment>
             <section
                 id="website_hero"
                 className="row website-hero justify-content-center pt-5"
             >
-                <div style={{ minHeight: "7rem" }}></div>
+                <div style={{ minHeight: "10rem" }}></div>
                 <div className="col-10 text-light text-center py-4">
                     <h2 className="display-2 fst-italic">
                         <span className="fw-normal">Freigh</span>t made relia
@@ -26,13 +26,16 @@ const Home = () => {
                         GET STARTED
                     </Link>
                     <Link
-                        to="/register"
+                        to="/"
                         className="brand-font btn btn-lg btn-outline-light fw-light rounded-pill"
+                        onClick={() => {
+                            setAnchor("about");
+                        }}
                     >
                         HOW IT WORKS
                     </Link>
                 </div>
-                <div style={{ minHeight: "7rem" }}></div>
+                <div style={{ minHeight: "10rem" }}></div>
             </section>
             <div
                 id="about"
