@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// console formating
+// console formatting
 const RED_TEXT = "\u001b[31m";
 const BLUE_TEXT = "\u001b[36m";
 const GREEN_TEXT = "\u001b[32m";
