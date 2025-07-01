@@ -1,13 +1,20 @@
 // imports
-
 import express from "express";
 import router from "../routes/vendors.js";
 
 import path from "path";
 import { fileURLToPath } from "url";
 
+//module
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// console formating
+const RED_TEXT = "\u001b[31m";
+const BLUE_TEXT = "\u001b[36m";
+const GREEN_TEXT = "\u001b[32m";
+const YELLOW_TEXT = "\u001b[33m";
+const DEFAULT_TEXT = "\u001b[37m";
 
 // app
 const app = express();
@@ -23,4 +30,9 @@ app.get("/{*any}", (req, res) => {
 
 // server
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, console.log(`Server ready and listening to port ${PORT}`));
+app.listen(
+    PORT,
+    console.log(
+        `\nExpress.js server ready: ${BLUE_TEXT}http://localhost:${PORT}/${DEFAULT_TEXT}\n`
+    )
+);
