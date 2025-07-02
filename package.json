@@ -12,8 +12,10 @@
     },
     "dependencies": {
         "bootstrap": "^5.3.5",
+        "dotenv": "^17.0.1",
         "express": "^5.1.0",
         "mongodb": "^6.17.0",
+        "mongoose": "^8.16.1",
         "react": "^19.0.0",
         "react-dom": "^19.0.0"
     },
