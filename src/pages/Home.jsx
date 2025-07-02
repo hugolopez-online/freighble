@@ -8,8 +8,10 @@ const Home = ({ anchor, setAnchor }) => {
                 id="website_hero"
                 className="row website-hero justify-content-center pt-5"
             >
-                <div style={{ minHeight: "10rem" }}></div>
-                <div className="col-10 text-light text-center py-4">
+                <div
+                    className="col-10 text-light text-center"
+                    style={{ minHeight: "100vh", paddingTop: "10em" }}
+                >
                     <h2 className="display-2 fst-italic">
                         <span className="fw-normal">Freigh</span>t made relia
                         <span className="fw-normal">ble</span>
@@ -35,7 +37,6 @@ const Home = ({ anchor, setAnchor }) => {
                         HOW IT WORKS
                     </Link>
                 </div>
-                <div style={{ minHeight: "10rem" }}></div>
             </section>
             <div
                 id="about"
