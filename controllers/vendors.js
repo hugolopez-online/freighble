@@ -1,6 +1,7 @@
 // imports
 
 import vendors from "../src/pages/Dashboard/data/vendors.js";
+import Vendor from "../db/models/Vendor.js";
 
 // controllers
 
@@ -77,4 +78,13 @@ export const getVendors = (req, res, next) => {
     }
 
     return res.status(200).json({ vendors });
+};
+
+export const createVendor = async (req, res, next) => {
+    const prospect_vendor = new Vendor(req.body);
+    await prospect_vendor.save();
+
+    return res
+        .status(201)
+        .json({ msg: `Vendor ${prospect_vendor.company} created!` });
 };
