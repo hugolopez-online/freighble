@@ -34,6 +34,7 @@ const default_specs = {
     twic: false,
     tsa: false,
     fast: false,
+    tanker_endorsement: false,
     origin_date: "",
     destination_date: "",
     unit_type: "",

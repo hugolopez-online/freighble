@@ -1,11 +1,17 @@
 // imports
 
-import vendors from "../src/pages/Dashboard/data/vendors.js";
+import locally_stored_vendors from "../src/pages/Dashboard/data/vendors.js";
 import Vendor from "../db/models/Vendor.js";
 
-// controllers
+// TESTING FLAG: `vendors` source (set to `true` for development and/testing, `false` for production)
+const USE_LOCAL_VENDOR_STORAGE = false;
 
-export const getVendors = (req, res, next) => {
+// controllers
+export const getVendors = async (req, res, next) => {
+    const vendors = USE_LOCAL_VENDOR_STORAGE
+        ? locally_stored_vendors
+        : await Vendor.find({});
+
     const {
         mode,
         o_country,
@@ -19,6 +25,7 @@ export const getVendors = (req, res, next) => {
         twic,
         tsa,
         fast,
+        tanker_endorsement,
     } = req.query;
 
     if (
@@ -33,26 +40,38 @@ export const getVendors = (req, res, next) => {
         ctpat &&
         twic &&
         tsa &&
-        fast
+        fast &&
+        tanker_endorsement
     ) {
         const searched_vendors = vendors.filter((vendor) => {
+            // `vendors` source conditional
+            const vendor_coverage = USE_LOCAL_VENDOR_STORAGE
+                ? vendor.coverage
+                : vendor.coverage._doc;
+
+            // `validated` flag
+            if (!vendor.validated) {
+                return false;
+            }
+
+            // Country coverage tracker
             let country_coverage = 0;
 
-            for (let country in vendor.coverage) {
+            for (let country in vendor_coverage) {
                 if (country_coverage === 2) {
                     break;
                 }
 
                 if (
-                    vendor.coverage[country].territory[0] &&
-                    vendor.coverage[country].country_code == o_country
+                    vendor_coverage[country].territory.length !== 0 &&
+                    vendor_coverage[country].country_code == o_country
                 ) {
                     country_coverage++;
                 }
 
                 if (
-                    vendor.coverage[country].territory[0] &&
-                    vendor.coverage[country].country_code == d_country
+                    vendor_coverage[country].territory.length !== 0 &&
+                    vendor_coverage[country].country_code == d_country
                 ) {
                     country_coverage++;
                 }
@@ -69,7 +88,8 @@ export const getVendors = (req, res, next) => {
                 (!Number(ctpat) || vendor.ctpat) &&
                 (!Number(twic) || vendor.twic) &&
                 (!Number(tsa) || vendor.tsa) &&
-                (!Number(fast) || vendor.fast);
+                (!Number(fast) || vendor.fast) &&
+                (!Number(tanker_endorsement) || vendor.tanker_endorsement);
 
             return is_qualified;
         });
@@ -87,4 +107,40 @@ export const createVendor = async (req, res, next) => {
     return res
         .status(201)
         .json({ msg: `Vendor ${prospect_vendor.company} created!` });
+};
+
+export const editVendor = async (req, res, next) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ msg: `Must provide id.` });
+    }
+
+    const vendor = await Vendor.findOneAndUpdate({ _id: id }, req.body);
+
+    if (!vendor) {
+        return res.status(400).json({
+            msg: `No vendor found with id: ${id} - Nothing was edited.`,
+        });
+    }
+
+    return res.status(200).json({ msg: `Edited ${vendor.company}` });
+};
+
+export const deleteVendor = async (req, res, next) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ msg: `Must provide id.` });
+    }
+
+    const vendor = await Vendor.findOneAndDelete({ _id: id });
+
+    if (!vendor) {
+        return res.status(400).json({
+            msg: `No vendor found with id: ${id} - Nothing was deleted.`,
+        });
+    }
+
+    return res.status(200).json({ msg: `Deleted ${vendor.company}` });
 };

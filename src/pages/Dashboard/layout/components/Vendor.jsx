@@ -42,7 +42,10 @@ const Vendor = (props) => {
                   (props.specs.ctpat ? "*C-TPAT\n" : "") +
                   (props.specs.twic ? "*TWIC\n" : "") +
                   (props.specs.tsa ? "*TSA\n" : "") +
-                  (props.specs.fast ? "*FAST\n" : "")
+                  (props.specs.fast ? "*FAST\n" : "") +
+                  (props.specs.tanker_endorsement
+                      ? "*Tanker endorsement\n"
+                      : "")
                 : ""
         }${
             props.specs.instructions &&
@@ -54,7 +57,7 @@ const Vendor = (props) => {
     );
 
     const disclaimer = encodeURIComponent(
-        `\n\nThis contact was facilitated by Freighble Technologies, Ltd. Visit freighble.com/vendors for further details.`
+        `\n\nThis contact was facilitated by Freighble Technologies.\nVisit freighble.com/vendors for further details.`
     );
 
     const EMAIL_SUBJECT = encodeURIComponent(
@@ -280,16 +283,16 @@ const Vendor = (props) => {
                                     } ms-2`}
                                 ></i>
                             </span>
-                            {props.borders.includes(props.specs.border) &&
-                                props.specs.border !== "None" && (
-                                    <span
-                                        className="badge rounded-pill text-bg-success me-1"
-                                        style={{ fontSize: "0.75rem" }}
-                                    >
-                                        Border crossing: {props.specs.border}
-                                        <i className="bi bi-check-circle-fill ms-2"></i>
-                                    </span>
-                                )}
+                            {props.specs.border !== "None" && (
+                                <span
+                                    className="badge rounded-pill text-bg-success me-1"
+                                    style={{ fontSize: "0.75rem" }}
+                                >
+                                    Border crossing:{" "}
+                                    {props.specs.border.split("+").join(" ")}
+                                    <i className="bi bi-check-circle-fill ms-2"></i>
+                                </span>
+                            )}
                             {props.hazmat && props.specs.hazmat && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
@@ -362,6 +365,16 @@ const Vendor = (props) => {
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}
+                            {props.tanker_endorsement &&
+                                props.specs.tanker_endorsement && (
+                                    <span
+                                        className="badge rounded-pill text-bg-success me-1"
+                                        style={{ fontSize: "0.75rem" }}
+                                    >
+                                        Tanker endorsement
+                                        <i className="bi bi-check-circle-fill ms-2"></i>
+                                    </span>
+                                )}
                             {props.matched_core_lane && (
                                 <span
                                     className="badge rounded-pill text-bg-primary bg-gradient me-1"

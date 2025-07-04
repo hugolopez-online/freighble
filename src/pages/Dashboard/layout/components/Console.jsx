@@ -57,12 +57,16 @@ const Console = (props) => {
                                 props.specs.ctpat ||
                                 props.specs.twic ||
                                 props.specs.tsa ||
-                                props.specs.fast
+                                props.specs.fast ||
+                                props.specs.tanker_endorsement
                                     ? " (Extras:" +
                                       (props.specs.ctpat ? " C-TPAT," : "") +
                                       (props.specs.twic ? " TWIC," : "") +
                                       (props.specs.tsa ? " TSA," : "") +
                                       (props.specs.fast ? " FAST," : "") +
+                                      (props.specs.tanker_endorsement
+                                          ? " Tanker endorsement,"
+                                          : "") +
                                       " certified)"
                                     : ""
                             }`}</>

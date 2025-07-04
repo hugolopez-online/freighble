@@ -218,6 +218,11 @@ const VendorSchema = new mongoose.Schema(
             default: [],
             required: true,
         },
+        verified: {
+            type: Boolean,
+            default: false,
+            required: true,
+        },
     },
     {
         collection: "vendors",

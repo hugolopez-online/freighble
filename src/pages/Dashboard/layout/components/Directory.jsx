@@ -34,7 +34,9 @@ const Directory = ({ specs, routes }) => {
                 specs.can_bonded
             )}&ctpat=${Number(specs.ctpat)}&twic=${Number(
                 specs.twic
-            )}&tsa=${Number(specs.tsa)}&fast=${Number(specs.fast)}`;
+            )}&tsa=${Number(specs.tsa)}&fast=${Number(
+                specs.fast
+            )}&tanker_endorsement=${Number(specs.tanker_endorsement)}`;
 
             setIsFetching(true);
 
@@ -80,6 +82,7 @@ const Directory = ({ specs, routes }) => {
         specs.twic,
         specs.tsa,
         specs.fast,
+        specs.tanker_endorsement,
         routes,
     ]);
 

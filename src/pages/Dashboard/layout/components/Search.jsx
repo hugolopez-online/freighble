@@ -28,6 +28,7 @@ const default_form_data = {
     twic: false,
     tsa: false,
     fast: false,
+    tanker_endorsement: false,
 };
 
 const default_location_suggestions = [];
@@ -92,6 +93,7 @@ const Search = (props) => {
                 twic: formData.twic,
                 tsa: formData.tsa,
                 fast: formData.fast,
+                tanker_endorsement: formData.tanker_endorsement,
             };
         });
 
@@ -194,6 +196,7 @@ const Search = (props) => {
                     twic: props.template.twic,
                     tsa: props.template.tsa,
                     fast: props.template.fast,
+                    tanker_endorsement: props.template.tanker_endorsement,
                 };
             });
         }
@@ -632,7 +635,8 @@ const Search = (props) => {
                             formData.ctpat ||
                             formData.twic ||
                             formData.tsa ||
-                            formData.fast
+                            formData.fast ||
+                            formData.tanker_endorsement
                                 ? "btn-primary"
                                 : "btn-outline-secondary border"
                         } rounded-2 w-100`}
@@ -830,6 +834,29 @@ const Search = (props) => {
                             htmlFor="fast"
                         >
                             FAST
+                        </label>
+                    </div>
+                    <div className="form-check form-check-inline">
+                        <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="tanker_endorsement"
+                            name="tanker_endorsement"
+                            checked={formData.tanker_endorsement}
+                            onChange={(e) =>
+                                setFormData((prev) => {
+                                    return {
+                                        ...prev,
+                                        tanker_endorsement: e.target.checked,
+                                    };
+                                })
+                            }
+                        />
+                        <label
+                            className="form-check-label"
+                            htmlFor="tanker_endorsement"
+                        >
+                            Tanker endorsement
                         </label>
                     </div>
                 </div>
