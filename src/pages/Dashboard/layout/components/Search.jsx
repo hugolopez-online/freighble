@@ -1,5 +1,4 @@
 // imports
-
 import { useEffect, useState } from "react";
 import {
     transportationModes,
@@ -7,12 +6,11 @@ import {
     usaDivisions,
     mexDivisions,
     borderCrossingPorts,
-} from "../../data/variables";
+} from "data/variables";
 import geo_lookup from "../handlers/geo_meta";
-import { search_options } from "../../data/search_options";
+import { search_options } from "data/search_options";
 
 // module
-
 const default_form_data = {
     mode: "",
     origin_city: "",

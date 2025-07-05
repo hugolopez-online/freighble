@@ -6,7 +6,7 @@ import {
     mexDivisions,
     transportationModes,
     borderCrossingPorts,
-} from "../../src/pages/Dashboard/data/variables.js";
+} from "../../data/variables.js";
 
 // module
 const valid_territories = [...canDivisions, ...usaDivisions, ...mexDivisions];

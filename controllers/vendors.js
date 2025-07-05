@@ -1,16 +1,15 @@
 // imports
 
-import locally_stored_vendors from "../src/pages/Dashboard/data/vendors.js";
+import locally_stored_vendors from "../data/vendors.js";
 import Vendor from "../db/models/Vendor.js";
-
-// TESTING FLAG: `vendors` source (set to `true` for development and/testing, `false` for production)
-const USE_LOCAL_VENDOR_STORAGE = false;
 
 // controllers
 export const getVendors = async (req, res, next) => {
-    const vendors = USE_LOCAL_VENDOR_STORAGE
-        ? locally_stored_vendors
-        : await Vendor.find({});
+    // Flag to determine `const vendors` data source
+    const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
+    const vendors = DB_AVAILABLE
+        ? await Vendor.find({})
+        : locally_stored_vendors;
 
     const {
         mode,
@@ -45,14 +44,14 @@ export const getVendors = async (req, res, next) => {
     ) {
         const searched_vendors = vendors.filter((vendor) => {
             // `vendors` source conditional
-            const vendor_coverage = USE_LOCAL_VENDOR_STORAGE
-                ? vendor.coverage
-                : vendor.coverage._doc;
+            const vendor_coverage = DB_AVAILABLE
+                ? vendor.coverage._doc
+                : vendor.coverage;
 
             // `validated` flag
-            if (!vendor.validated) {
-                return false;
-            }
+            // if (!vendor.validated) {
+            //     return false;
+            // }
 
             // Country coverage tracker
             let country_coverage = 0;

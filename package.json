@@ -8,7 +8,8 @@
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview",
-        "start": "nodemon server"
+        "serve": "nodemon server",
+        "start": "node server"
     },
     "dependencies": {
         "bootstrap": "^5.3.5",
