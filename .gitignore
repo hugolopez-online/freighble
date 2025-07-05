@@ -27,4 +27,4 @@ dist-ssr
 .env
 
 # misc
-generators
+generators/
