@@ -48,8 +48,10 @@ const VendorType = new mongoose.Schema(
 
 const VendorDomicile = new mongoose.Schema(
     {
+        // TODO remove <placeholder> after tests
         city: {
             type: String,
+            default: "<placeholder>",
             required: true,
         },
         territory: {
@@ -113,7 +115,7 @@ const VendorSchema = new mongoose.Schema(
         },
         // TODO format for phone
         phone: {
-            type: Number,
+            type: String,
             required: true,
         },
         domicile: {

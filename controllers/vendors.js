@@ -1,5 +1,4 @@
 // imports
-
 import locally_stored_vendors from "../data/vendors.js";
 import Vendor from "../db/models/Vendor.js";
 
@@ -100,12 +99,16 @@ export const getVendors = async (req, res, next) => {
 };
 
 export const createVendor = async (req, res, next) => {
-    const prospect_vendor = new Vendor(req.body);
-    await prospect_vendor.save();
+    try {
+        const prospect_vendor = new Vendor(req.body);
+        await prospect_vendor.save();
 
-    return res
-        .status(201)
-        .json({ msg: `Vendor ${prospect_vendor.company} created!` });
+        return res
+            .status(201)
+            .json({ msg: `Vendor ${prospect_vendor.company} created!` });
+    } catch (err) {
+        return res.status(500).json({ msg: `Something went wrong.`, err });
+    }
 };
 
 export const editVendor = async (req, res, next) => {
