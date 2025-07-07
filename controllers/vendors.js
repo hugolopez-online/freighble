@@ -11,6 +11,7 @@ export const getVendors = async (req, res, next) => {
         : locally_stored_vendors;
 
     const {
+        id,
         mode,
         o_country,
         d_country,
@@ -25,6 +26,14 @@ export const getVendors = async (req, res, next) => {
         fast,
         tanker_endorsement,
     } = req.query;
+
+    if (id) {
+        const searched_vendor = await Vendor.findById(id);
+
+        console.log(searched_vendor);
+
+        return res.status(200).json({ searched_vendor });
+    }
 
     if (
         mode &&

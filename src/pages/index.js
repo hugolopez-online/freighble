@@ -6,5 +6,22 @@ import Login from "./Login";
 import NotFound from "./NotFound";
 import Output from "./Output";
 import Register from "./Register";
+import VendorProfile from "./VendorProfile";
+import VendorRegister from "./VendorRegister";
+import Vendors from "./Vendors";
+import VendorsPortal from "./VendorsPortal";
 
-export { Dashboard, Footer, Header, Home, Login, NotFound, Output, Register };
+export {
+    Dashboard,
+    Footer,
+    Header,
+    Home,
+    Login,
+    NotFound,
+    Output,
+    Register,
+    VendorProfile,
+    VendorRegister,
+    Vendors,
+    VendorsPortal,
+};

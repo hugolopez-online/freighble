@@ -1,3 +1,6 @@
+// imports
+import { Link } from "react-router-dom";
+
 const Vendor = (props) => {
     const greeting = encodeURIComponent(
         `Hello team ${props.company},\n\nPlease help with pricing and confirming availability for the shipment below.\n\n`
@@ -95,7 +98,13 @@ const Vendor = (props) => {
                                         top: "0.4rem",
                                     }}
                                 >
-                                    {props.company}
+                                    <Link
+                                        to={`/vendors/vendor/${props._id}`}
+                                        className="link-dark link-underline-opacity-0 link-underline-opacity-25-hover"
+                                        target="_blank"
+                                    >
+                                        {props.company}
+                                    </Link>
                                 </span>
                                 <span style={{ fontSize: "0.7em" }}>
                                     <i

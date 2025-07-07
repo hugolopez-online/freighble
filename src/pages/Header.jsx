@@ -56,6 +56,15 @@ const Header = ({ anchor, setAnchor }) => {
                             >
                                 contact
                             </Link>
+                            <Link
+                                className="btn text-light px-2"
+                                to="/vendors"
+                                onClick={() => {
+                                    setAnchor("");
+                                }}
+                            >
+                                vendors
+                            </Link>
                         </div>
                     </div>
                     <Link
