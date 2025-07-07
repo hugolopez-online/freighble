@@ -28,11 +28,16 @@ export const getVendors = async (req, res, next) => {
     } = req.query;
 
     if (id) {
-        const searched_vendor = await Vendor.findById(id);
+        try {
+            const searched_vendor = await Vendor.findById(id);
 
-        console.log(searched_vendor);
+            console.log(searched_vendor);
 
-        return res.status(200).json({ searched_vendor });
+            return res.status(200).json({ searched_vendor });
+        } catch (err) {
+            console.error(err);
+            return res.status(500).json({});
+        }
     }
 
     if (

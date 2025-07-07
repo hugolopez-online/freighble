@@ -43,38 +43,36 @@ const VendorProfile = () => {
                                 aria-hidden="true"
                             ></div>
                         </div>
-                    ) : (
+                    ) : vendor ? (
                         <div className="card-body">
                             <h2 className="card-title">{vendor.company}</h2>
                             <hr />
                             <h4 className="card-subtitle text-secondary">
                                 Company information
                             </h4>
-                            <p className="card-text">
-                                <ul>
-                                    <li>
-                                        <strong>Domicile:</strong>{" "}
-                                        {vendor.domicile.city},{" "}
-                                        {vendor.domicile.territory},{" "}
-                                        {vendor.domicile.country}
-                                    </li>
-                                    {vendor.type.asset_based && (
-                                        <li>Asset-based</li>
-                                    )}
-                                    {vendor.type.freight_broker && (
-                                        <li>Freight broker</li>
-                                    )}
-                                    <li>
-                                        <strong>Phone:</strong> {vendor.phone}
-                                    </li>
-                                    <li>
-                                        <strong>Email:</strong> {vendor.email}
-                                    </li>
-                                    <li>
-                                        <strong>Attn:</strong> {vendor.contact}
-                                    </li>
-                                </ul>
-                            </p>
+                            <ul className="card-text">
+                                <li>
+                                    <strong>Domicile:</strong>{" "}
+                                    {vendor.domicile?.city},{" "}
+                                    {vendor.domicile?.territory},{" "}
+                                    {vendor.domicile?.country}
+                                </li>
+                                {vendor?.type?.asset_based && (
+                                    <li>Asset-based</li>
+                                )}
+                                {vendor?.type?.freight_broker && (
+                                    <li>Freight broker</li>
+                                )}
+                                <li>
+                                    <strong>Phone:</strong> {vendor.phone}
+                                </li>
+                                <li>
+                                    <strong>Email:</strong> {vendor.email}
+                                </li>
+                                <li>
+                                    <strong>Attn:</strong> {vendor.contact}
+                                </li>
+                            </ul>
                             <hr />
                             <h4 className="card-subtitle text-secondary">
                                 Coverage information
@@ -87,6 +85,12 @@ const VendorProfile = () => {
                                 quia itaque tempora exercitationem ut maxime
                                 consequuntur voluptate?
                             </p>
+                        </div>
+                    ) : (
+                        <div className="card-body">
+                            <div className="card-text">
+                                <p>Could not find that vendor</p>
+                            </div>
                         </div>
                     )}
                 </div>
