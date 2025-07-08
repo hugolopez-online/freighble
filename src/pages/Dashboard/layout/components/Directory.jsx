@@ -24,26 +24,28 @@ const Directory = ({ specs, routes }) => {
 
         const searchVendors = async () => {
             // async func to search vendors through API
-            const query_string = `/api/vendors?mode=${specs.mode}&o_country=${
-                specs.origin.country
-            }&d_country=${specs.destination.country}&border=${
-                specs.border
-            }&hazmat=${Number(specs.hazmat)}&team_drivers=${Number(
-                specs.team_drivers
-            )}&usa_bonded=${Number(specs.usa_bonded)}&can_bonded=${Number(
-                specs.can_bonded
-            )}&ctpat=${Number(specs.ctpat)}&twic=${Number(
-                specs.twic
-            )}&tsa=${Number(specs.tsa)}&fast=${Number(
-                specs.fast
-            )}&tanker_endorsement=${Number(specs.tanker_endorsement)}`;
+            const query_string = `/api/vendors/public/search?mode=${
+                specs.mode
+            }&o_country=${specs.origin.country}&d_country=${
+                specs.destination.country
+            }&border=${specs.border}&hazmat=${Number(
+                specs.hazmat
+            )}&team_drivers=${Number(specs.team_drivers)}&usa_bonded=${Number(
+                specs.usa_bonded
+            )}&can_bonded=${Number(specs.can_bonded)}&ctpat=${Number(
+                specs.ctpat
+            )}&twic=${Number(specs.twic)}&tsa=${Number(
+                specs.tsa
+            )}&fast=${Number(specs.fast)}&tanker_endorsement=${Number(
+                specs.tanker_endorsement
+            )}`;
 
             setIsFetching(true);
 
-            const searched_vendors_promise = await fetch(query_string);
+            const filtered_vendors_promise = await fetch(query_string);
 
-            const searched_vendors = await searched_vendors_promise.json();
-            const found_vendors = searched_vendors.searched_vendors.sort(
+            const filtered_vendors = await filtered_vendors_promise.json();
+            const found_vendors = filtered_vendors.filtered_vendors.sort(
                 (a, b) => a.company.localeCompare(b.company)
             );
 

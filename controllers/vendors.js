@@ -3,15 +3,27 @@ import locally_stored_vendors from "../data/vendors.js";
 import Vendor from "../db/models/Vendor.js";
 
 // controllers
-export const getVendors = async (req, res, next) => {
-    // Flag to determine `const vendors` data source
+export const viewVendors = async (req, res) => {
     const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
-    const vendors = DB_AVAILABLE
-        ? await Vendor.find({})
-        : locally_stored_vendors;
+
+    try {
+        const vendors = DB_AVAILABLE
+            ? await Vendor.find(req.body)
+            : locally_stored_vendors.filter((vendor) => {
+                  // will return all locally stored vendors, regardless of `req.body`
+                  return true;
+              });
+        return res.status(200).json({ vendors });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ msg: err, vendors: [] });
+    }
+};
+
+export const searchVendors = async (req, res) => {
+    const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
 
     const {
-        id,
         mode,
         o_country,
         d_country,
@@ -27,92 +39,100 @@ export const getVendors = async (req, res, next) => {
         tanker_endorsement,
     } = req.query;
 
-    if (id) {
-        try {
-            const searched_vendor = await Vendor.findById(id);
+    try {
+        if (
+            mode &&
+            o_country &&
+            d_country &&
+            border &&
+            hazmat &&
+            team_drivers &&
+            usa_bonded &&
+            can_bonded &&
+            ctpat &&
+            twic &&
+            tsa &&
+            fast &&
+            tanker_endorsement
+        ) {
+            const vendors = DB_AVAILABLE
+                ? await Vendor.find({ verified: false })
+                : locally_stored_vendors;
 
-            console.log(searched_vendor);
+            const filtered_vendors = vendors.filter((vendor) => {
+                const vendor_coverage = DB_AVAILABLE
+                    ? vendor.coverage._doc
+                    : vendor.coverage;
 
-            return res.status(200).json({ searched_vendor });
-        } catch (err) {
-            console.error(err);
-            return res.status(500).json({});
+                let country_coverage = 0;
+
+                for (let country in vendor_coverage) {
+                    if (country_coverage === 2) {
+                        break;
+                    }
+
+                    if (
+                        vendor_coverage[country].territory.length !== 0 &&
+                        vendor_coverage[country].country_code == o_country
+                    ) {
+                        country_coverage++;
+                    }
+
+                    if (
+                        vendor_coverage[country].territory.length !== 0 &&
+                        vendor_coverage[country].country_code == d_country
+                    ) {
+                        country_coverage++;
+                    }
+                }
+
+                const is_qualified =
+                    vendor.modes.includes(mode) &&
+                    country_coverage === 2 &&
+                    vendor.borders.includes(border.split("+").join(" ")) &&
+                    (!Number(hazmat) || vendor.hazmat) &&
+                    (!Number(team_drivers) || vendor.team_drivers) &&
+                    (!Number(usa_bonded) || vendor.usa_bonded) &&
+                    (!Number(can_bonded) || vendor.can_bonded) &&
+                    (!Number(ctpat) || vendor.ctpat) &&
+                    (!Number(twic) || vendor.twic) &&
+                    (!Number(tsa) || vendor.tsa) &&
+                    (!Number(fast) || vendor.fast) &&
+                    (!Number(tanker_endorsement) || vendor.tanker_endorsement);
+
+                return is_qualified;
+            });
+
+            return res.status(200).json({ filtered_vendors });
         }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ msg: err, filtered_vendors: [] });
     }
 
-    if (
-        mode &&
-        o_country &&
-        d_country &&
-        border &&
-        hazmat &&
-        team_drivers &&
-        usa_bonded &&
-        can_bonded &&
-        ctpat &&
-        twic &&
-        tsa &&
-        fast &&
-        tanker_endorsement
-    ) {
-        const searched_vendors = vendors.filter((vendor) => {
-            // `vendors` source conditional
-            const vendor_coverage = DB_AVAILABLE
-                ? vendor.coverage._doc
-                : vendor.coverage;
-
-            // `validated` flag
-            // if (!vendor.validated) {
-            //     return false;
-            // }
-
-            // Country coverage tracker
-            let country_coverage = 0;
-
-            for (let country in vendor_coverage) {
-                if (country_coverage === 2) {
-                    break;
-                }
-
-                if (
-                    vendor_coverage[country].territory.length !== 0 &&
-                    vendor_coverage[country].country_code == o_country
-                ) {
-                    country_coverage++;
-                }
-
-                if (
-                    vendor_coverage[country].territory.length !== 0 &&
-                    vendor_coverage[country].country_code == d_country
-                ) {
-                    country_coverage++;
-                }
-            }
-
-            const is_qualified =
-                vendor.modes.includes(mode) &&
-                country_coverage === 2 &&
-                vendor.borders.includes(border.split("+").join(" ")) &&
-                (!Number(hazmat) || vendor.hazmat) &&
-                (!Number(team_drivers) || vendor.team_drivers) &&
-                (!Number(usa_bonded) || vendor.usa_bonded) &&
-                (!Number(can_bonded) || vendor.can_bonded) &&
-                (!Number(ctpat) || vendor.ctpat) &&
-                (!Number(twic) || vendor.twic) &&
-                (!Number(tsa) || vendor.tsa) &&
-                (!Number(fast) || vendor.fast) &&
-                (!Number(tanker_endorsement) || vendor.tanker_endorsement);
-
-            return is_qualified;
-        });
-
-        return res.status(200).json({ searched_vendors });
-    }
-
-    return res.status(200).json({ vendors });
+    return res.status(200).json({ filtered_vendors: [] });
 };
 
-export const createVendor = async (req, res, next) => {
+export const findVendor = async (req, res) => {
+    const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
+
+    const { id } = req.params;
+
+    if (!DB_AVAILABLE) {
+        console.warn("No support for this feature with locally stored data.");
+        return false;
+    }
+
+    try {
+        const vendor = await Vendor.findById(id);
+        return res.status(200).json({ vendor });
+    } catch (err) {
+        console.error(err);
+        return res.status(200).json({ msg: err, vendor: {} });
+    }
+};
+
+export const createVendor = async (req, res) => {
     try {
         const prospect_vendor = new Vendor(req.body);
         await prospect_vendor.save();
@@ -125,7 +145,7 @@ export const createVendor = async (req, res, next) => {
     }
 };
 
-export const editVendor = async (req, res, next) => {
+export const editVendor = async (req, res) => {
     const { id } = req.params;
 
     if (!id) {
@@ -143,7 +163,7 @@ export const editVendor = async (req, res, next) => {
     return res.status(200).json({ msg: `Edited ${vendor.company}` });
 };
 
-export const deleteVendor = async (req, res, next) => {
+export const deleteVendor = async (req, res) => {
     const { id } = req.params;
 
     if (!id) {

@@ -9,21 +9,24 @@ const VendorProfile = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        const searchVendor = async () => {
+        const findVendor = async () => {
+            if (isFetching || vendor.company) {
+                return;
+            }
             // async func to search vendors through API
-            const query_string = `/api/vendors?id=${id}`;
+            const query_string = `/api/vendors/public/profile/${id}`;
 
             setIsFetching(true);
 
-            const searched_vendor_promise = await fetch(query_string);
+            const found_vendor_promise = await fetch(query_string);
 
-            const searched_vendor = await searched_vendor_promise.json();
-            const found_vendor = searched_vendor.searched_vendor;
+            const found_vendor_doc = await found_vendor_promise.json();
+            const found_vendor = found_vendor_doc.vendor;
             setVendor(found_vendor);
             setIsFetching(false);
         };
 
-        searchVendor();
+        findVendor();
     }, []);
 
     return (

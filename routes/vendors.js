@@ -2,7 +2,9 @@
 
 import { Router } from "express";
 import {
-    getVendors,
+    viewVendors,
+    searchVendors,
+    findVendor,
     createVendor,
     editVendor,
     deleteVendor,
@@ -12,9 +14,11 @@ const router = Router();
 
 // routes
 
-router.get("/", getVendors);
-router.post("/", createVendor);
-router.patch("/:id", editVendor);
-router.delete("/:id", deleteVendor);
+router.get("/admin/view", viewVendors);
+router.get("/public/search", searchVendors);
+router.get("/public/profile/:id", findVendor);
+router.post("/public/create", createVendor);
+router.patch("/public/edit/:id", editVendor);
+router.delete("/public/delete/:id", deleteVendor);
 
 export default router;
