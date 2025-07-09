@@ -22,7 +22,7 @@
 }
 
 #website_header {
-    z-index: 99;
+    z-index: 5000;
 }
 
 .website-header {

@@ -89,7 +89,7 @@ export const searchVendors = async (req, res) => {
                 const is_qualified =
                     vendor.modes.includes(mode) &&
                     country_coverage === 2 &&
-                    vendor.borders.includes(border.split("+").join(" ")) &&
+                    vendor.borders.includes(border) &&
                     (!Number(hazmat) || vendor.hazmat) &&
                     (!Number(team_drivers) || vendor.team_drivers) &&
                     (!Number(usa_bonded) || vendor.usa_bonded) &&

@@ -1,11 +1,11 @@
 // imports
 import mongoose from "mongoose";
 import {
+    modes_values,
+    borders_values,
     canDivisions,
     usaDivisions,
     mexDivisions,
-    transportationModes,
-    borderCrossingPorts,
 } from "../../data/variables.js";
 
 // module
@@ -125,7 +125,7 @@ const VendorSchema = new mongoose.Schema(
         modes: [
             {
                 type: String,
-                enum: transportationModes,
+                enum: modes_values,
                 required: true,
             },
         ],
@@ -196,10 +196,10 @@ const VendorSchema = new mongoose.Schema(
             type: [
                 {
                     type: String,
-                    enum: borderCrossingPorts,
+                    enum: borders_values,
                 },
             ],
-            default: ["None"],
+            default: ["none"],
             required: true,
         },
         // TODO include regex
@@ -232,8 +232,8 @@ const VendorSchema = new mongoose.Schema(
 );
 
 VendorSchema.pre("save", function (next) {
-    if (!this.borders.includes("None")) {
-        this.borders.push("None");
+    if (!this.borders.includes("none")) {
+        this.borders.push("none");
     }
 
     this.borders = [...new Set(this.borders)];

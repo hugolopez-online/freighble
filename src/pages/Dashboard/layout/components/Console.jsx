@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { modes, borders } from "data/variables";
 
 const Console = (props) => {
     // states
@@ -35,7 +36,7 @@ const Console = (props) => {
                                 props.specs.usa_bonded ? "U.S. bonded " : ""
                             }${props.specs.can_bonded ? "Canada bonded " : ""}${
                                 props.specs.hazmat ? "Hazmat " : ""
-                            }${props.specs.mode} from ${
+                            }${modes[props.specs.mode]} from ${
                                 props.specs.origin.city
                                     ? props.specs.origin.city + ", "
                                     : ""
@@ -49,9 +50,9 @@ const Console = (props) => {
                                     ? " with Team Drivers"
                                     : ""
                             }${
-                                props.specs.border !== "None"
+                                props.specs.border !== "none"
                                     ? ", crossing through " +
-                                      props.specs.border.split("+").join(" ")
+                                      borders[props.specs.border]
                                     : ""
                             }${
                                 props.specs.ctpat ||

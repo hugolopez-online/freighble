@@ -1,13 +1,15 @@
 // imports
 import { useEffect, useState } from "react";
 import {
-    transportationModes,
+    modes,
+    modes_values,
+    borders,
+    borders_values,
     canDivisions,
     usaDivisions,
     mexDivisions,
-    borderCrossingPorts,
 } from "data/variables";
-import geo_lookup from "../handlers/geo_meta";
+import geo_lookup from "data/geo_meta";
 import { search_options } from "data/search_options";
 
 // module
@@ -17,7 +19,7 @@ const default_form_data = {
     origin_territory: "",
     destination_city: "",
     destination_territory: "",
-    border: "None",
+    border: "none",
     hazmat: false,
     team_drivers: false,
     usa_bonded: false,
@@ -82,7 +84,7 @@ const Search = (props) => {
                     region: destination_region,
                     country: destination_country,
                 },
-                border: formData.border.split(" ").join("+"),
+                border: formData.border,
                 hazmat: formData.hazmat,
                 team_drivers: formData.team_drivers,
                 usa_bonded: formData.usa_bonded,
@@ -147,7 +149,7 @@ const Search = (props) => {
                         formData.destination_territory
                     )
                         ? ""
-                        : "None",
+                        : "none",
                 };
             });
         } else if (location_type === destination) {
@@ -158,7 +160,7 @@ const Search = (props) => {
                     destination_territory: territory,
                     border: isCrossBorder(formData.origin_territory, territory)
                         ? ""
-                        : "None",
+                        : "none",
                 };
             });
         } else {
@@ -185,7 +187,7 @@ const Search = (props) => {
                     origin_territory: props.template.origin.territory,
                     destination_city: props.template.destination.city,
                     destination_territory: props.template.destination.territory,
-                    border: props.template.border.split("+").join(" "),
+                    border: props.template.border,
                     hazmat: props.template.hazmat,
                     team_drivers: props.template.team_drivers,
                     usa_bonded: props.template.usa_bonded,
@@ -243,13 +245,13 @@ const Search = (props) => {
                         >
                             Transportation mode
                         </option>
-                        {transportationModes.map((mode, index) => {
+                        {modes_values.map((mode, index) => {
                             return (
                                 <option
                                     key={mode.concat("-mode-", index)}
                                     value={mode}
                                 >
-                                    {mode}
+                                    {modes[mode]}
                                 </option>
                             );
                         })}
@@ -342,7 +344,7 @@ const Search = (props) => {
                                         destination_territory
                                     )
                                         ? ""
-                                        : "None",
+                                        : "none",
                                 };
                             });
                         }}
@@ -489,7 +491,7 @@ const Search = (props) => {
                                         destination_territory
                                     )
                                         ? ""
-                                        : "None",
+                                        : "none",
                                 };
                             });
                         }}
@@ -553,7 +555,7 @@ const Search = (props) => {
             <div
                 id="border-fieldset"
                 className={`row mb-2 ${
-                    formData.border !== "None" ? "" : "d-none"
+                    formData.border !== "none" ? "" : "d-none"
                 }`}
             >
                 <div className="col-12">
@@ -590,7 +592,7 @@ const Search = (props) => {
                             style={{ display: "none" }}
                         ></option>
                         <option
-                            value="None"
+                            value="none"
                             hidden={
                                 formData.origin_territory &&
                                 formData.destination_territory &&
@@ -602,17 +604,15 @@ const Search = (props) => {
                         >
                             None
                         </option>
-                        {borderCrossingPorts
-                            .filter((border) => border != "None")
-                            .map((border) => {
+                        {borders_values
+                            .filter((border) => border !== "none")
+                            .map((border, index) => {
                                 return (
                                     <option
-                                        key={border
-                                            .replace(/ /g, "-")
-                                            .replace(/,/g, "_")}
+                                        key={border.concat("-border-", index)}
                                         value={border}
                                     >
-                                        {border}
+                                        {borders[border]}
                                     </option>
                                 );
                             })}

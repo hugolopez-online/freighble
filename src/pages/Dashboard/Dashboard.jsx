@@ -25,7 +25,7 @@ const default_specs = {
         region: "",
         country: "",
     },
-    border: "None",
+    border: "none",
     hazmat: false,
     team_drivers: false,
     usa_bonded: false,

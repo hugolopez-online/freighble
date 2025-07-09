@@ -1,5 +1,6 @@
 // imports
 import { Link } from "react-router-dom";
+import { modes, borders } from "data/variables";
 
 const Vendor = (props) => {
     const greeting = encodeURIComponent(
@@ -14,15 +15,14 @@ const Vendor = (props) => {
         `Destination: ${props.specs.destination.city}, ${
             props.specs.destination.territory
         } (${props.specs.destination_date || "date TBD"})${
-            props.specs.border !== "None"
-                ? "\nBorder crossing through: " +
-                  props.specs.border.split("+").join(" ")
+            props.specs.border !== "none"
+                ? "\nBorder crossing through: " + borders[props.specs.border]
                 : ""
         }\n\n`
     );
 
     const specs_info = encodeURIComponent(
-        `Mode: ${props.specs.mode}\nUnit type: ${
+        `Mode: ${modes[props.specs.mode]}\nUnit type: ${
             props.specs.unit_type || "(not defined)"
         }\nCargo details: ${props.specs.cargo_details || "(not defined)"}\n\n`
     );
@@ -292,13 +292,12 @@ const Vendor = (props) => {
                                     } ms-2`}
                                 ></i>
                             </span>
-                            {props.specs.border !== "None" && (
+                            {props.specs.border !== "none" && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
                                 >
-                                    Border crossing:{" "}
-                                    {props.specs.border.split("+").join(" ")}
+                                    Border crossing: {props.specs.border}
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}

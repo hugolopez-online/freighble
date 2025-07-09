@@ -102,7 +102,7 @@ import {
     ZAC,
 } from "data/variables";
 
-const geo_tree = {
+export const geo_tree = {
     CAN: {
         Pacific: [BC],
         Prairies: [AB, MB, SK],

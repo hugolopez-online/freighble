@@ -1,33 +1,33 @@
-export const transportationModes = [
-    "Truckload",
-    "Reefer Truckload",
-    "Flatbed",
-    "Step Deck",
-    "Specialized",
-    "Partial",
-    "Reefer Partial",
-    "LTL",
-    "Reefer LTL",
-    "Intermodal",
-    "Expedited",
-    "Drayage",
-];
+// modes
+export const modes = {
+    dedicated_van: "Dedicated Van",
+    dedicated_reefer: "Dedicated Reefer",
+    dedicated_flatbed: "Dedicated Flatbed",
+    partial_van: "Partial Van",
+    partial_reefer: "Partial Reefer",
+    partial_flatbed: "Partial Flatbed",
+    ltl: "LTL",
+    specialized: "Specialized (OD/OW)",
+    intermodal: "Intermodal",
+};
 
-export const [
-    Truckload,
-    ReeferTruckload,
-    Flatbed,
-    StepDeck,
-    Specialized,
-    Partial,
-    ReeferPartial,
-    LTL,
-    ReeferLTL,
-    Intermodal,
-    Expedited,
-    Drayage,
-] = transportationModes;
+export const modes_values = Object.keys(modes);
 
+// borders
+export const borders = {
+    none: "None",
+    otay_ca: "Otay, CA",
+    calexico_ca: "Calexico, CA",
+    nogales_az: "Nogales, AZ",
+    el_paso_tx: "El Paso, TX",
+    laredo_tx: "Laredo, TX",
+    hidalgo_tx: "Hidalgo, TX",
+    brownsville_tx: "Brownsville, TX",
+};
+
+export const borders_values = Object.keys(borders);
+
+// locations
 export const canDivisions = [
     "AB",
     "BC",
@@ -226,25 +226,3 @@ export const [
     YUC,
     ZAC,
 ] = mexDivisions;
-
-export const borderCrossingPorts = [
-    "None",
-    "Otay, CA",
-    "Calexico, CA",
-    "Nogales, AZ",
-    "El Paso, TX",
-    "Laredo, TX",
-    "Hidalgo, TX",
-    "Brownsville, TX",
-];
-
-export const [
-    None,
-    Otay,
-    Calexico,
-    Nogales,
-    ElPaso,
-    Laredo,
-    Hidalgo,
-    Brownsville,
-] = borderCrossingPorts;
