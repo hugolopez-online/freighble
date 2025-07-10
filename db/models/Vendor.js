@@ -231,6 +231,10 @@ const VendorSchema = new mongoose.Schema(
     }
 );
 
+VendorSchema.path("type").validate((value) => {
+    return value.asset_based || value.freight_broker;
+});
+
 VendorSchema.pre("save", function (next) {
     if (!this.borders.includes("none")) {
         this.borders.push("none");

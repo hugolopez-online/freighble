@@ -13,7 +13,10 @@ export const viewVendors = async (req, res) => {
                   // will return all locally stored vendors, regardless of `req.body`
                   return true;
               });
-        return res.status(200).json({ vendors });
+        return res.status(200).json({
+            msg: `Retrieved ${vendors.length} vendors successfully.`,
+            vendors,
+        });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ msg: err, vendors: [] });
@@ -103,7 +106,10 @@ export const searchVendors = async (req, res) => {
                 return is_qualified;
             });
 
-            return res.status(200).json({ filtered_vendors });
+            return res.status(200).json({
+                msg: `Filtered ${filtered_vendors.length} vendors successfully.`,
+                filtered_vendors,
+            });
         }
     } catch (err) {
         console.error(err);
@@ -125,7 +131,9 @@ export const findVendor = async (req, res) => {
 
     try {
         const vendor = await Vendor.findById(id);
-        return res.status(200).json({ vendor });
+        return res
+            .status(200)
+            .json({ msg: `Found vendor ${vendor.company}.`, vendor });
     } catch (err) {
         console.error(err);
         return res.status(200).json({ msg: err, vendor: {} });
@@ -141,7 +149,9 @@ export const createVendor = async (req, res) => {
             .status(201)
             .json({ msg: `Vendor ${prospect_vendor.company} created!` });
     } catch (err) {
-        return res.status(500).json({ msg: `Something went wrong.`, err });
+        return res
+            .status(500)
+            .json({ msg: `Something went wrong.`, error: err });
     }
 };
 

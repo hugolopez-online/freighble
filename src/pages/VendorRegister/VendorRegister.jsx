@@ -10,6 +10,7 @@ import {
     mexDivisions,
 } from "data/variables";
 import { geo_tree } from "data/geo_meta";
+import Coverage from "./layout/components/Coverage";
 
 // module
 const coverage_contries = Object.keys(geo_tree);
@@ -118,16 +119,12 @@ const VendorRegister = () => {
                         </div>
                         <div className="col-6">
                             <label
-                                htmlFor="company_type"
                                 className="fw-normal text-secondary"
                                 style={{ fontSize: "0.85em" }}
                             >
                                 company type
                             </label>
-                            <div
-                                id="company_type"
-                                className="col-12"
-                            >
+                            <div className="col-12">
                                 <div className="form-check form-check-inline">
                                     <input
                                         className="form-check-input"
@@ -278,7 +275,7 @@ const VendorRegister = () => {
                         >
                             domicile
                         </label>
-                        <div className="input-group dropdown col-12">
+                        <div className="input-group col-12">
                             <input
                                 type="text"
                                 className="form-control"
@@ -379,44 +376,20 @@ const VendorRegister = () => {
                         </div>
                     </div>
 
-                    <fieldset className="row mb-4"></fieldset>
-
-                    <input
-                        type="checkbox"
-                        className="btn-check"
-                        id="parent_check"
-                        autocomplete="off"
-                    />
-                    <label
-                        className="btn btn-outline-primary rounded-pill"
-                        for="parent_check"
-                    >
-                        Parent check
-                    </label>
-                    <input
-                        type="checkbox"
-                        className="btn-check"
-                        id="first_child_check"
-                        autocomplete="off"
-                    />
-                    <label
-                        className="btn btn-outline-primary rounded-pill"
-                        for="first_child_check"
-                    >
-                        First child check
-                    </label>
-                    <input
-                        type="checkbox"
-                        className="btn-check"
-                        id="second_child_check"
-                        autocomplete="off"
-                    />
-                    <label
-                        className="btn btn-outline-primary rounded-pill"
-                        for="second_child_check"
-                    >
-                        First child check
-                    </label>
+                    <fieldset className="row mb-4">
+                        {coverage_contries.map((country_code, index) => {
+                            return (
+                                <Coverage
+                                    key={`country_code-${country_code}`}
+                                    geo_tree={geo_tree}
+                                    country_code={country_code}
+                                    countries_labels={countries_labels}
+                                    formData={formData}
+                                    setFormData={setFormData}
+                                />
+                            );
+                        })}
+                    </fieldset>
 
                     <button
                         type="submit"

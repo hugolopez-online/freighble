@@ -36,7 +36,8 @@ const Vendor = (props) => {
             props.specs.ctpat ||
             props.specs.twic ||
             props.specs.tsa ||
-            props.specs.fast
+            props.specs.fast ||
+            props.specs.tanker_endorsement
                 ? "Special requirements:\n" +
                   (props.specs.hazmat ? "*Hazmat handling\n" : "") +
                   (props.specs.team_drivers ? "*Team drivers required\n" : "") +
@@ -64,7 +65,11 @@ const Vendor = (props) => {
     );
 
     const EMAIL_SUBJECT = encodeURIComponent(
-        `${props.specs.mode} (${props.specs.origin.city}, ${props.specs.origin.territory} to ${props.specs.destination.city}, ${props.specs.destination.territory}) [${props.company}]`
+        `${modes[props.specs.mode]} (${props.specs.origin.city}, ${
+            props.specs.origin.territory
+        } to ${props.specs.destination.city}, ${
+            props.specs.destination.territory
+        }) [${props.company}]`
     );
     const EMAIL_BODY =
         greeting +
@@ -207,7 +212,7 @@ const Vendor = (props) => {
                                 className="badge rounded-pill text-bg-success me-1"
                                 style={{ fontSize: "0.75rem" }}
                             >
-                                {props.specs.mode}
+                                {modes[props.specs.mode]}
                                 <i className="bi bi-check-circle-fill ms-2"></i>
                             </span>
                             <span
@@ -297,7 +302,8 @@ const Vendor = (props) => {
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
                                 >
-                                    Border crossing: {props.specs.border}
+                                    Border crossing:{" "}
+                                    {borders[props.specs.border]}
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}

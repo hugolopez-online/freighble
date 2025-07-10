@@ -127,7 +127,7 @@ export const geo_tree = {
         Bajio: [AGS, GTO, QRO, SLP],
         Occidente: [COL, JAL, MCH, NAY],
         Centro: [CMX, HGO, EMX, MOR, PUE, TLA],
-        "Sur-Sureste": [CAM, CHP, GRO, OAX, ROO, TAB, VER, VER, YUC],
+        "Sur-Sureste": [CAM, CHP, GRO, OAX, ROO, TAB, VER, YUC],
     },
 };
 
