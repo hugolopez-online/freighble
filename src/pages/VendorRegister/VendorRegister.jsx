@@ -1,5 +1,6 @@
 // imports
-import { useState } from "react";
+import { useState, Fragment } from "react";
+import { Toast } from "bootstrap";
 import {
     modes,
     modes_values,
@@ -10,7 +11,8 @@ import {
     mexDivisions,
 } from "data/variables";
 import { geo_tree } from "data/geo_meta";
-import Coverage from "./layout/components/Coverage";
+import geo_lookup from "data/geo_meta";
+import GeoCoverage from "./layout/components/GeoCoverage";
 
 // module
 const coverage_contries = Object.keys(geo_tree);
@@ -64,342 +66,636 @@ const default_form_data = {
 };
 
 const VendorRegister = () => {
+    // state
     const [formData, setFormData] = useState(default_form_data);
 
-    const handleRegistration = (e) => {
+    // module
+    const additional_services = {
+        hazmat: "Hazmat certified",
+        team_drivers: "Team drivers",
+        usa_bonded: "U.S. bonded",
+        can_bonded: "Canada bonded",
+        ctpat: "C-TPAT certified",
+        twic: "TWIC drivers",
+        tsa: "TSA drivers",
+        fast: "FAST certified",
+        tanker_endorsement: "Tanker Endorsement drivers",
+    };
+
+    const additional_services_values = Object.keys(additional_services);
+
+    // handlers
+    const handleRegistration = async (e, unit) => {
+        const created_alert = document.getElementById("created_alert");
+        const toast = Toast.getOrCreateInstance(created_alert);
         e.preventDefault();
 
-        console.log(formData);
+        const url = "/api/vendors/public/create";
+
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(unit),
+            });
+
+            const responseData = await response.json(); // Parse the JSON response
+
+            if (!response.ok) {
+                throw new Error(
+                    `HTTP error: ${JSON.stringify(responseData.error.errors)}`
+                );
+            }
+
+            console.log("Success:", responseData);
+
+            setFormData(default_form_data);
+            toast.show();
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
+    const modeSelection = (e) => {
+        const mode_coverage = formData.modes;
+        const selection = e.target.value;
+
+        if (mode_coverage.includes(selection)) {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    modes: prev.modes.filter((mode) => mode !== selection),
+                };
+            });
+        } else {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    modes: [...prev.modes, selection],
+                };
+            });
+        }
+    };
+
+    const borderSelection = (e) => {
+        const border_coverage = formData.borders;
+        const selection = e.target.value;
+
+        if (border_coverage.includes(selection)) {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    borders: prev.borders.filter(
+                        (border) => border !== selection
+                    ),
+                };
+            });
+        } else {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    borders: [...prev.borders, selection],
+                };
+            });
+        }
+    };
+
+    const serviceSelection = (e) => {
+        const service = e.target.value;
+
+        if (formData[service]) {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    [service]: false,
+                };
+            });
+        } else {
+            setFormData((prev) => {
+                return {
+                    ...prev,
+                    [service]: true,
+                };
+            });
+        }
     };
 
     return (
-        <div className="row justify-content-center pt-5">
-            <div className="col-10 py-4">
-                <h4 className="display-4 py-4">Vendor Registration</h4>
-                <form
-                    id="vendor_register"
-                    className="shadow-sm border rounded-4 p-4 bg-light bg-gradient needs-validation"
-                    onSubmit={handleRegistration}
-                >
-                    <div className="row border-bottom mb-4">
-                        <div className="col-12">
-                            <h6 className="display-6 text-secondary fs-2">
-                                company details
-                            </h6>
-                        </div>
-                    </div>
-
-                    <fieldset className="row mb-4">
-                        <div className="col-6">
-                            <label
-                                htmlFor="company_name"
-                                className="fw-normal text-secondary"
-                                style={{ fontSize: "0.85em" }}
-                            >
-                                company name
-                            </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Business DBA name"
-                                id="company_name"
-                                name="company_name"
-                                value={formData.company}
-                                onChange={(e) => {
-                                    setFormData((prev) => {
-                                        return {
-                                            ...prev,
-                                            company: e.target.value,
-                                        };
-                                    });
-                                }}
-                                autoComplete="off"
-                                required
-                            />
-                        </div>
-                        <div className="col-6">
-                            <label
-                                className="fw-normal text-secondary"
-                                style={{ fontSize: "0.85em" }}
-                            >
-                                company type
-                            </label>
+        <Fragment>
+            <div className="row justify-content-center pt-5">
+                <div className="col-10 py-4">
+                    <h4 className="display-4 py-4">Vendor Registration</h4>
+                    <form
+                        id="vendor_register"
+                        className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
+                        onSubmit={(e) => handleRegistration(e, formData)}
+                    >
+                        {/* Company details */}
+                        <div className="row border-bottom mb-4">
                             <div className="col-12">
-                                <div className="form-check form-check-inline">
-                                    <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        id="asset_based"
-                                        name="asset_based"
-                                        checked={formData.type.asset_based}
-                                        onChange={(e) => {
-                                            setFormData((prev) => {
-                                                return {
-                                                    ...prev,
-                                                    type: {
-                                                        ...prev.type,
-                                                        asset_based:
-                                                            e.target.checked,
-                                                    },
-                                                };
-                                            });
-                                        }}
-                                    />
-                                    <label
-                                        className="form-check-label"
-                                        htmlFor="asset_based"
-                                    >
-                                        Asset-based
-                                    </label>
-                                </div>
-                                <div className="form-check form-check-inline">
-                                    <input
-                                        className="form-check-input"
-                                        type="checkbox"
-                                        id="freight_broker"
-                                        name="freight_broker"
-                                        checked={formData.type.freight_broker}
-                                        onChange={(e) => {
-                                            setFormData((prev) => {
-                                                return {
-                                                    ...prev,
-                                                    type: {
-                                                        ...prev.type,
-                                                        freight_broker:
-                                                            e.target.checked,
-                                                    },
-                                                };
-                                            });
-                                        }}
-                                    />
-                                    <label
-                                        className="form-check-label"
-                                        htmlFor="freight_broker"
-                                    >
-                                        Freight broker
-                                    </label>
-                                </div>
+                                <h6 className="display-6 text-secondary fs-2">
+                                    company details
+                                </h6>
                             </div>
                         </div>
-                    </fieldset>
 
-                    <fieldset className="row mb-4">
-                        <div className="col-4">
-                            <label
-                                htmlFor="company_contact"
-                                className="fw-normal text-secondary"
-                                style={{ fontSize: "0.85em" }}
-                            >
-                                quoting contact
-                            </label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="Contact name"
-                                id="company_contact"
-                                name="company_contact"
-                                value={formData.contact}
-                                onChange={(e) => {
-                                    setFormData((prev) => {
-                                        return {
-                                            ...prev,
-                                            contact: e.target.value,
-                                        };
-                                    });
-                                }}
-                                autoComplete="off"
-                                required
-                            />
-                        </div>
-                        <div className="col-4">
-                            <label
-                                htmlFor="contact_email"
-                                className="fw-normal text-secondary"
-                                style={{ fontSize: "0.85em" }}
-                            >
-                                contact email
-                            </label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Contact email"
-                                id="contact_email"
-                                name="contact_email"
-                                value={formData.email}
-                                onChange={(e) => {
-                                    setFormData((prev) => {
-                                        return {
-                                            ...prev,
-                                            email: e.target.value,
-                                        };
-                                    });
-                                }}
-                                autoComplete="off"
-                                required
-                            />
-                        </div>
-                        <div className="col-4">
-                            <label
-                                htmlFor="contact_phone"
-                                className="fw-normal text-secondary"
-                                style={{ fontSize: "0.85em" }}
-                            >
-                                contact phone
-                            </label>
-                            <input
-                                type="tel"
-                                className="form-control"
-                                placeholder="Contact phone"
-                                id="contact_phone"
-                                name="contact_phone"
-                                value={formData.phone}
-                                onChange={(e) => {
-                                    setFormData((prev) => {
-                                        return {
-                                            ...prev,
-                                            phone: e.target.value,
-                                        };
-                                    });
-                                }}
-                                autoComplete="off"
-                                required
-                            />
-                        </div>
-                    </fieldset>
-
-                    <fieldset className="row mb-4">
-                        <label
-                            htmlFor="domicile_city"
-                            className="fw-normal text-secondary"
-                            style={{ fontSize: "0.85em" }}
-                        >
-                            domicile
-                        </label>
-                        <div className="input-group col-12">
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="City"
-                                id="domicile_city"
-                                name="domicile_city"
-                                value={formData.domicile.city}
-                                onChange={(e) => {
-                                    setFormData((prev) => {
-                                        return {
-                                            ...prev,
-                                            domicile: {
-                                                ...prev.domicile,
-                                                city: e.target.value,
-                                            },
-                                        };
-                                    });
-                                }}
-                                autoComplete="off"
-                            />
-                            <select
-                                className="form-select"
-                                id="domicile_territory"
-                                name="domicile_territory"
-                                value={formData.domicile.territory}
-                                onChange={(e) => {
-                                    setFormData((prev) => {
-                                        return {
-                                            ...prev,
-                                            domicile: {
-                                                ...prev.domicile,
-                                                territory: e.target.value,
-                                            },
-                                        };
-                                    });
-                                }}
-                                required
-                            >
-                                <option
-                                    value=""
-                                    style={{ display: "none" }}
+                        <fieldset className="row mb-4">
+                            <div className="col-6">
+                                <label
+                                    htmlFor="company_name"
+                                    className="fw-normal text-secondary"
+                                    style={{ fontSize: "0.85em" }}
                                 >
-                                    Territory
-                                </option>
-                                <option disabled>Canada</option>
-                                {canDivisions.map((territory, index) => {
-                                    return (
-                                        <option
-                                            key={territory.concat(
-                                                "-domicile_territory-",
-                                                index
-                                            )}
-                                            value={territory}
-                                        >
-                                            {territory}
-                                        </option>
-                                    );
-                                })}
-                                <option disabled></option>
-                                <option disabled>United States</option>
-                                {usaDivisions.map((territory, index) => {
-                                    return (
-                                        <option
-                                            key={territory.concat(
-                                                "-domicile_territory-",
-                                                index
-                                            )}
-                                            value={territory}
-                                        >
-                                            {territory}
-                                        </option>
-                                    );
-                                })}
-                                <option disabled></option>
-                                <option disabled>Mexico</option>
-                                {mexDivisions.map((territory, index) => {
-                                    return (
-                                        <option
-                                            key={territory.concat(
-                                                "-domicile_territory-",
-                                                index
-                                            )}
-                                            value={territory}
-                                        >
-                                            {territory}
-                                        </option>
-                                    );
-                                })}
-                            </select>
-                        </div>
-                    </fieldset>
-
-                    <div className="row border-bottom mb-4">
-                        <div className="col-12">
-                            <h6 className="display-6 text-secondary fs-2">
-                                coverage details
-                            </h6>
-                        </div>
-                    </div>
-
-                    <fieldset className="row mb-4">
-                        {coverage_contries.map((country_code, index) => {
-                            return (
-                                <Coverage
-                                    key={`country_code-${country_code}`}
-                                    geo_tree={geo_tree}
-                                    country_code={country_code}
-                                    countries_labels={countries_labels}
-                                    formData={formData}
-                                    setFormData={setFormData}
+                                    company name
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Business DBA name"
+                                    id="company_name"
+                                    name="company_name"
+                                    value={formData.company}
+                                    onChange={(e) => {
+                                        setFormData((prev) => {
+                                            return {
+                                                ...prev,
+                                                company: e.target.value,
+                                            };
+                                        });
+                                    }}
+                                    autoComplete="off"
+                                    required
                                 />
-                            );
-                        })}
-                    </fieldset>
+                            </div>
+                            <div className="col-6">
+                                <label
+                                    className="fw-normal text-secondary"
+                                    style={{ fontSize: "0.85em" }}
+                                >
+                                    company type
+                                </label>
+                                <div className="col-12">
+                                    <div className="form-check form-check-inline">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="asset_based"
+                                            name="asset_based"
+                                            checked={formData.type.asset_based}
+                                            onChange={(e) => {
+                                                setFormData((prev) => {
+                                                    return {
+                                                        ...prev,
+                                                        type: {
+                                                            ...prev.type,
+                                                            asset_based:
+                                                                e.target
+                                                                    .checked,
+                                                        },
+                                                    };
+                                                });
+                                            }}
+                                        />
+                                        <label
+                                            className="form-check-label"
+                                            htmlFor="asset_based"
+                                        >
+                                            Asset-based
+                                        </label>
+                                    </div>
+                                    <div className="form-check form-check-inline">
+                                        <input
+                                            className="form-check-input"
+                                            type="checkbox"
+                                            id="freight_broker"
+                                            name="freight_broker"
+                                            checked={
+                                                formData.type.freight_broker
+                                            }
+                                            onChange={(e) => {
+                                                setFormData((prev) => {
+                                                    return {
+                                                        ...prev,
+                                                        type: {
+                                                            ...prev.type,
+                                                            freight_broker:
+                                                                e.target
+                                                                    .checked,
+                                                        },
+                                                    };
+                                                });
+                                            }}
+                                        />
+                                        <label
+                                            className="form-check-label"
+                                            htmlFor="freight_broker"
+                                        >
+                                            Freight broker
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
 
-                    <button
-                        type="submit"
-                        className="btn btn-dark bg-gradient shadow-sm fw-bold w-100 rounded-pill"
-                    >
-                        Submit
-                    </button>
-                </form>
+                        <fieldset className="row mb-4">
+                            <div className="col-4">
+                                <label
+                                    htmlFor="company_contact"
+                                    className="fw-normal text-secondary"
+                                    style={{ fontSize: "0.85em" }}
+                                >
+                                    pricing contact
+                                </label>
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Contact name"
+                                    id="company_contact"
+                                    name="company_contact"
+                                    value={formData.contact}
+                                    onChange={(e) => {
+                                        setFormData((prev) => {
+                                            return {
+                                                ...prev,
+                                                contact: e.target.value,
+                                            };
+                                        });
+                                    }}
+                                    autoComplete="off"
+                                    required
+                                />
+                            </div>
+                            <div className="col-4">
+                                <label
+                                    htmlFor="contact_email"
+                                    className="fw-normal text-secondary"
+                                    style={{ fontSize: "0.85em" }}
+                                >
+                                    pricing contact email
+                                </label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    placeholder="Contact email"
+                                    id="contact_email"
+                                    name="contact_email"
+                                    value={formData.email}
+                                    onChange={(e) => {
+                                        setFormData((prev) => {
+                                            return {
+                                                ...prev,
+                                                email: e.target.value,
+                                            };
+                                        });
+                                    }}
+                                    autoComplete="off"
+                                    required
+                                />
+                            </div>
+                            <div className="col-4">
+                                <label
+                                    htmlFor="contact_phone"
+                                    className="fw-normal text-secondary"
+                                    style={{ fontSize: "0.85em" }}
+                                >
+                                    pricing contact phone
+                                </label>
+                                <input
+                                    type="tel"
+                                    className="form-control"
+                                    placeholder="Contact phone"
+                                    id="contact_phone"
+                                    name="contact_phone"
+                                    value={formData.phone}
+                                    onChange={(e) => {
+                                        setFormData((prev) => {
+                                            return {
+                                                ...prev,
+                                                phone: e.target.value,
+                                            };
+                                        });
+                                    }}
+                                    autoComplete="off"
+                                    required
+                                />
+                            </div>
+                        </fieldset>
+
+                        <fieldset className="row mb-4">
+                            <label
+                                htmlFor="domicile_city"
+                                className="fw-normal text-secondary"
+                                style={{ fontSize: "0.85em" }}
+                            >
+                                domicile
+                            </label>
+                            <div className="input-group col-12">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="City"
+                                    id="domicile_city"
+                                    name="domicile_city"
+                                    value={formData.domicile.city}
+                                    onChange={(e) => {
+                                        setFormData((prev) => {
+                                            return {
+                                                ...prev,
+                                                domicile: {
+                                                    ...prev.domicile,
+                                                    city: e.target.value,
+                                                },
+                                            };
+                                        });
+                                    }}
+                                    autoComplete="off"
+                                />
+                                <select
+                                    className="form-select"
+                                    id="domicile_territory"
+                                    name="domicile_territory"
+                                    value={formData.domicile.territory}
+                                    onChange={(e) => {
+                                        setFormData((prev) => {
+                                            return {
+                                                ...prev,
+                                                domicile: {
+                                                    ...prev.domicile,
+                                                    territory: e.target.value,
+                                                    country:
+                                                        countries_labels[
+                                                            geo_lookup[
+                                                                e.target.value
+                                                            ].country
+                                                        ],
+                                                    country_code:
+                                                        geo_lookup[
+                                                            e.target.value
+                                                        ].country,
+                                                },
+                                            };
+                                        });
+                                    }}
+                                    required
+                                >
+                                    <option
+                                        value=""
+                                        style={{ display: "none" }}
+                                    >
+                                        Territory
+                                    </option>
+                                    <option disabled>Canada</option>
+                                    {canDivisions.map((territory, index) => {
+                                        return (
+                                            <option
+                                                key={territory.concat(
+                                                    "-domicile_territory-",
+                                                    index
+                                                )}
+                                                value={territory}
+                                            >
+                                                {territory}
+                                            </option>
+                                        );
+                                    })}
+                                    <option disabled></option>
+                                    <option disabled>United States</option>
+                                    {usaDivisions.map((territory, index) => {
+                                        return (
+                                            <option
+                                                key={territory.concat(
+                                                    "-domicile_territory-",
+                                                    index
+                                                )}
+                                                value={territory}
+                                            >
+                                                {territory}
+                                            </option>
+                                        );
+                                    })}
+                                    <option disabled></option>
+                                    <option disabled>Mexico</option>
+                                    {mexDivisions.map((territory, index) => {
+                                        return (
+                                            <option
+                                                key={territory.concat(
+                                                    "-domicile_territory-",
+                                                    index
+                                                )}
+                                                value={territory}
+                                            >
+                                                {territory}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                            </div>
+                        </fieldset>
+
+                        {/* Transportation profile */}
+                        <div className="row border-bottom mb-4">
+                            <div className="col-12">
+                                <h6 className="display-6 text-secondary fs-2">
+                                    transportation profile
+                                </h6>
+                            </div>
+                        </div>
+
+                        <fieldset className="row mb-4">
+                            <h5 className="text-dark border-bottom pb-2">
+                                Modes of transportation
+                            </h5>
+                            <div className="col-12">
+                                <div className="mb-3">
+                                    {modes_values.map((mode) => {
+                                        return (
+                                            <Fragment key={`coverage-${mode}`}>
+                                                <input
+                                                    type="checkbox"
+                                                    className="btn-check"
+                                                    name={`coverage-${mode}`}
+                                                    id={`coverage-${mode}`}
+                                                    value={mode}
+                                                    checked={formData.modes.includes(
+                                                        mode
+                                                    )}
+                                                    onChange={(e) =>
+                                                        modeSelection(e)
+                                                    }
+                                                    autoComplete="off"
+                                                />
+                                                <label
+                                                    htmlFor={`coverage-${mode}`}
+                                                    className={`btn rounded-pill btn-outline-${
+                                                        formData.modes.includes(
+                                                            mode
+                                                        )
+                                                            ? "primary fw-bold"
+                                                            : "secondary"
+                                                    } m-1 py-1 px-2`}
+                                                    style={{
+                                                        fontSize: "0.75rem",
+                                                    }}
+                                                >
+                                                    {modes[mode]}
+                                                </label>
+                                            </Fragment>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset className="row mb-4">
+                            <h5 className="text-dark border-bottom pb-2">
+                                Geographical coverage
+                            </h5>
+                            {coverage_contries.map((country_code, index) => {
+                                return (
+                                    <GeoCoverage
+                                        key={`country_code-${country_code}`}
+                                        geo_tree={geo_tree}
+                                        country_code={country_code}
+                                        countries_labels={countries_labels}
+                                        formData={formData}
+                                        setFormData={setFormData}
+                                    />
+                                );
+                            })}
+                        </fieldset>
+
+                        <fieldset className="row mb-4">
+                            <h5 className="text-dark border-bottom pb-2">
+                                Border crossing ports for cross-Mexico vendors
+                            </h5>
+                            <div className="col-12">
+                                <div className="mb-3">
+                                    {borders_values
+                                        .filter((border) => border !== "none")
+                                        .map((border) => {
+                                            return (
+                                                <Fragment
+                                                    key={`coverage-${border}`}
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        className="btn-check"
+                                                        name={`coverage-${border}`}
+                                                        id={`coverage-${border}`}
+                                                        value={border}
+                                                        checked={formData.borders.includes(
+                                                            border
+                                                        )}
+                                                        onChange={(e) =>
+                                                            borderSelection(e)
+                                                        }
+                                                        autoComplete="off"
+                                                    />
+                                                    <label
+                                                        htmlFor={`coverage-${border}`}
+                                                        className={`btn rounded-pill btn-outline-${
+                                                            formData.borders.includes(
+                                                                border
+                                                            )
+                                                                ? "primary fw-bold"
+                                                                : "secondary"
+                                                        } m-1 py-1 px-2`}
+                                                        style={{
+                                                            fontSize: "0.75rem",
+                                                        }}
+                                                    >
+                                                        {borders[border]}
+                                                    </label>
+                                                </Fragment>
+                                            );
+                                        })}
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset className="row mb-4">
+                            <h5 className="text-dark border-bottom pb-2">
+                                Additional services
+                            </h5>
+                            <div className="col-12">
+                                <div className="mb-3">
+                                    {additional_services_values.map(
+                                        (service) => {
+                                            return (
+                                                <Fragment
+                                                    key={`coverage-${service}`}
+                                                >
+                                                    <input
+                                                        type="checkbox"
+                                                        className="btn-check"
+                                                        name={`coverage-${service}`}
+                                                        id={`coverage-${service}`}
+                                                        value={service}
+                                                        checked={
+                                                            formData[service]
+                                                        }
+                                                        onChange={(e) =>
+                                                            serviceSelection(e)
+                                                        }
+                                                        autoComplete="off"
+                                                    />
+                                                    <label
+                                                        htmlFor={`coverage-${service}`}
+                                                        className={`btn rounded-pill btn-outline-${
+                                                            formData[service]
+                                                                ? "primary fw-bold"
+                                                                : "secondary"
+                                                        } m-1 py-1 px-2`}
+                                                        style={{
+                                                            fontSize: "0.75rem",
+                                                        }}
+                                                    >
+                                                        {
+                                                            additional_services[
+                                                                service
+                                                            ]
+                                                        }
+                                                    </label>
+                                                </Fragment>
+                                            );
+                                        }
+                                    )}
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <button
+                            type="submit"
+                            className="btn btn-dark bg-gradient shadow-sm fw-bold w-100 rounded-pill"
+                        >
+                            Submit
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
+            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+                <div
+                    id="created_alert"
+                    className="toast"
+                    role="alert"
+                    aria-live="assertive"
+                    aria-atomic="true"
+                >
+                    <div className="toast-header text-bg-success">
+                        <strong className="me-auto">Freighble</strong>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="toast"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div className="toast-body">Vendor created!.</div>
+                </div>
+            </div>
+        </Fragment>
     );
 };
 

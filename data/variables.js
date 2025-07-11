@@ -1,12 +1,12 @@
 // modes
 export const modes = {
     dedicated_van: "Dedicated Van",
-    dedicated_reefer: "Dedicated Reefer",
-    dedicated_flatbed: "Dedicated Flatbed",
     partial_van: "Partial Van",
-    partial_reefer: "Partial Reefer",
-    partial_flatbed: "Partial Flatbed",
     ltl: "LTL",
+    dedicated_reefer: "Dedicated Reefer",
+    partial_reefer: "Partial Reefer",
+    dedicated_flatbed: "Dedicated Flatbed",
+    partial_flatbed: "Partial Flatbed",
     specialized: "Specialized (OD/OW)",
     intermodal: "Intermodal",
 };

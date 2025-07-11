@@ -147,11 +147,18 @@ export const createVendor = async (req, res) => {
 
         return res
             .status(201)
-            .json({ msg: `Vendor ${prospect_vendor.company} created!` });
+            .json({
+                msg: `Vendor ${prospect_vendor.company} created!`,
+                successful: true,
+            });
     } catch (err) {
         return res
             .status(500)
-            .json({ msg: `Something went wrong.`, error: err });
+            .json({
+                msg: `Something went wrong.`,
+                successful: false,
+                error: err,
+            });
     }
 };
 

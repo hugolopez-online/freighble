@@ -51,7 +51,6 @@ const VendorDomicile = new mongoose.Schema(
         // TODO remove <placeholder> after tests
         city: {
             type: String,
-            default: "<placeholder>",
             required: true,
         },
         territory: {

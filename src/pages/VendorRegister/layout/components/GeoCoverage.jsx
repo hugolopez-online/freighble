@@ -1,18 +1,21 @@
 import { Fragment } from "react";
 
-const Coverage = (props) => {
+const GeoCoverage = (props) => {
     // module
     const regions = Object.keys(props.geo_tree[props.country_code]);
+    const territory_coverage =
+        props.formData.coverage[props.countries_labels[props.country_code]]
+            .territory;
+
+    const regionIncluded = (territory_coverage, region_territories) => {
+        return region_territories.every((territory) =>
+            territory_coverage.includes(territory)
+        );
+    };
 
     // handlers
-    const singleSelection = (e, region) => {
-        const region_territories = props.geo_tree[props.country_code][region];
-        const territory_coverage =
-            props.formData.coverage[props.countries_labels[props.country_code]]
-                .territory;
+    const territorySelection = (e) => {
         const selection = e.target.value;
-
-        console.log(territory_coverage);
 
         if (territory_coverage.includes(selection)) {
             props.setFormData((prev) => {
@@ -55,6 +58,57 @@ const Coverage = (props) => {
         }
     };
 
+    const regionSelection = (territories) => {
+        if (regionIncluded(territory_coverage, territories)) {
+            const remove_territories = territory_coverage.filter(
+                (territory) => {
+                    return !territories.includes(territory);
+                }
+            );
+
+            props.setFormData((prev) => {
+                return {
+                    ...prev,
+                    coverage: {
+                        ...prev.coverage,
+                        [props.countries_labels[props.country_code]]: {
+                            ...prev.coverage[
+                                props.countries_labels[props.country_code]
+                            ],
+                            territory: remove_territories,
+                        },
+                    },
+                };
+            });
+        } else {
+            props.setFormData((prev) => {
+                return {
+                    ...prev,
+                    coverage: {
+                        ...prev.coverage,
+                        [props.countries_labels[props.country_code]]: {
+                            ...prev.coverage[
+                                props.countries_labels[props.country_code]
+                            ],
+                            territory: [
+                                ...new Set(
+                                    [
+                                        ...prev.coverage[
+                                            props.countries_labels[
+                                                props.country_code
+                                            ]
+                                        ].territory,
+                                        territories,
+                                    ].flat(Infinity)
+                                ),
+                            ],
+                        },
+                    },
+                };
+            });
+        }
+    };
+
     // render
     return (
         <div className="col-4">
@@ -75,16 +129,32 @@ const Coverage = (props) => {
                                 type="checkbox"
                                 id={region.split(" ").join("_")}
                                 name={region.split(" ").join("_")}
-                                onChange={(e) => {}}
+                                value={region}
+                                checked={regionIncluded(
+                                    territory_coverage,
+                                    territories
+                                )}
+                                onChange={() => {
+                                    regionSelection(territories);
+                                }}
                             />
                             <label
-                                className="form-check-label"
+                                className={`form-check-label text-${
+                                    regionIncluded(
+                                        territory_coverage,
+                                        territories
+                                    )
+                                        ? "primary fw-bold"
+                                        : "secondary"
+                                }`}
                                 htmlFor={region.split(" ").join("_")}
                             >
-                                {region}
+                                {regionIncluded(territory_coverage, territories)
+                                    ? `all ${region}`
+                                    : region}
                             </label>
                         </div>
-                        <div className="ps-2 mb-3">
+                        <div className="mb-3">
                             {territories.map((territory) => {
                                 return (
                                     <Fragment key={`coverage-${territory}`}>
@@ -94,22 +164,28 @@ const Coverage = (props) => {
                                             name={`coverage-${territory}`}
                                             id={`coverage-${territory}`}
                                             value={territory}
+                                            checked={props.formData.coverage[
+                                                props.countries_labels[
+                                                    props.country_code
+                                                ]
+                                            ].territory.includes(territory)}
                                             onChange={(e) =>
-                                                singleSelection(e, region)
+                                                territorySelection(e, region)
                                             }
                                             autoComplete="off"
                                         />
                                         <label
                                             htmlFor={`coverage-${territory}`}
-                                            className={`btn btn-sm rounded-pill btn-outline-${
+                                            className={`btn rounded-pill btn-outline-${
                                                 props.formData.coverage[
                                                     props.countries_labels[
                                                         props.country_code
                                                     ]
                                                 ].territory.includes(territory)
-                                                    ? "primary"
+                                                    ? "primary fw-bold"
                                                     : "secondary"
-                                            } m-1`}
+                                            } m-1 py-1 px-2`}
+                                            style={{ fontSize: "0.75rem" }}
                                         >
                                             {territory}
                                         </label>
@@ -124,4 +200,4 @@ const Coverage = (props) => {
     );
 };
 
-export default Coverage;
+export default GeoCoverage;
