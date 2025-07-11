@@ -68,6 +68,10 @@ const default_form_data = {
 const VendorRegister = () => {
     // state
     const [formData, setFormData] = useState(default_form_data);
+    const [toastMessage, setToastMessage] = useState({
+        success: false,
+        message: "",
+    });
 
     // module
     const additional_services = {
@@ -92,29 +96,29 @@ const VendorRegister = () => {
 
         const url = "/api/vendors/public/create";
 
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(unit),
+        });
+
+        const response_data = await response.json(); // Parse the JSON response
+
         try {
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(unit),
-            });
-
-            const responseData = await response.json(); // Parse the JSON response
-
             if (!response.ok) {
                 throw new Error(
-                    `HTTP error: ${JSON.stringify(responseData.error.errors)}`
+                    `${JSON.stringify(response_data.error.errors)}`
                 );
             }
 
-            console.log("Success:", responseData);
-
             setFormData(default_form_data);
+            setToastMessage({ success: true, message: response_data.msg });
             toast.show();
         } catch (error) {
-            console.error("Error:", error);
+            setToastMessage({ success: false, message: response_data.msg });
+            toast.show();
         }
     };
 
@@ -411,6 +415,7 @@ const VendorRegister = () => {
                                         });
                                     }}
                                     autoComplete="off"
+                                    required
                                 />
                                 <select
                                     className="form-select"
@@ -675,15 +680,15 @@ const VendorRegister = () => {
                     </form>
                 </div>
             </div>
-            <div className="toast-container position-fixed bottom-0 end-0 p-3">
+            <div className="toast-container rounded-3 position-fixed top-0 end-0 p-3">
                 <div
                     id="created_alert"
-                    className="toast"
+                    className="toast rounded-3"
                     role="alert"
                     aria-live="assertive"
                     aria-atomic="true"
                 >
-                    <div className="toast-header text-bg-success">
+                    <div className="toast-header rounded-top-3 border text-bg-primary">
                         <strong className="me-auto">Freighble</strong>
                         <button
                             type="button"
@@ -692,7 +697,14 @@ const VendorRegister = () => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body">Vendor created!.</div>
+                    <div className="toast-body rounded-bottom-3 bg-light">
+                        {toastMessage.success ? (
+                            <i className="bi bi-check-circle-fill text-success"></i>
+                        ) : (
+                            <i className="bi bi-exclamation-circle-fill text-danger"></i>
+                        )}{" "}
+                        {toastMessage.message}
+                    </div>
                 </div>
             </div>
         </Fragment>

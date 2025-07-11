@@ -130,8 +130,8 @@ const Directory = ({ specs, routes }) => {
                     <h6 className="display-6 text-secondary mb-0 mt-4">
                         Suitable vendors
                     </h6>
-                    {vendorList.map((vendor, index) => {
-                        const key = String(vendor.id) + String(index);
+                    {vendorList.map((vendor) => {
+                        const key = String(vendor._id);
                         return (
                             <Vendor
                                 key={key}

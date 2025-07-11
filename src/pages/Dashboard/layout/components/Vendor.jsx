@@ -128,7 +128,7 @@ const Vendor = (props) => {
                                         props.score < 70
                                             ? "secondary"
                                             : "dark fw-bold"
-                                    } bg-gradient ms-2 py-0 rounded-pill`}
+                                    } bg-gradient ms-2 py-0 rounded-pill collapsed`}
                                     data-bs-toggle="collapse"
                                     data-bs-target={`#${props.dispatched_key}-extra-info`}
                                     aria-expanded="false"

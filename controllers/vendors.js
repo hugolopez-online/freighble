@@ -145,20 +145,16 @@ export const createVendor = async (req, res) => {
         const prospect_vendor = new Vendor(req.body);
         await prospect_vendor.save();
 
-        return res
-            .status(201)
-            .json({
-                msg: `Vendor ${prospect_vendor.company} created!`,
-                successful: true,
-            });
+        return res.status(201).json({
+            msg: `Vendor ${prospect_vendor.company} created!`,
+            successful: true,
+        });
     } catch (err) {
-        return res
-            .status(500)
-            .json({
-                msg: `Something went wrong.`,
-                successful: false,
-                error: err,
-            });
+        return res.status(500).json({
+            msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
+            successful: false,
+            error: err,
+        });
     }
 };
 
