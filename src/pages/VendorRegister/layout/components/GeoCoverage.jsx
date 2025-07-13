@@ -112,7 +112,7 @@ const GeoCoverage = (props) => {
     // render
     return (
         <div className="col-4">
-            <h6 className="text-secondary">
+            <h6 className="text-secondary fw-semibold">
                 {props.countries_labels[props.country_code]}
             </h6>
             {regions.map((region, index) => {
@@ -144,7 +144,7 @@ const GeoCoverage = (props) => {
                                         territory_coverage,
                                         territories
                                     )
-                                        ? "primary fw-bold"
+                                        ? "primary fw-medium"
                                         : "secondary"
                                 }`}
                                 htmlFor={region.split(" ").join("_")}
@@ -180,7 +180,7 @@ const GeoCoverage = (props) => {
                                                         props.country_code
                                                     ]
                                                 ].territory.includes(territory)
-                                                    ? "primary fw-bold"
+                                                    ? "primary fw-medium"
                                                     : "secondary"
                                             } m-1 py-1 px-2`}
                                             style={{ fontSize: "0.75rem" }}

@@ -14,6 +14,8 @@ import { geo_tree } from "data/geo_meta";
 import geo_lookup from "data/geo_meta";
 import GeoCoverage from "./layout/components/GeoCoverage";
 import LaneBuilder from "./layout/components/LaneBuilder";
+import LaneList from "./layout/components/LaneList";
+import AddLane from "./layout/components/AddLane";
 
 // module
 const coverage_countries = Object.keys(geo_tree);
@@ -76,13 +78,13 @@ const VendorRegister = () => {
 
     const [laneOrigin, setLaneOrigin] = useState({
         label: "origin",
-        value: "",
+        value: "Anywhere",
         city: "",
     });
 
     const [laneDestination, setLaneDestination] = useState({
         label: "destination",
-        value: "",
+        value: "Anywhere",
         city: "",
     });
 
@@ -102,6 +104,57 @@ const VendorRegister = () => {
     };
 
     const additional_services_values = Object.keys(additional_services);
+
+    const lanes = {
+        core: {
+            ref: "core_lanes",
+            label: "preferred",
+        },
+        exclusive: {
+            ref: "exclusive_lanes",
+            label: "exclusive",
+        },
+        banned: {
+            ref: "banned_lanes",
+            label: "banned",
+        },
+    };
+
+    const is_cross_border =
+        (formData.coverage["Canada"].territory.length ||
+            formData.coverage["United States"].territory.length) &&
+        formData.coverage["Mexico"].territory.length;
+
+    const toTitleCase = (string) => {
+        return string
+            .split(" ")
+            .map((word) => {
+                if (word.length === 0) return "";
+                return (
+                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                );
+            })
+            .join(" ");
+    };
+
+    const toPhoneFormat = (phone) => {
+        return phone
+            .split("")
+            .map((char, index) => {
+                const digit = Number(char);
+
+                if (!Number.isInteger(digit)) {
+                    return "";
+                }
+
+                if (index === 3 || index === 7) {
+                    return `-${char}`;
+                }
+
+                return char;
+            })
+            .join("");
+    };
 
     // handlers
     const handleRegistration = async (e, unit) => {
@@ -207,7 +260,7 @@ const VendorRegister = () => {
         <Fragment>
             <div className="row justify-content-center pt-5">
                 <div className="col-10 py-4">
-                    <h4 className="display-4 py-4">Vendor Registration</h4>
+                    <h5 className="display-5 py-4">Vendor Registration</h5>
                     <form
                         id="vendor_register"
                         className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
@@ -216,8 +269,8 @@ const VendorRegister = () => {
                         {/* Company details */}
                         <div className="row border-bottom mb-4">
                             <div className="col-12">
-                                <h6 className="display-6 text-secondary fs-2">
-                                    company details
+                                <h6 className="display-6 text-dark fw-bold">
+                                    Company Details
                                 </h6>
                             </div>
                         </div>
@@ -226,10 +279,22 @@ const VendorRegister = () => {
                             <div className="col-6">
                                 <label
                                     htmlFor="company_name"
-                                    className="fw-normal text-secondary"
-                                    style={{ fontSize: "0.85em" }}
+                                    className="fw-medium text-dark-emphasis"
                                 >
-                                    company name
+                                    company name{" "}
+                                    <strong
+                                        className={`text-${
+                                            formData.company
+                                                ? "success"
+                                                : "danger"
+                                        }`}
+                                    >
+                                        {formData.company ? (
+                                            <i className="bi bi-check"></i>
+                                        ) : (
+                                            "*"
+                                        )}
+                                    </strong>
                                 </label>
                                 <input
                                     type="text"
@@ -242,7 +307,8 @@ const VendorRegister = () => {
                                         setFormData((prev) => {
                                             return {
                                                 ...prev,
-                                                company: e.target.value,
+                                                company:
+                                                    e.target.value.toUpperCase(),
                                             };
                                         });
                                     }}
@@ -251,12 +317,24 @@ const VendorRegister = () => {
                                 />
                             </div>
                             <div className="col-6">
-                                <label
-                                    className="fw-normal text-secondary"
-                                    style={{ fontSize: "0.85em" }}
-                                >
-                                    company type
-                                </label>
+                                <span className="fw-medium text-dark-emphasis">
+                                    company type{" "}
+                                    <strong
+                                        className={`text-${
+                                            formData.type.asset_based ||
+                                            formData.type.freight_broker
+                                                ? "success"
+                                                : "danger"
+                                        }`}
+                                    >
+                                        {formData.type.asset_based ||
+                                        formData.type.freight_broker ? (
+                                            <i className="bi bi-check"></i>
+                                        ) : (
+                                            "*"
+                                        )}
+                                    </strong>
+                                </span>
                                 <div className="col-12">
                                     <div className="form-check form-check-inline">
                                         <input
@@ -280,10 +358,14 @@ const VendorRegister = () => {
                                             }}
                                         />
                                         <label
-                                            className="form-check-label"
+                                            className={`form-check-label text-${
+                                                formData.type.asset_based
+                                                    ? "primary fw-medium"
+                                                    : "secondary"
+                                            }`}
                                             htmlFor="asset_based"
                                         >
-                                            Asset-based
+                                            asset-based
                                         </label>
                                     </div>
                                     <div className="form-check form-check-inline">
@@ -310,10 +392,14 @@ const VendorRegister = () => {
                                             }}
                                         />
                                         <label
-                                            className="form-check-label"
+                                            className={`form-check-label text-${
+                                                formData.type.freight_broker
+                                                    ? "primary fw-medium"
+                                                    : "secondary"
+                                            }`}
                                             htmlFor="freight_broker"
                                         >
-                                            Freight broker
+                                            freight broker
                                         </label>
                                     </div>
                                 </div>
@@ -324,10 +410,22 @@ const VendorRegister = () => {
                             <div className="col-4">
                                 <label
                                     htmlFor="company_contact"
-                                    className="fw-normal text-secondary"
-                                    style={{ fontSize: "0.85em" }}
+                                    className="fw-medium text-dark-emphasis"
                                 >
-                                    pricing contact
+                                    pricing contact{" "}
+                                    <strong
+                                        className={`text-${
+                                            formData.contact
+                                                ? "success"
+                                                : "danger"
+                                        }`}
+                                    >
+                                        {formData.contact ? (
+                                            <i className="bi bi-check"></i>
+                                        ) : (
+                                            "*"
+                                        )}
+                                    </strong>
                                 </label>
                                 <input
                                     type="text"
@@ -340,7 +438,9 @@ const VendorRegister = () => {
                                         setFormData((prev) => {
                                             return {
                                                 ...prev,
-                                                contact: e.target.value,
+                                                contact: toTitleCase(
+                                                    e.target.value
+                                                ),
                                             };
                                         });
                                     }}
@@ -351,10 +451,22 @@ const VendorRegister = () => {
                             <div className="col-4">
                                 <label
                                     htmlFor="contact_email"
-                                    className="fw-normal text-secondary"
-                                    style={{ fontSize: "0.85em" }}
+                                    className="fw-medium text-dark-emphasis"
                                 >
-                                    pricing contact email
+                                    pricing contact email{" "}
+                                    <strong
+                                        className={`text-${
+                                            formData.email
+                                                ? "success"
+                                                : "danger"
+                                        }`}
+                                    >
+                                        {formData.email ? (
+                                            <i className="bi bi-check"></i>
+                                        ) : (
+                                            "*"
+                                        )}
+                                    </strong>
                                 </label>
                                 <input
                                     type="email"
@@ -367,7 +479,7 @@ const VendorRegister = () => {
                                         setFormData((prev) => {
                                             return {
                                                 ...prev,
-                                                email: e.target.value,
+                                                email: e.target.value.toLowerCase(),
                                             };
                                         });
                                     }}
@@ -378,10 +490,22 @@ const VendorRegister = () => {
                             <div className="col-4">
                                 <label
                                     htmlFor="contact_phone"
-                                    className="fw-normal text-secondary"
-                                    style={{ fontSize: "0.85em" }}
+                                    className="fw-medium text-dark-emphasis"
                                 >
-                                    pricing contact phone
+                                    pricing contact phone{" "}
+                                    <strong
+                                        className={`text-${
+                                            formData.phone
+                                                ? "success"
+                                                : "danger"
+                                        }`}
+                                    >
+                                        {formData.phone ? (
+                                            <i className="bi bi-check"></i>
+                                        ) : (
+                                            "*"
+                                        )}
+                                    </strong>
                                 </label>
                                 <input
                                     type="tel"
@@ -394,7 +518,9 @@ const VendorRegister = () => {
                                         setFormData((prev) => {
                                             return {
                                                 ...prev,
-                                                phone: e.target.value,
+                                                phone: toPhoneFormat(
+                                                    e.target.value
+                                                ),
                                             };
                                         });
                                     }}
@@ -405,17 +531,29 @@ const VendorRegister = () => {
                         </fieldset>
 
                         <fieldset className="row mb-4">
-                            <label
-                                htmlFor="domicile_city"
-                                className="fw-normal text-secondary"
-                                style={{ fontSize: "0.85em" }}
-                            >
-                                domicile
-                            </label>
-                            <div className="input-group col-12">
+                            <div className="col-6 pe-0">
+                                <label
+                                    htmlFor="domicile_city"
+                                    className="fw-medium text-dark-emphasis"
+                                >
+                                    domicile city{" "}
+                                    <strong
+                                        className={`text-${
+                                            formData.domicile.city
+                                                ? "success"
+                                                : "danger"
+                                        }`}
+                                    >
+                                        {formData.domicile.city ? (
+                                            <i className="bi bi-check"></i>
+                                        ) : (
+                                            "*"
+                                        )}
+                                    </strong>
+                                </label>
                                 <input
                                     type="text"
-                                    className="form-control"
+                                    className="form-control rounded-end-0"
                                     placeholder="City"
                                     id="domicile_city"
                                     name="domicile_city"
@@ -426,7 +564,9 @@ const VendorRegister = () => {
                                                 ...prev,
                                                 domicile: {
                                                     ...prev.domicile,
-                                                    city: e.target.value,
+                                                    city: toTitleCase(
+                                                        e.target.value
+                                                    ),
                                                 },
                                             };
                                         });
@@ -434,8 +574,29 @@ const VendorRegister = () => {
                                     autoComplete="off"
                                     required
                                 />
+                            </div>
+                            <div className="col-6 ps-0">
+                                <label
+                                    htmlFor="domicile_territory"
+                                    className="fw-medium text-dark-emphasis"
+                                >
+                                    domicile territory{" "}
+                                    <strong
+                                        className={`text-${
+                                            formData.domicile.territory
+                                                ? "success"
+                                                : "danger"
+                                        }`}
+                                    >
+                                        {formData.domicile.territory ? (
+                                            <i className="bi bi-check"></i>
+                                        ) : (
+                                            "*"
+                                        )}
+                                    </strong>
+                                </label>
                                 <select
-                                    className="form-select"
+                                    className="form-select rounded-start-0 border-start-0"
                                     id="domicile_territory"
                                     name="domicile_territory"
                                     value={formData.domicile.territory}
@@ -466,7 +627,7 @@ const VendorRegister = () => {
                                         value=""
                                         style={{ display: "none" }}
                                     >
-                                        Territory
+                                        Territory (state or province)
                                     </option>
                                     <option disabled>Canada</option>
                                     {canDivisions.map((territory, index) => {
@@ -519,15 +680,28 @@ const VendorRegister = () => {
                         {/* Transportation profile */}
                         <div className="row border-bottom mb-4">
                             <div className="col-12">
-                                <h6 className="display-6 text-secondary fs-2">
-                                    transportation profile
+                                <h6 className="display-6 text-dark fw-bold">
+                                    Transportation Profile
                                 </h6>
                             </div>
                         </div>
 
                         <fieldset className="row mb-4">
-                            <h5 className="text-dark border-bottom pb-2">
-                                Modes of transportation
+                            <h5 className="text-dark-emphasis border-bottom pb-2">
+                                modes of transportation
+                                <strong
+                                    className={`text-${
+                                        formData.modes.length
+                                            ? "primary"
+                                            : "warning"
+                                    }`}
+                                >
+                                    {formData.modes.length ? (
+                                        <i className="bi bi-check"></i>
+                                    ) : (
+                                        <i className="bi bi-exclamation"></i>
+                                    )}
+                                </strong>
                             </h5>
                             <div className="col-12">
                                 <div className="mb-3">
@@ -554,7 +728,7 @@ const VendorRegister = () => {
                                                         formData.modes.includes(
                                                             mode
                                                         )
-                                                            ? "primary fw-bold"
+                                                            ? "primary fw-medium"
                                                             : "secondary"
                                                     } m-1 py-1 px-2`}
                                                     style={{
@@ -571,10 +745,33 @@ const VendorRegister = () => {
                         </fieldset>
 
                         <fieldset className="row mb-4">
-                            <h5 className="text-dark border-bottom pb-2">
-                                Geographical coverage
+                            <h5 className="text-dark-emphasis border-bottom pb-2">
+                                geographical coverage
+                                <strong
+                                    className={`text-${
+                                        formData.coverage["Canada"].territory
+                                            .length ||
+                                        formData.coverage["United States"]
+                                            .territory.length ||
+                                        formData.coverage["Mexico"].territory
+                                            .length
+                                            ? "primary"
+                                            : "warning"
+                                    }`}
+                                >
+                                    {formData.coverage["Canada"].territory
+                                        .length ||
+                                    formData.coverage["United States"].territory
+                                        .length ||
+                                    formData.coverage["Mexico"].territory
+                                        .length ? (
+                                        <i className="bi bi-check"></i>
+                                    ) : (
+                                        <i className="bi bi-exclamation"></i>
+                                    )}
+                                </strong>
                             </h5>
-                            {coverage_countries.map((country_code, index) => {
+                            {coverage_countries.map((country_code) => {
                                 return (
                                     <GeoCoverage
                                         key={`country_code-${country_code}`}
@@ -588,9 +785,26 @@ const VendorRegister = () => {
                             })}
                         </fieldset>
 
-                        <fieldset className="row mb-4">
-                            <h5 className="text-dark border-bottom pb-2">
-                                Border crossing ports for cross-Mexico vendors
+                        <fieldset
+                            className={`row mb-4${
+                                is_cross_border ? "" : " d-none"
+                            }`}
+                        >
+                            <h5 className="text-dark-emphasis border-bottom pb-2">
+                                border-crossing ports{" "}
+                                <strong
+                                    className={`text-${
+                                        formData.borders.length
+                                            ? "success"
+                                            : "danger"
+                                    }`}
+                                >
+                                    {formData.borders.length ? (
+                                        <i className="bi bi-check"></i>
+                                    ) : (
+                                        "*"
+                                    )}
+                                </strong>
                             </h5>
                             <div className="col-12">
                                 <div className="mb-3">
@@ -621,7 +835,7 @@ const VendorRegister = () => {
                                                             formData.borders.includes(
                                                                 border
                                                             )
-                                                                ? "primary fw-bold"
+                                                                ? "primary fw-medium"
                                                                 : "secondary"
                                                         } m-1 py-1 px-2`}
                                                         style={{
@@ -638,8 +852,8 @@ const VendorRegister = () => {
                         </fieldset>
 
                         <fieldset className="row mb-4">
-                            <h5 className="text-dark border-bottom pb-2">
-                                Additional services
+                            <h5 className="text-dark-emphasis border-bottom pb-2">
+                                additional services
                             </h5>
                             <div className="col-12">
                                 <div className="mb-3">
@@ -667,7 +881,7 @@ const VendorRegister = () => {
                                                         htmlFor={`coverage-${service}`}
                                                         className={`btn rounded-pill btn-outline-${
                                                             formData[service]
-                                                                ? "primary fw-bold"
+                                                                ? "primary fw-medium"
                                                                 : "secondary"
                                                         } m-1 py-1 px-2`}
                                                         style={{
@@ -689,15 +903,20 @@ const VendorRegister = () => {
                         </fieldset>
 
                         <fieldset className="row mb-4">
+                            <h5 className="text-dark-emphasis border-bottom pb-2">
+                                lane preferences
+                            </h5>
                             <LaneBuilder
                                 coverage={formData.coverage}
                                 target={laneOrigin}
                                 setter={setLaneOrigin}
+                                toTitleCase={toTitleCase}
                             />
                             <LaneBuilder
                                 coverage={formData.coverage}
                                 target={laneDestination}
                                 setter={setLaneDestination}
+                                toTitleCase={toTitleCase}
                             />
                             <div className="col-12 pt-2">
                                 <div className="form-check form-switch">
@@ -714,15 +933,59 @@ const VendorRegister = () => {
                                     <label
                                         className={`form-check-label text-${
                                             isBothWays
-                                                ? "primary fw-bold"
+                                                ? "primary fw-medium"
                                                 : "secondary"
                                         }`}
-                                        for="is_both_ways"
+                                        htmlFor="is_both_ways"
                                     >
                                         {isBothWays ? "both ways" : "one way"}
                                     </label>
                                 </div>
+                                <div className="col-12 pt-2">
+                                    <AddLane
+                                        target={lanes.core}
+                                        formData={formData}
+                                        setFormData={setFormData}
+                                        laneOrigin={laneOrigin}
+                                        laneDestination={laneDestination}
+                                        isBothWays={isBothWays}
+                                    />
+                                    <AddLane
+                                        target={lanes.exclusive}
+                                        formData={formData}
+                                        setFormData={setFormData}
+                                        laneOrigin={laneOrigin}
+                                        laneDestination={laneDestination}
+                                        isBothWays={isBothWays}
+                                    />
+                                    <AddLane
+                                        target={lanes.banned}
+                                        formData={formData}
+                                        setFormData={setFormData}
+                                        laneOrigin={laneOrigin}
+                                        laneDestination={laneDestination}
+                                        isBothWays={isBothWays}
+                                    />
+                                </div>
                             </div>
+                        </fieldset>
+
+                        <fieldset className="row mb-4">
+                            <LaneList
+                                target={lanes.core}
+                                formData={formData}
+                                setFormData={setFormData}
+                            />
+                            <LaneList
+                                target={lanes.exclusive}
+                                formData={formData}
+                                setFormData={setFormData}
+                            />
+                            <LaneList
+                                target={lanes.banned}
+                                formData={formData}
+                                setFormData={setFormData}
+                            />
                         </fieldset>
 
                         <button

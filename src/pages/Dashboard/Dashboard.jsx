@@ -88,7 +88,13 @@ const Dashboard = () => {
         }
 
         setRoutes(route_aliases);
-    }, [specs.mode, specs.origin.territory, specs.destination.territory]);
+    }, [
+        specs.mode,
+        specs.origin.territory,
+        specs.origin.city,
+        specs.destination.territory,
+        specs.destination.city,
+    ]);
 
     // render
 

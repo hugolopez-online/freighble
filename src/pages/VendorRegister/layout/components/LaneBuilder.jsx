@@ -16,7 +16,6 @@ const regions = regions_array.flat(Infinity);
 const LaneBuilder = (props) => {
     // state
     const [scope, setScope] = useState("Anywhere");
-    const [location, setLocation] = useState("Anywhere");
 
     // module
     const can_territories = props.coverage["Canada"].territory;
@@ -42,17 +41,16 @@ const LaneBuilder = (props) => {
 
     return (
         <Fragment>
-            <div className="col-6">
-                <label
-                    htmlFor={`${props.target.label}-lane_scope`}
-                    className="fw-normal text-secondary"
-                    style={{ fontSize: "0.85em" }}
-                >
-                    {props.target.label} scope and location
-                </label>
-                <div className="input-group mb-2">
+            <div className="row col-6 gy-2">
+                <div className="col-6 pe-0">
+                    <label
+                        htmlFor={`${props.target.label}-lane_scope`}
+                        className="fw-medium text-dark-emphasis"
+                    >
+                        {props.target.label} scope
+                    </label>
                     <select
-                        className="form-select"
+                        className="form-select rounded-end-0"
                         id={`${props.target.label}-lane_scope`}
                         name={`${props.target.label}-lane_scope`}
                         value={scope}
@@ -61,7 +59,10 @@ const LaneBuilder = (props) => {
                             props.setter((prev) => {
                                 return {
                                     ...prev,
-                                    value: "",
+                                    value:
+                                        e.target.value === "Anywhere"
+                                            ? "Anywhere"
+                                            : "",
                                     city: "",
                                 };
                             });
@@ -78,9 +79,16 @@ const LaneBuilder = (props) => {
                             );
                         })}
                     </select>
-
+                </div>
+                <div className="col-6 ps-0">
+                    <label
+                        htmlFor={`${props.target.label}-lane_location`}
+                        className="fw-medium text-dark-emphasis"
+                    >
+                        {props.target.label} location
+                    </label>
                     <select
-                        className="form-select"
+                        className="form-select border-start-0 rounded-start-0"
                         id={`${props.target.label}-lane_location`}
                         name={`${props.target.label}-lane_location`}
                         value={props.target.value}
@@ -92,6 +100,7 @@ const LaneBuilder = (props) => {
                                 };
                             });
                         }}
+                        disabled={scope === "Anywhere"}
                     >
                         <option value="">Make a selection</option>
                         {scopes[scope].map((location) => {
@@ -119,26 +128,35 @@ const LaneBuilder = (props) => {
                         })}
                     </select>
                 </div>
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="City (optional)"
-                    id={`${props.target.label}-lane_city`}
-                    name={`${props.target.label}-lane_city`}
-                    value={props.target.city}
-                    onChange={(e) => {
-                        props.setter((prev) => {
-                            return {
-                                ...prev,
-                                city: e.target.value,
-                            };
-                        });
-                    }}
-                    autoComplete="off"
-                    disabled={
+                <div
+                    className={`col-12${
                         scope !== "Territory" || !Boolean(props.target.value)
-                    }
-                />
+                            ? " d-none"
+                            : ""
+                    }`}
+                >
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="City (optional)"
+                        id={`${props.target.label}-lane_city`}
+                        name={`${props.target.label}-lane_city`}
+                        value={props.target.city}
+                        onChange={(e) => {
+                            props.setter((prev) => {
+                                return {
+                                    ...prev,
+                                    city: props.toTitleCase(e.target.value),
+                                };
+                            });
+                        }}
+                        autoComplete="off"
+                        disabled={
+                            scope !== "Territory" ||
+                            !Boolean(props.target.value)
+                        }
+                    />
+                </div>
             </div>
         </Fragment>
     );
