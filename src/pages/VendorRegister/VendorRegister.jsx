@@ -13,9 +13,10 @@ import {
 import { geo_tree } from "data/geo_meta";
 import geo_lookup from "data/geo_meta";
 import GeoCoverage from "./layout/components/GeoCoverage";
+import LaneBuilder from "./layout/components/LaneBuilder";
 
 // module
-const coverage_contries = Object.keys(geo_tree);
+const coverage_countries = Object.keys(geo_tree);
 
 const countries_labels = {
     CAN: "Canada",
@@ -73,6 +74,20 @@ const VendorRegister = () => {
         message: "",
     });
 
+    const [laneOrigin, setLaneOrigin] = useState({
+        label: "origin",
+        value: "",
+        city: "",
+    });
+
+    const [laneDestination, setLaneDestination] = useState({
+        label: "destination",
+        value: "",
+        city: "",
+    });
+
+    const [isBothWays, setIsBothWays] = useState(false);
+
     // module
     const additional_services = {
         hazmat: "Hazmat certified",
@@ -115,9 +130,11 @@ const VendorRegister = () => {
 
             setFormData(default_form_data);
             setToastMessage({ success: true, message: response_data.msg });
+            window.scrollTo(0, 0);
             toast.show();
         } catch (error) {
             setToastMessage({ success: false, message: response_data.msg });
+            window.scrollTo(0, 0);
             toast.show();
         }
     };
@@ -557,7 +574,7 @@ const VendorRegister = () => {
                             <h5 className="text-dark border-bottom pb-2">
                                 Geographical coverage
                             </h5>
-                            {coverage_contries.map((country_code, index) => {
+                            {coverage_countries.map((country_code, index) => {
                                 return (
                                     <GeoCoverage
                                         key={`country_code-${country_code}`}
@@ -671,6 +688,43 @@ const VendorRegister = () => {
                             </div>
                         </fieldset>
 
+                        <fieldset className="row mb-4">
+                            <LaneBuilder
+                                coverage={formData.coverage}
+                                target={laneOrigin}
+                                setter={setLaneOrigin}
+                            />
+                            <LaneBuilder
+                                coverage={formData.coverage}
+                                target={laneDestination}
+                                setter={setLaneDestination}
+                            />
+                            <div className="col-12 pt-2">
+                                <div className="form-check form-switch">
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        role="switch"
+                                        id="is_both_ways"
+                                        checked={isBothWays}
+                                        onChange={() => {
+                                            setIsBothWays(!isBothWays);
+                                        }}
+                                    />
+                                    <label
+                                        className={`form-check-label text-${
+                                            isBothWays
+                                                ? "primary fw-bold"
+                                                : "secondary"
+                                        }`}
+                                        for="is_both_ways"
+                                    >
+                                        {isBothWays ? "both ways" : "one way"}
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+
                         <button
                             type="submit"
                             className="btn btn-dark bg-gradient shadow-sm fw-bold w-100 rounded-pill"
@@ -680,6 +734,8 @@ const VendorRegister = () => {
                     </form>
                 </div>
             </div>
+
+            {/* Informative toast */}
             <div className="toast-container rounded-3 position-fixed top-0 end-0 p-3">
                 <div
                     id="created_alert"

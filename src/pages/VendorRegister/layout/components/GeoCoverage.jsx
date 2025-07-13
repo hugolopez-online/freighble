@@ -149,9 +149,7 @@ const GeoCoverage = (props) => {
                                 }`}
                                 htmlFor={region.split(" ").join("_")}
                             >
-                                {regionIncluded(territory_coverage, territories)
-                                    ? `all ${region}`
-                                    : region}
+                                {region}
                             </label>
                         </div>
                         <div className="mb-3">
