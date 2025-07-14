@@ -17,11 +17,9 @@ const AddLane = (props) => {
 
         const a = props.laneOrigin.value;
         const a_city = props.laneOrigin.city;
-        console.log(a_city);
 
         const b = props.laneDestination.value;
         const b_city = props.laneDestination.city;
-        console.log(b_city);
 
         const main_lane = `${a_city ? `${a_city}, ${a}` : a}:${
             b_city ? `${b_city}, ${b}` : b

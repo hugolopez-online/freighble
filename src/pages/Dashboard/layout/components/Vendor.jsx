@@ -391,7 +391,7 @@ const Vendor = (props) => {
                                 )}
                             {props.matched_core_lane && (
                                 <span
-                                    className="badge rounded-pill text-bg-primary bg-gradient me-1"
+                                    className="badge rounded-pill text-bg-success bg-gradient me-1"
                                     style={{ fontSize: "0.75rem" }}
                                 >
                                     Core lane ~ {props.matched_core_lane}
@@ -400,12 +400,12 @@ const Vendor = (props) => {
                             )}
                             {props.matched_exclusive_lane && (
                                 <span
-                                    className="badge rounded-pill text-bg-warning bg-gradient me-1"
+                                    className="badge rounded-pill text-bg-primary bg-gradient me-1"
                                     style={{ fontSize: "0.75rem" }}
                                 >
                                     Exclusive lane ~{" "}
                                     {props.matched_exclusive_lane}
-                                    <i className="bi bi-exclamation-circle-fill ms-2"></i>
+                                    <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}
                             {props.matched_banned_lane && (

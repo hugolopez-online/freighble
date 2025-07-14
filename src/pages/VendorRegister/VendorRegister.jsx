@@ -1,5 +1,6 @@
 // imports
 import { useState, Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
 import {
     modes,
@@ -138,23 +139,26 @@ const VendorRegister = () => {
     };
 
     const toPhoneFormat = (phone) => {
-        return phone
+        const digits = phone
             .split("")
-            .map((char, index) => {
-                const digit = Number(char);
+            .filter((char) => Number.isInteger(Number(char)));
 
-                if (!Number.isInteger(digit)) {
-                    return "";
-                }
+        if (digits.length < 10) {
+            return digits.join("");
+        } else {
+            return digits
+                .map((digit, index) => {
+                    if (index === 2 || index === 5) {
+                        return `${digit}-`;
+                    }
 
-                if (index === 3 || index === 7) {
-                    return `-${char}`;
-                }
-
-                return char;
-            })
-            .join("");
+                    return digit;
+                })
+                .join("");
+        }
     };
+
+    const navigate = useNavigate();
 
     // handlers
     const handleRegistration = async (e, unit) => {
@@ -185,6 +189,9 @@ const VendorRegister = () => {
             setToastMessage({ success: true, message: response_data.msg });
             window.scrollTo(0, 0);
             toast.show();
+            setTimeout(() => {
+                navigate(`/vendors/vendor/${response_data.id}`);
+            }, 2500);
         } catch (error) {
             setToastMessage({ success: false, message: response_data.msg });
             window.scrollTo(0, 0);
@@ -261,6 +268,19 @@ const VendorRegister = () => {
             <div className="row justify-content-center pt-5">
                 <div className="col-10 py-4">
                     <h5 className="display-5 py-4">Vendor Registration</h5>
+                    <small className="text-secondary">
+                        <strong className="text-danger">*</strong> mandatory
+                        field
+                    </small>
+                    <br />
+                    <small className="text-secondary">
+                        <strong className="text-warning">
+                            <i className="bi bi-exclamation"></i>
+                        </strong>
+                        strongly encouraged field
+                    </small>
+                    <br />
+                    <br />
                     <form
                         id="vendor_register"
                         className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
@@ -514,6 +534,8 @@ const VendorRegister = () => {
                                     id="contact_phone"
                                     name="contact_phone"
                                     value={formData.phone}
+                                    minLength="12"
+                                    maxLength="12"
                                     onChange={(e) => {
                                         setFormData((prev) => {
                                             return {

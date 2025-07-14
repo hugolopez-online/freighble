@@ -142,11 +142,11 @@ export const findVendor = async (req, res) => {
 
 export const createVendor = async (req, res) => {
     try {
-        const prospect_vendor = new Vendor(req.body);
-        await prospect_vendor.save();
+        const prospect_vendor = await Vendor.create(req.body);
 
         return res.status(201).json({
             msg: `Vendor ${prospect_vendor.company} created!`,
+            id: prospect_vendor._id,
             successful: true,
         });
     } catch (err) {
