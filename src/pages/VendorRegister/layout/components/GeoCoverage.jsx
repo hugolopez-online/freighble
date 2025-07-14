@@ -4,7 +4,7 @@ const GeoCoverage = (props) => {
     // module
     const regions = Object.keys(props.geo_tree[props.country_code]);
     const territory_coverage =
-        props.formData.coverage[props.countries_labels[props.country_code]]
+        props.data.coverage[props.countries_labels[props.country_code]]
             .territory;
 
     const regionIncluded = (territory_coverage, region_territories) => {
@@ -18,7 +18,7 @@ const GeoCoverage = (props) => {
         const selection = e.target.value;
 
         if (territory_coverage.includes(selection)) {
-            props.setFormData((prev) => {
+            props.setData((prev) => {
                 return {
                     ...prev,
                     coverage: {
@@ -41,7 +41,7 @@ const GeoCoverage = (props) => {
 
             update_territories.push(selection);
 
-            props.setFormData((prev) => {
+            props.setData((prev) => {
                 return {
                     ...prev,
                     coverage: {
@@ -66,7 +66,7 @@ const GeoCoverage = (props) => {
                 }
             );
 
-            props.setFormData((prev) => {
+            props.setData((prev) => {
                 return {
                     ...prev,
                     coverage: {
@@ -81,7 +81,7 @@ const GeoCoverage = (props) => {
                 };
             });
         } else {
-            props.setFormData((prev) => {
+            props.setData((prev) => {
                 return {
                     ...prev,
                     coverage: {
@@ -162,7 +162,7 @@ const GeoCoverage = (props) => {
                                             name={`coverage-${territory}`}
                                             id={`coverage-${territory}`}
                                             value={territory}
-                                            checked={props.formData.coverage[
+                                            checked={props.data.coverage[
                                                 props.countries_labels[
                                                     props.country_code
                                                 ]
@@ -175,7 +175,7 @@ const GeoCoverage = (props) => {
                                         <label
                                             htmlFor={`coverage-${territory}`}
                                             className={`btn rounded-pill btn-outline-${
-                                                props.formData.coverage[
+                                                props.data.coverage[
                                                     props.countries_labels[
                                                         props.country_code
                                                     ]

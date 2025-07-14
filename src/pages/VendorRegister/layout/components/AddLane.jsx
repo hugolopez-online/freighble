@@ -34,7 +34,7 @@ const AddLane = (props) => {
             lanes.push(return_lane);
         }
 
-        props.setFormData((prev) => {
+        props.setData((prev) => {
             return {
                 ...prev,
                 [target]: [...new Set([...prev[target], lanes].flat(Infinity))],

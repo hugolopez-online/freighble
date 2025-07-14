@@ -1,11 +1,59 @@
 // imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
+import VendorDisplay from "./VendorDisplay";
+import GeoCoverage from "./VendorRegister/layout/components/GeoCoverage";
+import LaneList from "./VendorRegister/layout/components/LaneList";
+import LaneBuilder from "./VendorRegister/layout/components/LaneBuilder";
+import AddLane from "./VendorRegister/layout/components/AddLane";
+
+// module
+const skeleton = {
+    company: "",
+    type: {
+        asset_based: false,
+        freight_broker: false,
+    },
+    contact: "",
+    email: "",
+    phone: "",
+    domicile: {
+        city: "",
+        territory: "",
+        country: "",
+        country_code: "",
+    },
+    modes: [],
+    hazmat: false,
+    team_drivers: false,
+    usa_bonded: false,
+    can_bonded: false,
+    ctpat: false,
+    twic: false,
+    tsa: false,
+    fast: false,
+    tanker_endorsement: false,
+    coverage: {
+        Canada: {
+            country_code: "CAN",
+            territory: [],
+        },
+        "United States": {
+            country_code: "USA",
+            territory: [],
+        },
+        Mexico: { country_code: "MEX", territory: [] },
+    },
+    borders: [],
+    core_lanes: [],
+    exclusive_lanes: [],
+    banned_lanes: [],
+};
 
 // render
 const VendorProfile = () => {
     const [isFetching, setIsFetching] = useState(false);
-    const [vendor, setVendor] = useState({});
+    const [vendor, setVendor] = useState(skeleton);
     const { id } = useParams();
 
     useEffect(() => {
@@ -30,75 +78,50 @@ const VendorProfile = () => {
     }, []);
 
     return (
-        <div className="row justify-content-center pt-5">
-            <div className="col-10 py-4">
-                <h1 className="display-1">Vendor Profile</h1>
-            </div>
-            <div className="col-10">
-                <div className="card text-bg-light bg-gradient rounded-4 p-4 mb-4">
-                    {isFetching ? (
-                        <div className="d-flex align-items-center">
-                            <strong role="status">
-                                Loading vendor information...
-                            </strong>
-                            <div
-                                className="spinner-border ms-auto"
-                                aria-hidden="true"
-                            ></div>
-                        </div>
-                    ) : vendor ? (
-                        <div className="card-body">
-                            <h2 className="card-title">{vendor.company}</h2>
-                            <hr />
-                            <h4 className="card-subtitle text-secondary">
-                                Company information
-                            </h4>
-                            <ul className="card-text">
-                                <li>
-                                    <strong>Domicile:</strong>{" "}
-                                    {vendor.domicile?.city},{" "}
-                                    {vendor.domicile?.territory},{" "}
-                                    {vendor.domicile?.country}
-                                </li>
-                                {vendor?.type?.asset_based && (
-                                    <li>Asset-based</li>
-                                )}
-                                {vendor?.type?.freight_broker && (
-                                    <li>Freight broker</li>
-                                )}
-                                <li>
-                                    <strong>Phone:</strong> {vendor.phone}
-                                </li>
-                                <li>
-                                    <strong>Email:</strong> {vendor.email}
-                                </li>
-                                <li>
-                                    <strong>Attn:</strong> {vendor.contact}
-                                </li>
-                            </ul>
-                            <hr />
-                            <h4 className="card-subtitle text-secondary">
-                                Coverage information
-                            </h4>
-                            <p className="card-text">
-                                Lorem ipsum dolor sit amet consectetur,
-                                adipisicing elit. Harum voluptatum laboriosam
-                                laborum voluptatem eveniet? Consequuntur vel
-                                quia unde laudantium. Saepe enim perspiciatis
-                                quia itaque tempora exercitationem ut maxime
-                                consequuntur voluptate?
-                            </p>
-                        </div>
-                    ) : (
-                        <div className="card-body">
-                            <div className="card-text">
-                                <p>Could not find that vendor</p>
-                            </div>
-                        </div>
-                    )}
+        <Fragment>
+            {isFetching ? (
+                <div className="row justify-content-center pt-5">
+                    <div
+                        className="col-10 py-4"
+                        style={{ minHeight: "100vh" }}
+                    >
+                        <h5
+                            className="display-5 py4"
+                            role="status"
+                        >
+                            Loading vendor information...
+                        </h5>
+                        <div
+                            className="spinner-border ms-auto"
+                            aria-hidden="true"
+                        ></div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            ) : vendor.company ? (
+                <VendorDisplay
+                    visibility="view"
+                    data={vendor}
+                    GeoCoverage={GeoCoverage}
+                    LaneList={LaneList}
+                    LaneBuilder={LaneBuilder}
+                    AddLane={AddLane}
+                />
+            ) : (
+                <div className="row justify-content-center pt-5">
+                    <div
+                        className="col-10 py-4"
+                        style={{ minHeight: "100vh" }}
+                    >
+                        <h5
+                            className="display-5 py4"
+                            role="status"
+                        >
+                            No vendor has been found...
+                        </h5>
+                    </div>
+                </div>
+            )}
+        </Fragment>
     );
 };
 

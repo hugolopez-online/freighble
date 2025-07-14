@@ -159,21 +159,31 @@ export const createVendor = async (req, res) => {
 };
 
 export const editVendor = async (req, res) => {
-    const { id } = req.params;
+    try {
+        const { id } = req.params;
 
-    if (!id) {
-        return res.status(400).json({ msg: `Must provide id.` });
-    }
+        if (!id) {
+            return res.status(400).json({ msg: `Must provide id.` });
+        }
 
-    const vendor = await Vendor.findOneAndUpdate({ _id: id }, req.body);
+        const vendor = await Vendor.findOneAndUpdate({ _id: id }, req.body, {
+            runValidators: true,
+        });
 
-    if (!vendor) {
-        return res.status(400).json({
-            msg: `No vendor found with id: ${id} - Nothing was edited.`,
+        if (!vendor) {
+            return res.status(400).json({
+                msg: `No vendor found with id: ${id} - Nothing was edited.`,
+            });
+        }
+
+        return res.status(200).json({ msg: `Edited ${vendor.company}` });
+    } catch (err) {
+        return res.status(500).json({
+            msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
+            successful: false,
+            error: err,
         });
     }
-
-    return res.status(200).json({ msg: `Edited ${vendor.company}` });
 };
 
 export const deleteVendor = async (req, res) => {

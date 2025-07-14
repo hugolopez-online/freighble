@@ -1,7 +1,7 @@
 const LaneList = (props) => {
     // module
     const label = props.target.label;
-    const lanes = props.formData[props.target.ref];
+    const lanes = props.data[props.target.ref];
 
     // render
     return (
@@ -12,14 +12,20 @@ const LaneList = (props) => {
                     return (
                         <span
                             key={`lanes-${lane}-${index}`}
-                            className="fw-medium badge text-bg-primary bg-gradient rounded-pill me-1"
+                            className={`fw-medium badge text-bg-${
+                                label === "preferred"
+                                    ? "success"
+                                    : label === "exclusive"
+                                    ? "primary"
+                                    : "danger"
+                            } bg-gradient rounded-pill me-1`}
                         >
                             {lane}{" "}
                             <i
                                 className="bi bi-x"
                                 style={{ cursor: "pointer" }}
                                 onClick={() => {
-                                    props.setFormData((prev) => {
+                                    props.setData((prev) => {
                                         return {
                                             ...prev,
                                             [props.target.ref]: [
