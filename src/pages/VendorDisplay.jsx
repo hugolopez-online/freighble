@@ -45,6 +45,7 @@ const VendorDisplay = (props) => {
     });
 
     const [isBothWays, setIsBothWays] = useState(false);
+    const [authToken, setAuthToken] = useState("");
 
     // module
     const GeoCoverage = props.GeoCoverage;
@@ -165,7 +166,8 @@ const VendorDisplay = (props) => {
         }
 
         if (visibility === "edit") {
-            const url = `/api/vendors/public/edit/${data._id}`;
+            const url = `/api/vendors/public/edit/${data._id}?token=${authToken}`;
+            console.log(typeof data.token);
 
             const response = await fetch(url, {
                 method: "PATCH",
@@ -285,15 +287,7 @@ const VendorDisplay = (props) => {
                                 <>
                                     Vendor Profile{" "}
                                     <button
-                                        className="btn btn-dark bg-gradient rounded-3 fw-medium me-2"
-                                        onClick={(e) => {
-                                            handleRegistration(e, data);
-                                        }}
-                                    >
-                                        Save Changes
-                                    </button>
-                                    <button
-                                        className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
+                                        className="btn btn-secondary bg-gradient fw-medium"
                                         onClick={() => {
                                             setData(props.data);
                                             setVisibility("view");
@@ -301,6 +295,30 @@ const VendorDisplay = (props) => {
                                     >
                                         Cancel
                                     </button>
+                                    <div className="input-group mt-4">
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            placeholder="Authorization token (required to apply changes)"
+                                            id="auth_token"
+                                            name="auth_token"
+                                            value={authToken}
+                                            onChange={(e) => {
+                                                setAuthToken(e.target.value);
+                                            }}
+                                            autoComplete="off"
+                                            required
+                                        />
+                                        <button
+                                            className="btn btn-dark bg-gradient fw-medium"
+                                            onClick={(e) => {
+                                                handleRegistration(e, data);
+                                                setAuthToken("");
+                                            }}
+                                        >
+                                            Save Changes
+                                        </button>
+                                    </div>
                                 </>
                             ) : (
                                 "BAD REQUEST!"

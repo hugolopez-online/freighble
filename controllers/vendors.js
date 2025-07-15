@@ -161,18 +161,34 @@ export const createVendor = async (req, res) => {
 export const editVendor = async (req, res) => {
     try {
         const { id } = req.params;
+        const { token } = req.query;
+
+        console.log(token);
 
         if (!id) {
             return res.status(400).json({ msg: `Must provide id.` });
         }
 
-        const vendor = await Vendor.findOneAndUpdate({ _id: id }, req.body, {
-            runValidators: true,
-        });
+        const vendor_token = await Vendor.findById(id, "token");
+
+        if (!token || token !== vendor_token.token) {
+            return res.status(500).json({
+                msg: `Not authorized to make these changes.`,
+                successful: false,
+            });
+        }
+
+        const vendor = await Vendor.findOneAndUpdate(
+            { _id: id },
+            { ...req.body, verified: false },
+            {
+                runValidators: true,
+            }
+        );
 
         if (!vendor) {
             return res.status(400).json({
-                msg: `No vendor found with id: ${id} - Nothing was edited.`,
+                msg: `No vendor found with id: ${id} - nothing to edit.`,
             });
         }
 

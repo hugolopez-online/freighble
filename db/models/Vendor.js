@@ -224,6 +224,11 @@ const VendorSchema = new mongoose.Schema(
             default: false,
             required: true,
         },
+        token: {
+            type: String,
+            default: "1234",
+            required: true,
+        },
     },
     {
         collection: "vendors",
@@ -240,6 +245,11 @@ VendorSchema.pre("save", function (next) {
     }
 
     this.borders = [...new Set(this.borders)];
+    next();
+});
+
+VendorSchema.pre("save", function (next) {
+    this.token = "2345";
     next();
 });
 
