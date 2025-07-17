@@ -1,6 +1,6 @@
 // imports
 import { useState, Fragment } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
 import { geo_tree } from "data/geo_meta";
 import geo_lookup from "data/geo_meta";
@@ -26,6 +26,7 @@ const countries_labels = {
 const VendorDisplay = (props) => {
     // state
     const [data, setData] = useState(props.data);
+    const [passwordMatch, setPasswordMatch] = useState("");
     const [visibility, setVisibility] = useState(props.visibility);
     const [toastMessage, setToastMessage] = useState({
         success: false,
@@ -45,7 +46,6 @@ const VendorDisplay = (props) => {
     });
 
     const [isBothWays, setIsBothWays] = useState(false);
-    const [authToken, setAuthToken] = useState("");
 
     // module
     const GeoCoverage = props.GeoCoverage;
@@ -132,6 +132,16 @@ const VendorDisplay = (props) => {
         e.preventDefault();
 
         if (visibility === "create") {
+            if (passwordMatch !== data.auth.password) {
+                setToastMessage({
+                    success: false,
+                    message: "Password doesn't match.",
+                });
+                window.scrollTo(0, 0);
+                toast.show();
+                return false;
+            }
+
             const url = "/api/vendors/public/create";
 
             const response = await fetch(url, {
@@ -166,8 +176,7 @@ const VendorDisplay = (props) => {
         }
 
         if (visibility === "edit") {
-            const url = `/api/vendors/public/edit/${data._id}?token=${authToken}`;
-            console.log(typeof data.token);
+            const url = `/api/vendors/public/edit/${data._id}`;
 
             const response = await fetch(url, {
                 method: "PATCH",
@@ -287,6 +296,14 @@ const VendorDisplay = (props) => {
                                 <>
                                     Vendor Profile{" "}
                                     <button
+                                        className="btn btn-dark bg-gradient fw-medium me-2"
+                                        onClick={(e) => {
+                                            handleRegistration(e, data);
+                                        }}
+                                    >
+                                        Save Changes
+                                    </button>
+                                    <button
                                         className="btn btn-secondary bg-gradient fw-medium"
                                         onClick={() => {
                                             setData(props.data);
@@ -295,30 +312,6 @@ const VendorDisplay = (props) => {
                                     >
                                         Cancel
                                     </button>
-                                    <div className="input-group mt-4">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="Authorization token (required to apply changes)"
-                                            id="auth_token"
-                                            name="auth_token"
-                                            value={authToken}
-                                            onChange={(e) => {
-                                                setAuthToken(e.target.value);
-                                            }}
-                                            autoComplete="off"
-                                            required
-                                        />
-                                        <button
-                                            className="btn btn-dark bg-gradient fw-medium"
-                                            onClick={(e) => {
-                                                handleRegistration(e, data);
-                                                setAuthToken("");
-                                            }}
-                                        >
-                                            Save Changes
-                                        </button>
-                                    </div>
                                 </>
                             ) : (
                                 "BAD REQUEST!"
@@ -329,6 +322,146 @@ const VendorDisplay = (props) => {
                             className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
                             onSubmit={(e) => handleRegistration(e, data)}
                         >
+                            {/* Auth details */}
+                            {create && (
+                                <Fragment>
+                                    <div className="row border-bottom mb-4">
+                                        <div className="col-12">
+                                            <h6 className="display-6 text-dark fw-bold">
+                                                Sign-up Details
+                                            </h6>
+                                        </div>
+                                    </div>
+
+                                    <fieldset className="row mb-4">
+                                        <div className="col-12 mb-2">
+                                            <label
+                                                htmlFor="main_email_address"
+                                                className="fw-medium text-dark-emphasis"
+                                            >
+                                                main email address{" "}
+                                                <strong
+                                                    className={`text-${
+                                                        data.main_email
+                                                            ? "success"
+                                                            : "danger"
+                                                    }`}
+                                                >
+                                                    {data.main_email ? (
+                                                        <i className="bi bi-check"></i>
+                                                    ) : (
+                                                        "*"
+                                                    )}
+                                                </strong>
+                                            </label>
+                                            <input
+                                                type="email"
+                                                className="form-control"
+                                                placeholder="Email address"
+                                                id="main_email_address"
+                                                name="main_email_address"
+                                                value={data.main_email}
+                                                onChange={(e) => {
+                                                    setData((prev) => {
+                                                        return {
+                                                            ...prev,
+                                                            main_email:
+                                                                e.target.value.toLowerCase(),
+                                                        };
+                                                    });
+                                                }}
+                                                autoComplete="off"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="col-12 mb-2">
+                                            <label
+                                                htmlFor="vendor_password"
+                                                className="fw-medium text-dark-emphasis"
+                                            >
+                                                password{" "}
+                                                <strong
+                                                    className={`text-${
+                                                        data.auth.password
+                                                            ? "success"
+                                                            : "danger"
+                                                    }`}
+                                                >
+                                                    {data.auth.password ? (
+                                                        <i className="bi bi-check"></i>
+                                                    ) : (
+                                                        "*"
+                                                    )}
+                                                </strong>
+                                            </label>
+                                            <input
+                                                type="password"
+                                                className="form-control"
+                                                placeholder="Password"
+                                                id="vendor_password"
+                                                name="vendor_password"
+                                                value={data.auth.password}
+                                                onChange={(e) => {
+                                                    setData((prev) => {
+                                                        return {
+                                                            ...prev,
+                                                            auth: {
+                                                                ...prev.auth,
+                                                                password:
+                                                                    e.target
+                                                                        .value,
+                                                            },
+                                                        };
+                                                    });
+                                                }}
+                                                autoComplete="off"
+                                                required
+                                            />
+                                        </div>
+                                        <div className="col-12 mb-2">
+                                            <label
+                                                htmlFor="confirm_vendor_password"
+                                                className="fw-medium text-dark-emphasis"
+                                            >
+                                                confirm password{" "}
+                                                <strong
+                                                    className={`text-${
+                                                        passwordMatch &&
+                                                        passwordMatch ===
+                                                            data.auth.password
+                                                            ? "success"
+                                                            : "danger"
+                                                    }`}
+                                                >
+                                                    {passwordMatch &&
+                                                    passwordMatch ===
+                                                        data.auth.password ? (
+                                                        <i className="bi bi-check"></i>
+                                                    ) : (
+                                                        "*"
+                                                    )}
+                                                </strong>
+                                            </label>
+                                            <input
+                                                type="password"
+                                                className="form-control"
+                                                placeholder="Password"
+                                                id="confirm_vendor_password"
+                                                name="confirm_vendor_password"
+                                                value={passwordMatch}
+                                                onChange={(e) => {
+                                                    setPasswordMatch(
+                                                        e.target.value
+                                                    );
+                                                }}
+                                                autoComplete="off"
+                                                required
+                                            />
+                                        </div>
+                                    </fieldset>
+                                </Fragment>
+                            )}
+
                             {/* Company details */}
                             <div className="row border-bottom mb-4">
                                 <div className="col-12">
@@ -1437,16 +1570,83 @@ const VendorDisplay = (props) => {
                             </fieldset>
 
                             {!view && (
-                                <button
-                                    type="submit"
-                                    className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
-                                >
-                                    {create
-                                        ? "Create Vendor"
-                                        : edit
-                                        ? "Save Changes"
-                                        : "BAD REQUEST!"}
-                                </button>
+                                <Fragment>
+                                    {create && (
+                                        <div className="form-check mb-4">
+                                            <input
+                                                className="form-check-input"
+                                                type="checkbox"
+                                                id="accept_terms"
+                                                name="accept_terms"
+                                                checked={
+                                                    data.auth.terms.accepted
+                                                }
+                                                onChange={(e) => {
+                                                    setData((prev) => {
+                                                        return {
+                                                            ...prev,
+                                                            auth: {
+                                                                ...prev.auth,
+                                                                terms: {
+                                                                    ...prev.auth
+                                                                        .terms,
+                                                                    accepted:
+                                                                        e.target
+                                                                            .checked,
+                                                                    date_accepted:
+                                                                        Date.now(),
+                                                                },
+                                                            },
+                                                        };
+                                                    });
+                                                }}
+                                            />
+                                            <label
+                                                className={`form-check-label text-${
+                                                    data.auth.terms.accepted
+                                                        ? "dark"
+                                                        : "secondary"
+                                                }`}
+                                                htmlFor="accept_terms"
+                                            >
+                                                By signing up, I acknowledge
+                                                that I have read, understood,
+                                                and accepted the{" "}
+                                                <Link
+                                                    to="/general-terms-and-conditions"
+                                                    target="_blank"
+                                                >
+                                                    General Terms and Conditions
+                                                </Link>{" "}
+                                                of use.{" "}
+                                                <strong
+                                                    className={`text-${
+                                                        data.auth.terms.accepted
+                                                            ? "success"
+                                                            : "danger"
+                                                    }`}
+                                                >
+                                                    {data.auth.terms
+                                                        .accepted ? (
+                                                        <i className="bi bi-check"></i>
+                                                    ) : (
+                                                        "*"
+                                                    )}
+                                                </strong>
+                                            </label>
+                                        </div>
+                                    )}
+                                    <button
+                                        type="submit"
+                                        className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
+                                    >
+                                        {create
+                                            ? "Sign Up and Create Vendor"
+                                            : edit
+                                            ? "Save Changes"
+                                            : "BAD REQUEST!"}
+                                    </button>
+                                </Fragment>
                             )}
                         </form>
                     </div>

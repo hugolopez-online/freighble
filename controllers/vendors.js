@@ -161,21 +161,11 @@ export const createVendor = async (req, res) => {
 export const editVendor = async (req, res) => {
     try {
         const { id } = req.params;
-        const { token } = req.query;
-
-        console.log(token);
 
         if (!id) {
-            return res.status(400).json({ msg: `Must provide id.` });
-        }
-
-        const vendor_token = await Vendor.findById(id, "token");
-
-        if (!token || token !== vendor_token.token) {
-            return res.status(500).json({
-                msg: `Not authorized to make these changes.`,
-                successful: false,
-            });
+            return res
+                .status(400)
+                .json({ msg: `Must provide vendor ID to edit.` });
         }
 
         const vendor = await Vendor.findOneAndUpdate(
@@ -188,11 +178,11 @@ export const editVendor = async (req, res) => {
 
         if (!vendor) {
             return res.status(400).json({
-                msg: `No vendor found with id: ${id} - nothing to edit.`,
+                msg: `No vendor found: nothing to edit.`,
             });
         }
 
-        return res.status(200).json({ msg: `Edited ${vendor.company}` });
+        return res.status(200).json({ msg: `${vendor.company} edited.` });
     } catch (err) {
         return res.status(500).json({
             msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
@@ -206,14 +196,14 @@ export const deleteVendor = async (req, res) => {
     const { id } = req.params;
 
     if (!id) {
-        return res.status(400).json({ msg: `Must provide id.` });
+        return res.status(400).json({ msg: `Must provide vendor ID.` });
     }
 
     const vendor = await Vendor.findOneAndDelete({ _id: id });
 
     if (!vendor) {
         return res.status(400).json({
-            msg: `No vendor found with id: ${id} - Nothing was deleted.`,
+            msg: `No vendor found: nothing to delete.`,
         });
     }
 

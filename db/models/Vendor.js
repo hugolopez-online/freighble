@@ -1,5 +1,7 @@
 // imports
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
+import { SALT } from "../auth/encryption.js";
 import {
     modes_values,
     borders_values,
@@ -90,9 +92,53 @@ const VendorCoverage = new mongoose.Schema(
     { _id: false }
 );
 
+const VendorTerms = new mongoose.Schema(
+    {
+        version: {
+            type: String,
+            required: true,
+        },
+        accepted: {
+            type: Boolean,
+            default: false,
+            required: true,
+        },
+        date_accepted: {
+            type: Date,
+            default: Date.now(),
+            required: true,
+        },
+    },
+    { _id: false }
+);
+
+const VendorAuth = new mongoose.Schema(
+    {
+        password: {
+            type: String,
+            required: true,
+        },
+        role: {
+            type: String,
+            default: "vendor",
+            required: true,
+        },
+        terms: {
+            type: VendorTerms,
+            required: true,
+        },
+    },
+    { _id: false }
+);
+
 // main schema
 const VendorSchema = new mongoose.Schema(
     {
+        main_email: {
+            type: String,
+            unique: true,
+            required: true,
+        },
         // TODO include regex
         company: {
             type: String,
@@ -201,19 +247,16 @@ const VendorSchema = new mongoose.Schema(
             default: ["none"],
             required: true,
         },
-        // TODO include regex
         core_lanes: {
             type: Array,
             default: [],
             required: true,
         },
-        // TODO include regex
         exclusive_lanes: {
             type: Array,
             default: [],
             required: true,
         },
-        // TODO include regex
         banned_lanes: {
             type: Array,
             default: [],
@@ -224,9 +267,8 @@ const VendorSchema = new mongoose.Schema(
             default: false,
             required: true,
         },
-        token: {
-            type: String,
-            default: "1234",
+        auth: {
+            type: VendorAuth,
             required: true,
         },
     },
@@ -239,17 +281,21 @@ VendorSchema.path("type").validate((value) => {
     return value.asset_based || value.freight_broker;
 });
 
-VendorSchema.pre("save", function (next) {
+VendorSchema.path("auth").validate((value) => {
+    return value.terms.accepted;
+});
+
+VendorSchema.pre("save", async function (next) {
+    // complete borders
     if (!this.borders.includes("none")) {
         this.borders.push("none");
     }
-
     this.borders = [...new Set(this.borders)];
-    next();
-});
 
-VendorSchema.pre("save", function (next) {
-    this.token = "2345";
+    // enforce auth variables
+    this.auth.role = "vendor";
+    this.auth.password = await bcrypt.hash(this.auth.password, 6);
+
     next();
 });
 

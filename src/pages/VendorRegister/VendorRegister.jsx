@@ -7,6 +7,7 @@ import AddLane from "./layout/components/AddLane";
 
 // module
 const data = {
+    main_email: "",
     company: "",
     type: {
         asset_based: false,
@@ -46,6 +47,14 @@ const data = {
     core_lanes: [],
     exclusive_lanes: [],
     banned_lanes: [],
+    auth: {
+        password: "",
+        terms: {
+            version: "v1.0.0",
+            accepted: false,
+            date_accepted: null,
+        },
+    },
 };
 
 const VendorRegister = () => {
