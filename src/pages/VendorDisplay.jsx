@@ -23,6 +23,10 @@ const countries_labels = {
     MEX: "Mexico",
 };
 
+const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+const phone_regex = /^\d\d\d-\d\d\d-\d\d\d\d$/i;
+const bad_password_regex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
+
 const VendorDisplay = (props) => {
     // state
     const [data, setData] = useState(props.data);
@@ -30,7 +34,7 @@ const VendorDisplay = (props) => {
     const [visibility, setVisibility] = useState(props.visibility);
     const [toastMessage, setToastMessage] = useState({
         success: false,
-        message: "",
+        message: [],
     });
 
     const [laneOrigin, setLaneOrigin] = useState({
@@ -135,7 +139,7 @@ const VendorDisplay = (props) => {
             if (passwordMatch !== data.auth.password) {
                 setToastMessage({
                     success: false,
-                    message: "Password doesn't match.",
+                    message: ["Password doesn't match."],
                 });
                 window.scrollTo(0, 0);
                 toast.show();
@@ -162,14 +166,25 @@ const VendorDisplay = (props) => {
                 }
 
                 setData(props.data);
-                setToastMessage({ success: true, message: response_data.msg });
+                setToastMessage({
+                    success: true,
+                    message: [response_data.msg],
+                });
                 window.scrollTo(0, 0);
                 toast.show();
                 setTimeout(() => {
                     navigate(`/vendors/vendor/${response_data.id}`);
-                }, 1500);
+                }, 1250);
             } catch (error) {
-                setToastMessage({ success: false, message: response_data.msg });
+                const err_variables = Object.keys(response_data.error.errors);
+                const errors = err_variables.map((err) => {
+                    return response_data.error.errors[err].message;
+                });
+
+                setToastMessage({
+                    success: false,
+                    message: errors,
+                });
                 window.scrollTo(0, 0);
                 toast.show();
             }
@@ -195,12 +210,23 @@ const VendorDisplay = (props) => {
                     );
                 }
 
-                setToastMessage({ success: true, message: response_data.msg });
+                setToastMessage({
+                    success: true,
+                    message: [response_data.msg],
+                });
                 window.scrollTo(0, 0);
                 setVisibility("view");
                 toast.show();
             } catch (error) {
-                setToastMessage({ success: false, message: response_data.msg });
+                const err_variables = Object.keys(response_data.error.errors);
+                const errors = err_variables.map((err) => {
+                    return response_data.error.errors[err].message;
+                });
+
+                setToastMessage({
+                    success: false,
+                    message: errors,
+                });
                 window.scrollTo(0, 0);
                 toast.show();
             }
@@ -279,7 +305,7 @@ const VendorDisplay = (props) => {
                     <div className="col-10 py-4">
                         <h5 className="display-5 py-4">
                             {view ? (
-                                <>
+                                <Fragment>
                                     Vendor Profile{" "}
                                     <button
                                         className="btn btn-secondary bg-gradient rounded-3 fw-medium"
@@ -289,11 +315,11 @@ const VendorDisplay = (props) => {
                                     >
                                         Edit
                                     </button>
-                                </>
+                                </Fragment>
                             ) : create ? (
-                                <>Vendor Registration</>
+                                "Vendor Registration"
                             ) : edit ? (
-                                <>
+                                <Fragment>
                                     Vendor Profile{" "}
                                     <button
                                         className="btn btn-dark bg-gradient fw-medium me-2"
@@ -312,7 +338,7 @@ const VendorDisplay = (props) => {
                                     >
                                         Cancel
                                     </button>
-                                </>
+                                </Fragment>
                             ) : (
                                 "BAD REQUEST!"
                             )}
@@ -342,12 +368,18 @@ const VendorDisplay = (props) => {
                                                 main email address{" "}
                                                 <strong
                                                     className={`text-${
-                                                        data.main_email
+                                                        data.main_email &&
+                                                        email_regex.test(
+                                                            data.main_email
+                                                        )
                                                             ? "success"
                                                             : "danger"
                                                     }`}
                                                 >
-                                                    {data.main_email ? (
+                                                    {data.main_email &&
+                                                    email_regex.test(
+                                                        data.main_email
+                                                    ) ? (
                                                         <i className="bi bi-check"></i>
                                                     ) : (
                                                         "*"
@@ -380,14 +412,26 @@ const VendorDisplay = (props) => {
                                                 className="fw-medium text-dark-emphasis"
                                             >
                                                 password{" "}
+                                                <small className="fw-light text-secondary">
+                                                    (at least 8 characters long
+                                                    and include lowercase,
+                                                    uppercase, number, and
+                                                    special characters)
+                                                </small>{" "}
                                                 <strong
                                                     className={`text-${
-                                                        data.auth.password
+                                                        data.auth.password &&
+                                                        !bad_password_regex.test(
+                                                            data.auth.password
+                                                        )
                                                             ? "success"
                                                             : "danger"
                                                     }`}
                                                 >
-                                                    {data.auth.password ? (
+                                                    {data.auth.password &&
+                                                    !bad_password_regex.test(
+                                                        data.auth.password
+                                                    ) ? (
                                                         <i className="bi bi-check"></i>
                                                     ) : (
                                                         "*"
@@ -428,14 +472,21 @@ const VendorDisplay = (props) => {
                                                     className={`text-${
                                                         passwordMatch &&
                                                         passwordMatch ===
+                                                            data.auth
+                                                                .password &&
+                                                        !bad_password_regex.test(
                                                             data.auth.password
+                                                        )
                                                             ? "success"
                                                             : "danger"
                                                     }`}
                                                 >
                                                     {passwordMatch &&
                                                     passwordMatch ===
-                                                        data.auth.password ? (
+                                                        data.auth.password &&
+                                                    !bad_password_regex.test(
+                                                        data.auth.password
+                                                    ) ? (
                                                         <i className="bi bi-check"></i>
                                                     ) : (
                                                         "*"
@@ -660,6 +711,7 @@ const VendorDisplay = (props) => {
                                                 </li>
                                                 <li>
                                                     <i className="bi bi-telephone-fill"></i>{" "}
+                                                    {data.ph_country_code}-
                                                     {data.phone}
                                                 </li>
                                             </ul>
@@ -759,48 +811,83 @@ const VendorDisplay = (props) => {
                                                 required
                                             />
                                         </div>
-                                        <div className="col-4">
-                                            <label
-                                                htmlFor="contact_phone"
-                                                className="fw-medium text-dark-emphasis"
-                                            >
-                                                pricing contact phone{" "}
+                                        <div className="row col-4">
+                                            <span className="fw-medium text-dark-emphasis">
+                                                pricing phone{" "}
                                                 <strong
                                                     className={`text-${
+                                                        data.ph_country_code &&
                                                         data.phone
                                                             ? "success"
                                                             : "danger"
                                                     }`}
                                                 >
-                                                    {data.phone ? (
+                                                    {data.ph_country_code &&
+                                                    data.phone ? (
                                                         <i className="bi bi-check"></i>
                                                     ) : (
                                                         "*"
                                                     )}
                                                 </strong>
-                                            </label>
-                                            <input
-                                                type="tel"
-                                                className="form-control"
-                                                placeholder="Contact phone"
-                                                id="contact_phone"
-                                                name="contact_phone"
-                                                value={data.phone}
-                                                minLength="12"
-                                                maxLength="12"
-                                                onChange={(e) => {
-                                                    setData((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            phone: toPhoneFormat(
-                                                                e.target.value
-                                                            ),
-                                                        };
-                                                    });
-                                                }}
-                                                autoComplete="off"
-                                                required
-                                            />
+                                            </span>
+                                            <div className="col-4 pe-0">
+                                                <select
+                                                    className="form-select rounded-end-0 border-end-0"
+                                                    id="contact_phone_country"
+                                                    name="contact_phone_country"
+                                                    value={data.ph_country_code}
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                ph_country_code:
+                                                                    e.target
+                                                                        .value,
+                                                            };
+                                                        });
+                                                    }}
+                                                    required
+                                                >
+                                                    <option
+                                                        value=""
+                                                        disabled
+                                                        hidden
+                                                    >
+                                                        Code
+                                                    </option>
+                                                    <option value="+1">
+                                                        +1
+                                                    </option>
+                                                    <option value="+52">
+                                                        +52
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div className="col-8 ps-0">
+                                                <input
+                                                    type="tel"
+                                                    className="form-control rounded-start-0"
+                                                    placeholder="10-digit phone number"
+                                                    id="contact_phone"
+                                                    name="contact_phone"
+                                                    value={data.phone}
+                                                    minLength="12"
+                                                    maxLength="12"
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                phone: toPhoneFormat(
+                                                                    e.target
+                                                                        .value
+                                                                ),
+                                                            };
+                                                        });
+                                                    }}
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                            </div>
                                         </div>
                                     </Fragment>
                                 )}
@@ -1672,11 +1759,46 @@ const VendorDisplay = (props) => {
                         </div>
                         <div className="toast-body rounded-bottom-3 bg-light">
                             {toastMessage.success ? (
-                                <i className="bi bi-check-circle-fill text-success"></i>
+                                <Fragment>
+                                    <i className="bi bi-check-circle-fill text-success"></i>{" "}
+                                    <span className="text-success fw-medium">
+                                        Success!
+                                    </span>
+                                    <ul>
+                                        {toastMessage.message.map(
+                                            (bullet, index) => {
+                                                return (
+                                                    <li
+                                                        key={`error-msg_${index}`}
+                                                    >
+                                                        {bullet}
+                                                    </li>
+                                                );
+                                            }
+                                        )}
+                                    </ul>
+                                </Fragment>
                             ) : (
-                                <i className="bi bi-exclamation-circle-fill text-danger"></i>
-                            )}{" "}
-                            {toastMessage.message}
+                                <Fragment>
+                                    <i className="bi bi-exclamation-circle-fill text-danger"></i>{" "}
+                                    <span className="text-danger fw-medium">
+                                        Something went wrong
+                                    </span>
+                                    <ul>
+                                        {toastMessage.message.map(
+                                            (bullet, index) => {
+                                                return (
+                                                    <li
+                                                        key={`error-msg_${index}`}
+                                                    >
+                                                        {bullet}
+                                                    </li>
+                                                );
+                                            }
+                                        )}
+                                    </ul>
+                                </Fragment>
+                            )}
                         </div>
                     </div>
                 </div>

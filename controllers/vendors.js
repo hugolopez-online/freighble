@@ -112,7 +112,6 @@ export const searchVendors = async (req, res) => {
             });
         }
     } catch (err) {
-        console.error(err);
         return res.status(500).json({ msg: err, filtered_vendors: [] });
     }
 
@@ -152,7 +151,6 @@ export const createVendor = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
-            successful: false,
             error: err,
         });
     }
@@ -186,7 +184,6 @@ export const editVendor = async (req, res) => {
     } catch (err) {
         return res.status(500).json({
             msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
-            successful: false,
             error: err,
         });
     }

@@ -190,7 +190,8 @@ const Vendor = (props) => {
                                 className="btn badge text-bg-dark bg-gradient fw-normal me-1"
                             >
                                 <i className="bi bi-person-rolodex"></i>{" "}
-                                {props.contact}: {props.phone}
+                                {props.contact}: {props.ph_country_code}-
+                                {props.phone}
                             </a>
                             <a
                                 href={`mailto:${props.email}`}

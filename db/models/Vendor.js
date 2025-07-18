@@ -1,7 +1,6 @@
 // imports
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
-import { SALT } from "../auth/encryption.js";
 import {
     modes_values,
     borders_values,
@@ -21,7 +20,7 @@ const CoverageContent = (country_code, divisions) =>
                 type: String,
                 enum: [country_code],
                 default: country_code,
-                required: true,
+                required: [true, "Coverage: country code must be provided."],
             },
             territory: [
                 {
@@ -38,11 +37,17 @@ const VendorType = new mongoose.Schema(
     {
         asset_based: {
             type: Boolean,
-            required: true,
+            required: [
+                true,
+                "Company type `asset-based`: must confirm field either way (yes or no).",
+            ],
         },
         freight_broker: {
             type: Boolean,
-            required: true,
+            required: [
+                true,
+                "Company type `freight broker`: must confirm field either way (yes or no).",
+            ],
         },
     },
     { _id: false }
@@ -50,25 +55,27 @@ const VendorType = new mongoose.Schema(
 
 const VendorDomicile = new mongoose.Schema(
     {
-        // TODO remove <placeholder> after tests
         city: {
             type: String,
-            required: true,
+            required: [true, "Domicile city: required field."],
         },
         territory: {
             type: String,
             enum: valid_territories,
-            required: true,
+            required: [
+                true,
+                "Domicile territory (province or state): required field.",
+            ],
         },
         country: {
             type: String,
             enum: ["Canada", "United States", "Mexico"],
-            required: true,
+            required: [true, "Domicile country: required field."],
         },
         country_code: {
             type: String,
             enum: ["CAN", "USA", "MEX"],
-            required: true,
+            required: [true, "Domicile country code: required field."],
         },
     },
     { _id: false }
@@ -78,15 +85,15 @@ const VendorCoverage = new mongoose.Schema(
     {
         Canada: {
             type: CoverageContent("CAN", canDivisions),
-            required: true,
+            required: [true, "Canada coverage must be provided."],
         },
         "United States": {
             type: CoverageContent("USA", usaDivisions),
-            required: true,
+            required: [true, "United States coverage must be provided."],
         },
         Mexico: {
             type: CoverageContent("MEX", mexDivisions),
-            required: true,
+            required: [true, "Mexico coverage must be provided."],
         },
     },
     { _id: false }
@@ -96,17 +103,17 @@ const VendorTerms = new mongoose.Schema(
     {
         version: {
             type: String,
-            required: true,
+            required: [true, "Terms version must be provided."],
         },
         accepted: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [true, "Acceptance of terms must be provided."],
         },
         date_accepted: {
             type: Date,
             default: Date.now(),
-            required: true,
+            required: [true, "Date of acceptance of terms must be provided."],
         },
     },
     { _id: false }
@@ -116,16 +123,26 @@ const VendorAuth = new mongoose.Schema(
     {
         password: {
             type: String,
-            required: true,
+            validate: {
+                validator: function (value) {
+                    return !/^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/.test(
+                        value
+                    );
+                },
+                message:
+                    "Password must be at least 8 characters long and include lowercase, uppercase, number, and special characters.",
+            },
+            required: [true, "Password: required field."],
         },
         role: {
             type: String,
             default: "vendor",
-            required: true,
+            enum: ["admin", "client", "vendor"],
+            required: [true, "User role must be provided."],
         },
         terms: {
             type: VendorTerms,
-            required: true,
+            required: [true, "Terms information must be provided."],
         },
     },
     { _id: false }
@@ -136,88 +153,119 @@ const VendorSchema = new mongoose.Schema(
     {
         main_email: {
             type: String,
-            unique: true,
-            required: true,
+            match: [
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+                "Main email: invalid email format.",
+            ],
+            unique: true, // TODO: create validator for unique
+            required: [true, "Main email: required field."],
         },
-        // TODO include regex
         company: {
             type: String,
-            required: true,
+            required: [true, "Company name: required field."],
         },
         type: {
             type: VendorType,
-            required: true,
+            required: [true, "Company type: at least one must be selected."],
         },
-        // TODO include regex
         contact: {
             type: String,
-            required: true,
+            required: [true, "Contact name: required field."],
         },
-        // TODO include regex
         email: {
             type: String,
-            required: true,
+            match: [
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+                "Pricing email: invalid email format.",
+            ],
+            required: [true, "Pricing email: required field."],
         },
-        // TODO format for phone
         phone: {
             type: String,
-            required: true,
+            match: [
+                /^\d\d\d-\d\d\d-\d\d\d\d$/i,
+                "Pricing phone: invalid phone format.",
+            ],
+            required: [true, "Pricing phone: required field."],
+        },
+        ph_country_code: {
+            type: String,
+            enum: {
+                values: ["+1", "+52"],
+                message: "{VALUE} is not a valid country telephone code.",
+            },
+            required: [true, "Pricing phone country code: required field."],
         },
         domicile: {
             type: VendorDomicile,
-            required: true,
+            required: [true, "Company domicile: required field."],
         },
         modes: [
             {
                 type: String,
-                enum: modes_values,
-                required: true,
+                enum: {
+                    values: modes_values,
+                    message: "{VALUE} is not a valid transportation mode.",
+                },
+                required: [
+                    true,
+                    "Transportation modes list must be provided, even if empty.",
+                ],
             },
         ],
         hazmat: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [true, "Hazmat: coverage capacity must be provided."],
         },
         team_drivers: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [
+                true,
+                "Team Drivers: coverage capacity must be provided.",
+            ],
         },
         usa_bonded: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [true, "U.S bonded: coverage capacity must be provided."],
         },
         can_bonded: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [
+                true,
+                "Canada bonded: coverage capacity must be provided.",
+            ],
         },
         ctpat: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [true, "C-TPAT: coverage capacity must be provided."],
         },
         twic: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [true, "TWIC: coverage capacity must be provided."],
         },
         tsa: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [true, "TSA: coverage capacity must be provided."],
         },
         fast: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [true, "FAST: coverage capacity must be provided."],
         },
         tanker_endorsement: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [
+                true,
+                "Tanker Endorsement: coverage capacity must be provided.",
+            ],
         },
         coverage: {
             type: VendorCoverage,
@@ -235,7 +283,10 @@ const VendorSchema = new mongoose.Schema(
                     territory: [],
                 },
             },
-            required: true,
+            required: [
+                true,
+                "Geographical coverage capacity must be provided.",
+            ],
         },
         borders: {
             type: [
@@ -245,31 +296,43 @@ const VendorSchema = new mongoose.Schema(
                 },
             ],
             default: ["none"],
-            required: true,
+            required: [true, "Border crossing capacity must be provided."],
         },
         core_lanes: {
             type: Array,
             default: [],
-            required: true,
+            required: [
+                true,
+                "Core lanes list must be provided, even if empty.",
+            ],
         },
         exclusive_lanes: {
             type: Array,
             default: [],
-            required: true,
+            required: [
+                true,
+                "Exclusive lanes list must be provided, even if empty.",
+            ],
         },
         banned_lanes: {
             type: Array,
             default: [],
-            required: true,
+            required: [
+                true,
+                "Banned lanes list must be provided, even if empty.",
+            ],
         },
         verified: {
             type: Boolean,
             default: false,
-            required: true,
+            required: [
+                true,
+                "admin // INTERNAL ERROR: `VERIFIED` FLAG MISSING.",
+            ],
         },
         auth: {
             type: VendorAuth,
-            required: true,
+            required: [true, "Sign-up details must be provided."],
         },
     },
     {
@@ -277,12 +340,18 @@ const VendorSchema = new mongoose.Schema(
     }
 );
 
-VendorSchema.path("type").validate((value) => {
-    return value.asset_based || value.freight_broker;
+VendorSchema.path("type").validate({
+    validator: function (value) {
+        return value.asset_based || value.freight_broker;
+    },
+    message: "Company type: at least one must be selected.",
 });
 
-VendorSchema.path("auth").validate((value) => {
-    return value.terms.accepted;
+VendorSchema.path("auth").validate({
+    validator: function (value) {
+        return value.terms.accepted;
+    },
+    message: "Terms and conditions must be accepted.",
 });
 
 VendorSchema.pre("save", async function (next) {
