@@ -137,8 +137,8 @@ const VendorAuth = new mongoose.Schema(
         role: {
             type: String,
             default: "vendor",
-            enum: ["admin", "client", "vendor"],
-            required: [true, "User role must be provided."],
+            enum: ["admin", "user", "vendor"],
+            required: [true, "Registrant role must be provided."],
         },
         terms: {
             type: VendorTerms,
@@ -157,7 +157,7 @@ const VendorSchema = new mongoose.Schema(
                 /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                 "Main email: invalid email format.",
             ],
-            unique: true, // TODO: create validator for unique
+            unique: true,
             required: [true, "Main email: required field."],
         },
         company: {

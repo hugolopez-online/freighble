@@ -7,6 +7,7 @@ import {
     Login,
     Output,
     Register,
+    VendorLogin,
     VendorProfile,
     VendorRegister,
     Vendors,
@@ -87,6 +88,15 @@ function App() {
                             path="vendor/:id"
                             element={
                                 <VendorProfile
+                                    anchor={anchor}
+                                    setAnchor={setAnchor}
+                                />
+                            }
+                        />
+                        <Route
+                            path="login"
+                            element={
+                                <VendorLogin
                                     anchor={anchor}
                                     setAnchor={setAnchor}
                                 />

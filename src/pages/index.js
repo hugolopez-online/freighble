@@ -7,6 +7,7 @@ import NotFound from "./NotFound";
 import Output from "./Output";
 import Register from "./Register";
 import VendorDisplay from "./VendorDisplay";
+import VendorLogin from "./VendorLogin";
 import VendorProfile from "./VendorProfile";
 import VendorRegister from "./VendorRegister";
 import Vendors from "./Vendors";
@@ -22,6 +23,7 @@ export {
     Output,
     Register,
     VendorDisplay,
+    VendorLogin,
     VendorProfile,
     VendorRegister,
     Vendors,

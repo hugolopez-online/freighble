@@ -141,11 +141,26 @@ export const findVendor = async (req, res) => {
 
 export const createVendor = async (req, res) => {
     try {
-        const prospect_vendor = await Vendor.create(req.body);
+        const { main_email } = req.body;
+        const repeated_user = await Vendor.findOne({ main_email });
+
+        if (repeated_user) {
+            return res.status(500).json({
+                error: {
+                    errors: {
+                        unique: {
+                            message: `Sign-up email "${main_email}" has already been taken.`,
+                        },
+                    },
+                },
+            });
+        }
+
+        const vendor = await Vendor.create({ ...req.body });
 
         return res.status(201).json({
-            msg: `Vendor ${prospect_vendor.company} created!`,
-            id: prospect_vendor._id,
+            msg: `Vendor ${vendor.company} created!`,
+            id: vendor._id,
             successful: true,
         });
     } catch (err) {

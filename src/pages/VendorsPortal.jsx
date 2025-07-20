@@ -7,7 +7,17 @@ const VendorsPortal = () => {
                 <h1 className="display-1">Vendors Portal</h1>
             </div>
             <div className="col-10 pb-4">
-                <p>Become a Freighble vendor today!</p>
+                <p>
+                    If you're already a Freighble Vendor, log in to review and
+                    manage your information. Otherwise, you can register in just
+                    a few minutes.
+                </p>
+                <Link
+                    to="login"
+                    className="btn btn-lg btn-dark bg-gradient"
+                >
+                    Vendor Log In
+                </Link>
                 <Link
                     to="vendor"
                     className="btn btn-lg btn-primary bg-gradient"

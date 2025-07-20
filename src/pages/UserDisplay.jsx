@@ -2,32 +2,13 @@
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
-import { geo_tree } from "data/geo_meta";
-import geo_lookup from "data/geo_meta";
-import {
-    modes,
-    modes_values,
-    borders,
-    borders_values,
-    canDivisions,
-    usaDivisions,
-    mexDivisions,
-} from "data/variables";
 
 // module
-const coverage_countries = Object.keys(geo_tree);
-
-const countries_labels = {
-    CAN: "Canada",
-    USA: "United States",
-    MEX: "Mexico",
-};
-
 const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
 const phone_regex = /^\d\d\d-\d\d\d-\d\d\d\d$/i;
 const bad_password_regex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
 
-const VendorDisplay = (props) => {
+const UserDisplay = (props) => {
     // state
     const [data, setData] = useState(props.data);
     const [passwordMatch, setPasswordMatch] = useState("");
@@ -37,63 +18,10 @@ const VendorDisplay = (props) => {
         message: [],
     });
 
-    const [laneOrigin, setLaneOrigin] = useState({
-        label: "origin",
-        value: "Anywhere",
-        city: "",
-    });
-
-    const [laneDestination, setLaneDestination] = useState({
-        label: "destination",
-        value: "Anywhere",
-        city: "",
-    });
-
-    const [isBothWays, setIsBothWays] = useState(false);
-
     // module
-    const GeoCoverage = props.GeoCoverage;
-    const LaneList = props.LaneList;
-    const LaneBuilder = props.LaneBuilder;
-    const AddLane = props.AddLane;
-
     const view = visibility === "view";
     const edit = visibility === "edit";
     const create = visibility === "create";
-
-    const additional_services = {
-        hazmat: "Hazmat certified",
-        team_drivers: "Team drivers",
-        usa_bonded: "U.S. bonded",
-        can_bonded: "Canada bonded",
-        ctpat: "C-TPAT certified",
-        twic: "TWIC drivers",
-        tsa: "TSA drivers",
-        fast: "FAST certified",
-        tanker_endorsement: "Tanker Endorsement drivers",
-    };
-
-    const additional_services_values = Object.keys(additional_services);
-
-    const lanes = {
-        core: {
-            ref: "core_lanes",
-            label: "preferred",
-        },
-        exclusive: {
-            ref: "exclusive_lanes",
-            label: "exclusive",
-        },
-        banned: {
-            ref: "banned_lanes",
-            label: "banned",
-        },
-    };
-
-    const is_cross_border =
-        (data.coverage["Canada"].territory.length ||
-            data.coverage["United States"].territory.length) &&
-        data.coverage["Mexico"].territory.length;
 
     const toTitleCase = (string) => {
         return string
@@ -146,7 +74,7 @@ const VendorDisplay = (props) => {
                 return false;
             }
 
-            const url = "/api/vendors/public/create";
+            const url = "/api/users/public/create";
 
             const response = await fetch(url, {
                 method: "POST",
@@ -173,7 +101,7 @@ const VendorDisplay = (props) => {
                 window.scrollTo(0, 0);
                 toast.show();
                 setTimeout(() => {
-                    navigate(`/vendors/vendor/${response_data.id}`);
+                    navigate(`/login`);
                 }, 1250);
             } catch (error) {
                 const err_variables = Object.keys(response_data.error.errors);
@@ -191,7 +119,7 @@ const VendorDisplay = (props) => {
         }
 
         if (visibility === "edit") {
-            const url = `/api/vendors/public/edit/${data._id}`;
+            const url = `/api/users/public/edit/${data._id}`;
 
             const response = await fetch(url, {
                 method: "PATCH",
@@ -233,70 +161,6 @@ const VendorDisplay = (props) => {
         }
     };
 
-    const modeSelection = (e) => {
-        const mode_coverage = data.modes;
-        const selection = e.target.value;
-
-        if (mode_coverage.includes(selection)) {
-            setData((prev) => {
-                return {
-                    ...prev,
-                    modes: prev.modes.filter((mode) => mode !== selection),
-                };
-            });
-        } else {
-            setData((prev) => {
-                return {
-                    ...prev,
-                    modes: [...prev.modes, selection],
-                };
-            });
-        }
-    };
-
-    const borderSelection = (e) => {
-        const border_coverage = data.borders;
-        const selection = e.target.value;
-
-        if (border_coverage.includes(selection)) {
-            setData((prev) => {
-                return {
-                    ...prev,
-                    borders: prev.borders.filter(
-                        (border) => border !== selection
-                    ),
-                };
-            });
-        } else {
-            setData((prev) => {
-                return {
-                    ...prev,
-                    borders: [...prev.borders, selection],
-                };
-            });
-        }
-    };
-
-    const serviceSelection = (e) => {
-        const service = e.target.value;
-
-        if (data[service]) {
-            setData((prev) => {
-                return {
-                    ...prev,
-                    [service]: false,
-                };
-            });
-        } else {
-            setData((prev) => {
-                return {
-                    ...prev,
-                    [service]: true,
-                };
-            });
-        }
-    };
-
     // render
     return (
         (view || create || edit) && (
@@ -306,7 +170,7 @@ const VendorDisplay = (props) => {
                         <h5 className="display-5 py-4">
                             {view ? (
                                 <Fragment>
-                                    Vendor Profile{" "}
+                                    User Profile{" "}
                                     <button
                                         className="btn btn-secondary bg-gradient rounded-3 fw-medium"
                                         onClick={() => {
@@ -317,10 +181,10 @@ const VendorDisplay = (props) => {
                                     </button>
                                 </Fragment>
                             ) : create ? (
-                                "Vendor Registration"
+                                "User Registration"
                             ) : edit ? (
                                 <Fragment>
-                                    Vendor Profile{" "}
+                                    User Profile{" "}
                                     <button
                                         className="btn btn-dark bg-gradient fw-medium me-2"
                                         onClick={(e) => {
@@ -344,7 +208,7 @@ const VendorDisplay = (props) => {
                             )}
                         </h5>
                         <form
-                            id="vendor_register"
+                            id="user_register"
                             className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
                             onSubmit={(e) => handleRegistration(e, data)}
                         >
@@ -362,23 +226,23 @@ const VendorDisplay = (props) => {
                                     <fieldset className="row mb-4">
                                         <div className="col-12 mb-2">
                                             <label
-                                                htmlFor="main_email_address"
+                                                htmlFor="email_address"
                                                 className="fw-medium text-dark-emphasis"
                                             >
-                                                main email address{" "}
+                                                email address{" "}
                                                 <strong
                                                     className={`text-${
-                                                        data.main_email &&
+                                                        data.email &&
                                                         email_regex.test(
-                                                            data.main_email
+                                                            data.email
                                                         )
                                                             ? "success"
                                                             : "danger"
                                                     }`}
                                                 >
-                                                    {data.main_email &&
+                                                    {data.email &&
                                                     email_regex.test(
-                                                        data.main_email
+                                                        data.email
                                                     ) ? (
                                                         <i className="bi bi-check"></i>
                                                     ) : (
@@ -390,15 +254,14 @@ const VendorDisplay = (props) => {
                                                 type="email"
                                                 className="form-control"
                                                 placeholder="Email address"
-                                                id="main_email_address"
-                                                name="main_email_address"
-                                                value={data.main_email}
+                                                id="email_address"
+                                                name="email_address"
+                                                value={data.email}
                                                 onChange={(e) => {
                                                     setData((prev) => {
                                                         return {
                                                             ...prev,
-                                                            main_email:
-                                                                e.target.value.toLowerCase(),
+                                                            email: e.target.value.toLowerCase(),
                                                         };
                                                     });
                                                 }}
@@ -408,7 +271,7 @@ const VendorDisplay = (props) => {
                                         </div>
                                         <div className="col-12 mb-2">
                                             <label
-                                                htmlFor="vendor_password"
+                                                htmlFor="user_password"
                                                 className="fw-medium text-dark-emphasis"
                                             >
                                                 password{" "}
@@ -442,8 +305,8 @@ const VendorDisplay = (props) => {
                                                 type="password"
                                                 className="form-control"
                                                 placeholder="Password"
-                                                id="vendor_password"
-                                                name="vendor_password"
+                                                id="user_password"
+                                                name="user_password"
                                                 value={data.auth.password}
                                                 onChange={(e) => {
                                                     setData((prev) => {
@@ -464,7 +327,7 @@ const VendorDisplay = (props) => {
                                         </div>
                                         <div className="col-12 mb-2">
                                             <label
-                                                htmlFor="confirm_vendor_password"
+                                                htmlFor="confirm_user_password"
                                                 className="fw-medium text-dark-emphasis"
                                             >
                                                 confirm password{" "}
@@ -497,8 +360,8 @@ const VendorDisplay = (props) => {
                                                 type="password"
                                                 className="form-control"
                                                 placeholder="Password"
-                                                id="confirm_vendor_password"
-                                                name="confirm_vendor_password"
+                                                id="confirm_user_password"
+                                                name="confirm_user_password"
                                                 value={passwordMatch}
                                                 onChange={(e) => {
                                                     setPasswordMatch(
@@ -513,11 +376,11 @@ const VendorDisplay = (props) => {
                                 </Fragment>
                             )}
 
-                            {/* Company details */}
+                            {/* Profile info */}
                             <div className="row border-bottom mb-4">
                                 <div className="col-12">
                                     <h6 className="display-6 text-dark fw-bold">
-                                        Company Details
+                                        Profile Information
                                     </h6>
                                 </div>
                             </div>
@@ -527,10 +390,11 @@ const VendorDisplay = (props) => {
                                     {view ? (
                                         <Fragment>
                                             <h6 className="text-secondary">
-                                                company name
+                                                user full name
                                             </h6>
                                             <span className="badge text-bg-primary bg-gradient fs-4 brand-font">
-                                                {data.company}
+                                                {data.first_name}{" "}
+                                                {data.last_name}
                                             </span>
                                         </Fragment>
                                     ) : (
