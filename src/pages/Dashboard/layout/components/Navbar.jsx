@@ -1,5 +1,5 @@
 // imports
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Console } from "./";
 import logo from "../../../../assets/img/logo_206x40.webp";
@@ -14,6 +14,8 @@ const Navbar = ({
     setSpecs,
     templateSpecs,
 }) => {
+    const navigate = useNavigate();
+
     return (
         <nav className="navbar p-0">
             <div className="container-fluid">
@@ -52,12 +54,42 @@ const Navbar = ({
                 </div>
                 <div className="navbar">
                     <div className="container-fluid">
-                        <button className="btn btn-sm btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
+                        {/* <button className="btn btn-sm btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
                             <i className="bi bi-gear-fill"></i>
-                        </button>
-                        <button className="btn btn-sm btn-primary bg-gradient rounded-pill px-3 ms-1">
-                            <i className="bi bi-person-fill"></i>
-                        </button>
+                        </button> */}
+                        <div className="dropdown">
+                            <button
+                                className="btn btn-sm btn-primary bg-gradient rounded-pill px-3 ms-1"
+                                type="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                <i className="bi bi-person-fill"></i>
+                            </button>
+                            <ul className="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <Link
+                                        className="dropdown-item"
+                                        to="profile"
+                                    >
+                                        Profile
+                                    </Link>
+                                </li>
+                                <li>
+                                    <button
+                                        className="dropdown-item text-danger fw-medium"
+                                        onClick={() => {
+                                            localStorage.removeItem("token");
+                                            localStorage.removeItem("user");
+
+                                            navigate("/login");
+                                        }}
+                                    >
+                                        Log Out
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

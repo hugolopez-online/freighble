@@ -6,6 +6,8 @@ import Login from "./Login";
 import NotFound from "./NotFound";
 import Output from "./Output";
 import Register from "./Register";
+import UserDisplay from "./UserDisplay";
+import UserProfile from "./UserProfile";
 import VendorDisplay from "./VendorDisplay";
 import VendorLogin from "./VendorLogin";
 import VendorProfile from "./VendorProfile";
@@ -22,6 +24,8 @@ export {
     NotFound,
     Output,
     Register,
+    UserDisplay,
+    UserProfile,
     VendorDisplay,
     VendorLogin,
     VendorProfile,

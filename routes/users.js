@@ -7,6 +7,8 @@ import {
     createUser,
     editUser,
     deleteUser,
+    userLogin,
+    userLogout,
 } from "../controllers/users.js";
 
 import authAdmin from "../middleware/auth/authAdmin.js";
@@ -21,5 +23,8 @@ router.get("/public/profile/:id", authUser, findUser);
 router.post("/public/create", createUser);
 router.patch("/public/edit/:id", authUser, editUser);
 router.delete("/public/delete/:id", authUser, deleteUser);
+
+router.post("/login", userLogin);
+router.post("/logout", userLogout);
 
 export default router;

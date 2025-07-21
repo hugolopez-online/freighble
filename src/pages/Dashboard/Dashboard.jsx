@@ -1,6 +1,6 @@
 // imports
-
 import { useEffect, useState, Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     Navbar,
     Search,
@@ -10,7 +10,6 @@ import {
 } from "./layout/components";
 
 // module
-
 const default_specs = {
     mode: "",
     origin: {
@@ -43,16 +42,17 @@ const default_specs = {
 };
 
 // component
-
 const Dashboard = () => {
     // states
-
     const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
     const [routes, setRoutes] = useState([]);
 
-    // handlers
+    // module
+    const user_session = localStorage.getItem("user");
+    const navigate = useNavigate();
 
+    // handlers
     const resetSpecs = () => {
         setSpecs(default_specs);
     };
@@ -62,6 +62,11 @@ const Dashboard = () => {
     };
 
     // effects
+    useEffect(() => {
+        if (!user_session) {
+            navigate("/login");
+        }
+    }, []);
 
     useEffect(() => {
         const origin_scopes = [
@@ -96,8 +101,12 @@ const Dashboard = () => {
         specs.destination.city,
     ]);
 
-    // render
+    // early return if no session
+    if (!user_session) {
+        return false;
+    }
 
+    // render
     return (
         <Fragment>
             <div

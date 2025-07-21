@@ -368,4 +368,23 @@ VendorSchema.pre("save", async function (next) {
     next();
 });
 
+VendorSchema.methods.createToken = function () {
+    const token = jwt.sign(
+        {
+            id: this._id,
+            role: this.auth.role,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_VALIDITY }
+    );
+
+    return token;
+};
+
+VendorSchema.methods.comparePassword = async function (prospectPassword) {
+    const match = await bcrypt.compare(prospectPassword, this.auth.password);
+
+    return match;
+};
+
 export default mongoose.model("Vendor", VendorSchema);

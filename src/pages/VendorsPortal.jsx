@@ -14,13 +14,13 @@ const VendorsPortal = () => {
                 </p>
                 <Link
                     to="login"
-                    className="btn btn-lg btn-dark bg-gradient"
+                    className="btn btn-dark bg-gradient me-2"
                 >
-                    Vendor Log In
+                    Vendor Login
                 </Link>
                 <Link
                     to="vendor"
-                    className="btn btn-lg btn-primary bg-gradient"
+                    className="btn btn-primary bg-gradient"
                 >
                     Register
                 </Link>

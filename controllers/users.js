@@ -18,7 +18,7 @@ export const findUser = async (req, res) => {
 export const createUser = async (req, res) => {
     try {
         const { email } = req.body;
-        const repeated_user = await Vendor.findOne({ email });
+        const repeated_user = await User.findOne({ email });
 
         if (repeated_user) {
             return res.status(500).json({
@@ -50,3 +50,47 @@ export const createUser = async (req, res) => {
 export const editUser = async (req, res) => {};
 
 export const deleteUser = async (req, res) => {};
+
+export const userLogin = async (req, res) => {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email.toLowerCase() });
+
+    if (user) {
+        const match = await user.comparePassword(password);
+        if (match) {
+            const token = user.createToken();
+            return res.status(200).json({
+                token,
+                user: { id: user._id, role: user.auth.role },
+                msg: "Login successful!",
+            });
+        } else {
+            return res.status(500).json({
+                error: {
+                    errors: {
+                        auth: {
+                            message: "Invalid credentials.",
+                        },
+                    },
+                },
+            });
+        }
+    } else {
+        return res.status(500).json({
+            error: {
+                errors: {
+                    auth: {
+                        message: "Invalid credentials.",
+                    },
+                },
+            },
+        });
+    }
+
+    /* !!! IMPLEMENT HTTPONLY COOKIE FOR LOGIN FOR PRODUCTION */
+
+    // TEMPORAL LOCALSTORAGE APPROACH FOR DEVELOPMENT
+};
+
+export const userLogout = async (req, res) => {};

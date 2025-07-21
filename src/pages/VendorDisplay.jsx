@@ -353,8 +353,8 @@ const VendorDisplay = (props) => {
                                 <Fragment>
                                     <div className="row border-bottom mb-4">
                                         <div className="col-12">
-                                            <h6 className="display-6 text-dark fw-bold">
-                                                Sign-up Details
+                                            <h6 className="display-6 text-dark fw-bold brand-font">
+                                                SING-UP DETAILS
                                             </h6>
                                         </div>
                                     </div>
@@ -516,8 +516,8 @@ const VendorDisplay = (props) => {
                             {/* Company details */}
                             <div className="row border-bottom mb-4">
                                 <div className="col-12">
-                                    <h6 className="display-6 text-dark fw-bold">
-                                        Company Details
+                                    <h6 className="display-6 text-dark fw-bold brand-font">
+                                        COMPANY DETAILS
                                     </h6>
                                 </div>
                             </div>
@@ -1056,8 +1056,8 @@ const VendorDisplay = (props) => {
                             {/* Transportation profile */}
                             <div className="row border-bottom mb-4">
                                 <div className="col-12">
-                                    <h6 className="display-6 text-dark fw-bold">
-                                        Transportation Profile
+                                    <h6 className="display-6 text-dark fw-bold brand-font">
+                                        TRANSPORTATION PROFILE
                                     </h6>
                                 </div>
                             </div>

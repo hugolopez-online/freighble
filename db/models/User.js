@@ -1,6 +1,7 @@
 // imports
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 // sub-schemas
 const UserTerms = new mongoose.Schema(
@@ -104,5 +105,25 @@ UserSchema.pre("save", async function (next) {
 
     next();
 });
+
+UserSchema.methods.createToken = function () {
+    const token = jwt.sign(
+        {
+            id: this._id,
+            role: this.auth.role,
+            subscribed: this.auth.subscribed,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_VALIDITY }
+    );
+
+    return token;
+};
+
+UserSchema.methods.comparePassword = async function (prospectPassword) {
+    const match = await bcrypt.compare(prospectPassword, this.auth.password);
+
+    return match;
+};
 
 export default mongoose.model("User", UserSchema);

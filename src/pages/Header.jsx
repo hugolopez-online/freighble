@@ -103,7 +103,6 @@ const Header = ({ anchor, setAnchor }) => {
                             <Link
                                 className="btn btn-sm btn-primary bg-gradient rounded-pill px-3"
                                 to="/dashboard"
-                                target="_blank"
                                 onClick={() => {
                                     setAnchor("");
                                 }}

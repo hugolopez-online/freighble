@@ -7,6 +7,7 @@ import {
     Login,
     Output,
     Register,
+    UserProfile,
     VendorLogin,
     VendorProfile,
     VendorRegister,
@@ -103,6 +104,15 @@ function App() {
                             }
                         />
                     </Route>
+                    <Route
+                        path="dashboard/profile"
+                        element={
+                            <UserProfile
+                                anchor={anchor}
+                                setAnchor={setAnchor}
+                            />
+                        }
+                    />
                     <Route
                         path="*"
                         element={
