@@ -33,6 +33,11 @@ const UserProfile = () => {
     useEffect(() => {
         if (user_session) {
             const { id, role } = JSON.parse(user_session);
+            if (role === "vendor") {
+                navigate(`vendors/vendor/${id}`);
+                return;
+            }
+
             const findUser = async () => {
                 if (isFetching || user.email) {
                     return;

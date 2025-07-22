@@ -221,3 +221,47 @@ export const deleteVendor = async (req, res) => {
 
     return res.status(200).json({ msg: `Deleted ${vendor.company}` });
 };
+
+export const vendorLogin = async (req, res) => {
+    const { email, password } = req.body;
+
+    const vendor = await Vendor.findOne({ email: email.toLowerCase() });
+
+    if (vendor) {
+        const match = await vendor.comparePassword(password);
+        if (match) {
+            const token = vendor.createToken();
+            return res.status(200).json({
+                token,
+                user: { id: vendor._id, role: vendor.auth.role },
+                msg: "Login successful!",
+            });
+        } else {
+            return res.status(500).json({
+                error: {
+                    errors: {
+                        auth: {
+                            message: "Invalid credentials.",
+                        },
+                    },
+                },
+            });
+        }
+    } else {
+        return res.status(500).json({
+            error: {
+                errors: {
+                    auth: {
+                        message: "Invalid credentials.",
+                    },
+                },
+            },
+        });
+    }
+
+    /* !!! IMPLEMENT HTTPONLY COOKIE FOR LOGIN FOR PRODUCTION */
+
+    // TEMPORAL LOCALSTORAGE APPROACH FOR DEVELOPMENT
+};
+
+export const vendorLogout = async (req, res) => {};

@@ -182,6 +182,25 @@ const LoginForm = (props) => {
                                     required
                                 />
                             </div>
+                            <div className="col-12 mb-2">
+                                <span className="text-secondary fw-normal">
+                                    don't have a Freighble
+                                    {props.role === "vendor"
+                                        ? " vendor"
+                                        : ""}{" "}
+                                    account?{" "}
+                                    <Link
+                                        className="fw-medium"
+                                        to={
+                                            props.role === "vendor"
+                                                ? "/vendors/vendor"
+                                                : "/register"
+                                        }
+                                    >
+                                        Register here
+                                    </Link>
+                                </span>
+                            </div>
                         </fieldset>
 
                         <button

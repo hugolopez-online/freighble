@@ -44,6 +44,7 @@ const default_specs = {
 // component
 const Dashboard = () => {
     // states
+    const [greeting, setGreeting] = useState("");
     const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
     const [routes, setRoutes] = useState([]);
@@ -63,8 +64,16 @@ const Dashboard = () => {
 
     // effects
     useEffect(() => {
-        if (!user_session) {
+        if (user_session) {
+            const { id, role } = JSON.parse(user_session);
+            if (role === "vendor") {
+                navigate(`/vendors/vendor/${id}`);
+                return;
+            }
+            setGreeting(JSON.parse(user_session).name);
+        } else {
             navigate("/login");
+            return;
         }
     }, []);
 
@@ -102,7 +111,7 @@ const Dashboard = () => {
     ]);
 
     // early return if no session
-    if (!user_session) {
+    if (!user_session || JSON.parse(user_session).role === "vendor") {
         return false;
     }
 
@@ -119,6 +128,7 @@ const Dashboard = () => {
                     resetSpecs={resetSpecs}
                     setSpecs={setSpecs}
                     templateSpecs={templateSpecs}
+                    greeting={greeting}
                 />
             </div>
             <div className="row">
@@ -166,6 +176,13 @@ const Dashboard = () => {
                     />
                 </div>
                 <div className="col-12 col-md mb-3">
+                    <Console
+                        specs={specs}
+                        default_specs={default_specs}
+                        resetSpecs={resetSpecs}
+                        setSpecs={setSpecs}
+                        templateSpecs={templateSpecs}
+                    />
                     <Directory
                         specs={specs}
                         routes={routes}

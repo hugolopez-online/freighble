@@ -13,6 +13,7 @@ const Navbar = ({
     resetSpecs,
     setSpecs,
     templateSpecs,
+    greeting,
 }) => {
     const navigate = useNavigate();
 
@@ -57,14 +58,17 @@ const Navbar = ({
                         {/* <button className="btn btn-sm btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
                             <i className="bi bi-gear-fill"></i>
                         </button> */}
-                        <div className="dropdown">
+                        <span className="text-dark fw-medium">
+                            Welcome, {greeting}!
+                        </span>
+                        <div className="dropdown ms-2">
                             <button
                                 className="btn btn-sm btn-primary bg-gradient rounded-pill px-3 ms-1"
                                 type="button"
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                <i className="bi bi-person-fill"></i>
+                                <i className="bi bi-three-dots"></i>
                             </button>
                             <ul className="dropdown-menu dropdown-menu-end">
                                 <li>

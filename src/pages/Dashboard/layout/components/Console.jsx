@@ -21,7 +21,7 @@ const Console = (props) => {
             <div className="container-fluid px-1">
                 <div
                     id="console-display"
-                    className={`rounded-pill border border-white bg-secondary bg-gradient-deep d-none d-md-block${
+                    className={`col rounded-pill border border-white bg-secondary bg-gradient-deep d-none d-md-block${
                         minData ? " marquee-container" : ""
                     } p-1 px-3 ms-0 me-2`}
                     style={{ fontSize: "0.75rem" }}
@@ -72,7 +72,7 @@ const Console = (props) => {
                                     : ""
                             }`}</>
                         ) : (
-                            "enter load details below"
+                            "enter load details"
                         )}
                     </span>
                 </div>

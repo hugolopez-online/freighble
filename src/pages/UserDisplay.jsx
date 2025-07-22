@@ -351,6 +351,17 @@ const UserDisplay = (props) => {
                                                 required
                                             />
                                         </div>
+                                        <div className="col-12 mb-2">
+                                            <span className="text-secondary fw-normal">
+                                                already a Freighble user?{" "}
+                                                <Link
+                                                    className="fw-medium"
+                                                    to="/login"
+                                                >
+                                                    Log in here
+                                                </Link>
+                                            </span>
+                                        </div>
                                     </fieldset>
                                 </Fragment>
                             )}
@@ -506,7 +517,7 @@ const UserDisplay = (props) => {
                             {!view && (
                                 <Fragment>
                                     {create && (
-                                        <div className="form-check mb-4">
+                                        <div className="form-check my-4">
                                             <input
                                                 className="form-check-input"
                                                 type="checkbox"
@@ -575,7 +586,7 @@ const UserDisplay = (props) => {
                                         className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
                                     >
                                         {create
-                                            ? "Sign Up and Create Vendor"
+                                            ? "Sign Up"
                                             : edit
                                             ? "Save Changes"
                                             : "BAD REQUEST!"}

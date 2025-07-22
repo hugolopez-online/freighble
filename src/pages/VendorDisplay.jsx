@@ -308,12 +308,23 @@ const VendorDisplay = (props) => {
                                 <Fragment>
                                     Vendor Profile{" "}
                                     <button
-                                        className="btn btn-secondary bg-gradient rounded-3 fw-medium"
+                                        className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
                                         onClick={() => {
                                             setVisibility("edit");
                                         }}
                                     >
                                         Edit
+                                    </button>
+                                    <button
+                                        className="btn btn-danger bg-gradient rounded-3 fw-medium me-2"
+                                        onClick={() => {
+                                            localStorage.removeItem("token");
+                                            localStorage.removeItem("user");
+
+                                            navigate("/vendors/login");
+                                        }}
+                                    >
+                                        Log Out
                                     </button>
                                 </Fragment>
                             ) : create ? (
@@ -508,6 +519,17 @@ const VendorDisplay = (props) => {
                                                 autoComplete="off"
                                                 required
                                             />
+                                        </div>
+                                        <div className="col-12 mb-2">
+                                            <span className="text-secondary fw-normal">
+                                                already a Freighble vendor?{" "}
+                                                <Link
+                                                    className="fw-medium"
+                                                    to="/vendors/login"
+                                                >
+                                                    Log in here
+                                                </Link>
+                                            </span>
                                         </div>
                                     </fieldset>
                                 </Fragment>

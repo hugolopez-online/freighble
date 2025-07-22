@@ -8,6 +8,8 @@ import {
     createVendor,
     editVendor,
     deleteVendor,
+    vendorLogin,
+    vendorLogout,
 } from "../controllers/vendors.js";
 
 import authAdmin from "../middleware/auth/authAdmin.js";
@@ -24,5 +26,8 @@ router.get("/public/profile/:id", findVendor);
 router.post("/public/create", createVendor);
 router.patch("/public/edit/:id", authVendor, editVendor);
 router.delete("/public/delete/:id", authVendor, deleteVendor);
+
+router.post("/login", vendorLogin);
+router.post("/logout", vendorLogout);
 
 export default router;
