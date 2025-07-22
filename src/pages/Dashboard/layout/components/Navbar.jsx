@@ -48,7 +48,7 @@ const Navbar = ({ greeting }) => {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                <i className="bi bi-three-dots"></i>
+                                <i className="bi bi-list"></i>
                             </button>
                             <ul
                                 className="dropdown-menu dropdown-menu-end"

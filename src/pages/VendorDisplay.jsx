@@ -52,6 +52,10 @@ const VendorDisplay = (props) => {
     const [isBothWays, setIsBothWays] = useState(false);
 
     // module
+    const user_session = localStorage.getItem("user");
+    const id = user_session ? JSON.parse(user_session).id : "";
+    const role = user_session ? JSON.parse(user_session).role : "";
+
     const GeoCoverage = props.GeoCoverage;
     const LaneList = props.LaneList;
     const LaneBuilder = props.LaneBuilder;
@@ -307,25 +311,35 @@ const VendorDisplay = (props) => {
                             {view ? (
                                 <Fragment>
                                     Vendor Profile{" "}
-                                    <button
-                                        className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
-                                        onClick={() => {
-                                            setVisibility("edit");
-                                        }}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="btn btn-danger bg-gradient rounded-3 fw-medium me-2"
-                                        onClick={() => {
-                                            localStorage.removeItem("token");
-                                            localStorage.removeItem("user");
+                                    {role === "vendor" && id === data._id ? (
+                                        <Fragment>
+                                            <button
+                                                className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
+                                                onClick={() => {
+                                                    setVisibility("edit");
+                                                }}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className="btn btn-danger bg-gradient rounded-3 fw-medium me-2"
+                                                onClick={() => {
+                                                    localStorage.removeItem(
+                                                        "token"
+                                                    );
+                                                    localStorage.removeItem(
+                                                        "user"
+                                                    );
 
-                                            navigate("/vendors/login");
-                                        }}
-                                    >
-                                        Log Out
-                                    </button>
+                                                    navigate("/vendors/login");
+                                                }}
+                                            >
+                                                Log Out
+                                            </button>
+                                        </Fragment>
+                                    ) : (
+                                        ""
+                                    )}
                                 </Fragment>
                             ) : create ? (
                                 "Vendor Registration"
@@ -802,12 +816,18 @@ const VendorDisplay = (props) => {
                                                 pricing contact email{" "}
                                                 <strong
                                                     className={`text-${
-                                                        data.email
+                                                        data.email &&
+                                                        email_regex.test(
+                                                            data.email
+                                                        )
                                                             ? "success"
                                                             : "danger"
                                                     }`}
                                                 >
-                                                    {data.email ? (
+                                                    {data.email &&
+                                                    email_regex.test(
+                                                        data.email
+                                                    ) ? (
                                                         <i className="bi bi-check"></i>
                                                     ) : (
                                                         "*"
@@ -839,13 +859,19 @@ const VendorDisplay = (props) => {
                                                 <strong
                                                     className={`text-${
                                                         data.ph_country_code &&
-                                                        data.phone
+                                                        data.phone &&
+                                                        phone_regex.test(
+                                                            data.phone
+                                                        )
                                                             ? "success"
                                                             : "danger"
                                                     }`}
                                                 >
                                                     {data.ph_country_code &&
-                                                    data.phone ? (
+                                                    data.phone &&
+                                                    phone_regex.test(
+                                                        data.phone
+                                                    ) ? (
                                                         <i className="bi bi-check"></i>
                                                     ) : (
                                                         "*"

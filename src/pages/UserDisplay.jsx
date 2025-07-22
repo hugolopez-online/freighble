@@ -146,7 +146,7 @@ const UserDisplay = (props) => {
             <Fragment>
                 <div
                     className={`row justify-content-center${
-                        !view ? " pt-5" : ""
+                        create ? " pt-5" : ""
                     }`}
                 >
                     <div className="col-8 py-4">

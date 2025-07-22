@@ -98,7 +98,7 @@ const Header = ({ anchor, setAnchor }) => {
                                     setAnchor("");
                                 }}
                             >
-                                login
+                                log in
                             </Link>
                             <Link
                                 className="btn btn-sm btn-primary bg-gradient rounded-pill px-3"
