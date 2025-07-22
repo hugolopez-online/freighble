@@ -1,20 +1,12 @@
 // imports
 import { Link, useNavigate } from "react-router-dom";
 
-import { Console } from "./";
 import logo from "../../../../assets/img/logo_206x40.webp";
 import icon from "../../../../assets/img/logo-icon_40x40.webp";
 
 // component
 
-const Navbar = ({
-    specs,
-    default_specs,
-    resetSpecs,
-    setSpecs,
-    templateSpecs,
-    greeting,
-}) => {
+const Navbar = ({ greeting }) => {
     const navigate = useNavigate();
 
     return (
@@ -44,20 +36,8 @@ const Navbar = ({
                         alt="Freighble icon"
                     />
                 </Link>
-                <div className="d-none d-md-block">
-                    <Console
-                        specs={specs}
-                        default_specs={default_specs}
-                        resetSpecs={resetSpecs}
-                        setSpecs={setSpecs}
-                        templateSpecs={templateSpecs}
-                    />
-                </div>
                 <div className="navbar">
                     <div className="container-fluid">
-                        {/* <button className="btn btn-sm btn-light border bg-gradient text-secondary rounded-pill px-3 mx-1">
-                            <i className="bi bi-gear-fill"></i>
-                        </button> */}
                         <span className="text-dark fw-medium">
                             Welcome, {greeting}!
                         </span>
@@ -70,7 +50,18 @@ const Navbar = ({
                             >
                                 <i className="bi bi-three-dots"></i>
                             </button>
-                            <ul className="dropdown-menu dropdown-menu-end">
+                            <ul
+                                className="dropdown-menu dropdown-menu-end"
+                                style={{ zIndex: "1020" }}
+                            >
+                                <li>
+                                    <Link
+                                        className="dropdown-item"
+                                        to="/dashboard"
+                                    >
+                                        Dashboard
+                                    </Link>
+                                </li>
                                 <li>
                                     <Link
                                         className="dropdown-item"

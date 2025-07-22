@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
 import { Header, Footer } from "./";
 
-const Output = ({ anchor, setAnchor }) => {
+const PageLayout = ({ anchor, setAnchor }) => {
     return (
         <Fragment>
             <Header
@@ -19,4 +19,4 @@ const Output = ({ anchor, setAnchor }) => {
     );
 };
 
-export default Output;
+export default PageLayout;

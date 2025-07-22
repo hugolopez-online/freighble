@@ -17,13 +17,16 @@ const Console = (props) => {
     }, [props.specs.mode, props.specs.origin, props.specs.destination]);
 
     return (
-        <div className="navbar bg-light p-1 rounded-pill border border-tertiary">
-            <div className="container-fluid px-1">
+        <div
+            className="navbar bg-light rounded-4 border border-tertiary sticky-top under-navbar"
+            style={{ zIndex: "1000" }}
+        >
+            <div className="container-fluid">
                 <div
                     id="console-display"
-                    className={`col rounded-pill border border-white bg-secondary bg-gradient-deep d-none d-md-block${
+                    className={`col-12 rounded-3 border border-white bg-secondary bg-gradient-deep ${
                         minData ? " marquee-container" : ""
-                    } p-1 px-3 ms-0 me-2`}
+                    } py-1 px-3 mb-2`}
                     style={{ fontSize: "0.75rem" }}
                 >
                     <span
@@ -31,6 +34,9 @@ const Console = (props) => {
                             minData ? " marquee-item" : ""
                         }`}
                     >
+                        <span className="fw-bold fs-6">
+                            current search:&gt;{" "}
+                        </span>
                         {minData ? (
                             <>{`${
                                 props.specs.usa_bonded ? "U.S. bonded " : ""
@@ -72,14 +78,14 @@ const Console = (props) => {
                                     : ""
                             }`}</>
                         ) : (
-                            "enter load details"
+                            "none..."
                         )}
                     </span>
                 </div>
-                <div className="btn-group me-2">
+                <div className="col-9 btn-group pe-2">
                     <button
                         type="button"
-                        className={`btn btn-sm bg-gradient rounded-pill rounded-end px-3 fw-bold${
+                        className={`btn btn-sm bg-gradient rounded-start-3 fw-bold${
                             minData ? " btn-primary" : " btn-secondary disabled"
                         }`}
                         onClick={() => {
@@ -94,7 +100,7 @@ const Console = (props) => {
                     </button>
                     <button
                         type="button"
-                        className={`btn btn-sm bg-gradient rounded-pill rounded-start px-3${
+                        className={`btn btn-sm bg-gradient rounded-end-3 px-3${
                             minData ? " btn-danger" : " btn-secondary disabled"
                         }`}
                         onClick={() => {
@@ -113,9 +119,9 @@ const Console = (props) => {
                         clear
                     </button>
                 </div>
-                <div className="btn-group">
+                <div className="col-3 btn-group ps-2">
                     <button
-                        className="btn btn-sm btn-light shadow-sm text-secondary bg-gradient rounded-pill d-inline-block d-md-none me-2"
+                        className="btn btn-sm btn-dark bg-gradient rounded-pill d-inline-block d-md-none me-2"
                         type="button"
                         onClick={() => {
                             document
@@ -131,7 +137,7 @@ const Console = (props) => {
                         <i className="bi bi-search"></i>
                     </button>
                     <button
-                        className="btn btn-sm btn-secondary bg-gradient rounded-pill"
+                        className="btn btn-sm btn-dark bg-gradient rounded-pill"
                         type="button"
                         onClick={() => {
                             window.scrollTo({

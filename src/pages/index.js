@@ -4,7 +4,7 @@ import Header from "./Header";
 import Home from "./Home";
 import Login from "./Login";
 import NotFound from "./NotFound";
-import Output from "./Output";
+import PageLayout from "./PageLayout";
 import Register from "./Register";
 import UserDisplay from "./UserDisplay";
 import UserProfile from "./UserProfile";
@@ -22,7 +22,7 @@ export {
     Home,
     Login,
     NotFound,
-    Output,
+    PageLayout,
     Register,
     UserDisplay,
     UserProfile,

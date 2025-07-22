@@ -144,7 +144,11 @@ const UserDisplay = (props) => {
     return (
         (view || create || edit) && (
             <Fragment>
-                <div className="row justify-content-center pt-5">
+                <div
+                    className={`row justify-content-center${
+                        !view ? " pt-5" : ""
+                    }`}
+                >
                     <div className="col-8 py-4">
                         <h5 className="display-5 py-4">
                             {view ? (

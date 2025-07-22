@@ -65,13 +65,13 @@ const UserProfile = () => {
     return (
         <Fragment>
             {isFetching ? (
-                <div className="row justify-content-center pt-5">
+                <div className="row justify-content-center">
                     <div
-                        className="col-10 py-4"
+                        className="col-10"
                         style={{ minHeight: "100vh" }}
                     >
                         <h5
-                            className="display-5 py4"
+                            className="display-5"
                             role="status"
                         >
                             Loading user information...
@@ -88,13 +88,13 @@ const UserProfile = () => {
                     data={user}
                 />
             ) : (
-                <div className="row justify-content-center pt-5">
+                <div className="row justify-content-center">
                     <div
-                        className="col-10 py-4"
+                        className="col-10"
                         style={{ minHeight: "100vh" }}
                     >
                         <h5
-                            className="display-5 py4"
+                            className="display-5"
                             role="status"
                         >
                             No user has been found...

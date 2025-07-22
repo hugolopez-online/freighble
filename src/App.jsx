@@ -5,7 +5,7 @@ import {
     Dashboard,
     Home,
     Login,
-    Output,
+    PageLayout,
     Register,
     UserProfile,
     VendorLogin,
@@ -16,6 +16,8 @@ import {
     NotFound,
 } from "./pages";
 
+import DashboardMain from "./pages/Dashboard/layout/components/DashboardMain";
+
 function App() {
     const [anchor, setAnchor] = useState("");
 
@@ -25,7 +27,7 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        <Output
+                        <PageLayout
                             anchor={anchor}
                             setAnchor={setAnchor}
                         />
@@ -105,15 +107,6 @@ function App() {
                         />
                     </Route>
                     <Route
-                        path="dashboard/profile"
-                        element={
-                            <UserProfile
-                                anchor={anchor}
-                                setAnchor={setAnchor}
-                            />
-                        }
-                    />
-                    <Route
                         path="*"
                         element={
                             <NotFound
@@ -126,7 +119,16 @@ function App() {
                 <Route
                     path="dashboard"
                     element={<Dashboard />}
-                />
+                >
+                    <Route
+                        index
+                        element={<DashboardMain />}
+                    />
+                    <Route
+                        path="profile"
+                        element={<UserProfile />}
+                    />
+                </Route>
             </Routes>
         </BrowserRouter>
     );
