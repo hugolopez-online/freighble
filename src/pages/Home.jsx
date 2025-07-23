@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
-const Home = ({ anchor, setAnchor }) => {
+const Home = ({ setAnchor }) => {
     return (
         <Fragment>
             <section

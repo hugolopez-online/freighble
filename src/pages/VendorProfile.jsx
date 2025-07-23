@@ -51,7 +51,7 @@ const skeleton = {
 };
 
 // render
-const VendorProfile = () => {
+const VendorProfile = ({ CONDITIONAL_RENDERING }) => {
     const [isFetching, setIsFetching] = useState(false);
     const [vendor, setVendor] = useState(skeleton);
     const { id } = useParams();
@@ -105,6 +105,7 @@ const VendorProfile = () => {
                     LaneList={LaneList}
                     LaneBuilder={LaneBuilder}
                     AddLane={AddLane}
+                    CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
                 />
             ) : (
                 <div className="row justify-content-center pt-5">

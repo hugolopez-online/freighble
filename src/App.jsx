@@ -1,6 +1,6 @@
 //imports
 import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import {
     Dashboard,
     Home,
@@ -18,9 +18,28 @@ import {
 
 import DashboardMain from "./pages/Dashboard/layout/components/DashboardMain";
 
+// component
 function App() {
+    // state
     const [anchor, setAnchor] = useState("");
+    const [session, setSession] = useState(
+        JSON.parse(localStorage.getItem("user"))
+    );
 
+    // module
+    const USER_ID = session?.id;
+    const USER_ROLE = session?.role;
+    const USER_NAME = session?.role === "user" && session?.name;
+
+    const CONDITIONAL_RENDERING = {
+        session,
+        setSession,
+        USER_ID,
+        USER_ROLE,
+        USER_NAME,
+    };
+
+    // render
     return (
         <BrowserRouter>
             <Routes>
@@ -35,19 +54,13 @@ function App() {
                 >
                     <Route
                         index
-                        element={
-                            <Home
-                                anchor={anchor}
-                                setAnchor={setAnchor}
-                            />
-                        }
+                        element={<Home setAnchor={setAnchor} />}
                     />
                     <Route
                         path="login"
                         element={
                             <Login
-                                anchor={anchor}
-                                setAnchor={setAnchor}
+                                CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
                             />
                         }
                     />
@@ -55,35 +68,25 @@ function App() {
                         path="register"
                         element={
                             <Register
-                                anchor={anchor}
-                                setAnchor={setAnchor}
+                                CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
                             />
                         }
                     />
                     <Route
                         path="vendors"
-                        element={
-                            <Vendors
-                                anchor={anchor}
-                                setAnchor={setAnchor}
-                            />
-                        }
+                        element={<Vendors />}
                     >
                         <Route
                             index
-                            element={
-                                <VendorsPortal
-                                    anchor={anchor}
-                                    setAnchor={setAnchor}
-                                />
-                            }
+                            element={<VendorsPortal />}
                         />
                         <Route
                             path="vendor"
                             element={
                                 <VendorRegister
-                                    anchor={anchor}
-                                    setAnchor={setAnchor}
+                                    CONDITIONAL_RENDERING={
+                                        CONDITIONAL_RENDERING
+                                    }
                                 />
                             }
                         />
@@ -91,8 +94,9 @@ function App() {
                             path="vendor/:id"
                             element={
                                 <VendorProfile
-                                    anchor={anchor}
-                                    setAnchor={setAnchor}
+                                    CONDITIONAL_RENDERING={
+                                        CONDITIONAL_RENDERING
+                                    }
                                 />
                             }
                         />
@@ -100,25 +104,25 @@ function App() {
                             path="login"
                             element={
                                 <VendorLogin
-                                    anchor={anchor}
-                                    setAnchor={setAnchor}
+                                    CONDITIONAL_RENDERING={
+                                        CONDITIONAL_RENDERING
+                                    }
                                 />
                             }
                         />
                     </Route>
                     <Route
                         path="*"
-                        element={
-                            <NotFound
-                                anchor={anchor}
-                                setAnchor={setAnchor}
-                            />
-                        }
+                        element={<NotFound />}
                     />
                 </Route>
                 <Route
                     path="dashboard"
-                    element={<Dashboard />}
+                    element={
+                        <Dashboard
+                            CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                        />
+                    }
                 >
                     <Route
                         index

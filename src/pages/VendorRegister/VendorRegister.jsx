@@ -1,4 +1,6 @@
 // imports
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import VendorDisplay from "../VendorDisplay";
 import GeoCoverage from "./layout/components/GeoCoverage";
 import LaneBuilder from "./layout/components/LaneBuilder";
@@ -58,7 +60,22 @@ const data = {
     },
 };
 
-const VendorRegister = () => {
+// component
+const VendorRegister = ({ CONDITIONAL_RENDERING }) => {
+    // module
+    const navigate = useNavigate();
+
+    // effects
+    useEffect(() => {
+        if (CONDITIONAL_RENDERING.session) {
+            navigate("/dashboard");
+        }
+    }, []);
+
+    if (CONDITIONAL_RENDERING.session) {
+        return false;
+    }
+
     return (
         <VendorDisplay
             visibility={"create"}
@@ -67,6 +84,7 @@ const VendorRegister = () => {
             LaneList={LaneList}
             LaneBuilder={LaneBuilder}
             AddLane={AddLane}
+            CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
         />
     );
 };

@@ -1,4 +1,6 @@
 // imports
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import UserDisplay from "./UserDisplay";
 
 // module
@@ -17,7 +19,22 @@ const data = {
     },
 };
 
-const Register = () => {
+// component
+const Register = ({ CONDITIONAL_RENDERING }) => {
+    // module
+    const navigate = useNavigate();
+
+    // effects
+    useEffect(() => {
+        if (CONDITIONAL_RENDERING.session) {
+            navigate("/dashboard");
+        }
+    }, []);
+
+    if (CONDITIONAL_RENDERING.session) {
+        return false;
+    }
+
     return (
         <UserDisplay
             visibility="create"

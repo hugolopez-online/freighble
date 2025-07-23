@@ -4,23 +4,21 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar } from "./layout/components";
 
 // component
-const Dashboard = () => {
+const Dashboard = ({ CONDITIONAL_RENDERING }) => {
     // states
     const [greeting, setGreeting] = useState("");
 
     // module
-    const user_session = localStorage.getItem("user");
     const navigate = useNavigate();
 
     // effects
     useEffect(() => {
-        if (user_session) {
-            const { id, role } = JSON.parse(user_session);
-            if (role === "vendor") {
-                navigate(`/vendors/vendor/${id}`);
-                return;
+        if (CONDITIONAL_RENDERING.session) {
+            if (CONDITIONAL_RENDERING.USER_ROLE === "vendor") {
+                navigate(`/vendors/vendor/${CONDITIONAL_RENDERING.USER_ID}`);
             }
-            setGreeting(JSON.parse(user_session).name);
+
+            setGreeting(CONDITIONAL_RENDERING.USER_NAME);
         } else {
             navigate("/login");
             return;
@@ -28,7 +26,10 @@ const Dashboard = () => {
     }, []);
 
     // early return if no session
-    if (!user_session || JSON.parse(user_session).role === "vendor") {
+    if (
+        !CONDITIONAL_RENDERING.session ||
+        CONDITIONAL_RENDERING.USER_ROLE === "vendor"
+    ) {
         return false;
     }
 
@@ -39,7 +40,10 @@ const Dashboard = () => {
                 id="navbar"
                 className="row justify-content-center sticky-top mb-3"
             >
-                <Navbar greeting={greeting} />
+                <Navbar
+                    greeting={greeting}
+                    CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                />
             </div>
             <Outlet />
         </Fragment>

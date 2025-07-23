@@ -12,6 +12,7 @@ const blank_credentials = {
 const LoginForm = (props) => {
     // state
     const [credentials, setCredentials] = useState(blank_credentials);
+    const [authenticating, setAuthenticating] = useState(false);
     const [toastMessage, setToastMessage] = useState({
         success: false,
         message: [],
@@ -24,6 +25,7 @@ const LoginForm = (props) => {
         const freighble_alert = document.getElementById("freighble_alert");
         const toast = Toast.getOrCreateInstance(freighble_alert);
         e.preventDefault();
+        setAuthenticating(true);
 
         const url = `/api/${
             props.role === "user"
@@ -57,12 +59,16 @@ const LoginForm = (props) => {
             });
             localStorage.setItem("token", response_data.token);
             localStorage.setItem("user", JSON.stringify(response_data.user));
+            props.CONDITIONAL_RENDERING.setSession(
+                JSON.parse(localStorage.getItem("user"))
+            );
             window.scrollTo(0, 0);
             toast.show();
             setTimeout(() => {
                 navigate(`/dashboard`);
             }, 500);
         } catch (error) {
+            setAuthenticating(false);
             const err_variables = Object.keys(response_data.error.errors);
             const errors = err_variables.map((err) => {
                 return response_data.error.errors[err].message;
@@ -81,136 +87,152 @@ const LoginForm = (props) => {
     return (
         <Fragment>
             <div className="row justify-content-center pt-5">
-                <div className="col-8 py-4">
-                    <h5 className="display-5 py-4">
-                        {props.role === "user"
-                            ? "User"
-                            : props.role === "vendor"
-                            ? "Vendor"
-                            : "BAD_REQUEST"}{" "}
-                        Login
-                    </h5>
-                    <form
-                        id="user_login"
-                        className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
-                        onSubmit={(e) => handleLogin(e, credentials)}
-                    >
-                        <div className="row border-bottom mb-4">
-                            <div className="col-12">
-                                <h6 className="display-6 text-dark fw-bold brand-font">
-                                    FREIGHBLE CREDENTIALS
-                                </h6>
+                {!authenticating ? (
+                    <div className="col-8 py-4">
+                        <h5 className="display-5 py-4">
+                            {props.role === "user"
+                                ? "User"
+                                : props.role === "vendor"
+                                ? "Vendor"
+                                : "BAD_REQUEST"}{" "}
+                            Login
+                        </h5>
+                        <form
+                            id="user_login"
+                            className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
+                            onSubmit={(e) => handleLogin(e, credentials)}
+                        >
+                            <div className="row border-bottom mb-4">
+                                <div className="col-12">
+                                    <h6 className="display-6 text-dark fw-bold brand-font">
+                                        FREIGHBLE CREDENTIALS
+                                    </h6>
+                                </div>
                             </div>
-                        </div>
 
-                        <fieldset className="row mb-4">
-                            <div className="col-12 mb-2">
-                                <label
-                                    htmlFor="login_email"
-                                    className="fw-medium text-dark-emphasis"
-                                >
-                                    email address{" "}
-                                    <strong
-                                        className={`text-${
-                                            credentials.email
-                                                ? "success"
-                                                : "danger"
-                                        }`}
+                            <fieldset className="row mb-4">
+                                <div className="col-12 mb-2">
+                                    <label
+                                        htmlFor="login_email"
+                                        className="fw-medium text-dark-emphasis"
                                     >
-                                        {credentials.email ? (
-                                            <i className="bi bi-check"></i>
-                                        ) : (
-                                            "*"
-                                        )}
-                                    </strong>
-                                </label>
-                                <input
-                                    type="email"
-                                    className="form-control"
-                                    placeholder="Email address"
-                                    id="login_email"
-                                    name="login_email"
-                                    value={credentials.email}
-                                    onChange={(e) => {
-                                        setCredentials((prev) => {
-                                            return {
-                                                ...prev,
-                                                email: e.target.value,
-                                            };
-                                        });
-                                    }}
-                                    autoComplete="off"
-                                    required
-                                />
-                            </div>
-                            <div className="col-12 mb-2">
-                                <label
-                                    htmlFor="login_password"
-                                    className="fw-medium text-dark-emphasis"
-                                >
-                                    password{" "}
-                                    <strong
-                                        className={`text-${
-                                            credentials.password
-                                                ? "success"
-                                                : "danger"
-                                        }`}
+                                        email address{" "}
+                                        <strong
+                                            className={`text-${
+                                                credentials.email
+                                                    ? "success"
+                                                    : "danger"
+                                            }`}
+                                        >
+                                            {credentials.email ? (
+                                                <i className="bi bi-check"></i>
+                                            ) : (
+                                                "*"
+                                            )}
+                                        </strong>
+                                    </label>
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        placeholder="Email address"
+                                        id="login_email"
+                                        name="login_email"
+                                        value={credentials.email}
+                                        onChange={(e) => {
+                                            setCredentials((prev) => {
+                                                return {
+                                                    ...prev,
+                                                    email: e.target.value,
+                                                };
+                                            });
+                                        }}
+                                        autoComplete="off"
+                                        required
+                                    />
+                                </div>
+                                <div className="col-12 mb-2">
+                                    <label
+                                        htmlFor="login_password"
+                                        className="fw-medium text-dark-emphasis"
                                     >
-                                        {credentials.password ? (
-                                            <i className="bi bi-check"></i>
-                                        ) : (
-                                            "*"
-                                        )}
-                                    </strong>
-                                </label>
-                                <input
-                                    type="password"
-                                    className="form-control"
-                                    placeholder="Password"
-                                    id="login_password"
-                                    name="login_password"
-                                    value={credentials.password}
-                                    onChange={(e) => {
-                                        setCredentials((prev) => {
-                                            return {
-                                                ...prev,
-                                                password: e.target.value,
-                                            };
-                                        });
-                                    }}
-                                    autoComplete="off"
-                                    required
-                                />
-                            </div>
-                            <div className="col-12 mb-2">
-                                <span className="text-secondary fw-normal">
-                                    don't have a Freighble
-                                    {props.role === "vendor"
-                                        ? " vendor"
-                                        : ""}{" "}
-                                    account?{" "}
-                                    <Link
-                                        className="fw-medium"
-                                        to={
-                                            props.role === "vendor"
-                                                ? "/vendors/vendor"
-                                                : "/register"
-                                        }
-                                    >
-                                        Register here
-                                    </Link>
+                                        password{" "}
+                                        <strong
+                                            className={`text-${
+                                                credentials.password
+                                                    ? "success"
+                                                    : "danger"
+                                            }`}
+                                        >
+                                            {credentials.password ? (
+                                                <i className="bi bi-check"></i>
+                                            ) : (
+                                                "*"
+                                            )}
+                                        </strong>
+                                    </label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        placeholder="Password"
+                                        id="login_password"
+                                        name="login_password"
+                                        value={credentials.password}
+                                        onChange={(e) => {
+                                            setCredentials((prev) => {
+                                                return {
+                                                    ...prev,
+                                                    password: e.target.value,
+                                                };
+                                            });
+                                        }}
+                                        autoComplete="off"
+                                        required
+                                    />
+                                </div>
+                                <div className="col-12 mb-2">
+                                    <span className="text-secondary fw-normal">
+                                        don't have a Freighble
+                                        {props.role === "vendor"
+                                            ? " vendor"
+                                            : ""}{" "}
+                                        account?{" "}
+                                        <Link
+                                            className="fw-medium"
+                                            to={
+                                                props.role === "vendor"
+                                                    ? "/vendors/vendor"
+                                                    : "/register"
+                                            }
+                                        >
+                                            Register here
+                                        </Link>
+                                    </span>
+                                </div>
+                            </fieldset>
+
+                            <button
+                                type="submit"
+                                className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
+                            >
+                                Log In
+                            </button>
+                        </form>
+                    </div>
+                ) : (
+                    <div className="col-8 py-4">
+                        <div className="alert alert-success">
+                            <h4>Authenticating... </h4>
+                            <div
+                                className="spinner-grow text-success"
+                                role="status"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
                                 </span>
                             </div>
-                        </fieldset>
-
-                        <button
-                            type="submit"
-                            className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
-                        >
-                            Log In
-                        </button>
-                    </form>
-                </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
             {/* Informative toast */}

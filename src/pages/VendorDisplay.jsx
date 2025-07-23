@@ -52,10 +52,6 @@ const VendorDisplay = (props) => {
     const [isBothWays, setIsBothWays] = useState(false);
 
     // module
-    const user_session = localStorage.getItem("user");
-    const id = user_session ? JSON.parse(user_session).id : "";
-    const role = user_session ? JSON.parse(user_session).role : "";
-
     const GeoCoverage = props.GeoCoverage;
     const LaneList = props.LaneList;
     const LaneBuilder = props.LaneBuilder;
@@ -311,7 +307,10 @@ const VendorDisplay = (props) => {
                             {view ? (
                                 <Fragment>
                                     Vendor Profile{" "}
-                                    {role === "vendor" && id === data._id ? (
+                                    {props.CONDITIONAL_RENDERING.USER_ROLE ===
+                                        "vendor" &&
+                                    props.CONDITIONAL_RENDERING.USER_ID ===
+                                        data._id ? (
                                         <Fragment>
                                             <button
                                                 className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
@@ -329,6 +328,14 @@ const VendorDisplay = (props) => {
                                                     );
                                                     localStorage.removeItem(
                                                         "user"
+                                                    );
+
+                                                    props.CONDITIONAL_RENDERING.setSession(
+                                                        JSON.parse(
+                                                            localStorage.getItem(
+                                                                "user"
+                                                            )
+                                                        )
                                                     );
 
                                                     navigate("/vendors/login");

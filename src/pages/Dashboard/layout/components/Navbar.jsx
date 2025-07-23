@@ -6,7 +6,7 @@ import icon from "../../../../assets/img/logo-icon_40x40.webp";
 
 // component
 
-const Navbar = ({ greeting }) => {
+const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
     const navigate = useNavigate();
 
     return (
@@ -15,7 +15,6 @@ const Navbar = ({ greeting }) => {
                 <Link
                     className="navbar-brand d-none d-md-block"
                     to="/"
-                    target="_blank"
                 >
                     <img
                         className="d-block"
@@ -48,7 +47,7 @@ const Navbar = ({ greeting }) => {
                                 data-bs-toggle="dropdown"
                                 aria-expanded="false"
                             >
-                                <i className="bi bi-list"></i>
+                                <i className="bi bi-person-fill"></i>
                             </button>
                             <ul
                                 className="dropdown-menu dropdown-menu-end"
@@ -59,6 +58,7 @@ const Navbar = ({ greeting }) => {
                                         className="dropdown-item"
                                         to="/dashboard"
                                     >
+                                        <i className="bi bi-display"></i>{" "}
                                         Dashboard
                                     </Link>
                                 </li>
@@ -67,6 +67,7 @@ const Navbar = ({ greeting }) => {
                                         className="dropdown-item"
                                         to="profile"
                                     >
+                                        <i className="bi bi-person-rolodex"></i>{" "}
                                         Profile
                                     </Link>
                                 </li>
@@ -77,9 +78,16 @@ const Navbar = ({ greeting }) => {
                                             localStorage.removeItem("token");
                                             localStorage.removeItem("user");
 
+                                            CONDITIONAL_RENDERING.setSession(
+                                                JSON.parse(
+                                                    localStorage.getItem("user")
+                                                )
+                                            );
+
                                             navigate("/login");
                                         }}
                                     >
+                                        <i className="bi bi-box-arrow-right"></i>{" "}
                                         Log Out
                                     </button>
                                 </li>
