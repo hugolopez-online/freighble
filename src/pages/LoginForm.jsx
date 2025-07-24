@@ -9,6 +9,7 @@ const blank_credentials = {
     password: "",
 };
 
+// component
 const LoginForm = (props) => {
     // state
     const [credentials, setCredentials] = useState(blank_credentials);
@@ -114,26 +115,21 @@ const LoginForm = (props) => {
                                 <div className="col-12 mb-2">
                                     <label
                                         htmlFor="login_email"
-                                        className="fw-medium text-dark-emphasis"
+                                        className={`fw-medium text-${
+                                            credentials.email
+                                                ? "primary"
+                                                : "dark-emphasis"
+                                        }`}
                                     >
-                                        email address{" "}
-                                        <strong
-                                            className={`text-${
-                                                credentials.email
-                                                    ? "success"
-                                                    : "danger"
-                                            }`}
-                                        >
-                                            {credentials.email ? (
-                                                <i className="bi bi-check"></i>
-                                            ) : (
-                                                "*"
-                                            )}
-                                        </strong>
+                                        email address
                                     </label>
                                     <input
                                         type="email"
-                                        className="form-control"
+                                        className={`form-control ${
+                                            credentials.email
+                                                ? "border-primary"
+                                                : ""
+                                        }`}
                                         placeholder="Email address"
                                         id="login_email"
                                         name="login_email"
@@ -153,26 +149,21 @@ const LoginForm = (props) => {
                                 <div className="col-12 mb-2">
                                     <label
                                         htmlFor="login_password"
-                                        className="fw-medium text-dark-emphasis"
+                                        className={`fw-medium text-${
+                                            credentials.password
+                                                ? "primary"
+                                                : "dark-emphasis"
+                                        }`}
                                     >
-                                        password{" "}
-                                        <strong
-                                            className={`text-${
-                                                credentials.password
-                                                    ? "success"
-                                                    : "danger"
-                                            }`}
-                                        >
-                                            {credentials.password ? (
-                                                <i className="bi bi-check"></i>
-                                            ) : (
-                                                "*"
-                                            )}
-                                        </strong>
+                                        password
                                     </label>
                                     <input
                                         type="password"
-                                        className="form-control"
+                                        className={`form-control ${
+                                            credentials.password
+                                                ? "border-primary"
+                                                : ""
+                                        }`}
                                         placeholder="Password"
                                         id="login_password"
                                         name="login_password"

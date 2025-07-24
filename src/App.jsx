@@ -130,7 +130,11 @@ function App() {
                     />
                     <Route
                         path="profile"
-                        element={<UserProfile />}
+                        element={
+                            <UserProfile
+                                CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                            />
+                        }
                     />
                 </Route>
             </Routes>

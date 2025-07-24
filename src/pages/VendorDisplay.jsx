@@ -233,6 +233,59 @@ const VendorDisplay = (props) => {
         }
     };
 
+    const handleDelete = async (e) => {
+        const freighble_alert = document.getElementById("freighble_alert");
+        const toast = Toast.getOrCreateInstance(freighble_alert);
+        e.preventDefault();
+
+        const url = `/api/vendors/public/delete/${data._id}`;
+
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const response_data = await response.json(); // Parse the JSON response
+
+        try {
+            if (!response.ok) {
+                throw new Error(
+                    `${JSON.stringify(response_data.error.errors)}`
+                );
+            }
+
+            setToastMessage({
+                success: true,
+                message: [response_data.msg],
+            });
+            window.scrollTo(0, 0);
+            setVisibility("view");
+            toast.show();
+            setTimeout(() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                props.CONDITIONAL_RENDERING.setSession(
+                    JSON.parse(localStorage.getItem("user"))
+                );
+                navigate("/");
+            }, 1250);
+        } catch (error) {
+            const err_variables = Object.keys(response_data.error.errors);
+            const errors = err_variables.map((err) => {
+                return response_data.error.errors[err].message;
+            });
+
+            setToastMessage({
+                success: false,
+                message: errors,
+            });
+            window.scrollTo(0, 0);
+            toast.show();
+        }
+    };
+
     const modeSelection = (e) => {
         const mode_coverage = data.modes;
         const selection = e.target.value;
@@ -1788,6 +1841,15 @@ const VendorDisplay = (props) => {
                                             ? "Save Changes"
                                             : "BAD REQUEST!"}
                                     </button>
+                                    {edit && (
+                                        <button
+                                            type="button"
+                                            className="btn btn-danger bg-gradient fw-medium w-100 rounded-3 mt-2"
+                                            onClick={(e) => handleDelete(e)}
+                                        >
+                                            Delete Account
+                                        </button>
+                                    )}
                                 </Fragment>
                             )}
                         </form>

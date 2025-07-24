@@ -50,12 +50,12 @@ const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
                                 <i className="bi bi-person-fill"></i>
                             </button>
                             <ul
-                                className="dropdown-menu dropdown-menu-end"
+                                className="dropdown-menu dropdown-menu-end p-2"
                                 style={{ zIndex: "1020" }}
                             >
                                 <li>
                                     <Link
-                                        className="dropdown-item"
+                                        className="dropdown-item rounded"
                                         to="/dashboard"
                                     >
                                         <i className="bi bi-display"></i>{" "}
@@ -64,7 +64,7 @@ const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
                                 </li>
                                 <li>
                                     <Link
-                                        className="dropdown-item"
+                                        className="dropdown-item rounded"
                                         to="profile"
                                     >
                                         <i className="bi bi-person-rolodex"></i>{" "}
@@ -73,7 +73,7 @@ const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
                                 </li>
                                 <li>
                                     <button
-                                        className="dropdown-item text-danger fw-medium"
+                                        className="dropdown-item rounded text-danger fw-medium"
                                         onClick={() => {
                                             localStorage.removeItem("token");
                                             localStorage.removeItem("user");

@@ -47,9 +47,63 @@ export const createUser = async (req, res) => {
     }
 };
 
-export const editUser = async (req, res) => {};
+export const editUser = async (req, res) => {
+    try {
+        const { id } = req.params;
 
-export const deleteUser = async (req, res) => {};
+        if (!id) {
+            return res
+                .status(400)
+                .json({ msg: `Must provide user ID to edit.` });
+        }
+
+        const user = await User.findOneAndUpdate(
+            { _id: id },
+            { ...req.body },
+            {
+                runValidators: true,
+            }
+        );
+
+        if (!user) {
+            return res.status(400).json({
+                msg: `No user found: nothing to edit.`,
+            });
+        }
+
+        return res.status(200).json({ msg: `Profile edited.` });
+    } catch (err) {
+        return res.status(500).json({
+            msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
+            error: err,
+        });
+    }
+};
+
+export const deleteUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res.status(400).json({ msg: `Must provide user ID.` });
+        }
+
+        const user = await User.findOneAndDelete({ _id: id });
+
+        if (!user) {
+            return res.status(400).json({
+                msg: `No user found: nothing to delete.`,
+            });
+        }
+
+        return res.status(200).json({ msg: `Profile deleted.` });
+    } catch (err) {
+        return res.status(500).json({
+            msg: `Something went wrong.`,
+            error: err,
+        });
+    }
+};
 
 export const userLogin = async (req, res) => {
     const { email, password } = req.body;

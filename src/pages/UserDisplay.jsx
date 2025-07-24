@@ -140,6 +140,59 @@ const UserDisplay = (props) => {
         }
     };
 
+    const handleDelete = async (e) => {
+        const freighble_alert = document.getElementById("freighble_alert");
+        const toast = Toast.getOrCreateInstance(freighble_alert);
+        e.preventDefault();
+
+        const url = `/api/users/public/delete/${data._id}`;
+
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        const response_data = await response.json(); // Parse the JSON response
+
+        try {
+            if (!response.ok) {
+                throw new Error(
+                    `${JSON.stringify(response_data.error.errors)}`
+                );
+            }
+
+            setToastMessage({
+                success: true,
+                message: [response_data.msg],
+            });
+            window.scrollTo(0, 0);
+            setVisibility("view");
+            toast.show();
+            setTimeout(() => {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                props.CONDITIONAL_RENDERING.setSession(
+                    JSON.parse(localStorage.getItem("user"))
+                );
+                navigate("/");
+            }, 1250);
+        } catch (error) {
+            const err_variables = Object.keys(response_data.error.errors);
+            const errors = err_variables.map((err) => {
+                return response_data.error.errors[err].message;
+            });
+
+            setToastMessage({
+                success: false,
+                message: errors,
+            });
+            window.scrollTo(0, 0);
+            toast.show();
+        }
+    };
+
     // render
     return (
         (view || create || edit) && (
@@ -155,12 +208,29 @@ const UserDisplay = (props) => {
                                 <Fragment>
                                     User Profile{" "}
                                     <button
-                                        className="btn btn-secondary bg-gradient rounded-3 fw-medium"
+                                        className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
                                         onClick={() => {
                                             setVisibility("edit");
                                         }}
                                     >
                                         Edit
+                                    </button>
+                                    <button
+                                        className="btn btn-danger bg-gradient rounded-3 fw-medium me-2"
+                                        onClick={() => {
+                                            localStorage.removeItem("token");
+                                            localStorage.removeItem("user");
+
+                                            props.CONDITIONAL_RENDERING.setSession(
+                                                JSON.parse(
+                                                    localStorage.getItem("user")
+                                                )
+                                            );
+
+                                            navigate("/login");
+                                        }}
+                                    >
+                                        Log Out
                                     </button>
                                 </Fragment>
                             ) : create ? (
@@ -383,26 +453,36 @@ const UserDisplay = (props) => {
                                 {view ? (
                                     <Fragment>
                                         <div className="col-12 mb-4">
-                                            <h6 className="text-secondary fw-light">
-                                                full name
+                                            <h6 className="text-secondary">
+                                                name
                                             </h6>
-                                            <span className="text-dark fw-medium fs-3">
+                                            <span className="badge text-bg-primary bg-gradient fs-4 brand-font">
                                                 {data.first_name}{" "}
                                                 {data.last_name}
                                             </span>
                                         </div>
-                                        <div className="col-12">
-                                            <h6 className="text-secondary fw-light">
+                                        <div className="col-12 mb-4">
+                                            <h6 className="text-secondary">
                                                 email
                                             </h6>
-                                            <span className="text-dark fw-medium fs-3">
+                                            <span className="text-dark">
                                                 {data.email}
                                             </span>
                                         </div>
+                                        {data.company && (
+                                            <div className="col-12">
+                                                <h6 className="text-secondary">
+                                                    company
+                                                </h6>
+                                                <span className="text-dark">
+                                                    {data.company}
+                                                </span>
+                                            </div>
+                                        )}
                                     </Fragment>
                                 ) : (
                                     <Fragment>
-                                        <div className="col-12">
+                                        <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="user_first_name"
                                                 className="fw-medium text-dark-emphasis"
@@ -445,7 +525,7 @@ const UserDisplay = (props) => {
                                                 required
                                             />
                                         </div>
-                                        <div className="col-12">
+                                        <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="user_last_name"
                                                 className="fw-medium text-dark-emphasis"
@@ -488,7 +568,54 @@ const UserDisplay = (props) => {
                                                 required
                                             />
                                         </div>
-                                        <div className="col-12">
+                                        {edit && (
+                                            <div className="col-12 mb-2">
+                                                <label
+                                                    htmlFor="email_address"
+                                                    className="fw-medium text-dark-emphasis"
+                                                >
+                                                    email address{" "}
+                                                    <strong
+                                                        className={`text-${
+                                                            data.email &&
+                                                            email_regex.test(
+                                                                data.email
+                                                            )
+                                                                ? "success"
+                                                                : "danger"
+                                                        }`}
+                                                    >
+                                                        {data.email &&
+                                                        email_regex.test(
+                                                            data.email
+                                                        ) ? (
+                                                            <i className="bi bi-check"></i>
+                                                        ) : (
+                                                            "*"
+                                                        )}
+                                                    </strong>
+                                                </label>
+                                                <input
+                                                    type="email"
+                                                    className="form-control"
+                                                    placeholder="Email address"
+                                                    id="email_address"
+                                                    name="email_address"
+                                                    value={data.email}
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                email: e.target.value.toLowerCase(),
+                                                            };
+                                                        });
+                                                    }}
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                            </div>
+                                        )}
+                                        <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="user_company"
                                                 className="fw-medium text-dark-emphasis"
@@ -595,6 +722,15 @@ const UserDisplay = (props) => {
                                             ? "Save Changes"
                                             : "BAD REQUEST!"}
                                     </button>
+                                    {edit && (
+                                        <button
+                                            type="button"
+                                            className="btn btn-danger bg-gradient fw-medium w-100 rounded-3 mt-2"
+                                            onClick={(e) => handleDelete(e)}
+                                        >
+                                            Delete Account
+                                        </button>
+                                    )}
                                 </Fragment>
                             )}
                         </form>

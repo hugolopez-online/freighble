@@ -205,27 +205,34 @@ export const editVendor = async (req, res) => {
 };
 
 export const deleteVendor = async (req, res) => {
-    const { id } = req.params;
+    try {
+        const { id } = req.params;
 
-    if (!id) {
-        return res.status(400).json({ msg: `Must provide vendor ID.` });
-    }
+        if (!id) {
+            return res.status(400).json({ msg: `Must provide vendor ID.` });
+        }
 
-    const vendor = await Vendor.findOneAndDelete({ _id: id });
+        const vendor = await Vendor.findOneAndDelete({ _id: id });
 
-    if (!vendor) {
-        return res.status(400).json({
-            msg: `No vendor found: nothing to delete.`,
+        if (!vendor) {
+            return res.status(400).json({
+                msg: `No vendor found: nothing to delete.`,
+            });
+        }
+
+        return res.status(200).json({ msg: `Deleted ${vendor.company}` });
+    } catch (err) {
+        return res.status(500).json({
+            msg: `Something went wrong.`,
+            error: err,
         });
     }
-
-    return res.status(200).json({ msg: `Deleted ${vendor.company}` });
 };
 
 export const vendorLogin = async (req, res) => {
     const { email, password } = req.body;
 
-    const vendor = await Vendor.findOne({ email: email.toLowerCase() });
+    const vendor = await Vendor.findOne({ main_email: email.toLowerCase() });
 
     if (vendor) {
         const match = await vendor.comparePassword(password);
