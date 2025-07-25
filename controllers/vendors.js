@@ -1,48 +1,48 @@
-// imports
-import locally_stored_vendors from "../data/vendors.js";
+/* IMPORTS START */
+import TEST_VENDORS from "../data/vendors.js"; // <- TODOTASK: create some valid test vendors
 import Vendor from "../db/models/Vendor.js";
+/* IMPORTS END */
 
-// controllers
-export const viewVendors = async (req, res) => {
-    const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
-
+/* CONTROLLERS START */
+const viewVendors = async (req, res) => {
     try {
+        const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
+
         const vendors = DB_AVAILABLE
             ? await Vendor.find(req.body)
-            : locally_stored_vendors.filter((vendor) => {
-                  // will return all locally stored vendors, regardless of `req.body`
-                  return true;
-              });
+            : TEST_VENDORS;
+
         return res.status(200).json({
             msg: `Retrieved ${vendors.length} vendors successfully.`,
             vendors,
         });
     } catch (err) {
         console.error(err);
+
         return res.status(500).json({ msg: err, vendors: [] });
     }
 };
 
-export const searchVendors = async (req, res) => {
-    const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
-
-    const {
-        mode,
-        o_country,
-        d_country,
-        border,
-        hazmat,
-        team_drivers,
-        usa_bonded,
-        can_bonded,
-        ctpat,
-        twic,
-        tsa,
-        fast,
-        tanker_endorsement,
-    } = req.query;
-
+const searchVendors = async (req, res) => {
     try {
+        const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
+
+        const {
+            mode,
+            o_country,
+            d_country,
+            border,
+            hazmat,
+            team_drivers,
+            usa_bonded,
+            can_bonded,
+            ctpat,
+            twic,
+            tsa,
+            fast,
+            tanker_endorsement,
+        } = req.query;
+
         if (
             mode &&
             o_country &&
@@ -58,9 +58,10 @@ export const searchVendors = async (req, res) => {
             fast &&
             tanker_endorsement
         ) {
+            // TODOTASK: switch to find verified `true` vendors
             const vendors = DB_AVAILABLE
                 ? await Vendor.find({ verified: false })
-                : locally_stored_vendors;
+                : TEST_VENDORS;
 
             const filtered_vendors = vendors.filter((vendor) => {
                 const vendor_coverage = DB_AVAILABLE
@@ -76,14 +77,14 @@ export const searchVendors = async (req, res) => {
 
                     if (
                         vendor_coverage[country].territory.length !== 0 &&
-                        vendor_coverage[country].country_code == o_country
+                        vendor_coverage[country].country_code === o_country
                     ) {
                         country_coverage++;
                     }
 
                     if (
                         vendor_coverage[country].territory.length !== 0 &&
-                        vendor_coverage[country].country_code == d_country
+                        vendor_coverage[country].country_code === d_country
                     ) {
                         country_coverage++;
                     }
@@ -111,14 +112,16 @@ export const searchVendors = async (req, res) => {
                 filtered_vendors,
             });
         }
+
+        return res.status(200).json({ filtered_vendors: [] });
     } catch (err) {
+        console.error(err);
+
         return res.status(500).json({ msg: err, filtered_vendors: [] });
     }
-
-    return res.status(200).json({ filtered_vendors: [] });
 };
 
-export const findVendor = async (req, res) => {
+const findVendor = async (req, res) => {
     const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
 
     const { id } = req.params;
@@ -139,7 +142,7 @@ export const findVendor = async (req, res) => {
     }
 };
 
-export const createVendor = async (req, res) => {
+const createVendor = async (req, res) => {
     try {
         const { main_email } = req.body;
         const repeated_user = await Vendor.findOne({ main_email });
@@ -171,7 +174,7 @@ export const createVendor = async (req, res) => {
     }
 };
 
-export const editVendor = async (req, res) => {
+const editVendor = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -204,7 +207,7 @@ export const editVendor = async (req, res) => {
     }
 };
 
-export const deleteVendor = async (req, res) => {
+const deleteVendor = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -229,7 +232,7 @@ export const deleteVendor = async (req, res) => {
     }
 };
 
-export const vendorLogin = async (req, res) => {
+const vendorLogin = async (req, res) => {
     const { email, password } = req.body;
 
     const vendor = await Vendor.findOne({ main_email: email.toLowerCase() });
@@ -271,4 +274,18 @@ export const vendorLogin = async (req, res) => {
     // TEMPORAL LOCALSTORAGE APPROACH FOR DEVELOPMENT
 };
 
-export const vendorLogout = async (req, res) => {};
+const vendorLogout = async (req, res) => {};
+/* CONTROLLERS END */
+
+/* EXPORTS START */
+export {
+    viewVendors,
+    searchVendors,
+    findVendor,
+    createVendor,
+    editVendor,
+    deleteVendor,
+    vendorLogin,
+    vendorLogout,
+};
+/* EXPORTS END */

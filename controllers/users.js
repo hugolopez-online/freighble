@@ -1,31 +1,49 @@
-// imports
+/* IMPORTS START */
 import User from "../db/models/User.js";
+/* IMPORTS END */
 
-export const viewUsers = async (req, res) => {};
+/* CONTROLLERS START */
+const viewUsers = async (req, res) => {};
 
-export const findUser = async (req, res) => {
-    const { id } = req.params;
-
+const findUser = async (req, res) => {
     try {
+        const { id } = req.params;
+
+        if (!id) {
+            return res
+                .status(500)
+                .json({ msg: "Must provide ID to find user.", user: {} });
+        }
+
         const user = await User.findById(id);
+
+        if (!user) {
+            return res
+                .status(500)
+                .json({ msg: "No user has been found.", user: {} });
+        }
+
         return res.status(200).json({ msg: `Found user ${user.email}.`, user });
     } catch (err) {
         console.error(err);
+
         return res.status(200).json({ msg: err, user: {} });
     }
 };
 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
     try {
         const { email } = req.body;
+
         const repeated_user = await User.findOne({ email });
 
         if (repeated_user) {
+            // TODOTASK: implement proper error handling, below is a temporal approach
             return res.status(500).json({
                 error: {
                     errors: {
                         unique: {
-                            message: `Sign-up email "${email}" has already been taken.`,
+                            message: `Sign-up email "${email}" already taken.`,
                         },
                     },
                 },
@@ -35,19 +53,19 @@ export const createUser = async (req, res) => {
         const user = await User.create({ ...req.body });
 
         return res.status(201).json({
-            msg: `${user.first_name}, you have been successfuly registered! Now you can log in.`,
-            id: user._id,
-            successful: true,
+            msg: `${user.first_name}, you have been successfuly registered!`,
         });
     } catch (err) {
+        console.error(err);
+
         return res.status(500).json({
-            msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
+            msg: "Something went wrong.",
             error: err,
         });
     }
 };
 
-export const editUser = async (req, res) => {
+const editUser = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -67,62 +85,81 @@ export const editUser = async (req, res) => {
 
         if (!user) {
             return res.status(400).json({
-                msg: `No user found: nothing to edit.`,
+                msg: "No user found: nothing to edit.",
             });
         }
 
-        return res.status(200).json({ msg: `Profile edited.` });
+        return res.status(200).json({ msg: "Profile edited." });
     } catch (err) {
+        console.error(err);
+
         return res.status(500).json({
-            msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
+            msg: "Something went wrong.",
             error: err,
         });
     }
 };
 
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
 
         if (!id) {
-            return res.status(400).json({ msg: `Must provide user ID.` });
+            return res
+                .status(400)
+                .json({ msg: "Must provide user ID to delete." });
         }
 
         const user = await User.findOneAndDelete({ _id: id });
 
         if (!user) {
             return res.status(400).json({
-                msg: `No user found: nothing to delete.`,
+                msg: "No user found: nothing to delete.",
             });
         }
 
-        return res.status(200).json({ msg: `Profile deleted.` });
+        return res.status(200).json({ msg: "Profile deleted." });
     } catch (err) {
+        console.error(err);
+
         return res.status(500).json({
-            msg: `Something went wrong.`,
+            msg: "Something went wrong.",
             error: err,
         });
     }
 };
 
-export const userLogin = async (req, res) => {
-    const { email, password } = req.body;
+const userLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-    const user = await User.findOne({ email: email.toLowerCase() });
+        const user = await User.findOne({ email: email.toLowerCase() });
 
-    if (user) {
-        const match = await user.comparePassword(password);
-        if (match) {
-            const token = user.createToken();
-            return res.status(200).json({
-                token,
-                user: {
-                    id: user._id,
-                    role: user.auth.role,
-                    name: user.first_name,
-                },
-                msg: "Login successful!",
-            });
+        if (user) {
+            const match = await user.comparePassword(password);
+            if (match) {
+                // TODOTASK: store token in httOnly cookie - localStorage is for development only
+                const token = user.createToken();
+                return res.status(200).json({
+                    token,
+                    user: {
+                        id: user._id,
+                        role: user.auth.role,
+                        name: user.first_name,
+                    },
+                    msg: "Login successful!",
+                });
+            } else {
+                return res.status(500).json({
+                    error: {
+                        errors: {
+                            auth: {
+                                message: "Invalid credentials.",
+                            },
+                        },
+                    },
+                });
+            }
         } else {
             return res.status(500).json({
                 error: {
@@ -134,21 +171,26 @@ export const userLogin = async (req, res) => {
                 },
             });
         }
-    } else {
-        return res.status(500).json({
-            error: {
-                errors: {
-                    auth: {
-                        message: "Invalid credentials.",
-                    },
-                },
-            },
-        });
+    } catch (err) {
+        console.error(err);
+
+        return res
+            .status(500)
+            .json({ msg: "Something went wrong.", error: err });
     }
-
-    /* !!! IMPLEMENT HTTPONLY COOKIE FOR LOGIN FOR PRODUCTION */
-
-    // TEMPORAL LOCALSTORAGE APPROACH FOR DEVELOPMENT
 };
 
-export const userLogout = async (req, res) => {};
+const userLogout = async (req, res) => {};
+/* CONTROLLERS END */
+
+/* EXPORTS START */
+export {
+    viewUsers,
+    findUser,
+    createUser,
+    editUser,
+    deleteUser,
+    userLogin,
+    userLogout,
+};
+/* EXPORTS END */

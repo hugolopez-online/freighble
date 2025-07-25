@@ -45,17 +45,14 @@ const isCrossBorder = (o, d) => {
 };
 
 // component
-
 const Search = (props) => {
     // states
-
     const [formData, setFormData] = useState(default_form_data);
     const [locationSuggestions, setLocationSuggestions] = useState(
         default_location_suggestions
     );
 
     // handlers
-
     const handleSpecs = (e) => {
         e.preventDefault();
         props.setSpecs(props.default_specs);
@@ -203,7 +200,6 @@ const Search = (props) => {
     }, [props.template]);
 
     // render
-
     return (
         <form
             id="search"
