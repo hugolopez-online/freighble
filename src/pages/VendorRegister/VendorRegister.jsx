@@ -1,12 +1,11 @@
 // imports
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import VendorDisplay from "../VendorDisplay";
 import GeoCoverage from "./layout/components/GeoCoverage";
 import LaneBuilder from "./layout/components/LaneBuilder";
 import LaneList from "./layout/components/LaneList";
 import AddLane from "./layout/components/AddLane";
-import Transition from "../_templates/Transition";
+import { Transition, VendorDisplay } from "../_templates";
 
 // module
 const data = {

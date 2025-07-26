@@ -1,8 +1,7 @@
 // imports
 import { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import UserDisplay from "./UserDisplay";
-import Transition from "./_templates/Transition";
+import { Transition, UserDisplay } from "../../../_templates";
 
 // module
 const skeleton = {
@@ -85,12 +84,7 @@ const UserProfile = ({ CONDITIONAL_RENDERING }) => {
                         className="col-10"
                         style={{ minHeight: "100vh" }}
                     >
-                        <h5
-                            className="display-5"
-                            role="status"
-                        >
-                            No user has been found...
-                        </h5>
+                        <h5 className="display-5">No user has been found...</h5>
                     </div>
                 </div>
             )}

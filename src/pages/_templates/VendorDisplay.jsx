@@ -13,7 +13,7 @@ import {
     usaDivisions,
     mexDivisions,
 } from "data/variables";
-import Transition from "./_templates/Transition";
+import Transition from "./Transition";
 
 // module
 const coverage_countries = Object.keys(geo_tree);

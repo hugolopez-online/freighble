@@ -6,9 +6,7 @@ import Login from "./Login";
 import NotFound from "./NotFound";
 import PageLayout from "./PageLayout";
 import Register from "./Register";
-import UserDisplay from "./UserDisplay";
-import UserProfile from "./UserProfile";
-import VendorDisplay from "./VendorDisplay";
+import UserProfile from "./Dashboard/layout/components/UserProfile";
 import VendorLogin from "./VendorLogin";
 import VendorProfile from "./VendorProfile";
 import VendorRegister from "./VendorRegister";
@@ -24,9 +22,7 @@ export {
     NotFound,
     PageLayout,
     Register,
-    UserDisplay,
     UserProfile,
-    VendorDisplay,
     VendorLogin,
     VendorProfile,
     VendorRegister,

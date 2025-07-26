@@ -1,8 +1,7 @@
 // imports
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import UserDisplay from "./UserDisplay";
-import Transition from "./_templates/Transition";
+import { Transition, UserDisplay } from "./_templates";
 
 // module
 const data = {

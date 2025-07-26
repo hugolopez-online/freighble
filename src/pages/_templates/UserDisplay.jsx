@@ -2,7 +2,7 @@
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
-import Transition from "./_templates/Transition";
+import Transition from "./Transition";
 
 // module
 const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
@@ -126,7 +126,9 @@ const UserDisplay = (props) => {
 
                 setToastMessage({
                     success: true,
-                    message: [response_data.msg],
+                    message: [
+                        `${response_data.msg} Some changes may require you to log out and then log back in to be reflected.`,
+                    ],
                 });
                 window.scrollTo(0, 0);
                 setVisibility("view");

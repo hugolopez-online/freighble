@@ -1,5 +1,5 @@
 // imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Search, Directory, Banner, Console } from "./";
 
 // module
@@ -39,6 +39,7 @@ const DashboardMain = () => {
     const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
     const [routes, setRoutes] = useState([]);
+    const [hits, setHits] = useState(0);
 
     // handlers
     const resetSpecs = () => {
@@ -85,55 +86,73 @@ const DashboardMain = () => {
 
     // render
     return (
-        <div className="row">
-            <div
-                id="searchForm"
-                className="col-12 col-md-3 mb-3"
-            >
-                <Search
-                    default_specs={default_specs}
-                    setSpecs={setSpecs}
-                    template={template}
-                    setTemplate={setTemplate}
-                />
-            </div>
-            <div
-                className={`col-12 col-md-3 mb-3${
-                    !(
-                        specs.mode &&
-                        specs.origin.country &&
-                        specs.destination.country
-                    )
-                        ? " d-none"
-                        : ""
-                }`}
-            >
-                <div className="row sticky-md-top under-navbar">
-                    <div
-                        id="informativeBanner"
-                        className="col-12"
-                    >
-                        <Banner
-                            specs={specs}
-                            setSpecs={setSpecs}
-                        />
+        <Fragment>
+            <div className="row">
+                <div
+                    id="searchForm"
+                    className="col-12 col-md-3 mb-3"
+                >
+                    <Search
+                        default_specs={default_specs}
+                        setSpecs={setSpecs}
+                        template={template}
+                        setTemplate={setTemplate}
+                    />
+                </div>
+                <div
+                    className={`col-12 col-md-3 mb-3${
+                        !(
+                            specs.mode &&
+                            specs.origin.country &&
+                            specs.destination.country
+                        )
+                            ? " d-none"
+                            : ""
+                    }`}
+                >
+                    <div className="row sticky-md-top under-navbar">
+                        <div
+                            id="informativeBanner"
+                            className="col-12"
+                        >
+                            <Banner
+                                specs={specs}
+                                setSpecs={setSpecs}
+                            />
+                        </div>
                     </div>
                 </div>
+                <div className="col-12 col-md mb-3">
+                    <Console
+                        specs={specs}
+                        default_specs={default_specs}
+                        resetSpecs={resetSpecs}
+                        setSpecs={setSpecs}
+                        templateSpecs={templateSpecs}
+                    />
+                    <Directory
+                        specs={specs}
+                        routes={routes}
+                    />
+                </div>
             </div>
-            <div className="col-12 col-md mb-3">
-                <Console
-                    specs={specs}
-                    default_specs={default_specs}
-                    resetSpecs={resetSpecs}
-                    setSpecs={setSpecs}
-                    templateSpecs={templateSpecs}
-                />
-                <Directory
-                    specs={specs}
-                    routes={routes}
-                />
+            <div className="row justify-content-between fixed-bottom text-bg-secondary px-4 py-1">
+                <div className="col-4">
+                    {specs !== default_specs ? (
+                        <div
+                            className={`spinner-grow spinner-grow-sm me-2`}
+                            aria-hidden="true"
+                        ></div>
+                    ) : (
+                        <i className="bi bi-check me-2"></i>
+                    )}
+                    <small>System ready...</small>
+                </div>
+                <div className="col-4 text-end">
+                    <small>Last updated: {new Date().toLocaleString()}</small>
+                </div>
             </div>
-        </div>
+        </Fragment>
     );
 };
 

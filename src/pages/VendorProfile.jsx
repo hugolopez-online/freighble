@@ -1,12 +1,11 @@
 // imports
 import { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
-import VendorDisplay from "./VendorDisplay";
 import GeoCoverage from "./VendorRegister/layout/components/GeoCoverage";
 import LaneList from "./VendorRegister/layout/components/LaneList";
 import LaneBuilder from "./VendorRegister/layout/components/LaneBuilder";
 import AddLane from "./VendorRegister/layout/components/AddLane";
-import Transition from "./_templates/Transition";
+import { Transition, VendorDisplay } from "./_templates";
 
 // module
 const skeleton = {
@@ -104,10 +103,7 @@ const VendorProfile = ({ CONDITIONAL_RENDERING }) => {
                         className="col-10 py-4"
                         style={{ minHeight: "100vh" }}
                     >
-                        <h5
-                            className="display-5 py4"
-                            role="status"
-                        >
+                        <h5 className="display-5 py4">
                             No vendor has been found...
                         </h5>
                     </div>
