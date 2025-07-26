@@ -6,7 +6,7 @@ import { base_score, $VAST } from "../handlers/vast_system";
 
 // component
 
-const Directory = ({ specs, routes }) => {
+const Directory = ({ specs, routes, setHits, setIsSearching }) => {
     // states
 
     const [vendorList, setVendorList] = useState([]);
@@ -41,6 +41,7 @@ const Directory = ({ specs, routes }) => {
             )}`;
 
             setIsFetching(true);
+            setIsSearching(true);
 
             const filtered_vendors_promise = await fetch(query_string);
 
@@ -65,6 +66,8 @@ const Directory = ({ specs, routes }) => {
 
             setVendorList(filtered_scored_vendors);
             setIsFetching(false);
+            setHits(filtered_scored_vendors.length);
+            setIsSearching(false);
             window.scrollTo(0, 0);
         };
 

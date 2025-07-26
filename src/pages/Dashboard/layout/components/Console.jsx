@@ -34,9 +34,7 @@ const Console = (props) => {
                             minData ? " marquee-item" : ""
                         }`}
                     >
-                        <span className="fw-bold fs-6">
-                            current search:&gt;{" "}
-                        </span>
+                        <span className="fw-bold fs-6">current search: </span>
                         {minData ? (
                             <>{`${
                                 props.specs.usa_bonded ? "U.S. bonded " : ""

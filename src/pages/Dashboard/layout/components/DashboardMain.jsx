@@ -39,6 +39,7 @@ const DashboardMain = () => {
     const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
     const [routes, setRoutes] = useState([]);
+    const [isSearching, setIsSearching] = useState(false);
     const [hits, setHits] = useState(0);
 
     // handlers
@@ -133,23 +134,58 @@ const DashboardMain = () => {
                     <Directory
                         specs={specs}
                         routes={routes}
+                        setHits={setHits}
+                        setIsSearching={setIsSearching}
                     />
                 </div>
             </div>
-            <div className="row justify-content-between fixed-bottom text-bg-secondary px-4 py-1">
+            <div
+                className={`row justify-content-between fixed-bottom font-monospace text-bg-${
+                    specs === default_specs
+                        ? "secondary"
+                        : isSearching
+                        ? "warning"
+                        : hits > 0
+                        ? "primary bg-gradient"
+                        : "danger"
+                } px-4 py-0`}
+            >
                 <div className="col-4">
-                    {specs !== default_specs ? (
-                        <div
-                            className={`spinner-grow spinner-grow-sm me-2`}
-                            aria-hidden="true"
-                        ></div>
+                    <small>App status: </small>
+                    {specs === default_specs ? (
+                        <Fragment>
+                            <small>system ready</small>
+                            <div
+                                className={`spinner-grow spinner-grow-sm ms-2`}
+                                aria-hidden="true"
+                            ></div>
+                        </Fragment>
+                    ) : isSearching ? (
+                        <Fragment>
+                            <small>searching vendors</small>
+                            <div
+                                className={`spinner-border spinner-grow-sm ms-2`}
+                                aria-hidden="true"
+                            ></div>
+                        </Fragment>
                     ) : (
-                        <i className="bi bi-check me-2"></i>
+                        <Fragment>
+                            <small>
+                                displaying <b>{hits}</b> search result
+                                {hits !== 1 ? "s" : ""}
+                            </small>
+                            <i
+                                className={`bi bi-${
+                                    hits > 0 ? "check" : "exclamation-triangle"
+                                } ms-1`}
+                            ></i>
+                        </Fragment>
                     )}
-                    <small>System ready...</small>
                 </div>
                 <div className="col-4 text-end">
-                    <small>Last updated: {new Date().toLocaleString()}</small>
+                    <small>
+                        Last app status update: {new Date().toLocaleString()}
+                    </small>
                 </div>
             </div>
         </Fragment>
