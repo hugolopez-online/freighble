@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserDisplay from "./UserDisplay";
+import Transition from "./_templates/Transition";
 
 // module
 const data = {
@@ -32,7 +33,15 @@ const Register = ({ CONDITIONAL_RENDERING }) => {
     }, []);
 
     if (CONDITIONAL_RENDERING.session) {
-        return false;
+        return (
+            <Transition
+                variables={{
+                    type: ["Authenticating", "Redirecting", "Loading"][1],
+                    loader: ["spinner-border", "spinner-grow"][0],
+                    message: "",
+                }}
+            />
+        );
     }
 
     return (

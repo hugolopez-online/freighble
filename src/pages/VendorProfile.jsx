@@ -6,6 +6,7 @@ import GeoCoverage from "./VendorRegister/layout/components/GeoCoverage";
 import LaneList from "./VendorRegister/layout/components/LaneList";
 import LaneBuilder from "./VendorRegister/layout/components/LaneBuilder";
 import AddLane from "./VendorRegister/layout/components/AddLane";
+import Transition from "./_templates/Transition";
 
 // module
 const skeleton = {
@@ -80,23 +81,13 @@ const VendorProfile = ({ CONDITIONAL_RENDERING }) => {
     return (
         <Fragment>
             {isFetching ? (
-                <div className="row justify-content-center pt-5">
-                    <div
-                        className="col-10 py-4"
-                        style={{ minHeight: "100vh" }}
-                    >
-                        <h5
-                            className="display-5 py4"
-                            role="status"
-                        >
-                            Loading vendor information...
-                        </h5>
-                        <div
-                            className="spinner-border ms-auto"
-                            aria-hidden="true"
-                        ></div>
-                    </div>
-                </div>
+                <Transition
+                    variables={{
+                        type: ["Authenticating", "Redirecting", "Loading"][2],
+                        loader: ["spinner-border", "spinner-grow"][0],
+                        message: "",
+                    }}
+                />
             ) : vendor.company ? (
                 <VendorDisplay
                     visibility="view"

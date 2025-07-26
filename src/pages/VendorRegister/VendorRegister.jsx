@@ -6,6 +6,7 @@ import GeoCoverage from "./layout/components/GeoCoverage";
 import LaneBuilder from "./layout/components/LaneBuilder";
 import LaneList from "./layout/components/LaneList";
 import AddLane from "./layout/components/AddLane";
+import Transition from "../_templates/Transition";
 
 // module
 const data = {
@@ -73,7 +74,15 @@ const VendorRegister = ({ CONDITIONAL_RENDERING }) => {
     }, []);
 
     if (CONDITIONAL_RENDERING.session) {
-        return false;
+        return (
+            <Transition
+                variables={{
+                    type: ["Authenticating", "Redirecting", "Loading"][1],
+                    loader: ["spinner-border", "spinner-grow"][0],
+                    message: "",
+                }}
+            />
+        );
     }
 
     return (

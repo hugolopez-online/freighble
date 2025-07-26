@@ -2,6 +2,7 @@
 import { useEffect, useState, Fragment } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar } from "./layout/components";
+import Transition from "../_templates/Transition";
 
 // component
 const Dashboard = ({ CONDITIONAL_RENDERING }) => {
@@ -30,7 +31,15 @@ const Dashboard = ({ CONDITIONAL_RENDERING }) => {
         !CONDITIONAL_RENDERING.session ||
         CONDITIONAL_RENDERING.USER_ROLE === "vendor"
     ) {
-        return false;
+        return (
+            <Transition
+                variables={{
+                    type: ["Authenticating", "Redirecting", "Loading"][1],
+                    loader: ["spinner-border", "spinner-grow"][0],
+                    message: "",
+                }}
+            />
+        );
     }
 
     // render

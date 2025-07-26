@@ -2,6 +2,7 @@
 import { useState, useEffect, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import UserDisplay from "./UserDisplay";
+import Transition from "./_templates/Transition";
 
 // module
 const skeleton = {
@@ -65,23 +66,13 @@ const UserProfile = ({ CONDITIONAL_RENDERING }) => {
     return (
         <Fragment>
             {isFetching ? (
-                <div className="row justify-content-center">
-                    <div
-                        className="col-10"
-                        style={{ minHeight: "100vh" }}
-                    >
-                        <h5
-                            className="display-5"
-                            role="status"
-                        >
-                            Loading user information...
-                        </h5>
-                        <div
-                            className="spinner-border ms-auto"
-                            aria-hidden="true"
-                        ></div>
-                    </div>
-                </div>
+                <Transition
+                    variables={{
+                        type: ["Authenticating", "Redirecting", "Loading"][2],
+                        loader: ["spinner-border", "spinner-grow"][0],
+                        message: "",
+                    }}
+                />
             ) : user.first_name ? (
                 <UserDisplay
                     visibility="view"

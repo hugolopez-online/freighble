@@ -113,7 +113,11 @@ const searchVendors = async (req, res) => {
             });
         }
 
-        return res.status(200).json({ filtered_vendors: [] });
+        // TODOTASK: implement BAD_REQUEST error handling
+        return res.status(500).json({
+            msg: "Incorrect search query format. No vendors have been filtered.",
+            filtered_vendors: [],
+        });
     } catch (err) {
         console.error(err);
 
@@ -122,23 +126,31 @@ const searchVendors = async (req, res) => {
 };
 
 const findVendor = async (req, res) => {
-    const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
-
-    const { id } = req.params;
-
-    if (!DB_AVAILABLE) {
-        console.warn("No support for this feature with locally stored data.");
-        return false;
-    }
-
     try {
+        const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
+
+        const { id } = req.params;
+
+        if (!DB_AVAILABLE) {
+            console.warn(
+                "No support for this feature with locally stored data."
+            );
+
+            return res.status(500).json({
+                msg: "No support for this feature with locally stored data.",
+                vendor: {},
+            });
+        }
+
         const vendor = await Vendor.findById(id);
+
         return res
             .status(200)
             .json({ msg: `Found vendor ${vendor.company}.`, vendor });
     } catch (err) {
         console.error(err);
-        return res.status(200).json({ msg: err, vendor: {} });
+
+        return res.status(500).json({ msg: err, vendor: {} });
     }
 };
 
@@ -164,11 +176,12 @@ const createVendor = async (req, res) => {
         return res.status(201).json({
             msg: `Vendor ${vendor.company} created!`,
             id: vendor._id,
-            successful: true,
         });
     } catch (err) {
+        console.error(err);
+
         return res.status(500).json({
-            msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
+            msg: "Something went wrong.",
             error: err,
         });
     }
@@ -181,7 +194,7 @@ const editVendor = async (req, res) => {
         if (!id) {
             return res
                 .status(400)
-                .json({ msg: `Must provide vendor ID to edit.` });
+                .json({ msg: "Must provide vendor ID to edit." });
         }
 
         const vendor = await Vendor.findOneAndUpdate(
@@ -194,14 +207,16 @@ const editVendor = async (req, res) => {
 
         if (!vendor) {
             return res.status(400).json({
-                msg: `No vendor found: nothing to edit.`,
+                msg: "No vendor found: nothing to edit.",
             });
         }
 
         return res.status(200).json({ msg: `${vendor.company} edited.` });
     } catch (err) {
+        console.error(err);
+
         return res.status(500).json({
-            msg: `Something went wrong. Please make sure all mandatory fields are completed as instructed.`,
+            msg: "Something went wrong.",
             error: err,
         });
     }
@@ -212,40 +227,59 @@ const deleteVendor = async (req, res) => {
         const { id } = req.params;
 
         if (!id) {
-            return res.status(400).json({ msg: `Must provide vendor ID.` });
+            return res
+                .status(400)
+                .json({ msg: "Must provide vendor ID to delete." });
         }
 
         const vendor = await Vendor.findOneAndDelete({ _id: id });
 
         if (!vendor) {
             return res.status(400).json({
-                msg: `No vendor found: nothing to delete.`,
+                msg: "No vendor found: nothing to delete.",
             });
         }
 
-        return res.status(200).json({ msg: `Deleted ${vendor.company}` });
+        return res.status(200).json({ msg: `${vendor.company} deleted.` });
     } catch (err) {
+        console.error(err);
+
         return res.status(500).json({
-            msg: `Something went wrong.`,
+            msg: "Something went wrong.",
             error: err,
         });
     }
 };
 
 const vendorLogin = async (req, res) => {
-    const { email, password } = req.body;
+    try {
+        const { email, password } = req.body;
 
-    const vendor = await Vendor.findOne({ main_email: email.toLowerCase() });
+        const vendor = await Vendor.findOne({
+            main_email: email.toLowerCase(),
+        });
 
-    if (vendor) {
-        const match = await vendor.comparePassword(password);
-        if (match) {
-            const token = vendor.createToken();
-            return res.status(200).json({
-                token,
-                user: { id: vendor._id, role: vendor.auth.role },
-                msg: "Login successful!",
-            });
+        if (vendor) {
+            const match = await vendor.comparePassword(password);
+            if (match) {
+                // TODOTASK: store token in httOnly cookie - localStorage is for development only
+                const token = vendor.createToken();
+                return res.status(200).json({
+                    token,
+                    user: { id: vendor._id, role: vendor.auth.role },
+                    msg: "Login successful!",
+                });
+            } else {
+                return res.status(500).json({
+                    error: {
+                        errors: {
+                            auth: {
+                                message: "Invalid credentials.",
+                            },
+                        },
+                    },
+                });
+            }
         } else {
             return res.status(500).json({
                 error: {
@@ -257,21 +291,13 @@ const vendorLogin = async (req, res) => {
                 },
             });
         }
-    } else {
-        return res.status(500).json({
-            error: {
-                errors: {
-                    auth: {
-                        message: "Invalid credentials.",
-                    },
-                },
-            },
-        });
+    } catch (err) {
+        console.error(err);
+
+        return res
+            .status(500)
+            .json({ msg: "Something went wrong.", error: err });
     }
-
-    /* !!! IMPLEMENT HTTPONLY COOKIE FOR LOGIN FOR PRODUCTION */
-
-    // TEMPORAL LOCALSTORAGE APPROACH FOR DEVELOPMENT
 };
 
 const vendorLogout = async (req, res) => {};

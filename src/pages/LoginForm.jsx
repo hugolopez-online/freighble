@@ -2,6 +2,7 @@
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
+import Transition from "./_templates/Transition";
 
 // module
 const blank_credentials = {
@@ -210,19 +211,17 @@ const LoginForm = (props) => {
                         </form>
                     </div>
                 ) : (
-                    <div className="col-8 py-4">
-                        <div className="alert alert-success">
-                            <h4>Authenticating... </h4>
-                            <div
-                                className="spinner-grow text-success"
-                                role="status"
-                            >
-                                <span className="visually-hidden">
-                                    Loading...
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    <Transition
+                        variables={{
+                            type: [
+                                "Authenticating",
+                                "Redirecting",
+                                "Loading",
+                            ][0],
+                            loader: ["spinner-border", "spinner-grow"][1],
+                            message: "",
+                        }}
+                    />
                 )}
             </div>
 

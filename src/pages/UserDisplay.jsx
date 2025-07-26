@@ -2,6 +2,7 @@
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
+import Transition from "./_templates/Transition";
 
 // module
 const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
@@ -16,6 +17,7 @@ const UserDisplay = (props) => {
         success: false,
         message: [],
     });
+    const [isFetching, setIsFetching] = useState(false);
 
     // module
     const view = visibility === "view";
@@ -55,6 +57,8 @@ const UserDisplay = (props) => {
 
             const url = "/api/users/public/create";
 
+            setIsFetching(true);
+
             const response = await fetch(url, {
                 method: "POST",
                 headers: {
@@ -83,6 +87,7 @@ const UserDisplay = (props) => {
                     navigate("/login");
                 }, 1250);
             } catch (error) {
+                setIsFetching(false);
                 const err_variables = Object.keys(response_data.error.errors);
                 const errors = err_variables.map((err) => {
                     return response_data.error.errors[err].message;
@@ -99,6 +104,8 @@ const UserDisplay = (props) => {
 
         if (visibility === "edit") {
             const url = `/api/users/public/edit/${data._id}`;
+
+            setIsFetching(true);
 
             const response = await fetch(url, {
                 method: "PATCH",
@@ -124,7 +131,9 @@ const UserDisplay = (props) => {
                 window.scrollTo(0, 0);
                 setVisibility("view");
                 toast.show();
+                setIsFetching(false);
             } catch (error) {
+                setIsFetching(false);
                 const err_variables = Object.keys(response_data.error.errors);
                 const errors = err_variables.map((err) => {
                     return response_data.error.errors[err].message;
@@ -146,6 +155,8 @@ const UserDisplay = (props) => {
         e.preventDefault();
 
         const url = `/api/users/public/delete/${data._id}`;
+
+        setIsFetching(true);
 
         const response = await fetch(url, {
             method: "DELETE",
@@ -179,6 +190,7 @@ const UserDisplay = (props) => {
                 navigate("/");
             }, 1250);
         } catch (error) {
+            setIsFetching(false);
             const err_variables = Object.keys(response_data.error.errors);
             const errors = err_variables.map((err) => {
                 return response_data.error.errors[err].message;
@@ -197,378 +209,91 @@ const UserDisplay = (props) => {
     return (
         (view || create || edit) && (
             <Fragment>
-                <div
-                    className={`row justify-content-center${
-                        create ? " pt-5" : ""
-                    }`}
-                >
-                    <div className="col-8 py-4">
-                        <h5 className="display-5 py-4">
-                            {view ? (
-                                <Fragment>
-                                    User Profile{" "}
-                                    <button
-                                        className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
-                                        onClick={() => {
-                                            setVisibility("edit");
-                                        }}
-                                    >
-                                        Edit
-                                    </button>
-                                    <button
-                                        className="btn btn-danger bg-gradient rounded-3 fw-medium me-2"
-                                        onClick={() => {
-                                            localStorage.removeItem("token");
-                                            localStorage.removeItem("user");
-
-                                            props.CONDITIONAL_RENDERING.setSession(
-                                                JSON.parse(
-                                                    localStorage.getItem("user")
-                                                )
-                                            );
-
-                                            navigate("/login");
-                                        }}
-                                    >
-                                        Log Out
-                                    </button>
-                                </Fragment>
-                            ) : create ? (
-                                "User Registration"
-                            ) : edit ? (
-                                <Fragment>
-                                    User Profile{" "}
-                                    <button
-                                        className="btn btn-dark bg-gradient fw-medium me-2"
-                                        onClick={(e) => {
-                                            handleRegistration(e, data);
-                                        }}
-                                    >
-                                        Save Changes
-                                    </button>
-                                    <button
-                                        className="btn btn-secondary bg-gradient fw-medium"
-                                        onClick={() => {
-                                            setData(props.data);
-                                            setVisibility("view");
-                                        }}
-                                    >
-                                        Cancel
-                                    </button>
-                                </Fragment>
-                            ) : (
-                                "BAD REQUEST!"
-                            )}
-                        </h5>
-                        <form
-                            id="user_register"
-                            className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
-                            onSubmit={(e) => handleRegistration(e, data)}
-                        >
-                            {/* Auth details */}
-                            {create && (
-                                <Fragment>
-                                    <div className="row border-bottom mb-4">
-                                        <div className="col-12">
-                                            <h6 className="display-6 text-dark fw-bold brand-font">
-                                                SIGN-UP DETAILS
-                                            </h6>
-                                        </div>
-                                    </div>
-
-                                    <fieldset className="row mb-4">
-                                        <div className="col-12 mb-2">
-                                            <label
-                                                htmlFor="email_address"
-                                                className="fw-medium text-dark-emphasis"
-                                            >
-                                                email address{" "}
-                                                <strong
-                                                    className={`text-${
-                                                        data.email &&
-                                                        email_regex.test(
-                                                            data.email
-                                                        )
-                                                            ? "success"
-                                                            : "danger"
-                                                    }`}
-                                                >
-                                                    {data.email &&
-                                                    email_regex.test(
-                                                        data.email
-                                                    ) ? (
-                                                        <i className="bi bi-check"></i>
-                                                    ) : (
-                                                        "*"
-                                                    )}
-                                                </strong>
-                                            </label>
-                                            <input
-                                                type="email"
-                                                className="form-control"
-                                                placeholder="Email address"
-                                                id="email_address"
-                                                name="email_address"
-                                                value={data.email}
-                                                onChange={(e) => {
-                                                    setData((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            email: e.target.value.toLowerCase(),
-                                                        };
-                                                    });
-                                                }}
-                                                autoComplete="off"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="col-12 mb-2">
-                                            <label
-                                                htmlFor="user_password"
-                                                className="fw-medium text-dark-emphasis"
-                                            >
-                                                password{" "}
-                                                <strong
-                                                    className={`text-${
-                                                        data.auth.password &&
-                                                        !bad_password_regex.test(
-                                                            data.auth.password
-                                                        )
-                                                            ? "success"
-                                                            : "danger"
-                                                    }`}
-                                                >
-                                                    {data.auth.password &&
-                                                    !bad_password_regex.test(
-                                                        data.auth.password
-                                                    ) ? (
-                                                        <i className="bi bi-check"></i>
-                                                    ) : (
-                                                        "*"
-                                                    )}
-                                                </strong>{" "}
-                                                <small className="fw-light text-secondary">
-                                                    (at least 8 characters long,
-                                                    including lowercase,
-                                                    uppercase, number, and
-                                                    special characters)
-                                                </small>{" "}
-                                            </label>
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                placeholder="Password"
-                                                id="user_password"
-                                                name="user_password"
-                                                value={data.auth.password}
-                                                onChange={(e) => {
-                                                    setData((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            auth: {
-                                                                ...prev.auth,
-                                                                password:
-                                                                    e.target
-                                                                        .value,
-                                                            },
-                                                        };
-                                                    });
-                                                }}
-                                                autoComplete="off"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="col-12 mb-2">
-                                            <label
-                                                htmlFor="confirm_user_password"
-                                                className="fw-medium text-dark-emphasis"
-                                            >
-                                                confirm password{" "}
-                                                <strong
-                                                    className={`text-${
-                                                        passwordMatch &&
-                                                        passwordMatch ===
-                                                            data.auth
-                                                                .password &&
-                                                        !bad_password_regex.test(
-                                                            data.auth.password
-                                                        )
-                                                            ? "success"
-                                                            : "danger"
-                                                    }`}
-                                                >
-                                                    {passwordMatch &&
-                                                    passwordMatch ===
-                                                        data.auth.password &&
-                                                    !bad_password_regex.test(
-                                                        data.auth.password
-                                                    ) ? (
-                                                        <i className="bi bi-check"></i>
-                                                    ) : (
-                                                        "*"
-                                                    )}
-                                                </strong>
-                                            </label>
-                                            <input
-                                                type="password"
-                                                className="form-control"
-                                                placeholder="Password"
-                                                id="confirm_user_password"
-                                                name="confirm_user_password"
-                                                value={passwordMatch}
-                                                onChange={(e) => {
-                                                    setPasswordMatch(
-                                                        e.target.value
-                                                    );
-                                                }}
-                                                autoComplete="off"
-                                                required
-                                            />
-                                        </div>
-                                        <div className="col-12 mb-2">
-                                            <span className="text-secondary fw-normal">
-                                                already a Freighble user?{" "}
-                                                <Link
-                                                    className="fw-medium"
-                                                    to="/login"
-                                                >
-                                                    Log in here
-                                                </Link>
-                                            </span>
-                                        </div>
-                                    </fieldset>
-                                </Fragment>
-                            )}
-
-                            {/* Profile info */}
-                            <div className="row border-bottom mb-4">
-                                <div className="col-12">
-                                    <h6 className="display-6 text-dark fw-bold brand-font">
-                                        PROFILE INFORMATION
-                                    </h6>
-                                </div>
-                            </div>
-
-                            <fieldset className="row mb-4">
+                {!isFetching ? (
+                    <div
+                        className={`row justify-content-center${
+                            create ? " pt-5" : ""
+                        }`}
+                    >
+                        <div className="col-8 py-4">
+                            <h5 className="display-5 py-4">
                                 {view ? (
                                     <Fragment>
-                                        <div className="col-12 mb-4">
-                                            <h6 className="text-secondary">
-                                                name
-                                            </h6>
-                                            <span className="badge text-bg-primary bg-gradient fs-4 brand-font">
-                                                {data.first_name}{" "}
-                                                {data.last_name}
-                                            </span>
-                                        </div>
-                                        <div className="col-12 mb-4">
-                                            <h6 className="text-secondary">
-                                                email
-                                            </h6>
-                                            <span className="text-dark">
-                                                {data.email}
-                                            </span>
-                                        </div>
-                                        {data.company && (
-                                            <div className="col-12">
-                                                <h6 className="text-secondary">
-                                                    company
-                                                </h6>
-                                                <span className="text-dark">
-                                                    {data.company}
-                                                </span>
-                                            </div>
-                                        )}
+                                        User Profile{" "}
+                                        <button
+                                            className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
+                                            onClick={() => {
+                                                setVisibility("edit");
+                                            }}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button
+                                            className="btn btn-danger bg-gradient rounded-3 fw-medium me-2"
+                                            onClick={() => {
+                                                localStorage.removeItem(
+                                                    "token"
+                                                );
+                                                localStorage.removeItem("user");
+
+                                                props.CONDITIONAL_RENDERING.setSession(
+                                                    JSON.parse(
+                                                        localStorage.getItem(
+                                                            "user"
+                                                        )
+                                                    )
+                                                );
+
+                                                navigate("/login");
+                                            }}
+                                        >
+                                            Log Out
+                                        </button>
+                                    </Fragment>
+                                ) : create ? (
+                                    "User Registration"
+                                ) : edit ? (
+                                    <Fragment>
+                                        User Profile{" "}
+                                        <button
+                                            className="btn btn-dark bg-gradient fw-medium me-2"
+                                            onClick={(e) => {
+                                                handleRegistration(e, data);
+                                            }}
+                                        >
+                                            Save Changes
+                                        </button>
+                                        <button
+                                            className="btn btn-secondary bg-gradient fw-medium"
+                                            onClick={() => {
+                                                setData(props.data);
+                                                setVisibility("view");
+                                            }}
+                                        >
+                                            Cancel
+                                        </button>
                                     </Fragment>
                                 ) : (
+                                    "BAD REQUEST!"
+                                )}
+                            </h5>
+                            <form
+                                id="user_register"
+                                className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
+                                onSubmit={(e) => handleRegistration(e, data)}
+                            >
+                                {/* Auth details */}
+                                {create && (
                                     <Fragment>
-                                        <div className="col-12 mb-2">
-                                            <label
-                                                htmlFor="user_first_name"
-                                                className="fw-medium text-dark-emphasis"
-                                            >
-                                                first name{" "}
-                                                <strong
-                                                    className={`text-${
-                                                        data.first_name
-                                                            ? "success"
-                                                            : "danger"
-                                                    }`}
-                                                >
-                                                    {data.first_name ? (
-                                                        <i className="bi bi-check"></i>
-                                                    ) : (
-                                                        "*"
-                                                    )}
-                                                </strong>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="First name"
-                                                id="user_first_name"
-                                                name="user_first_name"
-                                                value={data.first_name}
-                                                onChange={(e) => {
-                                                    setData((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            first_name:
-                                                                toTitleCase(
-                                                                    e.target
-                                                                        .value
-                                                                ),
-                                                        };
-                                                    });
-                                                }}
-                                                autoComplete="off"
-                                                required
-                                            />
+                                        <div className="row border-bottom mb-4">
+                                            <div className="col-12">
+                                                <h6 className="display-6 text-dark fw-bold brand-font">
+                                                    SIGN-UP DETAILS
+                                                </h6>
+                                            </div>
                                         </div>
-                                        <div className="col-12 mb-2">
-                                            <label
-                                                htmlFor="user_last_name"
-                                                className="fw-medium text-dark-emphasis"
-                                            >
-                                                last name{" "}
-                                                <strong
-                                                    className={`text-${
-                                                        data.last_name
-                                                            ? "success"
-                                                            : "danger"
-                                                    }`}
-                                                >
-                                                    {data.last_name ? (
-                                                        <i className="bi bi-check"></i>
-                                                    ) : (
-                                                        "*"
-                                                    )}
-                                                </strong>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Last name"
-                                                id="user_last_name"
-                                                name="user_last_name"
-                                                value={data.last_name}
-                                                onChange={(e) => {
-                                                    setData((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            last_name:
-                                                                toTitleCase(
-                                                                    e.target
-                                                                        .value
-                                                                ),
-                                                        };
-                                                    });
-                                                }}
-                                                autoComplete="off"
-                                                required
-                                            />
-                                        </div>
-                                        {edit && (
+
+                                        <fieldset className="row mb-4">
                                             <div className="col-12 mb-2">
                                                 <label
                                                     htmlFor="email_address"
@@ -614,128 +339,442 @@ const UserDisplay = (props) => {
                                                     required
                                                 />
                                             </div>
-                                        )}
-                                        <div className="col-12 mb-2">
-                                            <label
-                                                htmlFor="user_company"
-                                                className="fw-medium text-dark-emphasis"
-                                            >
-                                                company
-                                            </label>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Company name (optional)"
-                                                id="user_company"
-                                                name="user_company"
-                                                value={data.company}
-                                                onChange={(e) => {
-                                                    setData((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            company:
-                                                                e.target.value.toUpperCase(),
-                                                        };
-                                                    });
-                                                }}
-                                                autoComplete="off"
-                                            />
-                                        </div>
+                                            <div className="col-12 mb-2">
+                                                <label
+                                                    htmlFor="user_password"
+                                                    className="fw-medium text-dark-emphasis"
+                                                >
+                                                    password{" "}
+                                                    <strong
+                                                        className={`text-${
+                                                            data.auth
+                                                                .password &&
+                                                            !bad_password_regex.test(
+                                                                data.auth
+                                                                    .password
+                                                            )
+                                                                ? "success"
+                                                                : "danger"
+                                                        }`}
+                                                    >
+                                                        {data.auth.password &&
+                                                        !bad_password_regex.test(
+                                                            data.auth.password
+                                                        ) ? (
+                                                            <i className="bi bi-check"></i>
+                                                        ) : (
+                                                            "*"
+                                                        )}
+                                                    </strong>{" "}
+                                                    <small className="fw-light text-secondary">
+                                                        (at least 8 characters
+                                                        long, including
+                                                        lowercase, uppercase,
+                                                        number, and special
+                                                        characters)
+                                                    </small>{" "}
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    placeholder="Password"
+                                                    id="user_password"
+                                                    name="user_password"
+                                                    value={data.auth.password}
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                auth: {
+                                                                    ...prev.auth,
+                                                                    password:
+                                                                        e.target
+                                                                            .value,
+                                                                },
+                                                            };
+                                                        });
+                                                    }}
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="col-12 mb-2">
+                                                <label
+                                                    htmlFor="confirm_user_password"
+                                                    className="fw-medium text-dark-emphasis"
+                                                >
+                                                    confirm password{" "}
+                                                    <strong
+                                                        className={`text-${
+                                                            passwordMatch &&
+                                                            passwordMatch ===
+                                                                data.auth
+                                                                    .password &&
+                                                            !bad_password_regex.test(
+                                                                data.auth
+                                                                    .password
+                                                            )
+                                                                ? "success"
+                                                                : "danger"
+                                                        }`}
+                                                    >
+                                                        {passwordMatch &&
+                                                        passwordMatch ===
+                                                            data.auth
+                                                                .password &&
+                                                        !bad_password_regex.test(
+                                                            data.auth.password
+                                                        ) ? (
+                                                            <i className="bi bi-check"></i>
+                                                        ) : (
+                                                            "*"
+                                                        )}
+                                                    </strong>
+                                                </label>
+                                                <input
+                                                    type="password"
+                                                    className="form-control"
+                                                    placeholder="Password"
+                                                    id="confirm_user_password"
+                                                    name="confirm_user_password"
+                                                    value={passwordMatch}
+                                                    onChange={(e) => {
+                                                        setPasswordMatch(
+                                                            e.target.value
+                                                        );
+                                                    }}
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="col-12 mb-2">
+                                                <span className="text-secondary fw-normal">
+                                                    already a Freighble user?{" "}
+                                                    <Link
+                                                        className="fw-medium"
+                                                        to="/login"
+                                                    >
+                                                        Log in here
+                                                    </Link>
+                                                </span>
+                                            </div>
+                                        </fieldset>
                                     </Fragment>
                                 )}
-                            </fieldset>
 
-                            {!view && (
-                                <Fragment>
-                                    {create && (
-                                        <div className="form-check my-4">
-                                            <input
-                                                className="form-check-input"
-                                                type="checkbox"
-                                                id="accept_terms"
-                                                name="accept_terms"
-                                                checked={
-                                                    data.auth.terms.accepted
-                                                }
-                                                onChange={(e) => {
-                                                    setData((prev) => {
-                                                        return {
-                                                            ...prev,
-                                                            auth: {
-                                                                ...prev.auth,
-                                                                terms: {
-                                                                    ...prev.auth
-                                                                        .terms,
-                                                                    accepted:
+                                {/* Profile info */}
+                                <div className="row border-bottom mb-4">
+                                    <div className="col-12">
+                                        <h6 className="display-6 text-dark fw-bold brand-font">
+                                            PROFILE INFORMATION
+                                        </h6>
+                                    </div>
+                                </div>
+
+                                <fieldset className="row mb-4">
+                                    {view ? (
+                                        <Fragment>
+                                            <div className="col-12 mb-4">
+                                                <h6 className="text-secondary">
+                                                    name
+                                                </h6>
+                                                <span className="badge text-bg-primary bg-gradient fs-4 brand-font">
+                                                    {data.first_name}{" "}
+                                                    {data.last_name}
+                                                </span>
+                                            </div>
+                                            <div className="col-12 mb-4">
+                                                <h6 className="text-secondary">
+                                                    email
+                                                </h6>
+                                                <span className="text-dark">
+                                                    {data.email}
+                                                </span>
+                                            </div>
+                                            {data.company && (
+                                                <div className="col-12">
+                                                    <h6 className="text-secondary">
+                                                        company
+                                                    </h6>
+                                                    <span className="text-dark">
+                                                        {data.company}
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </Fragment>
+                                    ) : (
+                                        <Fragment>
+                                            <div className="col-12 mb-2">
+                                                <label
+                                                    htmlFor="user_first_name"
+                                                    className="fw-medium text-dark-emphasis"
+                                                >
+                                                    first name{" "}
+                                                    <strong
+                                                        className={`text-${
+                                                            data.first_name
+                                                                ? "success"
+                                                                : "danger"
+                                                        }`}
+                                                    >
+                                                        {data.first_name ? (
+                                                            <i className="bi bi-check"></i>
+                                                        ) : (
+                                                            "*"
+                                                        )}
+                                                    </strong>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="First name"
+                                                    id="user_first_name"
+                                                    name="user_first_name"
+                                                    value={data.first_name}
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                first_name:
+                                                                    toTitleCase(
                                                                         e.target
-                                                                            .checked,
-                                                                    date_accepted:
-                                                                        Date.now(),
-                                                                },
-                                                            },
-                                                        };
-                                                    });
-                                                }}
-                                            />
-                                            <label
-                                                className={`form-check-label text-${
-                                                    data.auth.terms.accepted
-                                                        ? "dark"
-                                                        : "secondary"
-                                                }`}
-                                                htmlFor="accept_terms"
-                                            >
-                                                By signing up, I acknowledge
-                                                that I have read, understood,
-                                                and accepted the{" "}
-                                                <Link
-                                                    to="/general-terms-and-conditions"
-                                                    target="_blank"
+                                                                            .value
+                                                                    ),
+                                                            };
+                                                        });
+                                                    }}
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="col-12 mb-2">
+                                                <label
+                                                    htmlFor="user_last_name"
+                                                    className="fw-medium text-dark-emphasis"
                                                 >
-                                                    General Terms and Conditions
-                                                </Link>{" "}
-                                                of use.{" "}
-                                                <strong
-                                                    className={`text-${
+                                                    last name{" "}
+                                                    <strong
+                                                        className={`text-${
+                                                            data.last_name
+                                                                ? "success"
+                                                                : "danger"
+                                                        }`}
+                                                    >
+                                                        {data.last_name ? (
+                                                            <i className="bi bi-check"></i>
+                                                        ) : (
+                                                            "*"
+                                                        )}
+                                                    </strong>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Last name"
+                                                    id="user_last_name"
+                                                    name="user_last_name"
+                                                    value={data.last_name}
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                last_name:
+                                                                    toTitleCase(
+                                                                        e.target
+                                                                            .value
+                                                                    ),
+                                                            };
+                                                        });
+                                                    }}
+                                                    autoComplete="off"
+                                                    required
+                                                />
+                                            </div>
+                                            {edit && (
+                                                <div className="col-12 mb-2">
+                                                    <label
+                                                        htmlFor="email_address"
+                                                        className="fw-medium text-dark-emphasis"
+                                                    >
+                                                        email address{" "}
+                                                        <strong
+                                                            className={`text-${
+                                                                data.email &&
+                                                                email_regex.test(
+                                                                    data.email
+                                                                )
+                                                                    ? "success"
+                                                                    : "danger"
+                                                            }`}
+                                                        >
+                                                            {data.email &&
+                                                            email_regex.test(
+                                                                data.email
+                                                            ) ? (
+                                                                <i className="bi bi-check"></i>
+                                                            ) : (
+                                                                "*"
+                                                            )}
+                                                        </strong>
+                                                    </label>
+                                                    <input
+                                                        type="email"
+                                                        className="form-control"
+                                                        placeholder="Email address"
+                                                        id="email_address"
+                                                        name="email_address"
+                                                        value={data.email}
+                                                        onChange={(e) => {
+                                                            setData((prev) => {
+                                                                return {
+                                                                    ...prev,
+                                                                    email: e.target.value.toLowerCase(),
+                                                                };
+                                                            });
+                                                        }}
+                                                        autoComplete="off"
+                                                        required
+                                                    />
+                                                </div>
+                                            )}
+                                            <div className="col-12 mb-2">
+                                                <label
+                                                    htmlFor="user_company"
+                                                    className="fw-medium text-dark-emphasis"
+                                                >
+                                                    company
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Company name (optional)"
+                                                    id="user_company"
+                                                    name="user_company"
+                                                    value={data.company}
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                company:
+                                                                    e.target.value.toUpperCase(),
+                                                            };
+                                                        });
+                                                    }}
+                                                    autoComplete="off"
+                                                />
+                                            </div>
+                                        </Fragment>
+                                    )}
+                                </fieldset>
+
+                                {!view && (
+                                    <Fragment>
+                                        {create && (
+                                            <div className="form-check my-4">
+                                                <input
+                                                    className="form-check-input"
+                                                    type="checkbox"
+                                                    id="accept_terms"
+                                                    name="accept_terms"
+                                                    checked={
                                                         data.auth.terms.accepted
-                                                            ? "success"
-                                                            : "danger"
+                                                    }
+                                                    onChange={(e) => {
+                                                        setData((prev) => {
+                                                            return {
+                                                                ...prev,
+                                                                auth: {
+                                                                    ...prev.auth,
+                                                                    terms: {
+                                                                        ...prev
+                                                                            .auth
+                                                                            .terms,
+                                                                        accepted:
+                                                                            e
+                                                                                .target
+                                                                                .checked,
+                                                                        date_accepted:
+                                                                            Date.now(),
+                                                                    },
+                                                                },
+                                                            };
+                                                        });
+                                                    }}
+                                                />
+                                                <label
+                                                    className={`form-check-label text-${
+                                                        data.auth.terms.accepted
+                                                            ? "dark"
+                                                            : "secondary"
                                                     }`}
+                                                    htmlFor="accept_terms"
                                                 >
-                                                    {data.auth.terms
-                                                        .accepted ? (
-                                                        <i className="bi bi-check"></i>
-                                                    ) : (
-                                                        "*"
-                                                    )}
-                                                </strong>
-                                            </label>
-                                        </div>
-                                    )}
-                                    <button
-                                        type="submit"
-                                        className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
-                                    >
-                                        {create
-                                            ? "Sign Up"
-                                            : edit
-                                            ? "Save Changes"
-                                            : "BAD REQUEST!"}
-                                    </button>
-                                    {edit && (
+                                                    By signing up, I acknowledge
+                                                    that I have read,
+                                                    understood, and accepted the{" "}
+                                                    <Link
+                                                        to="/general-terms-and-conditions"
+                                                        target="_blank"
+                                                    >
+                                                        General Terms and
+                                                        Conditions
+                                                    </Link>{" "}
+                                                    of use.{" "}
+                                                    <strong
+                                                        className={`text-${
+                                                            data.auth.terms
+                                                                .accepted
+                                                                ? "success"
+                                                                : "danger"
+                                                        }`}
+                                                    >
+                                                        {data.auth.terms
+                                                            .accepted ? (
+                                                            <i className="bi bi-check"></i>
+                                                        ) : (
+                                                            "*"
+                                                        )}
+                                                    </strong>
+                                                </label>
+                                            </div>
+                                        )}
                                         <button
-                                            type="button"
-                                            className="btn btn-danger bg-gradient fw-medium w-100 rounded-3 mt-2"
-                                            onClick={(e) => handleDelete(e)}
+                                            type="submit"
+                                            className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
                                         >
-                                            Delete Account
+                                            {create
+                                                ? "Sign Up"
+                                                : edit
+                                                ? "Save Changes"
+                                                : "BAD REQUEST!"}
                                         </button>
-                                    )}
-                                </Fragment>
-                            )}
-                        </form>
+                                        {edit && (
+                                            <button
+                                                type="button"
+                                                className="btn btn-danger bg-gradient fw-medium w-100 rounded-3 mt-2"
+                                                onClick={(e) => handleDelete(e)}
+                                            >
+                                                Delete Account
+                                            </button>
+                                        )}
+                                    </Fragment>
+                                )}
+                            </form>
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <Transition
+                        variables={{
+                            type: [
+                                "Authenticating",
+                                "Redirecting",
+                                "Loading",
+                            ][2],
+                            loader: ["spinner-border", "spinner-grow"][0],
+                            message: "",
+                        }}
+                    />
+                )}
 
                 {/* Informative toast */}
                 <div className="toast-container rounded-3 position-fixed bottom-0 end-0 p-3">
