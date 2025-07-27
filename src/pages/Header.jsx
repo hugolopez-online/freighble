@@ -50,45 +50,82 @@ const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
                             MENU
                         </button>
                         <ul
-                            className="dropdown-menu dropdown-menu-end p-2"
+                            className="dropdown-menu dropdown-menu-end bg-dark p-2"
                             style={{ zIndex: "1020" }}
                         >
                             <li>
                                 <Link
-                                    className="dropdown-item rounded"
-                                    to="/dashboard"
+                                    className="dropdown-item rounded text-light"
+                                    to="/"
+                                    onClick={() => {
+                                        setAnchor("website_hero");
+                                    }}
                                 >
-                                    <i className="bi bi-display"></i> Dashboard
+                                    home
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    className="dropdown-item rounded"
-                                    to="profile"
+                                    className="dropdown-item rounded text-light"
+                                    to="/"
+                                    onClick={() => {
+                                        setAnchor("about");
+                                    }}
                                 >
-                                    <i className="bi bi-person-rolodex"></i>{" "}
-                                    Profile
+                                    about
                                 </Link>
                             </li>
                             <li>
-                                <button
-                                    className="dropdown-item rounded text-danger fw-medium"
+                                <Link
+                                    className="dropdown-item rounded text-light"
+                                    to="/"
                                     onClick={() => {
-                                        localStorage.removeItem("token");
-                                        localStorage.removeItem("user");
-
-                                        CONDITIONAL_RENDERING.setSession(
-                                            JSON.parse(
-                                                localStorage.getItem("user")
-                                            )
-                                        );
-
-                                        navigate("/login");
+                                        setAnchor("contact");
                                     }}
                                 >
-                                    <i className="bi bi-box-arrow-right"></i>{" "}
-                                    Log Out
-                                </button>
+                                    contact
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    className="dropdown-item rounded text-light"
+                                    to="/vendors"
+                                    onClick={() => {
+                                        setAnchor("");
+                                    }}
+                                >
+                                    vendors
+                                </Link>
+                            </li>
+                            {!CONDITIONAL_RENDERING.session && (
+                                <li>
+                                    <Link
+                                        className="dropdown-item rounded text-light"
+                                        to="/register"
+                                        onClick={() => {
+                                            setAnchor("");
+                                        }}
+                                    >
+                                        REGISTER
+                                    </Link>
+                                </li>
+                            )}
+                            <li>
+                                <Link
+                                    className="dropdown-item rounded text-bg-primary"
+                                    to={
+                                        !CONDITIONAL_RENDERING.session
+                                            ? "/login"
+                                            : "/dashboard"
+                                    }
+                                    onClick={() => {
+                                        setAnchor("");
+                                    }}
+                                >
+                                    {!CONDITIONAL_RENDERING.session
+                                        ? "LOG IN"
+                                        : "DASHBOARD"}
+                                </Link>
                             </li>
                         </ul>
                     </div>
