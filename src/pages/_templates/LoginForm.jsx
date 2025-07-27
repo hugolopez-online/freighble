@@ -90,23 +90,20 @@ const LoginForm = (props) => {
         <Fragment>
             <div className="row justify-content-center pt-5">
                 {!authenticating ? (
-                    <div className="col-8 py-4">
+                    <div className="col-11 col-md-7 py-4">
                         <h5 className="display-5 py-4">
                             {props.role === "user"
                                 ? "User"
                                 : props.role === "vendor"
                                 ? "Vendor"
                                 : "BAD_REQUEST"}{" "}
-                            Login
+                            Portal
                         </h5>
                         {props.role === "vendor" && (
-                            <div
-                                className="alert alert-primary"
-                                role="alert"
-                            >
-                                Please note you're in the vendor's login portal,
-                                exclusive for Freighble vendors. If you're an
-                                app user, please go to the{" "}
+                            <div className="border border-warning bg-warning bg-opacity-25 text-warning-emphasis rounded p-3 mb-3">
+                                Please note you're in our vendor's login portal,
+                                reserved for Freighble vendors. If you're an app
+                                user, please go to the{" "}
                                 <Link
                                     className="fw-medium"
                                     to="/login"
@@ -124,7 +121,12 @@ const LoginForm = (props) => {
                             <div className="row border-bottom mb-4">
                                 <div className="col-12">
                                     <h6 className="display-6 text-dark fw-bold brand-font">
-                                        FREIGHBLE CREDENTIALS
+                                        {props.role === "user"
+                                            ? "USER"
+                                            : props.role === "vendor"
+                                            ? "VENDOR"
+                                            : "BAD_REQUEST"}{" "}
+                                        CREDENTIALS
                                     </h6>
                                 </div>
                             </div>

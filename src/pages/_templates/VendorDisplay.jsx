@@ -368,16 +368,17 @@ const VendorDisplay = (props) => {
             <Fragment>
                 {!isFetching ? (
                     <div className="row justify-content-center pt-5">
-                        <div className="col-8 py-4">
+                        <div className="col-11 col-md-9 py-4">
                             <h5 className="display-5 py-4">
                                 {view ? (
                                     <Fragment>
-                                        Vendor Profile{" "}
+                                        Vendor Profile
                                         {props.CONDITIONAL_RENDERING
                                             .USER_ROLE === "vendor" &&
                                         props.CONDITIONAL_RENDERING.USER_ID ===
                                             data._id ? (
                                             <Fragment>
+                                                <br />
                                                 <button
                                                     className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
                                                     onClick={() => {
@@ -420,7 +421,8 @@ const VendorDisplay = (props) => {
                                     "Vendor Registration"
                                 ) : edit ? (
                                     <Fragment>
-                                        Vendor Profile{" "}
+                                        Vendor Profile
+                                        <br />
                                         <button
                                             className="btn btn-dark bg-gradient fw-medium me-2"
                                             onClick={(e) => {
@@ -639,7 +641,7 @@ const VendorDisplay = (props) => {
                                 </div>
 
                                 <fieldset className="row mb-4">
-                                    <div className="col-6">
+                                    <div className="col-12 col-md-6 mb-2">
                                         {view ? (
                                             <Fragment>
                                                 <h6 className="text-secondary">
@@ -692,7 +694,7 @@ const VendorDisplay = (props) => {
                                             </Fragment>
                                         )}
                                     </div>
-                                    <div className="col-6">
+                                    <div className="col-12 col-md-6 mb-2">
                                         {view ? (
                                             <Fragment>
                                                 <h6 className="text-secondary">
@@ -823,7 +825,7 @@ const VendorDisplay = (props) => {
                                 <fieldset className="row mb-4">
                                     {view ? (
                                         <Fragment>
-                                            <div className="col-6">
+                                            <div className="col-12 col-md-6 mb-2">
                                                 <h6 className="text-secondary">
                                                     pricing contact
                                                 </h6>
@@ -840,7 +842,7 @@ const VendorDisplay = (props) => {
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div className="col-6">
+                                            <div className="col-12 col-md-6 mb-2">
                                                 <h6 className="text-secondary">
                                                     domicile
                                                 </h6>
@@ -853,7 +855,7 @@ const VendorDisplay = (props) => {
                                         </Fragment>
                                     ) : (
                                         <Fragment>
-                                            <div className="col-4">
+                                            <div className="col-12 col-md-4 mb-2">
                                                 <label
                                                     htmlFor="company_contact"
                                                     className="fw-medium text-dark-emphasis"
@@ -896,7 +898,7 @@ const VendorDisplay = (props) => {
                                                     required
                                                 />
                                             </div>
-                                            <div className="col-4">
+                                            <div className="col-12 col-md-4 mb-2">
                                                 <label
                                                     htmlFor="contact_email"
                                                     className="fw-medium text-dark-emphasis"
@@ -941,7 +943,7 @@ const VendorDisplay = (props) => {
                                                     required
                                                 />
                                             </div>
-                                            <div className="row col-4">
+                                            <div className="row col-12 col-md-4 mb-2">
                                                 <span className="fw-medium text-dark-emphasis">
                                                     pricing phone{" "}
                                                     <strong
@@ -1348,7 +1350,7 @@ const VendorDisplay = (props) => {
                                             return (
                                                 <div
                                                     key={`country_code-${country_code}`}
-                                                    className="col-4"
+                                                    className="col-12 col-md-4 mb-3"
                                                 >
                                                     <h6 className="text-dark">
                                                         {
@@ -1745,7 +1747,7 @@ const VendorDisplay = (props) => {
                                 <fieldset className="row mb-4">
                                     {view ? (
                                         <Fragment>
-                                            <div className="col-4">
+                                            <div className="col-12 col-md-4 mb-4">
                                                 <h5 className="text-secondary">
                                                     preferred lanes
                                                 </h5>
@@ -1768,7 +1770,7 @@ const VendorDisplay = (props) => {
                                                     </em>
                                                 )}
                                             </div>
-                                            <div className="col-4">
+                                            <div className="col-12 col-md-4 mb-4">
                                                 <h5 className="text-secondary">
                                                     exclusive lanes
                                                 </h5>
@@ -1791,7 +1793,7 @@ const VendorDisplay = (props) => {
                                                     </em>
                                                 )}
                                             </div>
-                                            <div className="col-4">
+                                            <div className="col-12 col-md-4 mb-4">
                                                 <h5 className="text-secondary">
                                                     banned lanes
                                                 </h5>
@@ -1912,7 +1914,7 @@ const VendorDisplay = (props) => {
                                             className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
                                         >
                                             {create
-                                                ? "Sign Up and Create Vendor"
+                                                ? "Sign Up"
                                                 : edit
                                                 ? "Save Changes"
                                                 : "BAD REQUEST!"}

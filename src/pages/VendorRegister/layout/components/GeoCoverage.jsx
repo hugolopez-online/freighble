@@ -111,7 +111,7 @@ const GeoCoverage = (props) => {
 
     // render
     return (
-        <div className="col-4">
+        <div className="col-12 col-md-4 mb-2">
             <h6 className="text-secondary fw-semibold">
                 {props.countries_labels[props.country_code]}
             </h6>

@@ -41,7 +41,7 @@ const LaneBuilder = (props) => {
 
     return (
         <Fragment>
-            <div className="row col-6 gy-2">
+            <div className="row col-12 col-md-6 gy-2 pe-0">
                 <div className="col-6 pe-0">
                     <label
                         htmlFor={`${props.target.label}-lane_scope`}

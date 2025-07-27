@@ -5,7 +5,7 @@ const LaneList = (props) => {
 
     // render
     return (
-        <div className="col-4">
+        <div className="col-12 col-md-4 mb-3">
             <h6 className="text-dark-emphasis">{label} lanes</h6>
             {lanes.length !== 0 ? (
                 lanes.map((lane, index) => {

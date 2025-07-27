@@ -217,7 +217,7 @@ const UserDisplay = (props) => {
                             create ? " pt-5" : ""
                         }`}
                     >
-                        <div className="col-8 py-4">
+                        <div className="col-11 col-md-9 py-4">
                             <h5 className="display-5 py-4">
                                 {view ? (
                                     <Fragment>
