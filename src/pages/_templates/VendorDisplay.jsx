@@ -178,7 +178,7 @@ const VendorDisplay = (props) => {
                 toast.show();
                 setTimeout(() => {
                     navigate("/vendors/login");
-                }, 1250);
+                }, 2250);
             } catch (error) {
                 setIsFetching(false);
                 const err_variables = Object.keys(response_data.error.errors);

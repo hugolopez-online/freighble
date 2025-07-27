@@ -151,7 +151,9 @@ const DashboardMain = () => {
                 } px-4 py-0`}
             >
                 <div className="col-4">
-                    <small>App status: </small>
+                    <small>
+                        <b>app status:</b>{" "}
+                    </small>
                     {specs === default_specs ? (
                         <Fragment>
                             <small>system ready</small>
@@ -184,7 +186,8 @@ const DashboardMain = () => {
                 </div>
                 <div className="col-4 text-end">
                     <small>
-                        Last app status update: {new Date().toLocaleString()}
+                        <b>last app status update:</b>{" "}
+                        {new Date().toLocaleString()}
                     </small>
                 </div>
             </div>

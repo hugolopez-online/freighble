@@ -5,6 +5,9 @@ $danger: #d00000;
 $warning: #ff9d00;
 $success: #007728;
 $info: #ff326c;
+$focus-ring-width: 1px;
+$focus-ring-opacity: 0.4;
+$focus-ring-blur: 3px;
 
 // bootstrap init
 @import "bootstrap/scss/bootstrap";

@@ -8,22 +8,22 @@ const Banner = (props) => {
         <div className="card border text-bg-light bg-gradient shadow-sm rounded-4 p-4">
             <div className="row border-bottom mb-2">
                 <div className="col-12">
-                    <h6 className="display-6 text-secondary fs-2">
-                        additional info
+                    <h6 className="text-dark-emphasis fs-2 brand-font">
+                        ADDITIONAL INFO
                     </h6>
                 </div>
             </div>
             <div className="row mb-2">
                 <label
                     htmlFor="origin_date"
-                    className="fw-normal text-secondary col-6"
+                    className="fw-medium text-secondary col-6"
                     style={{ fontSize: "0.85em" }}
                 >
                     pick-up date
                 </label>
                 <label
                     htmlFor="destination_date"
-                    className="fw-normal text-secondary col-6 ps-0"
+                    className="fw-medium text-secondary col-6 ps-0"
                     style={{ fontSize: "0.85em" }}
                 >
                     delivery date
@@ -62,7 +62,7 @@ const Banner = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="unit_type"
-                        className="fw-normal text-secondary"
+                        className="fw-medium text-secondary"
                         style={{ fontSize: "0.85em" }}
                     >
                         unit/trailer type
@@ -87,7 +87,7 @@ const Banner = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="cargo_details"
-                        className="fw-normal text-secondary"
+                        className="fw-medium text-secondary"
                         style={{ fontSize: "0.85em" }}
                     >
                         cargo details
@@ -115,7 +115,7 @@ const Banner = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="instructions"
-                        className="fw-normal text-secondary"
+                        className="fw-medium text-secondary"
                         style={{ fontSize: "0.85em" }}
                     >
                         instructions

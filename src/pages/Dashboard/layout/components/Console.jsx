@@ -18,7 +18,7 @@ const Console = (props) => {
 
     return (
         <div
-            className="navbar bg-light rounded-4 border border-tertiary sticky-top under-navbar"
+            className="navbar shadow bg-light rounded-4 border border-tertiary sticky-top under-navbar"
             style={{ zIndex: "1000" }}
         >
             <div className="container-fluid">

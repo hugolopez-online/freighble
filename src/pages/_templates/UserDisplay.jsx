@@ -85,7 +85,7 @@ const UserDisplay = (props) => {
                 toast.show();
                 setTimeout(() => {
                     navigate("/login");
-                }, 1250);
+                }, 2250);
             } catch (error) {
                 setIsFetching(false);
                 const err_variables = Object.keys(response_data.error.errors);

@@ -1,6 +1,6 @@
 //imports
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
     Dashboard,
     Home,
@@ -49,6 +49,7 @@ function App() {
                         <PageLayout
                             anchor={anchor}
                             setAnchor={setAnchor}
+                            CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
                         />
                     }
                 >

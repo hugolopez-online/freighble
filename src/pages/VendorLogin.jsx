@@ -1,8 +1,7 @@
 // imports
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "./LoginForm";
-import Transition from "./_templates/Transition";
+import { Transition, LoginForm } from "./_templates";
 
 // component
 const VendorLogin = ({ CONDITIONAL_RENDERING }) => {

@@ -2,7 +2,7 @@
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
-import Transition from "./_templates/Transition";
+import Transition from "./Transition";
 
 // module
 const blank_credentials = {
@@ -99,6 +99,23 @@ const LoginForm = (props) => {
                                 : "BAD_REQUEST"}{" "}
                             Login
                         </h5>
+                        {props.role === "vendor" && (
+                            <div
+                                className="alert alert-primary"
+                                role="alert"
+                            >
+                                Please note you're in the vendor's login portal,
+                                exclusive for Freighble vendors. If you're an
+                                app user, please go to the{" "}
+                                <Link
+                                    className="fw-medium"
+                                    to="/login"
+                                >
+                                    user's login portal
+                                </Link>
+                                .
+                            </div>
+                        )}
                         <form
                             id="user_login"
                             className="shadow-sm border rounded-4 p-4 bg-light needs-validation"

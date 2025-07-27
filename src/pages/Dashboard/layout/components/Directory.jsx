@@ -106,14 +106,14 @@ const Directory = ({ specs, routes, setHits, setIsSearching }) => {
             {!vendorList.length ? (
                 !isFetching ? (
                     <div className="col-12">
-                        <h1 className="display-1 text-black-50">
+                        <h1 className="display-1 text-dark-emphasis">
                             nothing to show
                         </h1>
                         <hr className="border border-secondary" />
-                        <h6 className="display-6 text-body-tertiary">
+                        <h6 className="display-6 text-secondary">
                             {min_info
-                                ? "We were not able to find suitable vendors for your search, but we continuously update our our database. Please try again later."
-                                : "make a load search to display suitable vendors here"}
+                                ? "We were not able to find suitable vendors for your search, but we continuously update our database. Please try again later."
+                                : "Make a load search to display suitable vendors here."}
                         </h6>
                     </div>
                 ) : (

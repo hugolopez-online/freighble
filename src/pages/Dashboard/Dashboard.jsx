@@ -1,8 +1,9 @@
-// imports
+/* IMPORTS START */
 import { useEffect, useState, Fragment } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Navbar } from "./layout/components";
 import Transition from "../_templates/Transition";
+/* IMPORTS END */
 
 // component
 const Dashboard = ({ CONDITIONAL_RENDERING }) => {

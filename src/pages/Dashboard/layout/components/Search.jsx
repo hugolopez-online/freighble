@@ -1,4 +1,4 @@
-// imports
+/* IMPORTS START */
 import { useEffect, useState } from "react";
 import {
     modes,
@@ -11,6 +11,7 @@ import {
 } from "data/variables";
 import geo_lookup from "data/geo_meta";
 import { search_options } from "data/search_options";
+/* IMPORTS END */
 
 // module
 const default_form_data = {
@@ -51,6 +52,19 @@ const Search = (props) => {
     const [locationSuggestions, setLocationSuggestions] = useState(
         default_location_suggestions
     );
+
+    // module
+    const toTitleCase = (string) => {
+        return string
+            .split(" ")
+            .map((word) => {
+                if (word.length === 0) return "";
+                return (
+                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+                );
+            })
+            .join(" ");
+    };
 
     // handlers
     const handleSpecs = (e) => {
@@ -168,7 +182,6 @@ const Search = (props) => {
     };
 
     // effects
-
     useEffect(() => {
         if (props.template) {
             document
@@ -208,9 +221,7 @@ const Search = (props) => {
         >
             <div className="row border-bottom mb-2">
                 <div className="col-12">
-                    <h6 className="display-6 text-secondary fs-2">
-                        load details
-                    </h6>
+                    <h6 className="text-dark fs-2 brand-font">LOAD DETAILS</h6>
                 </div>
             </div>
 
@@ -219,13 +230,24 @@ const Search = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="mode"
-                        className="fw-normal text-secondary"
+                        className="fw-medium text-dark-emphasis"
                         style={{ fontSize: "0.85em" }}
                     >
-                        mode
+                        mode{" "}
+                        <strong
+                            className={`text-${
+                                formData.mode ? "success" : "danger"
+                            }`}
+                        >
+                            {formData.mode ? (
+                                <i className="bi bi-check"></i>
+                            ) : (
+                                "*"
+                            )}
+                        </strong>
                     </label>
                     <select
-                        className="form-select"
+                        className="form-select form-select-sm"
                         id="mode"
                         value={formData.mode}
                         onChange={(e) =>
@@ -259,22 +281,36 @@ const Search = (props) => {
             <fieldset className="row mb-2">
                 <label
                     htmlFor="origin_city"
-                    className="fw-normal text-secondary"
+                    className="fw-medium text-dark-emphasis"
                     style={{ fontSize: "0.85em" }}
                 >
-                    origin
+                    origin{" "}
+                    <strong
+                        className={`text-${
+                            formData.origin_territory ? "success" : "danger"
+                        }`}
+                    >
+                        {formData.origin_territory ? (
+                            <i className="bi bi-check"></i>
+                        ) : (
+                            "*"
+                        )}
+                    </strong>
                 </label>
                 <div className="input-group dropdown col-12">
                     <input
                         type="text"
-                        className="form-control"
+                        className="form-control form-control-sm"
                         placeholder="City"
                         id="origin_city"
                         name="origin_city"
                         value={formData.origin_city}
                         onChange={(e) => {
                             setFormData((prev) => {
-                                return { ...prev, origin_city: e.target.value };
+                                return {
+                                    ...prev,
+                                    origin_city: toTitleCase(e.target.value),
+                                };
                             });
                             handleLocationSuggestions(
                                 e,
@@ -322,7 +358,7 @@ const Search = (props) => {
                             })}
                     </ul>
                     <select
-                        className="form-select col-4"
+                        className="form-select form-select-sm"
                         id="origin_territory"
                         name="origin_territory"
                         value={formData.origin_territory}
@@ -404,15 +440,28 @@ const Search = (props) => {
             <fieldset className="row mb-2">
                 <label
                     htmlFor="destination_city"
-                    className="fw-normal text-secondary"
+                    className="fw-medium text-dark-emphasis"
                     style={{ fontSize: "0.85em" }}
                 >
-                    destination
+                    destination{" "}
+                    <strong
+                        className={`text-${
+                            formData.destination_territory
+                                ? "success"
+                                : "danger"
+                        }`}
+                    >
+                        {formData.destination_territory ? (
+                            <i className="bi bi-check"></i>
+                        ) : (
+                            "*"
+                        )}
+                    </strong>
                 </label>
                 <div className="input-group col-12">
                     <input
                         type="text"
-                        className="form-control"
+                        className="form-control form-control-sm"
                         placeholder="City"
                         id="destination_city"
                         name="destination_city"
@@ -421,7 +470,9 @@ const Search = (props) => {
                             setFormData((prev) => {
                                 return {
                                     ...prev,
-                                    destination_city: e.target.value,
+                                    destination_city: toTitleCase(
+                                        e.target.value
+                                    ),
                                 };
                             });
                             handleLocationSuggestions(
@@ -470,7 +521,7 @@ const Search = (props) => {
                             })}
                     </ul>
                     <select
-                        className="form-select col-4"
+                        className="form-select form-select-sm"
                         id="destination_territory"
                         name="destination_territory"
                         value={formData.destination_territory}
@@ -557,13 +608,24 @@ const Search = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="border"
-                        className="fw-normal text-secondary"
+                        className="fw-medium text-dark-emphasis"
                         style={{ fontSize: "0.85em" }}
                     >
-                        border crossing port
+                        border crossing port{" "}
+                        <strong
+                            className={`text-${
+                                formData.border ? "success" : "danger"
+                            }`}
+                        >
+                            {formData.border ? (
+                                <i className="bi bi-check"></i>
+                            ) : (
+                                "*"
+                            )}
+                        </strong>
                     </label>
                     <select
-                        className="form-select"
+                        className="form-select form-select-sm"
                         id="border"
                         value={formData.border}
                         onChange={(e) =>
@@ -850,7 +912,7 @@ const Search = (props) => {
                             className="form-check-label"
                             htmlFor="tanker_endorsement"
                         >
-                            Tanker endorsement
+                            Tanker Endorsement
                         </label>
                     </div>
                 </div>
