@@ -6,7 +6,7 @@ import Transition from "../_templates/Transition";
 /* IMPORTS END */
 
 // component
-const Dashboard = ({ CONDITIONAL_RENDERING }) => {
+const Dashboard = ({ CONDITIONAL_RENDERING, theme, setTheme }) => {
     // states
     const [greeting, setGreeting] = useState("");
 
@@ -47,12 +47,14 @@ const Dashboard = ({ CONDITIONAL_RENDERING }) => {
     return (
         <Fragment>
             <div
-                id="navbar"
+                id={theme === "light" ? "navbar" : "navbar-dark"}
                 className="row justify-content-center sticky-top mb-3"
             >
                 <Navbar
                     greeting={greeting}
                     CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                    theme={theme}
+                    setTheme={setTheme}
                 />
             </div>
             <Outlet />

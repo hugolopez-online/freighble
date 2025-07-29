@@ -69,7 +69,7 @@ const UserProfile = ({ CONDITIONAL_RENDERING }) => {
                     variables={{
                         type: ["Authenticating", "Redirecting", "Loading"][2],
                         loader: ["spinner-border", "spinner-grow"][0],
-                        message: "",
+                        message: "Fetching user data.",
                     }}
                 />
             ) : user.first_name ? (

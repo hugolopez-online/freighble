@@ -1,14 +1,14 @@
 // imports
 import { Fragment, useState } from "react";
-import { geo_tree } from "data/geo_meta";
+import { GEO_TREE } from "data/geo_meta";
 
 // module
-const countries = Object.keys(geo_tree);
+const countries = Object.keys(GEO_TREE);
 
 const regions_array = [
-    Object.keys(geo_tree.CAN),
-    Object.keys(geo_tree.USA),
-    Object.keys(geo_tree.MEX),
+    Object.keys(GEO_TREE.CAN),
+    Object.keys(GEO_TREE.USA),
+    Object.keys(GEO_TREE.MEX),
 ];
 const regions = regions_array.flat(Infinity);
 

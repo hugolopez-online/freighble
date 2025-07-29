@@ -1,5 +1,5 @@
 //imports
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
     Dashboard,
@@ -25,6 +25,9 @@ function App() {
     const [session, setSession] = useState(
         JSON.parse(localStorage.getItem("user"))
     );
+    const [theme, setTheme] = useState(
+        localStorage.getItem("freighbleTheme") || "light"
+    );
 
     // module
     const USER_ID = session?.id;
@@ -38,6 +41,20 @@ function App() {
         USER_ROLE,
         USER_NAME,
     };
+
+    if (!localStorage.getItem("freighbleTheme")) {
+        localStorage.setItem("freighbleTheme", "light");
+    }
+
+    if (theme === "dark") {
+        document.getElementById("body").classList.add("bg-black");
+
+        document.getElementById("body").classList.remove("bg-body");
+    } else {
+        document.getElementById("body").classList.add("bg-body");
+
+        document.getElementById("body").classList.remove("bg-black");
+    }
 
     // render
     return (
@@ -122,18 +139,21 @@ function App() {
                     element={
                         <Dashboard
                             CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                            theme={theme}
+                            setTheme={setTheme}
                         />
                     }
                 >
                     <Route
                         index
-                        element={<DashboardMain />}
+                        element={<DashboardMain theme={theme} />}
                     />
                     <Route
                         path="profile"
                         element={
                             <UserProfile
                                 CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                                theme={theme}
                             />
                         }
                     />

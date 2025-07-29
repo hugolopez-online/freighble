@@ -2,21 +2,20 @@
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toast } from "bootstrap";
-import { geo_tree } from "data/geo_meta";
-import geo_lookup from "data/geo_meta";
+import { GEO_TREE, GEO_LOOKUP } from "data/geo_meta";
 import {
     modes,
     modes_values,
     borders,
     borders_values,
-    canDivisions,
-    usaDivisions,
-    mexDivisions,
+    can_territories,
+    usa_territories,
+    mex_territories,
 } from "data/variables";
 import Transition from "./Transition";
 
 // module
-const coverage_countries = Object.keys(geo_tree);
+const coverage_countries = Object.keys(GEO_TREE);
 
 const countries_labels = {
     CAN: "Canada",
@@ -1116,7 +1115,7 @@ const VendorDisplay = (props) => {
                                                                         .value,
                                                                 country:
                                                                     countries_labels[
-                                                                        geo_lookup[
+                                                                        GEO_LOOKUP[
                                                                             e
                                                                                 .target
                                                                                 .value
@@ -1124,7 +1123,7 @@ const VendorDisplay = (props) => {
                                                                             .country
                                                                     ],
                                                                 country_code:
-                                                                    geo_lookup[
+                                                                    GEO_LOOKUP[
                                                                         e.target
                                                                             .value
                                                                     ].country,
@@ -1142,7 +1141,7 @@ const VendorDisplay = (props) => {
                                                     province)
                                                 </option>
                                                 <option disabled>Canada</option>
-                                                {canDivisions.map(
+                                                {can_territories.map(
                                                     (territory, index) => {
                                                         return (
                                                             <option
@@ -1163,7 +1162,7 @@ const VendorDisplay = (props) => {
                                                 <option disabled>
                                                     United States
                                                 </option>
-                                                {usaDivisions.map(
+                                                {usa_territories.map(
                                                     (territory, index) => {
                                                         return (
                                                             <option
@@ -1182,7 +1181,7 @@ const VendorDisplay = (props) => {
                                                 )}
                                                 <option disabled></option>
                                                 <option disabled>Mexico</option>
-                                                {mexDivisions.map(
+                                                {mex_territories.map(
                                                     (territory, index) => {
                                                         return (
                                                             <option
@@ -1400,7 +1399,7 @@ const VendorDisplay = (props) => {
                                         return (
                                             <GeoCoverage
                                                 key={`country_code-${country_code}`}
-                                                geo_tree={geo_tree}
+                                                GEO_TREE={GEO_TREE}
                                                 country_code={country_code}
                                                 countries_labels={
                                                     countries_labels

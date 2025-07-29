@@ -2,11 +2,12 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../../../../assets/img/logo_206x40.webp";
+import logo_light from "../../../../assets/img/logo-lighter_206x40.svg";
 import icon from "../../../../assets/img/logo-icon_40x40.webp";
 
 // component
 
-const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
+const Navbar = ({ CONDITIONAL_RENDERING, greeting, theme, setTheme }) => {
     const navigate = useNavigate();
 
     return (
@@ -19,7 +20,7 @@ const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
                     <img
                         className="d-block"
                         height={20}
-                        src={logo}
+                        src={theme === "light" ? logo : logo_light}
                         alt="Freighble logo"
                     />
                 </Link>
@@ -37,7 +38,11 @@ const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
                 </Link>
                 <div className="navbar">
                     <div className="container-fluid">
-                        <span className="text-dark fw-medium">
+                        <span
+                            className={`text-${
+                                theme === "light" ? "dark" : "light"
+                            } fw-medium`}
+                        >
                             Welcome, {greeting}!
                         </span>
                         <div className="dropdown ms-2">
@@ -73,7 +78,60 @@ const Navbar = ({ CONDITIONAL_RENDERING, greeting }) => {
                                 </li>
                                 <li>
                                     <button
-                                        className="dropdown-item rounded text-danger fw-medium"
+                                        className="dropdown-item rounded"
+                                        onClick={() => {
+                                            const CURRENT_THEME =
+                                                localStorage.getItem(
+                                                    "freighbleTheme"
+                                                );
+                                            localStorage["freighbleTheme"] =
+                                                CURRENT_THEME === "light"
+                                                    ? "dark"
+                                                    : "light";
+                                            setTheme(
+                                                localStorage["freighbleTheme"]
+                                            );
+                                            if (
+                                                localStorage[
+                                                    "freighbleTheme"
+                                                ] === "dark"
+                                            ) {
+                                                document
+                                                    .getElementById("body")
+                                                    .classList.add("bg-black");
+
+                                                document
+                                                    .getElementById("body")
+                                                    .classList.remove(
+                                                        "bg-body"
+                                                    );
+                                            } else {
+                                                document
+                                                    .getElementById("body")
+                                                    .classList.add("bg-body");
+
+                                                document
+                                                    .getElementById("body")
+                                                    .classList.remove(
+                                                        "bg-black"
+                                                    );
+                                            }
+                                        }}
+                                    >
+                                        <i
+                                            className={`bi bi-${
+                                                theme === "light"
+                                                    ? "moon-fill"
+                                                    : "sun-fill"
+                                            }`}
+                                        ></i>{" "}
+                                        {theme === "light" ? "Dark" : "Light"}{" "}
+                                        Theme
+                                    </button>
+                                </li>
+                                <li>
+                                    <button
+                                        className="dropdown-item rounded text-bg-danger bg-gradient fw-medium"
                                         onClick={() => {
                                             localStorage.removeItem("token");
                                             localStorage.removeItem("user");

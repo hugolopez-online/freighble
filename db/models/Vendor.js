@@ -5,13 +5,17 @@ import jwt from "jsonwebtoken";
 import {
     modes_values,
     borders_values,
-    canDivisions,
-    usaDivisions,
-    mexDivisions,
+    can_territories,
+    usa_territories,
+    mex_territories,
 } from "../../data/variables.js";
 
 // module
-const valid_territories = [...canDivisions, ...usaDivisions, ...mexDivisions];
+const valid_territories = [
+    ...can_territories,
+    ...usa_territories,
+    ...mex_territories,
+];
 
 // sub-sub-schemas
 const CoverageContent = (country_code, divisions) =>
@@ -85,15 +89,15 @@ const VendorDomicile = new mongoose.Schema(
 const VendorCoverage = new mongoose.Schema(
     {
         Canada: {
-            type: CoverageContent("CAN", canDivisions),
+            type: CoverageContent("CAN", can_territories),
             required: [true, "Canada coverage must be provided."],
         },
         "United States": {
-            type: CoverageContent("USA", usaDivisions),
+            type: CoverageContent("USA", usa_territories),
             required: [true, "United States coverage must be provided."],
         },
         Mexico: {
-            type: CoverageContent("MEX", mexDivisions),
+            type: CoverageContent("MEX", mex_territories),
             required: [true, "Mexico coverage must be provided."],
         },
     },

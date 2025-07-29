@@ -34,7 +34,7 @@ const default_specs = {
     instructions: "",
 };
 
-const DashboardMain = () => {
+const DashboardMain = ({ theme }) => {
     // states
     const [specs, setSpecs] = useState(default_specs);
     const [template, setTemplate] = useState(null);
@@ -139,6 +139,7 @@ const DashboardMain = () => {
                     />
                 </div>
             </div>
+            {/* STATUS BAR START */}
             <div
                 className={`row justify-content-between fixed-bottom font-monospace text-bg-${
                     specs === default_specs
@@ -150,7 +151,7 @@ const DashboardMain = () => {
                         : "danger"
                 } px-4 py-0`}
             >
-                <div className="col-4">
+                <div className="col-12 col-md-4">
                     <small>
                         <b>app status:</b>{" "}
                     </small>
@@ -166,7 +167,7 @@ const DashboardMain = () => {
                         <Fragment>
                             <small>searching vendors</small>
                             <div
-                                className={`spinner-border spinner-grow-sm ms-2`}
+                                className={`spinner-border spinner-border-sm ms-2`}
                                 aria-hidden="true"
                             ></div>
                         </Fragment>
@@ -184,13 +185,14 @@ const DashboardMain = () => {
                         </Fragment>
                     )}
                 </div>
-                <div className="col-4 text-end">
+                <div className="col-4 d-none d-md-block text-end">
                     <small>
                         <b>last app status update:</b>{" "}
                         {new Date().toLocaleString()}
                     </small>
                 </div>
             </div>
+            {/* STATUS BAR END */}
         </Fragment>
     );
 };

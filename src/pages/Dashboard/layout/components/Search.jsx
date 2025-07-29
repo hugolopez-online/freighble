@@ -5,11 +5,11 @@ import {
     modes_values,
     borders,
     borders_values,
-    canDivisions,
-    usaDivisions,
-    mexDivisions,
+    can_territories,
+    usa_territories,
+    mex_territories,
 } from "data/variables";
-import geo_lookup from "data/geo_meta";
+import { GEO_LOOKUP } from "data/geo_meta";
 import { search_options } from "data/search_options";
 /* IMPORTS END */
 
@@ -37,8 +37,8 @@ const default_location_suggestions = [];
 const isCrossBorder = (o, d) => {
     if (o && d) {
         return (
-            (geo_lookup[d].country === "MEX") !==
-            (geo_lookup[o].country === "MEX")
+            (GEO_LOOKUP[d].country === "MEX") !==
+            (GEO_LOOKUP[o].country === "MEX")
         );
     } else {
         return false;
@@ -71,13 +71,13 @@ const Search = (props) => {
         e.preventDefault();
         props.setSpecs(props.default_specs);
 
-        const origin_region = geo_lookup[formData.origin_territory].region;
-        const origin_country = geo_lookup[formData.origin_territory].country;
+        const origin_region = GEO_LOOKUP[formData.origin_territory].region;
+        const origin_country = GEO_LOOKUP[formData.origin_territory].country;
 
         const destination_region =
-            geo_lookup[formData.destination_territory].region;
+            GEO_LOOKUP[formData.destination_territory].region;
         const destination_country =
-            geo_lookup[formData.destination_territory].country;
+            GEO_LOOKUP[formData.destination_territory].country;
 
         props.setSpecs((prev) => {
             return {
@@ -389,7 +389,7 @@ const Search = (props) => {
                             Territory
                         </option>
                         <option disabled>Canada</option>
-                        {canDivisions.map((territory, index) => {
+                        {can_territories.map((territory, index) => {
                             return (
                                 <option
                                     key={territory.concat(
@@ -404,7 +404,7 @@ const Search = (props) => {
                         })}
                         <option disabled></option>
                         <option disabled>United States</option>
-                        {usaDivisions.map((territory, index) => {
+                        {usa_territories.map((territory, index) => {
                             return (
                                 <option
                                     key={territory.concat(
@@ -419,7 +419,7 @@ const Search = (props) => {
                         })}
                         <option disabled></option>
                         <option disabled>Mexico</option>
-                        {mexDivisions.map((territory, index) => {
+                        {mex_territories.map((territory, index) => {
                             return (
                                 <option
                                     key={territory.concat(
@@ -551,7 +551,7 @@ const Search = (props) => {
                             Territory
                         </option>
                         <option disabled>Canada</option>
-                        {canDivisions.map((territory, index) => {
+                        {can_territories.map((territory, index) => {
                             return (
                                 <option
                                     key={territory.concat(
@@ -566,7 +566,7 @@ const Search = (props) => {
                         })}
                         <option disabled></option>
                         <option disabled>United States</option>
-                        {usaDivisions.map((territory, index) => {
+                        {usa_territories.map((territory, index) => {
                             return (
                                 <option
                                     key={territory.concat(
@@ -581,7 +581,7 @@ const Search = (props) => {
                         })}
                         <option disabled></option>
                         <option disabled>Mexico</option>
-                        {mexDivisions.map((territory, index) => {
+                        {mex_territories.map((territory, index) => {
                             return (
                                 <option
                                     key={territory.concat(

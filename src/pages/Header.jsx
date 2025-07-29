@@ -42,20 +42,20 @@ const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
                     </Link>
                     <div className="dropdown brand-font d-md-none">
                         <button
-                            className="btn btn-primary bg-gradient rounded-3 px-3"
+                            className="btn btn-primary bg-gradient rounded-3"
                             type="button"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
-                            MENU
+                            <i className="bi bi-list"></i>
                         </button>
                         <ul
-                            className="dropdown-menu dropdown-menu-end bg-dark p-2"
-                            style={{ zIndex: "1020" }}
+                            className="dropdown-menu dropdown-menu-end bg-light p-2 mt-3 text-center"
+                            style={{ zIndex: "1020", width: "85vw" }}
                         >
                             <li>
                                 <Link
-                                    className="dropdown-item rounded text-light"
+                                    className="dropdown-item rounded py-2"
                                     to="/"
                                     onClick={() => {
                                         setAnchor("website_hero");
@@ -66,7 +66,7 @@ const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
                             </li>
                             <li>
                                 <Link
-                                    className="dropdown-item rounded text-light"
+                                    className="dropdown-item rounded py-2"
                                     to="/"
                                     onClick={() => {
                                         setAnchor("about");
@@ -77,7 +77,7 @@ const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
                             </li>
                             <li>
                                 <Link
-                                    className="dropdown-item rounded text-light"
+                                    className="dropdown-item rounded py-2"
                                     to="/"
                                     onClick={() => {
                                         setAnchor("contact");
@@ -88,7 +88,7 @@ const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
                             </li>
                             <li>
                                 <Link
-                                    className="dropdown-item rounded text-light"
+                                    className="dropdown-item rounded py-2"
                                     to="/vendors"
                                     onClick={() => {
                                         setAnchor("");
@@ -97,10 +97,13 @@ const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
                                     vendors
                                 </Link>
                             </li>
+                            <li>
+                                <hr className="dropdown-divider" />
+                            </li>
                             {!CONDITIONAL_RENDERING.session && (
                                 <li>
                                     <Link
-                                        className="dropdown-item rounded text-light"
+                                        className="dropdown-item rounded py-2"
                                         to="/register"
                                         onClick={() => {
                                             setAnchor("");
@@ -112,7 +115,7 @@ const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
                             )}
                             <li>
                                 <Link
-                                    className="dropdown-item rounded text-bg-primary"
+                                    className="dropdown-item rounded py-2 text-bg-primary bg-gradient"
                                     to={
                                         !CONDITIONAL_RENDERING.session
                                             ? "/login"

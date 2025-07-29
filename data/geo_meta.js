@@ -1,3 +1,4 @@
+/* IMPORTS START */
 import {
     AB,
     BC,
@@ -101,8 +102,9 @@ import {
     YUC,
     ZAC,
 } from "data/variables";
+/* IMPORTS END */
 
-export const geo_tree = {
+const GEO_TREE = {
     CAN: {
         Pacific: [BC],
         Prairies: [AB, MB, SK],
@@ -131,19 +133,19 @@ export const geo_tree = {
     },
 };
 
-const geo_lookup = {
+const GEO_LOOKUP = {
     "": {
         region: "",
         country: "",
     },
 };
 
-for (let country in geo_tree) {
-    for (let region in geo_tree[country]) {
-        for (let state of geo_tree[country][region]) {
-            geo_lookup[state] = { region, country };
+for (let country in GEO_TREE) {
+    for (let region in GEO_TREE[country]) {
+        for (let state of GEO_TREE[country][region]) {
+            GEO_LOOKUP[state] = { region, country };
         }
     }
 }
 
-export default geo_lookup;
+export { GEO_TREE, GEO_LOOKUP };

@@ -9,7 +9,7 @@ const Transition = ({ variables }) => {
 
     return (
         <div className="row justify-content-center pt-5">
-            <div className="col-4 pt-5">
+            <div className="col-10 col-md-4 pt-5">
                 <div
                     className={`alert alert-${
                         AUTH ? "success" : REDIRECT ? "warning" : "primary"

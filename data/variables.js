@@ -28,7 +28,7 @@ export const borders = {
 export const borders_values = Object.keys(borders);
 
 // locations
-export const canDivisions = [
+export const can_territories = [
     "AB",
     "BC",
     "MB",
@@ -45,9 +45,9 @@ export const canDivisions = [
 ];
 
 export const [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT] =
-    canDivisions;
+    can_territories;
 
-export const usaDivisions = [
+export const usa_territories = [
     "AL",
     "AK",
     "AZ",
@@ -155,9 +155,9 @@ export const [
     WI,
     WY,
     PR,
-] = usaDivisions;
+] = usa_territories;
 
-export const mexDivisions = [
+export const mex_territories = [
     "AGS",
     "BCN",
     "BCS",
@@ -225,4 +225,4 @@ export const [
     VER,
     YUC,
     ZAC,
-] = mexDivisions;
+] = mex_territories;

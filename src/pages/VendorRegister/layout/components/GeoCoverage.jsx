@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 const GeoCoverage = (props) => {
     // module
-    const regions = Object.keys(props.geo_tree[props.country_code]);
+    const regions = Object.keys(props.GEO_TREE[props.country_code]);
     const territory_coverage =
         props.data.coverage[props.countries_labels[props.country_code]]
             .territory;
@@ -116,7 +116,7 @@ const GeoCoverage = (props) => {
                 {props.countries_labels[props.country_code]}
             </h6>
             {regions.map((region, index) => {
-                const territories = props.geo_tree[props.country_code][region];
+                const territories = props.GEO_TREE[props.country_code][region];
 
                 return (
                     <div
