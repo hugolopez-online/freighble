@@ -3,9 +3,9 @@ import User from "../db/models/User.js";
 /* IMPORTS END */
 
 /* CONTROLLERS START */
-const viewUsers = async (req, res) => {};
+const USERS_API_VIEW = async (req, res) => {};
 
-const findUser = async (req, res) => {
+const USERS_API_FIND = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -31,7 +31,7 @@ const findUser = async (req, res) => {
     }
 };
 
-const createUser = async (req, res) => {
+const USERS_API_CREATE = async (req, res) => {
     try {
         const { email } = req.body;
 
@@ -65,7 +65,7 @@ const createUser = async (req, res) => {
     }
 };
 
-const editUser = async (req, res) => {
+const USERS_API_EDIT = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -100,7 +100,7 @@ const editUser = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
+const USERS_API_DELETE = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -129,7 +129,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
-const userLogin = async (req, res) => {
+const USERS_API_LOGIN = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -180,17 +180,17 @@ const userLogin = async (req, res) => {
     }
 };
 
-const userLogout = async (req, res) => {};
+const USERS_API_LOGOUT = async (req, res) => {};
 /* CONTROLLERS END */
 
 /* EXPORTS START */
 export {
-    viewUsers,
-    findUser,
-    createUser,
-    editUser,
-    deleteUser,
-    userLogin,
-    userLogout,
+    USERS_API_VIEW,
+    USERS_API_FIND,
+    USERS_API_CREATE,
+    USERS_API_EDIT,
+    USERS_API_DELETE,
+    USERS_API_LOGIN,
+    USERS_API_LOGOUT,
 };
 /* EXPORTS END */

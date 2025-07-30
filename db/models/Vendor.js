@@ -1,7 +1,8 @@
-// imports
-import mongoose from "mongoose";
+/* IMPORTS START */
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+
 import {
     modes_values,
     borders_values,
@@ -9,15 +10,17 @@ import {
     usa_territories,
     mex_territories,
 } from "../../data/variables.js";
+/* IMPORTS END */
 
-// module
+/* MODULE STARS */
 const valid_territories = [
     ...can_territories,
     ...usa_territories,
     ...mex_territories,
 ];
+/* MODULE END */
 
-// sub-sub-schemas
+/* SUB-SUB-SCHEMAS START */
 const CoverageContent = (country_code, divisions) =>
     new mongoose.Schema(
         {
@@ -36,8 +39,9 @@ const CoverageContent = (country_code, divisions) =>
         },
         { _id: false }
     );
+/* SUB-SUB-SCHEMAS END */
 
-// sub-schemas
+/* SUB-SCHEMAS START */
 const VendorType = new mongoose.Schema(
     {
         asset_based: {
@@ -152,8 +156,9 @@ const VendorAuth = new mongoose.Schema(
     },
     { _id: false }
 );
+/* SUB-SCHEMAS END */
 
-// main schema
+/* SCHEMA START */
 const VendorSchema = new mongoose.Schema(
     {
         main_email: {
@@ -344,7 +349,9 @@ const VendorSchema = new mongoose.Schema(
         collection: "vendors",
     }
 );
+/* SCHEMA END */
 
+/* SCHEMA UTILS START */
 VendorSchema.path("type").validate({
     validator: function (value) {
         return value.asset_based || value.freight_broker;
@@ -391,5 +398,6 @@ VendorSchema.methods.comparePassword = async function (prospectPassword) {
 
     return match;
 };
+/* SCHEMA UTILS END */
 
 export default mongoose.model("Vendor", VendorSchema);

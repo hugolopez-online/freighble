@@ -4,7 +4,7 @@ import Vendor from "../db/models/Vendor.js";
 /* IMPORTS END */
 
 /* CONTROLLERS START */
-const viewVendors = async (req, res) => {
+const VENDORS_API_VIEW = async (req, res) => {
     try {
         const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
 
@@ -23,7 +23,7 @@ const viewVendors = async (req, res) => {
     }
 };
 
-const searchVendors = async (req, res) => {
+const VENDORS_API_SEARCH = async (req, res) => {
     try {
         const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
 
@@ -125,7 +125,7 @@ const searchVendors = async (req, res) => {
     }
 };
 
-const findVendor = async (req, res) => {
+const VENDORS_API_FIND = async (req, res) => {
     try {
         const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
 
@@ -154,7 +154,7 @@ const findVendor = async (req, res) => {
     }
 };
 
-const createVendor = async (req, res) => {
+const VENDORS_API_CREATE = async (req, res) => {
     try {
         const { main_email } = req.body;
         const repeated_user = await Vendor.findOne({ main_email });
@@ -187,7 +187,7 @@ const createVendor = async (req, res) => {
     }
 };
 
-const editVendor = async (req, res) => {
+const VENDORS_API_EDIT = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -222,7 +222,7 @@ const editVendor = async (req, res) => {
     }
 };
 
-const deleteVendor = async (req, res) => {
+const VENDORS_API_DELETE = async (req, res) => {
     try {
         const { id } = req.params;
 
@@ -251,7 +251,7 @@ const deleteVendor = async (req, res) => {
     }
 };
 
-const vendorLogin = async (req, res) => {
+const VENDORS_API_LOGIN = async (req, res) => {
     try {
         const { email, password } = req.body;
 
@@ -300,18 +300,18 @@ const vendorLogin = async (req, res) => {
     }
 };
 
-const vendorLogout = async (req, res) => {};
+const VENDORS_API_LOGOUT = async (req, res) => {};
 /* CONTROLLERS END */
 
 /* EXPORTS START */
 export {
-    viewVendors,
-    searchVendors,
-    findVendor,
-    createVendor,
-    editVendor,
-    deleteVendor,
-    vendorLogin,
-    vendorLogout,
+    VENDORS_API_VIEW,
+    VENDORS_API_SEARCH,
+    VENDORS_API_FIND,
+    VENDORS_API_CREATE,
+    VENDORS_API_EDIT,
+    VENDORS_API_DELETE,
+    VENDORS_API_LOGIN,
+    VENDORS_API_LOGOUT,
 };
 /* EXPORTS END */

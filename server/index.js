@@ -1,4 +1,4 @@
-// imports
+/* IMPORTS START */
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -7,35 +7,40 @@ import { fileURLToPath } from "url";
 import connectDB from "../db/index.js";
 import usersRouter from "../routes/users.js";
 import vendorsRouter from "../routes/vendors.js";
+/* IMPORTS END */
 
-// module
+/* MODULE START */
+dotenv.config();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config();
+const app = express();
 
-// console formatting
 const RED_TEXT = "\u001b[31m";
 const BLUE_TEXT = "\u001b[36m";
 const GREEN_TEXT = "\u001b[32m";
 const YELLOW_TEXT = "\u001b[33m";
 const DEFAULT_TEXT = "\u001b[37m";
+/* MODULE END */
 
-// app
-const app = express();
-
-// middleware
+/* MIDDLEWARE START */
 app.use(express.json());
 app.use(express.static("dist"));
 app.use("/api/users", usersRouter);
 app.use("/api/vendors", vendorsRouter);
+/* MIDDLEWARE END */
 
-// catch-all for client-side routing
+// pass route handling to front-end
 app.get("/{*any}", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+    try {
+        return res.sendFile(path.resolve(__dirname, "../dist/index.html"));
+    } catch (err) {
+        return res.status(500).json({ error: err });
+    }
 });
 
-// server
+/* SERVER START */
 const PORT = process.env.PORT || 8080;
 
 const serve = async () => {
@@ -56,3 +61,4 @@ const serve = async () => {
 };
 
 serve();
+/* SERVER END */

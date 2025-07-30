@@ -26,7 +26,7 @@
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(24, 24, 24, 0.8);
 }
 
 .website-header {
@@ -35,6 +35,7 @@
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(100, 100, 100, 0.151);
+    z-index: 1000;
 }
 
 .website-hero {

@@ -1,43 +1,44 @@
-// imports
+/* IMPORTS START */
+import { Toast } from "bootstrap";
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Toast } from "bootstrap";
-import Transition from "./Transition";
 
-// module
-const blank_credentials = {
+import Transition from "./Transition";
+/* IMPORTS END */
+
+/* MODULE START */
+const BLANK_CREDENTIALS = {
     email: "",
     password: "",
 };
+/* MODULE END */
 
-// component
-const LoginForm = (props) => {
+/* COMPONENT START */
+const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
     // state
-    const [credentials, setCredentials] = useState(blank_credentials);
+    const [credentials, setCredentials] = useState(BLANK_CREDENTIALS);
+    const [showPassword, setShowPassword] = useState(false);
     const [authenticating, setAuthenticating] = useState(false);
     const [toastMessage, setToastMessage] = useState({
         success: false,
         message: [],
     });
 
+    // module
     const navigate = useNavigate();
 
     // handlers
     const handleLogin = async (e, login_credentials) => {
-        const freighble_alert = document.getElementById("freighble_alert");
-        const toast = Toast.getOrCreateInstance(freighble_alert);
         e.preventDefault();
+
+        const FREIGHBLE_ALERT = document.getElementById("freighble_alert");
+        const toast = Toast.getOrCreateInstance(FREIGHBLE_ALERT);
+
         setAuthenticating(true);
 
-        const url = `/api/${
-            props.role === "user"
-                ? "users"
-                : props.role === "vendor"
-                ? "vendors"
-                : "BAD_REQUEST"
-        }/login`;
+        const URL = `/api/${role}s/login`;
 
-        const response = await fetch(url, {
+        const RES = await fetch(URL, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -45,23 +46,21 @@ const LoginForm = (props) => {
             body: JSON.stringify(login_credentials),
         });
 
-        const response_data = await response.json(); // Parse the JSON response
+        const RES_DATA = await RES.json();
 
         try {
-            if (!response.ok) {
-                throw new Error(
-                    `${JSON.stringify(response_data.error.errors)}`
-                );
+            if (!RES.ok) {
+                throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
             }
 
-            setCredentials(blank_credentials);
+            setCredentials(BLANK_CREDENTIALS);
             setToastMessage({
                 success: true,
-                message: [response_data.msg],
+                message: [RES_DATA.msg],
             });
-            localStorage.setItem("token", response_data.token);
-            localStorage.setItem("user", JSON.stringify(response_data.user));
-            props.CONDITIONAL_RENDERING.setSession(
+            localStorage.setItem("token", RES_DATA.token);
+            localStorage.setItem("user", JSON.stringify(RES_DATA.user));
+            CONDITIONAL_RENDERING.setSession(
                 JSON.parse(localStorage.getItem("user"))
             );
             window.scrollTo(0, 0);
@@ -71,9 +70,9 @@ const LoginForm = (props) => {
             }, 500);
         } catch (error) {
             setAuthenticating(false);
-            const err_variables = Object.keys(response_data.error.errors);
+            const err_variables = Object.keys(RES_DATA.error.errors);
             const errors = err_variables.map((err) => {
-                return response_data.error.errors[err].message;
+                return RES_DATA.error.errors[err].message;
             });
 
             setToastMessage({
@@ -91,15 +90,10 @@ const LoginForm = (props) => {
             <div className="row justify-content-center pt-5">
                 {!authenticating ? (
                     <div className="col-11 col-md-7 py-4">
-                        <h5 className="display-5 py-4">
-                            {props.role === "user"
-                                ? "User"
-                                : props.role === "vendor"
-                                ? "Vendor"
-                                : "BAD_REQUEST"}{" "}
-                            Portal
+                        <h5 className="display-5 text-capitalize py-4">
+                            {role} portal
                         </h5>
-                        {props.role === "vendor" && (
+                        {role === "vendor" && (
                             <div className="border border-warning bg-warning bg-opacity-25 text-warning-emphasis rounded p-3 mb-3">
                                 Please note you're in our vendor's login portal,
                                 reserved for Freighble vendors. If you're an app
@@ -120,13 +114,8 @@ const LoginForm = (props) => {
                         >
                             <div className="row border-bottom mb-4">
                                 <div className="col-12">
-                                    <h6 className="display-6 text-dark fw-bold brand-font">
-                                        {props.role === "user"
-                                            ? "USER"
-                                            : props.role === "vendor"
-                                            ? "VENDOR"
-                                            : "BAD_REQUEST"}{" "}
-                                        CREDENTIALS
+                                    <h6 className="display-6 text-uppercase text-dark fw-bold brand-font">
+                                        credentials
                                     </h6>
                                 </div>
                             </div>
@@ -177,40 +166,62 @@ const LoginForm = (props) => {
                                     >
                                         password
                                     </label>
-                                    <input
-                                        type="password"
-                                        className={`form-control ${
-                                            credentials.password
-                                                ? "border-primary"
-                                                : ""
-                                        }`}
-                                        placeholder="Password"
-                                        id="login_password"
-                                        name="login_password"
-                                        value={credentials.password}
-                                        onChange={(e) => {
-                                            setCredentials((prev) => {
-                                                return {
-                                                    ...prev,
-                                                    password: e.target.value,
-                                                };
-                                            });
-                                        }}
-                                        autoComplete="off"
-                                        required
-                                    />
+                                    <div
+                                        className="input-group"
+                                        style={{ zIndex: "500" }}
+                                    >
+                                        <input
+                                            type={
+                                                showPassword
+                                                    ? "text"
+                                                    : "password"
+                                            }
+                                            className={`form-control ${
+                                                credentials.password
+                                                    ? "border-primary"
+                                                    : ""
+                                            }`}
+                                            placeholder="Password"
+                                            id="login_password"
+                                            name="login_password"
+                                            value={credentials.password}
+                                            onChange={(e) => {
+                                                setCredentials((prev) => {
+                                                    return {
+                                                        ...prev,
+                                                        password:
+                                                            e.target.value,
+                                                    };
+                                                });
+                                            }}
+                                            autoComplete="off"
+                                            required
+                                        />
+                                        <button
+                                            type="button"
+                                            className="btn border border-start-0"
+                                            onClick={() => {
+                                                setShowPassword(!showPassword);
+                                            }}
+                                        >
+                                            <i
+                                                className={`bi bi-eye-${
+                                                    showPassword
+                                                        ? "slash"
+                                                        : "fill"
+                                                }`}
+                                            ></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="col-12 mb-2">
                                     <span className="text-secondary fw-normal">
-                                        don't have a Freighble
-                                        {props.role === "vendor"
-                                            ? " vendor"
-                                            : ""}{" "}
+                                        You don't have a Freighble {role}{" "}
                                         account?{" "}
                                         <Link
                                             className="fw-medium"
                                             to={
-                                                props.role === "vendor"
+                                                role === "vendor"
                                                     ? "/vendors/vendor"
                                                     : "/register"
                                             }
@@ -223,9 +234,9 @@ const LoginForm = (props) => {
 
                             <button
                                 type="submit"
-                                className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
+                                className="btn btn-dark bg-gradient shadow-sm fw-medium text-capitalize w-100 rounded-3"
                             >
-                                Log In
+                                log in
                             </button>
                         </form>
                     </div>
@@ -238,7 +249,7 @@ const LoginForm = (props) => {
                                 "Loading",
                             ][0],
                             loader: ["spinner-border", "spinner-grow"][1],
-                            message: "",
+                            message: "Verifying credentials.",
                         }}
                     />
                 )}
@@ -254,7 +265,7 @@ const LoginForm = (props) => {
                     aria-atomic="true"
                 >
                     <div className="toast-header rounded-top-3 border text-bg-primary">
-                        <strong className="me-auto">Freighble</strong>
+                        <strong className="me-auto">Freighble alert</strong>
                         <button
                             type="button"
                             className="btn-close"
@@ -285,7 +296,7 @@ const LoginForm = (props) => {
                             <Fragment>
                                 <i className="bi bi-exclamation-circle-fill text-danger"></i>{" "}
                                 <span className="text-danger fw-medium">
-                                    Something went wrong
+                                    Something went wrong!
                                 </span>
                                 <ul>
                                     {toastMessage.message.map(
@@ -306,5 +317,6 @@ const LoginForm = (props) => {
         </Fragment>
     );
 };
+/* COMPONENT END */
 
 export default LoginForm;

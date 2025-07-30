@@ -1,4 +1,4 @@
-// modes
+/* MODES START*/
 export const modes = {
     dedicated_van: "Dedicated Van",
     partial_van: "Partial Van",
@@ -12,8 +12,9 @@ export const modes = {
 };
 
 export const modes_values = Object.keys(modes);
+/* MODES END */
 
-// borders
+/* BORDERS START */
 export const borders = {
     none: "None",
     otay_ca: "Otay, CA",
@@ -26,8 +27,9 @@ export const borders = {
 };
 
 export const borders_values = Object.keys(borders);
+/* BORDERS END */
 
-// locations
+/* TERRITORIES START */
 export const can_territories = [
     "AB",
     "BC",
@@ -226,3 +228,4 @@ export const [
     YUC,
     ZAC,
 ] = mex_territories;
+/* TERRITORIES END */

@@ -1,9 +1,10 @@
-// imports
-import mongoose from "mongoose";
+/* IMPORTS START */
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+/* IMPORTS END */
 
-// sub-schemas
+/* SUB-SCHEMAS START */
 const UserTerms = new mongoose.Schema(
     {
         version: {
@@ -57,8 +58,9 @@ const UserAuth = new mongoose.Schema(
     },
     { _id: false }
 );
+/* SUB-SCHEMAS END */
 
-// main schema
+/* SCHEMA START */
 const UserSchema = new mongoose.Schema(
     {
         first_name: {
@@ -90,7 +92,9 @@ const UserSchema = new mongoose.Schema(
         collection: "users",
     }
 );
+/* SCHEMA END */
 
+/* SCHEMA UTILS START */
 UserSchema.path("auth").validate({
     validator: function (value) {
         return value.terms.accepted;
@@ -99,7 +103,6 @@ UserSchema.path("auth").validate({
 });
 
 UserSchema.pre("save", async function (next) {
-    // enforce auth variables
     this.auth.role = "user";
     this.auth.password = await bcrypt.hash(this.auth.password, 6);
 
@@ -125,5 +128,6 @@ UserSchema.methods.comparePassword = async function (prospectPassword) {
 
     return match;
 };
+/* SCHEMA UTILS END */
 
 export default mongoose.model("User", UserSchema);
