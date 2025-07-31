@@ -67,6 +67,8 @@ function App() {
                             anchor={anchor}
                             setAnchor={setAnchor}
                             CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                            theme={theme}
+                            setTheme={setTheme}
                         />
                     }
                 >

@@ -7,8 +7,8 @@ import Transition from "./Transition";
 /* IMPORTS END */
 
 /* MODULE START */
-const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
-const bad_password_regex = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/i;
+const BAD_PASSWORD_REGEX = /^(.{0,7}|[^0-9]*|[^A-Z]*|[^a-z]*|[a-zA-Z0-9]*)$/;
 /* MODULE END */
 
 /* COMPONENT START */
@@ -53,7 +53,7 @@ const UserDisplay = (props) => {
             if (passwordMatch !== data.auth.password) {
                 setToastMessage({
                     success: false,
-                    message: ["Password doesn't match."],
+                    message: ["Password don't match."],
                 });
                 window.scrollTo(0, 0);
                 toast.show();
@@ -213,7 +213,7 @@ const UserDisplay = (props) => {
                     type: ["Authenticating", "Redirecting", "Loading"][2],
                     loader: ["spinner-border", "spinner-grow"][0],
                     message:
-                        "Something went wrong loading your profile. If this problem persists, please contact support.",
+                        "Something went wrong. If this problem persists, please contact support.",
                 }}
             />
         );
@@ -318,7 +318,7 @@ const UserDisplay = (props) => {
                                                 <strong
                                                     className={`text-${
                                                         data.email &&
-                                                        email_regex.test(
+                                                        EMAIL_REGEX.test(
                                                             data.email
                                                         )
                                                             ? "success"
@@ -326,7 +326,7 @@ const UserDisplay = (props) => {
                                                     }`}
                                                 >
                                                     {data.email &&
-                                                    email_regex.test(
+                                                    EMAIL_REGEX.test(
                                                         data.email
                                                     ) ? (
                                                         <i className="bi bi-check"></i>
@@ -363,7 +363,7 @@ const UserDisplay = (props) => {
                                                 <strong
                                                     className={`text-${
                                                         data.auth.password &&
-                                                        !bad_password_regex.test(
+                                                        !BAD_PASSWORD_REGEX.test(
                                                             data.auth.password
                                                         )
                                                             ? "success"
@@ -371,7 +371,7 @@ const UserDisplay = (props) => {
                                                     }`}
                                                 >
                                                     {data.auth.password &&
-                                                    !bad_password_regex.test(
+                                                    !BAD_PASSWORD_REGEX.test(
                                                         data.auth.password
                                                     ) ? (
                                                         <i className="bi bi-check"></i>
@@ -422,7 +422,7 @@ const UserDisplay = (props) => {
                                                         passwordMatch ===
                                                             data.auth
                                                                 .password &&
-                                                        !bad_password_regex.test(
+                                                        !BAD_PASSWORD_REGEX.test(
                                                             data.auth.password
                                                         )
                                                             ? "success"
@@ -432,7 +432,7 @@ const UserDisplay = (props) => {
                                                     {passwordMatch &&
                                                     passwordMatch ===
                                                         data.auth.password &&
-                                                    !bad_password_regex.test(
+                                                    !BAD_PASSWORD_REGEX.test(
                                                         data.auth.password
                                                     ) ? (
                                                         <i className="bi bi-check"></i>
@@ -481,7 +481,7 @@ const UserDisplay = (props) => {
                                 </div>
                             </div>
 
-                            <fieldset className={`row${!view && " mb-4"}`}>
+                            <fieldset className={`row${view ? "" : " mb-4"}`}>
                                 {view ? (
                                     <Fragment>
                                         <div className="col-12">
@@ -623,7 +623,7 @@ const UserDisplay = (props) => {
                                                     <strong
                                                         className={`text-${
                                                             data.email &&
-                                                            email_regex.test(
+                                                            EMAIL_REGEX.test(
                                                                 data.email
                                                             )
                                                                 ? "success"
@@ -631,7 +631,7 @@ const UserDisplay = (props) => {
                                                         }`}
                                                     >
                                                         {data.email &&
-                                                        email_regex.test(
+                                                        EMAIL_REGEX.test(
                                                             data.email
                                                         ) ? (
                                                             <i className="bi bi-check"></i>
@@ -842,7 +842,7 @@ const UserDisplay = (props) => {
                             <Fragment>
                                 <i className="bi bi-exclamation-circle-fill text-danger"></i>{" "}
                                 <span className="text-danger fw-medium">
-                                    Something went wrong
+                                    Something went wrong!
                                 </span>
                                 <ul>
                                     {toastMessage.message.map(

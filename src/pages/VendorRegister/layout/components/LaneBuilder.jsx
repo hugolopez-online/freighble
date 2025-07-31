@@ -41,8 +41,8 @@ const LaneBuilder = (props) => {
 
     return (
         <Fragment>
-            <div className="row col-12 col-md-6 gy-2 pe-0">
-                <div className="col-6 pe-0">
+            <div className="col-12 d-flex flex-wrap col-md-6">
+                <div className="col-6">
                     <label
                         htmlFor={`${props.target.label}-lane_scope`}
                         className="fw-medium text-dark-emphasis"
@@ -80,7 +80,7 @@ const LaneBuilder = (props) => {
                         })}
                     </select>
                 </div>
-                <div className="col-6 ps-0">
+                <div className="col-6">
                     <label
                         htmlFor={`${props.target.label}-lane_location`}
                         className="fw-medium text-dark-emphasis"
@@ -129,7 +129,7 @@ const LaneBuilder = (props) => {
                     </select>
                 </div>
                 <div
-                    className={`col-12${
+                    className={`col-12 my-2${
                         scope !== "Territory" || !Boolean(props.target.value)
                             ? " d-none"
                             : ""

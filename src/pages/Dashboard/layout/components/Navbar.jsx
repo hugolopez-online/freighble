@@ -1,4 +1,4 @@
-// imports
+/* IMPORTS START */
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../../../../assets/img/logo_206x40.webp";

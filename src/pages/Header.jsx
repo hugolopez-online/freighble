@@ -7,7 +7,13 @@ import logo from "../assets/img/logo_206x40.webp";
 import logo_lighter from "../assets/img/logo-lighter_206x40.svg";
 import logo_light from "../assets/img/logo-light_206x40.svg";
 
-const Header = ({ anchor, setAnchor, CONDITIONAL_RENDERING }) => {
+const Header = ({
+    anchor,
+    setAnchor,
+    CONDITIONAL_RENDERING,
+    theme,
+    setTheme,
+}) => {
     // effects
     useEffect(() => {
         setTimeout(() => {

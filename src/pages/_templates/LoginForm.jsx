@@ -166,10 +166,7 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
                                     >
                                         password
                                     </label>
-                                    <div
-                                        className="input-group"
-                                        style={{ zIndex: "500" }}
-                                    >
+                                    <div className="input-group">
                                         <input
                                             type={
                                                 showPassword

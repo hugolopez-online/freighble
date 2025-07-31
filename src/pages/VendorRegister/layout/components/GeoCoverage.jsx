@@ -4,8 +4,7 @@ const GeoCoverage = (props) => {
     // module
     const regions = Object.keys(props.GEO_TREE[props.country_code]);
     const territory_coverage =
-        props.data.coverage[props.countries_labels[props.country_code]]
-            .territory;
+        props.data.coverage[props.COUNTRY_LABELS[props.country_code]].territory;
 
     const regionIncluded = (territory_coverage, region_territories) => {
         return region_territories.every((territory) =>
@@ -23,9 +22,9 @@ const GeoCoverage = (props) => {
                     ...prev,
                     coverage: {
                         ...prev.coverage,
-                        [props.countries_labels[props.country_code]]: {
+                        [props.COUNTRY_LABELS[props.country_code]]: {
                             ...prev.coverage[
-                                props.countries_labels[props.country_code]
+                                props.COUNTRY_LABELS[props.country_code]
                             ],
                             territory: territory_coverage.filter(
                                 (territory) => territory !== selection
@@ -46,9 +45,9 @@ const GeoCoverage = (props) => {
                     ...prev,
                     coverage: {
                         ...prev.coverage,
-                        [props.countries_labels[props.country_code]]: {
+                        [props.COUNTRY_LABELS[props.country_code]]: {
                             ...prev.coverage[
-                                props.countries_labels[props.country_code]
+                                props.COUNTRY_LABELS[props.country_code]
                             ],
                             territory: update_territories,
                         },
@@ -71,9 +70,9 @@ const GeoCoverage = (props) => {
                     ...prev,
                     coverage: {
                         ...prev.coverage,
-                        [props.countries_labels[props.country_code]]: {
+                        [props.COUNTRY_LABELS[props.country_code]]: {
                             ...prev.coverage[
-                                props.countries_labels[props.country_code]
+                                props.COUNTRY_LABELS[props.country_code]
                             ],
                             territory: remove_territories,
                         },
@@ -86,15 +85,15 @@ const GeoCoverage = (props) => {
                     ...prev,
                     coverage: {
                         ...prev.coverage,
-                        [props.countries_labels[props.country_code]]: {
+                        [props.COUNTRY_LABELS[props.country_code]]: {
                             ...prev.coverage[
-                                props.countries_labels[props.country_code]
+                                props.COUNTRY_LABELS[props.country_code]
                             ],
                             territory: [
                                 ...new Set(
                                     [
                                         ...prev.coverage[
-                                            props.countries_labels[
+                                            props.COUNTRY_LABELS[
                                                 props.country_code
                                             ]
                                         ].territory,
@@ -113,7 +112,7 @@ const GeoCoverage = (props) => {
     return (
         <div className="col-12 col-md-4 mb-2">
             <h6 className="text-secondary fw-semibold">
-                {props.countries_labels[props.country_code]}
+                {props.COUNTRY_LABELS[props.country_code]}
             </h6>
             {regions.map((region, index) => {
                 const territories = props.GEO_TREE[props.country_code][region];
@@ -163,7 +162,7 @@ const GeoCoverage = (props) => {
                                             id={`coverage-${territory}`}
                                             value={territory}
                                             checked={props.data.coverage[
-                                                props.countries_labels[
+                                                props.COUNTRY_LABELS[
                                                     props.country_code
                                                 ]
                                             ].territory.includes(territory)}
@@ -176,7 +175,7 @@ const GeoCoverage = (props) => {
                                             htmlFor={`coverage-${territory}`}
                                             className={`btn rounded-pill btn-outline-${
                                                 props.data.coverage[
-                                                    props.countries_labels[
+                                                    props.COUNTRY_LABELS[
                                                         props.country_code
                                                     ]
                                                 ].territory.includes(territory)
