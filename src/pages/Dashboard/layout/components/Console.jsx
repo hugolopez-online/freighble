@@ -18,15 +18,19 @@ const Console = (props) => {
 
     return (
         <div
-            className="navbar shadow bg-light rounded-4 border border-tertiary sticky-top under-navbar"
+            className={`navbar shadow ${
+                props.theme === "light"
+                    ? "bg-light border-tertiary"
+                    : "bg-black bg-gradient border-secondary"
+            } rounded-4 border sticky-top under-navbar`}
             style={{ zIndex: "1000" }}
         >
             <div className="container-fluid">
                 <div
                     id="console-display"
-                    className={`col-12 rounded-3 border border-white bg-secondary bg-gradient-deep ${
-                        minData ? " marquee-container" : ""
-                    } py-1 px-3 mb-2`}
+                    className={`col-12 rounded-3 border border-${
+                        props.theme === "light" ? "white" : "dark"
+                    } bg-secondary bg-gradient-deep py-1 px-3 mb-2`}
                     style={{ fontSize: "0.75rem" }}
                 >
                     <span
@@ -135,7 +139,11 @@ const Console = (props) => {
                         <i className="bi bi-search"></i>
                     </button>
                     <button
-                        className="btn btn-sm btn-dark bg-gradient rounded-pill"
+                        className={`btn btn-sm btn-${
+                            props.theme === "light"
+                                ? "dark bg-gradient"
+                                : "light bg-gradient-soft"
+                        } rounded-pill`}
                         type="button"
                         onClick={() => {
                             window.scrollTo({

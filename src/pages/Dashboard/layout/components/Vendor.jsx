@@ -85,7 +85,13 @@ const Vendor = (props) => {
     return (
         <div className="col-12">
             <div className="input-group shadow-sm rounded-4">
-                <div className="card border bg-light bg-gradient col rounded-4">
+                <div
+                    className={`card border bg-${
+                        props.theme === "light"
+                            ? "light"
+                            : "black border-secondary"
+                    } bg-gradient col rounded-4`}
+                >
                     <div className="card-body">
                         <div className="d-flex justify-content-between">
                             <h5 className="card-title fw-bold text-dark m-0">
@@ -105,7 +111,11 @@ const Vendor = (props) => {
                                 >
                                     <Link
                                         to={`/vendors/vendor/${props._id}`}
-                                        className="link-dark link-underline-opacity-0 link-underline-opacity-25-hover"
+                                        className={`link-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "light"
+                                        } link-underline-opacity-0 link-underline-opacity-25-hover`}
                                         target="_blank"
                                     >
                                         {props.company}
@@ -127,8 +137,10 @@ const Vendor = (props) => {
                                     className={`btn btn-sm btn-${
                                         props.score < 70
                                             ? "secondary"
-                                            : "dark fw-bold"
-                                    } bg-gradient ms-2 py-0 rounded-pill collapsed`}
+                                            : props.theme === "light"
+                                            ? "dark fw-bold bg-gradient"
+                                            : "light fw-bold bg-gradient-soft"
+                                    } ms-2 py-0 rounded-pill collapsed`}
                                     data-bs-toggle="collapse"
                                     data-bs-target={`#${props.dispatched_key}-extra-info`}
                                     aria-expanded="false"
@@ -179,7 +191,11 @@ const Vendor = (props) => {
                             <a
                                 href={`https://www.google.com/maps/search/${props.domicile.city},+${props.domicile.territory},+${props.domicile.country}`}
                                 target="_blank"
-                                className="btn badge text-bg-dark bg-gradient fw-normal me-1"
+                                className={`btn badge text-bg-${
+                                    props.theme === "light"
+                                        ? "dark bg-gradient"
+                                        : "light bg-gradient-soft"
+                                } fw-normal me-1`}
                             >
                                 <i className="bi bi-house-fill"></i>{" "}
                                 {`${props.domicile.city}, ${props.domicile.territory}`}
@@ -187,7 +203,11 @@ const Vendor = (props) => {
                             <a
                                 href={`tel:${props.phone}`}
                                 target="_blank"
-                                className="btn badge text-bg-dark bg-gradient fw-normal me-1"
+                                className={`btn badge text-bg-${
+                                    props.theme === "light"
+                                        ? "dark bg-gradient"
+                                        : "light bg-gradient-soft"
+                                } fw-normal me-1`}
                             >
                                 <i className="bi bi-person-rolodex"></i>{" "}
                                 {props.contact}: {props.ph_country_code}-
@@ -196,7 +216,11 @@ const Vendor = (props) => {
                             <a
                                 href={`mailto:${props.email}`}
                                 target="_blank"
-                                className="btn badge text-bg-dark bg-gradient fw-normal"
+                                className={`btn badge text-bg-${
+                                    props.theme === "light"
+                                        ? "dark bg-gradient"
+                                        : "light bg-gradient-soft"
+                                } fw-normal me-1`}
                             >
                                 <i className="bi bi-envelope-fill"></i>{" "}
                                 {props.email}
@@ -204,7 +228,11 @@ const Vendor = (props) => {
                             <hr className="text-secondary mt-1 mb-0" />
 
                             <p
-                                className="text-secondary mt-1 mb-0"
+                                className={`text-${
+                                    props.theme === "light"
+                                        ? "secondary"
+                                        : "light"
+                                } mt-1 mb-1`}
                                 style={{ fontSize: "0.75rem" }}
                             >
                                 Qualifying factors:

@@ -6,7 +6,7 @@ import { base_score, $VAST } from "../handlers/vast_system";
 
 // component
 
-const Directory = ({ specs, routes, setHits, setIsSearching }) => {
+const Directory = ({ specs, routes, setHits, setIsSearching, theme }) => {
     // states
 
     const [vendorList, setVendorList] = useState([]);
@@ -123,6 +123,7 @@ const Directory = ({ specs, routes, setHits, setIsSearching }) => {
                                 <Placeholder
                                     key={`placeholder-${placeholder}`}
                                     opacity_deduction={placeholder}
+                                    theme={theme}
                                 />
                             );
                         })}
@@ -130,8 +131,14 @@ const Directory = ({ specs, routes, setHits, setIsSearching }) => {
                 )
             ) : (
                 <div className="row g-3 mb-3">
-                    <h6 className="display-6 text-secondary mb-0 mt-4">
-                        Suitable vendors
+                    <h6
+                        className={`display-6 text-capitalize text-${
+                            theme === "light"
+                                ? "secondary"
+                                : "light text-opacity-75"
+                        } mb-0 mt-4`}
+                    >
+                        suitable vendors
                     </h6>
                     {vendorList.map((vendor) => {
                         const key = String(vendor._id);
@@ -141,6 +148,7 @@ const Directory = ({ specs, routes, setHits, setIsSearching }) => {
                                 dispatched_key={key}
                                 {...vendor}
                                 specs={specs}
+                                theme={theme}
                             />
                         );
                     })}

@@ -184,9 +184,7 @@ const Search = (props) => {
     // effects
     useEffect(() => {
         if (props.template) {
-            document
-                .getElementById("navbar")
-                .scrollIntoView({ block: "start", behavior: "smooth" });
+            window.scrollTo(0, 0);
             props.setTemplate(null);
 
             setFormData((prev) => {
@@ -216,12 +214,26 @@ const Search = (props) => {
     return (
         <form
             id="search"
-            className="shadow-sm border rounded-4 p-4 bg-light bg-gradient needs-validation sticky-md-top under-navbar"
+            className={`shadow-sm border rounded-4 p-4 ${
+                props.theme === "light"
+                    ? "bg-light"
+                    : "bg-dark bg-opacity-10 border-secondary"
+            } bg-gradient needs-validation sticky-md-top under-navbar`}
             onSubmit={handleSpecs}
         >
-            <div className="row border-bottom mb-2">
+            <div
+                className={`row border-bottom ${
+                    props.theme === "light" ? "" : "border-secondary"
+                } mb-2`}
+            >
                 <div className="col-12">
-                    <h6 className="text-dark fs-2 brand-font">LOAD DETAILS</h6>
+                    <h6
+                        className={`text-${
+                            props.theme === "light" ? "dark" : "light"
+                        } fs-2 brand-font`}
+                    >
+                        LOAD DETAILS
+                    </h6>
                 </div>
             </div>
 
@@ -230,7 +242,11 @@ const Search = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="mode"
-                        className="fw-medium text-dark-emphasis"
+                        className={`fw-medium text-${
+                            props.theme === "light"
+                                ? "dark-emphasis"
+                                : "light text-opacity-75"
+                        }`}
                         style={{ fontSize: "0.85em" }}
                     >
                         mode{" "}
@@ -281,7 +297,11 @@ const Search = (props) => {
             <fieldset className="row mb-2">
                 <label
                     htmlFor="origin_city"
-                    className="fw-medium text-dark-emphasis"
+                    className={`fw-medium text-${
+                        props.theme === "light"
+                            ? "dark-emphasis"
+                            : "light text-opacity-75"
+                    }`}
                     style={{ fontSize: "0.85em" }}
                 >
                     origin{" "}
@@ -440,7 +460,11 @@ const Search = (props) => {
             <fieldset className="row mb-2">
                 <label
                     htmlFor="destination_city"
-                    className="fw-medium text-dark-emphasis"
+                    className={`fw-medium text-${
+                        props.theme === "light"
+                            ? "dark-emphasis"
+                            : "light text-opacity-75"
+                    }`}
                     style={{ fontSize: "0.85em" }}
                 >
                     destination{" "}
@@ -608,7 +632,11 @@ const Search = (props) => {
                 <div className="col-12">
                     <label
                         htmlFor="border"
-                        className="fw-medium text-dark-emphasis"
+                        className={`fw-medium text-${
+                            props.theme === "light"
+                                ? "dark-emphasis"
+                                : "light text-opacity-75"
+                        }`}
                         style={{ fontSize: "0.85em" }}
                     >
                         border crossing port{" "}
@@ -679,11 +707,11 @@ const Search = (props) => {
             </div>
 
             {/* Special Requirements */}
-            <fieldset className="row mb-2">
+            <fieldset className="row my-3">
                 <div className="col-12">
                     <button
                         type="button"
-                        className={`btn btn-sm ${
+                        className={`btn btn-sm fw-medium ${
                             formData.hazmat ||
                             formData.team_drivers ||
                             formData.usa_bonded ||
@@ -694,19 +722,21 @@ const Search = (props) => {
                             formData.fast ||
                             formData.tanker_endorsement
                                 ? "btn-primary"
-                                : "btn-outline-secondary border"
+                                : "btn-secondary"
                         } rounded-2 w-100`}
                         data-bs-toggle="collapse"
                         data-bs-target="#special-requirements"
                         aria-expanded="false"
                         aria-controls="special-requirements"
                     >
-                        Special requirements
+                        Special Requirements
                     </button>
                 </div>
                 <div
                     id="special-requirements"
-                    className="col-12 collapse"
+                    className={`col-12 ${
+                        props.theme === "light" ? "" : "text-light"
+                    } collapse`}
                 >
                     <div className="form-check form-check-inline">
                         <input
@@ -919,7 +949,9 @@ const Search = (props) => {
             </fieldset>
             <button
                 type="submit"
-                className="btn btn-dark bg-gradient shadow-sm fw-bold w-100 rounded-pill"
+                className={`btn btn-${
+                    props.theme === "light" ? "dark" : "primary"
+                } bg-gradient shadow-sm fw-bold w-100 rounded-pill`}
             >
                 Search
             </button>

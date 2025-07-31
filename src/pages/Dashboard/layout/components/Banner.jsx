@@ -5,10 +5,26 @@ const Banner = (props) => {
         props.specs.destination.country;
 
     return (
-        <div className="card border text-bg-light bg-gradient shadow-sm rounded-4 p-4">
-            <div className="row border-bottom mb-2">
+        <div
+            className={`card border ${
+                props.theme === "light"
+                    ? "bg-light"
+                    : "bg-dark bg-opacity-10 border-secondary"
+            } bg-gradient shadow-sm rounded-4 p-4`}
+        >
+            <div
+                className={`row border-bottom ${
+                    props.theme === "light" ? "" : "border-secondary"
+                } mb-2`}
+            >
                 <div className="col-12">
-                    <h6 className="text-dark-emphasis fs-2 brand-font">
+                    <h6
+                        className={`text-${
+                            props.theme === "light"
+                                ? "dark-emphasis"
+                                : "light text-opacity-75"
+                        } fs-2 brand-font`}
+                    >
                         ADDITIONAL INFO
                     </h6>
                 </div>

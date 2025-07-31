@@ -1,11 +1,17 @@
-const Placeholder = ({ opacity_deduction }) => {
+const Placeholder = ({ opacity_deduction, theme }) => {
     const opacity = 1 - Number(opacity_deduction) / 10;
     return (
         <div
             className="col-12"
             style={{ opacity }}
         >
-            <div className="card bg-light col shadow-sm rounded-4">
+            <div
+                className={`card bg-${
+                    theme === "light"
+                        ? "light"
+                        : "black border border-secondary"
+                } col shadow-sm rounded-4`}
+            >
                 <div className="card-body">
                     <h5 className="card-title placeholder-glow">
                         <span className="placeholder bg-secondary col-6"></span>

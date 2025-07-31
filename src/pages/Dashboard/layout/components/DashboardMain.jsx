@@ -98,6 +98,7 @@ const DashboardMain = ({ theme }) => {
                         setSpecs={setSpecs}
                         template={template}
                         setTemplate={setTemplate}
+                        theme={theme}
                     />
                 </div>
                 <div
@@ -119,6 +120,7 @@ const DashboardMain = ({ theme }) => {
                             <Banner
                                 specs={specs}
                                 setSpecs={setSpecs}
+                                theme={theme}
                             />
                         </div>
                     </div>
@@ -130,12 +132,14 @@ const DashboardMain = ({ theme }) => {
                         resetSpecs={resetSpecs}
                         setSpecs={setSpecs}
                         templateSpecs={templateSpecs}
+                        theme={theme}
                     />
                     <Directory
                         specs={specs}
                         routes={routes}
                         setHits={setHits}
                         setIsSearching={setIsSearching}
+                        theme={theme}
                     />
                 </div>
             </div>

@@ -25,7 +25,7 @@ const PageLayout = ({
                 setAnchor={setAnchor}
             />
             <button
-                className="btn text-warning position-fixed bottom-0 end-0"
+                className="btn btn-lg text-warning position-fixed bottom-0 end-0"
                 onClick={() => {
                     const CURRENT_THEME =
                         localStorage.getItem("freighbleTheme");
