@@ -81,6 +81,7 @@ function App() {
                         element={
                             <Login
                                 CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                                theme={theme}
                             />
                         }
                     />
@@ -89,6 +90,7 @@ function App() {
                         element={
                             <Register
                                 CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                                theme={theme}
                             />
                         }
                     />
@@ -107,6 +109,7 @@ function App() {
                                     CONDITIONAL_RENDERING={
                                         CONDITIONAL_RENDERING
                                     }
+                                    theme={theme}
                                 />
                             }
                         />
@@ -117,6 +120,7 @@ function App() {
                                     CONDITIONAL_RENDERING={
                                         CONDITIONAL_RENDERING
                                     }
+                                    theme={theme}
                                 />
                             }
                         />
@@ -127,6 +131,7 @@ function App() {
                                     CONDITIONAL_RENDERING={
                                         CONDITIONAL_RENDERING
                                     }
+                                    theme={theme}
                                 />
                             }
                         />

@@ -14,7 +14,7 @@ const BLANK_CREDENTIALS = {
 /* MODULE END */
 
 /* COMPONENT START */
-const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
+const LoginForm = ({ role, CONDITIONAL_RENDERING, theme }) => {
     // state
     const [credentials, setCredentials] = useState(BLANK_CREDENTIALS);
     const [showPassword, setShowPassword] = useState(false);
@@ -90,11 +90,19 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
             <div className="row justify-content-center pt-5">
                 {!authenticating ? (
                     <div className="col-11 col-md-7 py-4">
-                        <h5 className="display-5 text-capitalize py-4">
+                        <h5
+                            className={`display-5 ${
+                                theme === "light" ? "" : "text-light"
+                            } text-capitalize py-4`}
+                        >
                             {role} portal
                         </h5>
                         {role === "vendor" && (
-                            <div className="border border-warning bg-warning bg-opacity-25 text-warning-emphasis rounded p-3 mb-3">
+                            <div
+                                className={`border border-warning bg-warning bg-opacity-25 text-warning${
+                                    theme === "light" ? "-emphasis" : ""
+                                } rounded p-3 mb-3`}
+                            >
                                 Please note you're in our vendor's login portal,
                                 reserved for Freighble vendors. If you're an app
                                 user, please go to the{" "}
@@ -109,12 +117,24 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
                         )}
                         <form
                             id="user_login"
-                            className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
+                            className={`shadow-sm border rounded-4 p-4 bg-${
+                                theme === "light"
+                                    ? "light"
+                                    : "black bg-gradient border-secondary"
+                            } needs-validation`}
                             onSubmit={(e) => handleLogin(e, credentials)}
                         >
-                            <div className="row border-bottom mb-4">
+                            <div
+                                className={`row border-bottom ${
+                                    theme === "light" ? "" : "border-secondary"
+                                } mb-4`}
+                            >
                                 <div className="col-12">
-                                    <h6 className="display-6 text-uppercase text-dark fw-bold brand-font">
+                                    <h6
+                                        className={`display-6 text-uppercase text-${
+                                            theme === "light" ? "dark" : "light"
+                                        } fw-bold brand-font`}
+                                    >
                                         credentials
                                     </h6>
                                 </div>
@@ -127,7 +147,9 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
                                         className={`fw-medium text-${
                                             credentials.email
                                                 ? "primary"
-                                                : "dark-emphasis"
+                                                : theme === "light"
+                                                ? "dark-emphasis"
+                                                : "light text-opacity-75"
                                         }`}
                                     >
                                         email address
@@ -161,7 +183,9 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
                                         className={`fw-medium text-${
                                             credentials.password
                                                 ? "primary"
-                                                : "dark-emphasis"
+                                                : theme === "light"
+                                                ? "dark-emphasis"
+                                                : "light text-opacity-75"
                                         }`}
                                     >
                                         password
@@ -196,7 +220,11 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
                                         />
                                         <button
                                             type="button"
-                                            className="btn border border-start-0"
+                                            className={`btn border ${
+                                                theme === "light"
+                                                    ? ""
+                                                    : "bg-light border-secondary"
+                                            } border-start-0`}
                                             onClick={() => {
                                                 setShowPassword(!showPassword);
                                             }}
@@ -231,7 +259,9 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING }) => {
 
                             <button
                                 type="submit"
-                                className="btn btn-dark bg-gradient shadow-sm fw-medium text-capitalize w-100 rounded-3"
+                                className={`btn btn-${
+                                    theme === "light" ? "dark" : "primary"
+                                } bg-gradient shadow-sm fw-medium text-capitalize w-100 rounded-3`}
                             >
                                 log in
                             </button>

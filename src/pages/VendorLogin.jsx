@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Transition, LoginForm } from "./_templates";
 
 // component
-const VendorLogin = ({ CONDITIONAL_RENDERING }) => {
+const VendorLogin = ({ CONDITIONAL_RENDERING, theme }) => {
     // module
     const navigate = useNavigate();
 
@@ -32,6 +32,7 @@ const VendorLogin = ({ CONDITIONAL_RENDERING }) => {
         <LoginForm
             role="vendor"
             CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+            theme={theme}
         />
     );
 };

@@ -20,7 +20,7 @@ const skeleton = {
 };
 
 // render
-const UserProfile = ({ CONDITIONAL_RENDERING }) => {
+const UserProfile = ({ CONDITIONAL_RENDERING, theme }) => {
     // state
     const [isFetching, setIsFetching] = useState(false);
     const [user, setUser] = useState(skeleton);
@@ -77,6 +77,7 @@ const UserProfile = ({ CONDITIONAL_RENDERING }) => {
                     visibility="view"
                     data={user}
                     CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                    theme={theme}
                 />
             ) : (
                 <div className="row justify-content-center">

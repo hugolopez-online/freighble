@@ -20,7 +20,7 @@ const data = {
 };
 
 // component
-const Register = ({ CONDITIONAL_RENDERING }) => {
+const Register = ({ CONDITIONAL_RENDERING, theme }) => {
     // module
     const navigate = useNavigate();
 
@@ -47,6 +47,7 @@ const Register = ({ CONDITIONAL_RENDERING }) => {
         <UserDisplay
             visibility="create"
             data={data}
+            theme={theme}
         />
     );
 };

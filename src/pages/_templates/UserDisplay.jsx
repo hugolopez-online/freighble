@@ -229,13 +229,21 @@ const UserDisplay = (props) => {
                     }`}
                 >
                     <div className="col-11 col-md-9 py-4">
-                        <h5 className="display-5 py-4">
+                        <h5
+                            className={`display-5 ${
+                                props.theme === "light" ? "" : "text-light"
+                            } py-4`}
+                        >
                             {view ? (
                                 <Fragment>
                                     User Profile
                                     <br />
                                     <button
-                                        className="btn btn-sm btn-dark bg-gradient rounded-3 fw-medium me-2"
+                                        className={`btn btn-sm btn-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "primary"
+                                        } bg-gradient rounded-3 fw-medium me-2`}
                                         onClick={() => {
                                             setVisibility("edit");
                                         }}
@@ -243,7 +251,7 @@ const UserDisplay = (props) => {
                                         Edit Profile
                                     </button>
                                     <Link
-                                        className="btn btn-sm btn-primary bg-gradient rounded-3 fw-medium me-2"
+                                        className="btn btn-sm btn-secondary bg-gradient rounded-3 fw-medium me-2"
                                         to="../"
                                     >
                                         Go to Dashboard
@@ -273,7 +281,11 @@ const UserDisplay = (props) => {
                                     User Profile
                                     <br />
                                     <button
-                                        className="btn btn-sm btn-dark bg-gradient fw-medium me-2"
+                                        className={`btn btn-sm btn-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "primary"
+                                        } bg-gradient rounded-3 fw-medium me-2`}
                                         onClick={(e) => {
                                             handleRegistration(e, data);
                                         }}
@@ -281,7 +293,7 @@ const UserDisplay = (props) => {
                                         Save Changes
                                     </button>
                                     <button
-                                        className="btn btn-sm btn-secondary bg-gradient fw-medium"
+                                        className="btn btn-sm btn-secondary bg-gradient rounded-3 fw-medium"
                                         onClick={() => {
                                             setData(props.data);
                                             setVisibility("view");
@@ -294,15 +306,31 @@ const UserDisplay = (props) => {
                         </h5>
                         <form
                             id="user_register"
-                            className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
+                            className={`shadow-sm border rounded-4 p-4 bg-${
+                                props.theme === "light"
+                                    ? "light"
+                                    : "black bg-gradient border-secondary"
+                            } needs-validation`}
                             onSubmit={(e) => handleRegistration(e, data)}
                         >
                             {/* Auth details */}
                             {create && (
                                 <Fragment>
-                                    <div className="row border-bottom mb-4">
+                                    <div
+                                        className={`row border-bottom ${
+                                            props.theme === "light"
+                                                ? ""
+                                                : "border-secondary"
+                                        } mb-4`}
+                                    >
                                         <div className="col-12">
-                                            <h6 className="display-6 text-dark fw-bold brand-font">
+                                            <h6
+                                                className={`display-6 text-${
+                                                    props.theme === "light"
+                                                        ? "dark"
+                                                        : "light"
+                                                } fw-bold brand-font`}
+                                            >
                                                 SIGN-UP DETAILS
                                             </h6>
                                         </div>
@@ -312,7 +340,11 @@ const UserDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="email_address"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 email address{" "}
                                                 <strong
@@ -357,7 +389,11 @@ const UserDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="user_password"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 password{" "}
                                                 <strong
@@ -413,7 +449,11 @@ const UserDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="confirm_user_password"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 confirm password{" "}
                                                 <strong
@@ -473,9 +513,21 @@ const UserDisplay = (props) => {
                             )}
 
                             {/* Profile info */}
-                            <div className="row border-bottom mb-4">
+                            <div
+                                className={`row border-bottom ${
+                                    props.theme === "light"
+                                        ? ""
+                                        : "border-secondary"
+                                } mb-4`}
+                            >
                                 <div className="col-12">
-                                    <h6 className="display-6 text-dark fw-bold brand-font">
+                                    <h6
+                                        className={`display-6 text-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "light"
+                                        } fw-bold brand-font`}
+                                    >
                                         PROFILE INFORMATION
                                     </h6>
                                 </div>
@@ -485,12 +537,18 @@ const UserDisplay = (props) => {
                                 {view ? (
                                     <Fragment>
                                         <div className="col-12">
-                                            <h2 className="text-primary-emphasis fw-bold mb-3">
+                                            <h2
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "primary-emphasis"
+                                                        : "light text-opacity-75"
+                                                } fw-bold mb-3`}
+                                            >
                                                 {data.first_name}{" "}
                                                 {data.last_name}
                                             </h2>
                                             <div className="input-group mb-2">
-                                                <span className="input-group-text border-primary text-bg-primary">
+                                                <span className="input-group-text border-secondary text-bg-secondary">
                                                     <i className="bi bi-envelope-fill"></i>
                                                 </span>
                                                 <input
@@ -502,7 +560,7 @@ const UserDisplay = (props) => {
                                             </div>
                                             {data.company && (
                                                 <div className="input-group mb-2">
-                                                    <span className="input-group-text border-primary text-bg-primary">
+                                                    <span className="input-group-text border-secondary text-bg-secondary">
                                                         <i className="bi bi-building-fill"></i>
                                                     </span>
                                                     <input
@@ -516,7 +574,11 @@ const UserDisplay = (props) => {
                                         </div>
                                         <div className="col-12 mt-4">
                                             <button
-                                                className="btn btn-block btn-dark bg-gradient rounded-3 fw-medium w-100 me-2"
+                                                className={`btn btn-block btn-${
+                                                    props.theme === "light"
+                                                        ? "dark"
+                                                        : "primary"
+                                                } bg-gradient rounded-3 fw-medium w-100 me-2`}
                                                 onClick={() => {
                                                     setVisibility("edit");
                                                 }}
@@ -530,7 +592,11 @@ const UserDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="user_first_name"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 first name{" "}
                                                 <strong
@@ -573,7 +639,11 @@ const UserDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="user_last_name"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 last name{" "}
                                                 <strong
@@ -617,7 +687,11 @@ const UserDisplay = (props) => {
                                             <div className="col-12 mb-2">
                                                 <label
                                                     htmlFor="email_address"
-                                                    className="fw-medium text-dark-emphasis"
+                                                    className={`fw-medium text-${
+                                                        props.theme === "light"
+                                                            ? "dark-emphasis"
+                                                            : "light text-opacity-75"
+                                                    }`}
                                                 >
                                                     email address{" "}
                                                     <strong
@@ -663,7 +737,11 @@ const UserDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="user_company"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 company
                                             </label>
@@ -725,7 +803,10 @@ const UserDisplay = (props) => {
                                             <label
                                                 className={`form-check-label text-${
                                                     data.auth.terms.accepted
-                                                        ? "dark"
+                                                        ? props.theme ===
+                                                          "light"
+                                                            ? "dark"
+                                                            : "light"
                                                         : "secondary"
                                                 }`}
                                                 htmlFor="accept_terms"
@@ -759,7 +840,11 @@ const UserDisplay = (props) => {
                                     )}
                                     <button
                                         type="submit"
-                                        className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
+                                        className={`btn btn-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "primary"
+                                        } bg-gradient shadow-sm fw-medium w-100 rounded-3`}
                                     >
                                         {create ? "Sign Up" : "Save Changes"}
                                     </button>
@@ -769,9 +854,17 @@ const UserDisplay = (props) => {
                                             <h5 className="text-danger text-uppercase">
                                                 danger zone!
                                             </h5>
-                                            <small className="text-danger-emphasis">
+                                            <small
+                                                className={`text-danger${
+                                                    props.theme === "light"
+                                                        ? "-emphasis"
+                                                        : ""
+                                                }`}
+                                            >
                                                 This is a{" "}
-                                                <b>one-click deletion</b>{" "}
+                                                <b>
+                                                    <u>one-click deletion</u>
+                                                </b>{" "}
                                                 button, and once deleted, all
                                                 your account's information is
                                                 irrevocably removed from our
