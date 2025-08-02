@@ -5,7 +5,6 @@ const Transition = ({ variables }) => {
 
     const AUTH = type === "Authenticating";
     const REDIRECT = type === "Redirecting";
-    const LOAD = type === "Loading";
 
     return (
         <div className="row justify-content-center pt-5">

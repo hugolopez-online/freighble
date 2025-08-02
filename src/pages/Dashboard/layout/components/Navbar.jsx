@@ -7,7 +7,7 @@ import icon from "../../../../assets/img/logo-icon_40x40.webp";
 
 // component
 
-const Navbar = ({ CONDITIONAL_RENDERING, greeting, theme, setTheme }) => {
+const Navbar = ({ CONDITIONAL_RENDERING, GREETING, theme, setTheme }) => {
     const navigate = useNavigate();
 
     return (
@@ -43,7 +43,7 @@ const Navbar = ({ CONDITIONAL_RENDERING, greeting, theme, setTheme }) => {
                                 theme === "light" ? "dark" : "light"
                             } fw-medium`}
                         >
-                            Welcome, {greeting}!
+                            Welcome, {GREETING}!
                         </span>
                         <div className="dropdown ms-2">
                             <button

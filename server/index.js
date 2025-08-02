@@ -31,7 +31,6 @@ app.use("/api/users", usersRouter);
 app.use("/api/vendors", vendorsRouter);
 /* MIDDLEWARE END */
 
-// pass route handling to front-end
 app.get("/{*any}", (req, res) => {
     try {
         return res.sendFile(path.resolve(__dirname, "../dist/index.html"));
