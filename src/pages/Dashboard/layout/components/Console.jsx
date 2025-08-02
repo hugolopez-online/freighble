@@ -2,19 +2,10 @@ import { useEffect, useState } from "react";
 import { modes, borders } from "data/variables";
 
 const Console = (props) => {
-    // states
-
-    const [minData, setMinData] = useState(false);
-
-    // effects
-
-    useEffect(() => {
-        setMinData(
-            props.specs.mode &&
-                props.specs.origin.country &&
-                props.specs.destination.country
-        );
-    }, [props.specs.mode, props.specs.origin, props.specs.destination]);
+    const MIN_DATA =
+        props.specs.mandatory.mode &&
+        props.specs.mandatory.origin.country &&
+        props.specs.mandatory.destination.country;
 
     return (
         <div
@@ -35,45 +26,60 @@ const Console = (props) => {
                 >
                     <span
                         className={`font-monospace text-light${
-                            minData ? " marquee-item" : ""
+                            MIN_DATA ? " marquee-item" : ""
                         }`}
                     >
                         <span className="fw-bold fs-6">current search: </span>
-                        {minData ? (
+                        {MIN_DATA ? (
                             <>{`${
-                                props.specs.usa_bonded ? "U.S. bonded " : ""
-                            }${props.specs.can_bonded ? "Canada bonded " : ""}${
-                                props.specs.hazmat ? "Hazmat " : ""
-                            }${modes[props.specs.mode]} from ${
-                                props.specs.origin.city
-                                    ? props.specs.origin.city + ", "
+                                props.specs.mandatory.usa_bonded
+                                    ? "U.S. bonded "
                                     : ""
-                            }${props.specs.origin.territory} to 
+                            }${
+                                props.specs.mandatory.can_bonded
+                                    ? "Canada bonded "
+                                    : ""
+                            }${props.specs.mandatory.hazmat ? "Hazmat " : ""}${
+                                modes[props.specs.mandatory.mode]
+                            } from ${
+                                props.specs.mandatory.origin.city
+                                    ? props.specs.mandatory.origin.city + ", "
+                                    : ""
+                            }${props.specs.mandatory.origin.territory} to 
                             ${
-                                props.specs.destination.city
-                                    ? props.specs.destination.city + ", "
+                                props.specs.mandatory.destination.city
+                                    ? props.specs.mandatory.destination.city +
+                                      ", "
                                     : ""
-                            }${props.specs.destination.territory}${
-                                props.specs.team_drivers
+                            }${props.specs.mandatory.destination.territory}${
+                                props.specs.mandatory.team_drivers
                                     ? " with Team Drivers"
                                     : ""
                             }${
-                                props.specs.border !== "none"
+                                props.specs.mandatory.border !== "none"
                                     ? ", crossing through " +
-                                      borders[props.specs.border]
+                                      borders[props.specs.mandatory.border]
                                     : ""
                             }${
-                                props.specs.ctpat ||
-                                props.specs.twic ||
-                                props.specs.tsa ||
-                                props.specs.fast ||
-                                props.specs.tanker_endorsement
+                                props.specs.mandatory.ctpat ||
+                                props.specs.mandatory.twic ||
+                                props.specs.mandatory.tsa ||
+                                props.specs.mandatory.fast ||
+                                props.specs.mandatory.tanker_endorsement
                                     ? " (Extras:" +
-                                      (props.specs.ctpat ? " C-TPAT," : "") +
-                                      (props.specs.twic ? " TWIC," : "") +
-                                      (props.specs.tsa ? " TSA," : "") +
-                                      (props.specs.fast ? " FAST," : "") +
-                                      (props.specs.tanker_endorsement
+                                      (props.specs.mandatory.ctpat
+                                          ? " C-TPAT,"
+                                          : "") +
+                                      (props.specs.mandatory.twic
+                                          ? " TWIC,"
+                                          : "") +
+                                      (props.specs.mandatory.tsa
+                                          ? " TSA,"
+                                          : "") +
+                                      (props.specs.mandatory.fast
+                                          ? " FAST,"
+                                          : "") +
+                                      (props.specs.mandatory.tanker_endorsement
                                           ? " Tanker endorsement,"
                                           : "") +
                                       " certified)"
@@ -84,27 +90,12 @@ const Console = (props) => {
                         )}
                     </span>
                 </div>
-                <div className="col-9 btn-group pe-2">
+                <div className="col-12 btn-group">
                     <button
                         type="button"
-                        className={`btn btn-sm bg-gradient rounded-start-3 fw-bold${
-                            minData ? " btn-primary" : " btn-secondary disabled"
-                        }`}
-                        onClick={() => {
-                            document
-                                .getElementById("searchForm")
-                                .classList.remove("d-none");
-                            props.templateSpecs(props.specs);
-                            document.getElementById("origin_city").focus();
-                        }}
-                    >
-                        template
-                    </button>
-                    <button
-                        type="button"
-                        className={`btn btn-sm bg-gradient rounded-end-3 px-3${
-                            minData ? " btn-danger" : " btn-secondary disabled"
-                        }`}
+                        className={`btn btn-sm bg-gradient rounded-pill d-inline-block fw-medium px-3${
+                            MIN_DATA ? " btn-danger" : " btn-secondary disabled"
+                        } me-2`}
                         onClick={() => {
                             document
                                 .getElementById("searchForm")
@@ -115,15 +106,17 @@ const Console = (props) => {
                                 behavior: "smooth",
                             });
                             props.setSpecs(props.default_specs);
-                            props.templateSpecs(props.default_specs);
+                            props.setVendorList([]);
                         }}
                     >
-                        clear
+                        clear current search
                     </button>
-                </div>
-                <div className="col-3 btn-group ps-2">
                     <button
-                        className="btn btn-sm btn-dark bg-gradient rounded-pill d-inline-block d-md-none me-2"
+                        className={`btn btn-sm d-md-none btn-${
+                            props.theme === "light"
+                                ? "dark bg-gradient"
+                                : "light bg-gradient-soft"
+                        } rounded-pill me-2`}
                         type="button"
                         onClick={() => {
                             document

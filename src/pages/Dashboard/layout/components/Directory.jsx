@@ -6,57 +6,58 @@ import { base_score, $VAST } from "../handlers/vast_system";
 
 // component
 
-const Directory = ({ specs, routes, setHits, setIsSearching, theme }) => {
+const Directory = ({
+    specs,
+    default_specs,
+    routes,
+    vendorList,
+    setVendorList,
+    theme,
+}) => {
     // states
-
-    const [vendorList, setVendorList] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
 
     // module
 
-    const min_info =
-        specs.mode && specs.origin.country && specs.destination.country;
+    const MIN_DATA =
+        specs.mandatory.mode &&
+        specs.mandatory.origin.country &&
+        specs.mandatory.destination.country;
 
     // effects
 
     useEffect(() => {
-        setVendorList([]);
-
         const searchVendors = async () => {
-            // async func to search vendors through API
-            const query_string = `/api/vendors/public/search?mode=${
-                specs.mode
-            }&o_country=${specs.origin.country}&d_country=${
-                specs.destination.country
-            }&border=${specs.border}&hazmat=${Number(
-                specs.hazmat
-            )}&team_drivers=${Number(specs.team_drivers)}&usa_bonded=${Number(
-                specs.usa_bonded
-            )}&can_bonded=${Number(specs.can_bonded)}&ctpat=${Number(
-                specs.ctpat
-            )}&twic=${Number(specs.twic)}&tsa=${Number(
-                specs.tsa
-            )}&fast=${Number(specs.fast)}&tanker_endorsement=${Number(
-                specs.tanker_endorsement
+            const QUERY = `/api/vendors/public/search?mode=${
+                specs.mandatory.mode
+            }&o_country=${specs.mandatory.origin.country}&d_country=${
+                specs.mandatory.destination.country
+            }&border=${specs.mandatory.border}&hazmat=${Number(
+                specs.mandatory.hazmat
+            )}&team_drivers=${Number(
+                specs.mandatory.team_drivers
+            )}&usa_bonded=${Number(
+                specs.mandatory.usa_bonded
+            )}&can_bonded=${Number(specs.mandatory.can_bonded)}&ctpat=${Number(
+                specs.mandatory.ctpat
+            )}&twic=${Number(specs.mandatory.twic)}&tsa=${Number(
+                specs.mandatory.tsa
+            )}&fast=${Number(specs.mandatory.fast)}&tanker_endorsement=${Number(
+                specs.mandatory.tanker_endorsement
             )}`;
 
             setIsFetching(true);
-            setIsSearching(true);
 
-            const filtered_vendors_promise = await fetch(query_string);
+            const filtered_vendors_promise = await fetch(QUERY);
 
             const filtered_vendors = await filtered_vendors_promise.json();
             const found_vendors = filtered_vendors.filtered_vendors.sort(
                 (a, b) => a.company.localeCompare(b.company)
             );
 
-            // compute suitability score
-
             const scored_vendors = found_vendors.map((vendor) =>
                 $VAST(vendor, specs, routes)
             );
-
-            // re-filter and sort vendors by final suitability score
 
             const filtered_scored_vendors = scored_vendors.filter(
                 (vendor) => vendor.score >= base_score
@@ -66,33 +67,15 @@ const Directory = ({ specs, routes, setHits, setIsSearching, theme }) => {
 
             setVendorList(filtered_scored_vendors);
             setIsFetching(false);
-            setHits(filtered_scored_vendors.length);
-            setIsSearching(false);
             window.scrollTo(0, 0);
         };
 
-        if (min_info) {
+        if (MIN_DATA) {
             searchVendors();
         }
-    }, [
-        specs.mode,
-        specs.origin,
-        specs.destination,
-        specs.border,
-        specs.hazmat,
-        specs.team_drivers,
-        specs.usa_bonded,
-        specs.can_bonded,
-        specs.ctpat,
-        specs.twic,
-        specs.tsa,
-        specs.fast,
-        specs.tanker_endorsement,
-        routes,
-    ]);
+    }, [specs.mandatory]);
 
     // utils
-
     const placeholder_amount = 10;
     let placeholders = [];
     for (let i = 0; i <= placeholder_amount; i++) {
@@ -100,7 +83,6 @@ const Directory = ({ specs, routes, setHits, setIsSearching, theme }) => {
     }
 
     // render
-
     return (
         <Fragment>
             {!vendorList.length ? (
@@ -111,7 +93,7 @@ const Directory = ({ specs, routes, setHits, setIsSearching, theme }) => {
                         </h1>
                         <hr className="border border-secondary" />
                         <h6 className="display-6 text-secondary">
-                            {min_info
+                            {MIN_DATA
                                 ? "We were not able to find suitable vendors for your search, but we continuously update our database. Please try again later."
                                 : "Make a load search to display suitable vendors here."}
                         </h6>
@@ -154,6 +136,63 @@ const Directory = ({ specs, routes, setHits, setIsSearching, theme }) => {
                     })}
                 </div>
             )}
+            {/* STATUS BAR START */}
+            <div
+                className={`row justify-content-between fixed-bottom font-monospace text-bg-${
+                    specs === default_specs
+                        ? "secondary"
+                        : isFetching
+                        ? "warning"
+                        : vendorList.length > 0
+                        ? "primary bg-gradient"
+                        : "danger"
+                } px-4 py-0`}
+            >
+                <div className="col-12 col-md-4">
+                    <small>
+                        <b>app status:</b>{" "}
+                    </small>
+                    {specs === default_specs ? (
+                        <Fragment>
+                            <small>system ready</small>
+                            <div
+                                className={`spinner-grow spinner-grow-sm ms-2`}
+                                aria-hidden="true"
+                            ></div>
+                        </Fragment>
+                    ) : isFetching ? (
+                        <Fragment>
+                            <small>searching vendors</small>
+                            <div
+                                className={`spinner-border spinner-border-sm ms-2`}
+                                aria-hidden="true"
+                            ></div>
+                        </Fragment>
+                    ) : (
+                        <Fragment>
+                            <small>
+                                displaying <b>{vendorList.length}</b> search
+                                result
+                                {vendorList.length !== 1 ? "s" : ""}
+                            </small>
+                            <i
+                                className={`bi bi-${
+                                    vendorList.length > 0
+                                        ? "check"
+                                        : "exclamation-triangle"
+                                } ms-1`}
+                            ></i>
+                        </Fragment>
+                    )}
+                </div>
+                <div className="col-4 d-none d-md-block text-end">
+                    <small>
+                        <b>last app status update:</b>{" "}
+                        {new Date().toLocaleString()}
+                    </small>
+                </div>
+            </div>
+            {/* STATUS BAR END */}
         </Fragment>
     );
 };

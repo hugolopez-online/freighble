@@ -31,8 +31,8 @@ const $VAST = (vendor, specs, routes) => {
 
     if (
         !(
-            vendor.domicile.country_code === specs.origin.country ||
-            vendor.domicile.country_code === specs.destination.country
+            vendor.domicile.country_code === specs.mandatory.origin.country ||
+            vendor.domicile.country_code === specs.mandatory.destination.country
         )
     ) {
         adjusted_score -= 5;
@@ -40,8 +40,8 @@ const $VAST = (vendor, specs, routes) => {
 
     if (
         !(
-            vendor.domicile.territory === specs.origin.territory ||
-            vendor.domicile.territory === specs.destination.territory
+            vendor.domicile.territory === specs.mandatory.origin.territory ||
+            vendor.domicile.territory === specs.mandatory.destination.territory
         )
     ) {
         adjusted_score -= 2.5;
@@ -49,12 +49,13 @@ const $VAST = (vendor, specs, routes) => {
 
     for (let country_lookup of Object.keys(coverage)) {
         if (
-            coverage[country_lookup].country_code == specs.origin.country &&
+            coverage[country_lookup].country_code ==
+                specs.mandatory.origin.country &&
             coverage[country_lookup].territory.length != 0
         ) {
             if (
                 coverage[country_lookup].territory.includes(
-                    specs.origin.territory
+                    specs.mandatory.origin.territory
                 )
             ) {
                 adjusted_score += origin_territory_weight;
@@ -63,12 +64,12 @@ const $VAST = (vendor, specs, routes) => {
 
         if (
             coverage[country_lookup].country_code ==
-                specs.destination.country &&
+                specs.mandatory.destination.country &&
             coverage[country_lookup].territory.length != 0
         ) {
             if (
                 coverage[country_lookup].territory.includes(
-                    specs.destination.territory
+                    specs.mandatory.destination.territory
                 )
             ) {
                 adjusted_score += destination_territory_weight;

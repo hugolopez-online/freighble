@@ -1,8 +1,8 @@
 const Banner = (props) => {
-    const min_data =
-        props.specs.mode &&
-        props.specs.origin.country &&
-        props.specs.destination.country;
+    const MIN_DATA =
+        props.specs.mandatory.mode &&
+        props.specs.mandatory.origin.country &&
+        props.specs.mandatory.destination.country;
 
     return (
         <div
@@ -49,28 +49,37 @@ const Banner = (props) => {
                         id="origin_date"
                         type="date"
                         className="form-control form-control-sm"
-                        value={props.specs.origin_date}
+                        value={props.specs.optional.origin_date}
                         onChange={(e) => {
                             props.setSpecs((prev) => {
-                                return { ...prev, origin_date: e.target.value };
+                                return {
+                                    ...prev,
+                                    optional: {
+                                        ...prev.optional,
+                                        origin_date: e.target.value,
+                                    },
+                                };
                             });
                         }}
-                        disabled={!min_data}
+                        disabled={!MIN_DATA}
                     />
                     <input
                         id="destination_date"
                         type="date"
                         className="form-control form-control-sm"
-                        value={props.specs.destination_date}
+                        value={props.specs.optional.destination_date}
                         onChange={(e) => {
                             props.setSpecs((prev) => {
                                 return {
                                     ...prev,
-                                    destination_date: e.target.value,
+                                    optional: {
+                                        ...prev.optional,
+                                        destination_date: e.target.value,
+                                    },
                                 };
                             });
                         }}
-                        disabled={!min_data}
+                        disabled={!MIN_DATA}
                     />
                 </div>
             </div>
@@ -88,14 +97,20 @@ const Banner = (props) => {
                         type="text"
                         placeholder="e.g., 53 ft dry van"
                         className="form-control form-control-sm"
-                        value={props.specs.unit_type}
+                        value={props.specs.optional.unit_type}
                         onChange={(e) => {
                             props.setSpecs((prev) => {
-                                return { ...prev, unit_type: e.target.value };
+                                return {
+                                    ...prev,
+                                    optional: {
+                                        ...prev.optional,
+                                        unit_type: e.target.value,
+                                    },
+                                };
                             });
                         }}
                         autoComplete="off"
-                        disabled={!min_data}
+                        disabled={!MIN_DATA}
                     />
                 </div>
             </div>
@@ -114,16 +129,19 @@ const Banner = (props) => {
                         placeholder="e.g., 20 pallets / 44,000 lbs"
                         className="form-control form-control-sm"
                         rows="2"
-                        value={props.specs.cargo_details}
+                        value={props.specs.optional.cargo_details}
                         onChange={(e) => {
                             props.setSpecs((prev) => {
                                 return {
                                     ...prev,
-                                    cargo_details: e.target.value,
+                                    optional: {
+                                        ...prev.optional,
+                                        cargo_details: e.target.value,
+                                    },
                                 };
                             });
                         }}
-                        disabled={!min_data}
+                        disabled={!MIN_DATA}
                     ></textarea>
                 </div>
             </div>
@@ -142,16 +160,19 @@ const Banner = (props) => {
                         placeholder="e.g., Call prior to arrival"
                         className="form-control form-control-sm"
                         rows="2"
-                        value={props.specs.instructions}
+                        value={props.specs.optional.instructions}
                         onChange={(e) => {
                             props.setSpecs((prev) => {
                                 return {
                                     ...prev,
-                                    instructions: e.target.value,
+                                    optional: {
+                                        ...prev.optional,
+                                        instructions: e.target.value,
+                                    },
                                 };
                             });
                         }}
-                        disabled={!min_data}
+                        disabled={!MIN_DATA}
                     ></textarea>
                 </div>
             </div>

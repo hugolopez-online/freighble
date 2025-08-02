@@ -7,53 +7,60 @@ const Vendor = (props) => {
         `Hello team ${props.company},\n\nPlease help with pricing and confirming availability for the shipment below.\n\n`
     );
     const origin_info = encodeURIComponent(
-        `Origin: ${props.specs.origin.city}, ${props.specs.origin.territory} (${
-            props.specs.origin_date || "date TBD"
-        })\n`
+        `Origin: ${props.specs.mandatory.origin.city}, ${
+            props.specs.mandatory.origin.territory
+        } (${props.specs.optional.origin_date || "date TBD"})\n`
     );
     const destination_info = encodeURIComponent(
-        `Destination: ${props.specs.destination.city}, ${
-            props.specs.destination.territory
-        } (${props.specs.destination_date || "date TBD"})${
-            props.specs.border !== "none"
-                ? "\nBorder crossing through: " + borders[props.specs.border]
+        `Destination: ${props.specs.mandatory.destination.city}, ${
+            props.specs.mandatory.destination.territory
+        } (${props.specs.optional.destination_date || "date TBD"})${
+            props.specs.mandatory.border !== "none"
+                ? "\nBorder crossing through: " +
+                  borders[props.specs.mandatory.border]
                 : ""
         }\n\n`
     );
 
     const specs_info = encodeURIComponent(
-        `Mode: ${modes[props.specs.mode]}\nUnit type: ${
-            props.specs.unit_type || "(not defined)"
-        }\nCargo details: ${props.specs.cargo_details || "(not defined)"}\n\n`
+        `Mode: ${modes[props.specs.mandatory.mode]}\nUnit type: ${
+            props.specs.optional.unit_type || "(not defined)"
+        }\nCargo details: ${
+            props.specs.optional.cargo_details || "(not defined)"
+        }\n\n`
     );
 
     const instructions_info = encodeURIComponent(
         `${
-            props.specs.hazmat ||
-            props.specs.team_drivers ||
-            props.specs.usa_bonded ||
-            props.specs.can_bonded ||
-            props.specs.ctpat ||
-            props.specs.twic ||
-            props.specs.tsa ||
-            props.specs.fast ||
-            props.specs.tanker_endorsement
+            props.specs.mandatory.hazmat ||
+            props.specs.mandatory.team_drivers ||
+            props.specs.mandatory.usa_bonded ||
+            props.specs.mandatory.can_bonded ||
+            props.specs.mandatory.ctpat ||
+            props.specs.mandatory.twic ||
+            props.specs.mandatory.tsa ||
+            props.specs.mandatory.fast ||
+            props.specs.mandatory.tanker_endorsement
                 ? "Special requirements:\n" +
-                  (props.specs.hazmat ? "*Hazmat handling\n" : "") +
-                  (props.specs.team_drivers ? "*Team drivers required\n" : "") +
-                  (props.specs.usa_bonded ? "*U.S bonded\n" : "") +
-                  (props.specs.can_bonded ? "*Canada bonded\n" : "") +
-                  (props.specs.ctpat ? "*C-TPAT\n" : "") +
-                  (props.specs.twic ? "*TWIC\n" : "") +
-                  (props.specs.tsa ? "*TSA\n" : "") +
-                  (props.specs.fast ? "*FAST\n" : "") +
-                  (props.specs.tanker_endorsement
+                  (props.specs.mandatory.hazmat ? "*Hazmat handling\n" : "") +
+                  (props.specs.mandatory.team_drivers
+                      ? "*Team drivers required\n"
+                      : "") +
+                  (props.specs.mandatory.usa_bonded ? "*U.S bonded\n" : "") +
+                  (props.specs.mandatory.can_bonded ? "*Canada bonded\n" : "") +
+                  (props.specs.mandatory.ctpat ? "*C-TPAT\n" : "") +
+                  (props.specs.mandatory.twic ? "*TWIC\n" : "") +
+                  (props.specs.mandatory.tsa ? "*TSA\n" : "") +
+                  (props.specs.mandatory.fast ? "*FAST\n" : "") +
+                  (props.specs.mandatory.tanker_endorsement
                       ? "*Tanker endorsement\n"
                       : "")
                 : ""
         }${
-            props.specs.instructions &&
-            "\nAdditional instructions:\n" + props.specs.instructions + "\n"
+            props.specs.optional.instructions &&
+            "\nAdditional instructions:\n" +
+                props.specs.optional.instructions +
+                "\n"
         }`
     );
     const signature = encodeURIComponent(
@@ -65,11 +72,11 @@ const Vendor = (props) => {
     );
 
     const EMAIL_SUBJECT = encodeURIComponent(
-        `${modes[props.specs.mode]} (${props.specs.origin.city}, ${
-            props.specs.origin.territory
-        } to ${props.specs.destination.city}, ${
-            props.specs.destination.territory
-        }) [${props.company}]`
+        `${modes[props.specs.mandatory.mode]} (${
+            props.specs.mandatory.origin.city
+        }, ${props.specs.mandatory.origin.territory} to ${
+            props.specs.mandatory.destination.city
+        }, ${props.specs.mandatory.destination.territory}) [${props.company}]`
     );
     const EMAIL_BODY =
         greeting +
@@ -241,14 +248,14 @@ const Vendor = (props) => {
                                 className="badge rounded-pill text-bg-success me-1"
                                 style={{ fontSize: "0.75rem" }}
                             >
-                                {modes[props.specs.mode]}
+                                {modes[props.specs.mandatory.mode]}
                                 <i className="bi bi-check-circle-fill ms-2"></i>
                             </span>
                             <span
                                 className="badge rounded-pill text-bg-success me-1"
                                 style={{ fontSize: "0.75rem" }}
                             >
-                                Origin: {props.specs.origin.country}
+                                Origin: {props.specs.mandatory.origin.country}
                                 <i className="bi bi-check-circle-fill ms-2"></i>
                             </span>
                             <span
@@ -258,47 +265,7 @@ const Vendor = (props) => {
                                             props.coverage[
                                                 country
                                             ].territory.includes(
-                                                props.specs.origin.territory
-                                            )
-                                        )
-                                        .includes(true)
-                                        ? "text-bg-success"
-                                        : "text-secondary border border-secondary fw-normal"
-                                } me-1`}
-                                style={{ fontSize: "0.75rem" }}
-                            >
-                                Origin: {props.specs.origin.territory}
-                                <i
-                                    className={`bi bi-${
-                                        Object.keys(props.coverage)
-                                            .map((country) =>
-                                                props.coverage[
-                                                    country
-                                                ].territory.includes(
-                                                    props.specs.origin.territory
-                                                )
-                                            )
-                                            .includes(true)
-                                            ? "check-circle-fill"
-                                            : "x-circle"
-                                    } ms-2`}
-                                ></i>
-                            </span>
-                            <span
-                                className="badge rounded-pill text-bg-success me-1"
-                                style={{ fontSize: "0.75rem" }}
-                            >
-                                Destination: {props.specs.destination.country}
-                                <i className="bi bi-check-circle-fill ms-2"></i>
-                            </span>
-                            <span
-                                className={`badge rounded-pill ${
-                                    Object.keys(props.coverage)
-                                        .map((country) =>
-                                            props.coverage[
-                                                country
-                                            ].territory.includes(
-                                                props.specs.destination
+                                                props.specs.mandatory.origin
                                                     .territory
                                             )
                                         )
@@ -308,7 +275,7 @@ const Vendor = (props) => {
                                 } me-1`}
                                 style={{ fontSize: "0.75rem" }}
                             >
-                                Destination: {props.specs.destination.territory}
+                                Origin: {props.specs.mandatory.origin.territory}
                                 <i
                                     className={`bi bi-${
                                         Object.keys(props.coverage)
@@ -316,7 +283,7 @@ const Vendor = (props) => {
                                                 props.coverage[
                                                     country
                                                 ].territory.includes(
-                                                    props.specs.destination
+                                                    props.specs.mandatory.origin
                                                         .territory
                                                 )
                                             )
@@ -326,17 +293,61 @@ const Vendor = (props) => {
                                     } ms-2`}
                                 ></i>
                             </span>
-                            {props.specs.border !== "none" && (
+                            <span
+                                className="badge rounded-pill text-bg-success me-1"
+                                style={{ fontSize: "0.75rem" }}
+                            >
+                                Destination:{" "}
+                                {props.specs.mandatory.destination.country}
+                                <i className="bi bi-check-circle-fill ms-2"></i>
+                            </span>
+                            <span
+                                className={`badge rounded-pill ${
+                                    Object.keys(props.coverage)
+                                        .map((country) =>
+                                            props.coverage[
+                                                country
+                                            ].territory.includes(
+                                                props.specs.mandatory
+                                                    .destination.territory
+                                            )
+                                        )
+                                        .includes(true)
+                                        ? "text-bg-success"
+                                        : "text-secondary border border-secondary fw-normal"
+                                } me-1`}
+                                style={{ fontSize: "0.75rem" }}
+                            >
+                                Destination:{" "}
+                                {props.specs.mandatory.destination.territory}
+                                <i
+                                    className={`bi bi-${
+                                        Object.keys(props.coverage)
+                                            .map((country) =>
+                                                props.coverage[
+                                                    country
+                                                ].territory.includes(
+                                                    props.specs.mandatory
+                                                        .destination.territory
+                                                )
+                                            )
+                                            .includes(true)
+                                            ? "check-circle-fill"
+                                            : "x-circle"
+                                    } ms-2`}
+                                ></i>
+                            </span>
+                            {props.specs.mandatory.border !== "none" && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
                                 >
                                     Border crossing:{" "}
-                                    {borders[props.specs.border]}
+                                    {borders[props.specs.mandatory.border]}
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}
-                            {props.hazmat && props.specs.hazmat && (
+                            {props.hazmat && props.specs.mandatory.hazmat && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
@@ -345,34 +356,37 @@ const Vendor = (props) => {
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}
-                            {props.team_drivers && props.specs.team_drivers && (
-                                <span
-                                    className="badge rounded-pill text-bg-success me-1"
-                                    style={{ fontSize: "0.75rem" }}
-                                >
-                                    Team drivers
-                                    <i className="bi bi-check-circle-fill ms-2"></i>
-                                </span>
-                            )}
-                            {props.usa_bonded && props.specs.usa_bonded && (
-                                <span
-                                    className="badge rounded-pill text-bg-success me-1"
-                                    style={{ fontSize: "0.75rem" }}
-                                >
-                                    U.S. bonded
-                                    <i className="bi bi-check-circle-fill ms-2"></i>
-                                </span>
-                            )}
-                            {props.can_bonded && props.specs.can_bonded && (
-                                <span
-                                    className="badge rounded-pill text-bg-success me-1"
-                                    style={{ fontSize: "0.75rem" }}
-                                >
-                                    Canada bond
-                                    <i className="bi bi-check-circle-fill ms-2"></i>
-                                </span>
-                            )}
-                            {props.ctpat && props.specs.ctpat && (
+                            {props.team_drivers &&
+                                props.specs.mandatory.team_drivers && (
+                                    <span
+                                        className="badge rounded-pill text-bg-success me-1"
+                                        style={{ fontSize: "0.75rem" }}
+                                    >
+                                        Team drivers
+                                        <i className="bi bi-check-circle-fill ms-2"></i>
+                                    </span>
+                                )}
+                            {props.usa_bonded &&
+                                props.specs.mandatory.usa_bonded && (
+                                    <span
+                                        className="badge rounded-pill text-bg-success me-1"
+                                        style={{ fontSize: "0.75rem" }}
+                                    >
+                                        U.S. bonded
+                                        <i className="bi bi-check-circle-fill ms-2"></i>
+                                    </span>
+                                )}
+                            {props.can_bonded &&
+                                props.specs.mandatory.can_bonded && (
+                                    <span
+                                        className="badge rounded-pill text-bg-success me-1"
+                                        style={{ fontSize: "0.75rem" }}
+                                    >
+                                        Canada bond
+                                        <i className="bi bi-check-circle-fill ms-2"></i>
+                                    </span>
+                                )}
+                            {props.ctpat && props.specs.mandatory.ctpat && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
@@ -381,7 +395,7 @@ const Vendor = (props) => {
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}
-                            {props.twic && props.specs.twic && (
+                            {props.twic && props.specs.mandatory.twic && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
@@ -390,7 +404,7 @@ const Vendor = (props) => {
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}
-                            {props.tsa && props.specs.tsa && (
+                            {props.tsa && props.specs.mandatory.tsa && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
@@ -399,7 +413,7 @@ const Vendor = (props) => {
                                     <i className="bi bi-check-circle-fill ms-2"></i>
                                 </span>
                             )}
-                            {props.fast && props.specs.fast && (
+                            {props.fast && props.specs.mandatory.fast && (
                                 <span
                                     className="badge rounded-pill text-bg-success me-1"
                                     style={{ fontSize: "0.75rem" }}
@@ -409,7 +423,7 @@ const Vendor = (props) => {
                                 </span>
                             )}
                             {props.tanker_endorsement &&
-                                props.specs.tanker_endorsement && (
+                                props.specs.mandatory.tanker_endorsement && (
                                     <span
                                         className="badge rounded-pill text-bg-success me-1"
                                         style={{ fontSize: "0.75rem" }}

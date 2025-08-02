@@ -82,29 +82,31 @@ const Search = (props) => {
         props.setSpecs((prev) => {
             return {
                 ...prev,
-                mode: formData.mode,
-                origin: {
-                    city: formData.origin_city,
-                    territory: formData.origin_territory,
-                    region: origin_region,
-                    country: origin_country,
+                mandatory: {
+                    mode: formData.mode,
+                    origin: {
+                        city: formData.origin_city,
+                        territory: formData.origin_territory,
+                        region: origin_region,
+                        country: origin_country,
+                    },
+                    destination: {
+                        city: formData.destination_city,
+                        territory: formData.destination_territory,
+                        region: destination_region,
+                        country: destination_country,
+                    },
+                    border: formData.border,
+                    hazmat: formData.hazmat,
+                    team_drivers: formData.team_drivers,
+                    usa_bonded: formData.usa_bonded,
+                    can_bonded: formData.can_bonded,
+                    ctpat: formData.ctpat,
+                    twic: formData.twic,
+                    tsa: formData.tsa,
+                    fast: formData.fast,
+                    tanker_endorsement: formData.tanker_endorsement,
                 },
-                destination: {
-                    city: formData.destination_city,
-                    territory: formData.destination_territory,
-                    region: destination_region,
-                    country: destination_country,
-                },
-                border: formData.border,
-                hazmat: formData.hazmat,
-                team_drivers: formData.team_drivers,
-                usa_bonded: formData.usa_bonded,
-                can_bonded: formData.can_bonded,
-                ctpat: formData.ctpat,
-                twic: formData.twic,
-                tsa: formData.tsa,
-                fast: formData.fast,
-                tanker_endorsement: formData.tanker_endorsement,
             };
         });
 
@@ -183,32 +185,10 @@ const Search = (props) => {
 
     // effects
     useEffect(() => {
-        if (props.template) {
-            window.scrollTo(0, 0);
-            props.setTemplate(null);
-
-            setFormData((prev) => {
-                return {
-                    ...prev,
-                    mode: props.template.mode,
-                    origin_city: props.template.origin.city,
-                    origin_territory: props.template.origin.territory,
-                    destination_city: props.template.destination.city,
-                    destination_territory: props.template.destination.territory,
-                    border: props.template.border,
-                    hazmat: props.template.hazmat,
-                    team_drivers: props.template.team_drivers,
-                    usa_bonded: props.template.usa_bonded,
-                    can_bonded: props.template.can_bonded,
-                    ctpat: props.template.ctpat,
-                    twic: props.template.twic,
-                    tsa: props.template.tsa,
-                    fast: props.template.fast,
-                    tanker_endorsement: props.template.tanker_endorsement,
-                };
-            });
+        if (!props.specs.mandatory.mode) {
+            setFormData(default_form_data);
         }
-    }, [props.template]);
+    }, [props.specs]);
 
     // render
     return (
