@@ -43,6 +43,7 @@ const Directory = ({
                 specs.mandatory.tanker_endorsement
             )}`;
 
+            setVendorList([]);
             setIsFetching(true);
 
             const filtered_vendors_promise = await fetch(QUERY);

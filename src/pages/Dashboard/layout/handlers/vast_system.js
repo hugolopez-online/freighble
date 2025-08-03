@@ -1,4 +1,4 @@
-/* === Vendor Assessment Segmentation Technology (VASST) === */
+/* === Vendor Assessment Segmentation Technology (VAST) === */
 
 // imports
 import suitability_weight from "./suitability_meta";

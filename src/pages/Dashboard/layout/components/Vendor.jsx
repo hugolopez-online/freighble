@@ -1,17 +1,20 @@
-// imports
+/* IMPORTS START*/
 import { Link } from "react-router-dom";
 import { modes, borders } from "data/variables";
+/* IMPORTS END */
 
+/* COMPONENT START */
 const Vendor = (props) => {
-    const greeting = encodeURIComponent(
+    // module
+    const GREET = encodeURIComponent(
         `Hello team ${props.company},\n\nPlease help with pricing and confirming availability for the shipment below.\n\n`
     );
-    const origin_info = encodeURIComponent(
+    const O_INFO = encodeURIComponent(
         `Origin: ${props.specs.mandatory.origin.city}, ${
             props.specs.mandatory.origin.territory
         } (${props.specs.optional.origin_date || "date TBD"})\n`
     );
-    const destination_info = encodeURIComponent(
+    const D_INFO = encodeURIComponent(
         `Destination: ${props.specs.mandatory.destination.city}, ${
             props.specs.mandatory.destination.territory
         } (${props.specs.optional.destination_date || "date TBD"})${
@@ -22,7 +25,7 @@ const Vendor = (props) => {
         }\n\n`
     );
 
-    const specs_info = encodeURIComponent(
+    const SPECS = encodeURIComponent(
         `Mode: ${modes[props.specs.mandatory.mode]}\nUnit type: ${
             props.specs.optional.unit_type || "(not defined)"
         }\nCargo details: ${
@@ -30,7 +33,7 @@ const Vendor = (props) => {
         }\n\n`
     );
 
-    const instructions_info = encodeURIComponent(
+    const INSTRUCTIONS = encodeURIComponent(
         `${
             props.specs.mandatory.hazmat ||
             props.specs.mandatory.team_drivers ||
@@ -54,21 +57,23 @@ const Vendor = (props) => {
                   (props.specs.mandatory.fast ? "*FAST\n" : "") +
                   (props.specs.mandatory.tanker_endorsement
                       ? "*Tanker endorsement\n"
-                      : "")
+                      : "") +
+                  "\n"
                 : ""
         }${
             props.specs.optional.instructions &&
-            "\nAdditional instructions:\n" +
+            "Additional instructions:\n" +
                 props.specs.optional.instructions +
-                "\n"
+                "\n\n"
         }`
     );
-    const signature = encodeURIComponent(
-        `\nLet me know if you have any questions.\n\nKind regards!`
+
+    const SIGN = encodeURIComponent(
+        `Let me know if you have any questions.\n\nKind regards!\n\n`
     );
 
-    const disclaimer = encodeURIComponent(
-        `\n\nThis contact was facilitated by Freighble Technologies.\nVisit freighble.com/vendors for further details.`
+    const DISCLAIMER = encodeURIComponent(
+        `This contact was facilitated by Freighble Technologies.\nVisit freighble.com/vendors for further details.`
     );
 
     const EMAIL_SUBJECT = encodeURIComponent(
@@ -79,16 +84,11 @@ const Vendor = (props) => {
         }, ${props.specs.mandatory.destination.territory}) [${props.company}]`
     );
     const EMAIL_BODY =
-        greeting +
-        origin_info +
-        destination_info +
-        specs_info +
-        instructions_info +
-        signature +
-        disclaimer;
+        GREET + O_INFO + D_INFO + SPECS + INSTRUCTIONS + SIGN + DISCLAIMER;
 
     const MAILTO_LINK = `mailto:${props.email}?subject=${EMAIL_SUBJECT}&body=${EMAIL_BODY}`;
 
+    // render
     return (
         <div className="col-12">
             <div className="input-group shadow-sm rounded-4">
@@ -467,5 +467,6 @@ const Vendor = (props) => {
         </div>
     );
 };
+/* COMPONENT END */
 
 export default Vendor;
