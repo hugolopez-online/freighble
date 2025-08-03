@@ -1,4 +1,4 @@
-const Banner = (props) => {
+const AdditionalInfo = (props) => {
     const MIN_DATA =
         props.specs.mandatory.mode &&
         props.specs.mandatory.origin.country &&
@@ -180,4 +180,4 @@ const Banner = (props) => {
     );
 };
 
-export default Banner;
+export default AdditionalInfo;

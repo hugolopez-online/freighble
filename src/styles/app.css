@@ -29,6 +29,11 @@
     border-bottom: 1px solid rgba(54, 54, 54, 0.8);
 }
 
+#user_profile {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
 .website-header {
     background: rgba(0, 0, 0, 0.9);
     box-shadow: 0 1px 10px rgba(77, 77, 77, 0.5);

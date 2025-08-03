@@ -8,7 +8,7 @@ import AddLane from "./VendorRegister/layout/components/AddLane";
 import { Transition, VendorDisplay } from "./_templates";
 
 // module
-const skeleton = {
+const BLANK_USER = {
     company: "",
     type: {
         asset_based: false,
@@ -53,7 +53,7 @@ const skeleton = {
 // render
 const VendorProfile = ({ CONDITIONAL_RENDERING }) => {
     const [isFetching, setIsFetching] = useState(false);
-    const [vendor, setVendor] = useState(skeleton);
+    const [vendor, setVendor] = useState(BLANK_USER);
     const { id } = useParams();
 
     useEffect(() => {

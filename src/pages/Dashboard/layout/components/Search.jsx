@@ -1,5 +1,5 @@
 /* IMPORTS START */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
     modes,
     modes_values,
@@ -13,8 +13,8 @@ import { GEO_LOOKUP } from "data/geo_meta";
 import { search_options } from "data/search_options";
 /* IMPORTS END */
 
-// module
-const default_form_data = {
+/* MODULE START */
+const BLANK_FORM = {
     mode: "",
     origin_city: "",
     origin_territory: "",
@@ -32,7 +32,7 @@ const default_form_data = {
     tanker_endorsement: false,
 };
 
-const default_location_suggestions = [];
+const BLANK_SUGGESTIONS = [];
 
 const isCrossBorder = (o, d) => {
     if (o && d) {
@@ -44,14 +44,14 @@ const isCrossBorder = (o, d) => {
         return false;
     }
 };
+/* MODULE END */
 
-// component
+/* COMPONENT START */
 const Search = (props) => {
     // states
-    const [formData, setFormData] = useState(default_form_data);
-    const [locationSuggestions, setLocationSuggestions] = useState(
-        default_location_suggestions
-    );
+    const [formData, setFormData] = useState(BLANK_FORM);
+    const [locationSuggestions, setLocationSuggestions] =
+        useState(BLANK_SUGGESTIONS);
 
     // module
     const toTitleCase = (string) => {
@@ -69,15 +69,12 @@ const Search = (props) => {
     // handlers
     const handleSpecs = (e) => {
         e.preventDefault();
-        props.setSpecs(props.default_specs);
 
-        const origin_region = GEO_LOOKUP[formData.origin_territory].region;
-        const origin_country = GEO_LOOKUP[formData.origin_territory].country;
+        const O_REGION = GEO_LOOKUP[formData.origin_territory].region;
+        const O_COUNTRY = GEO_LOOKUP[formData.origin_territory].country;
 
-        const destination_region =
-            GEO_LOOKUP[formData.destination_territory].region;
-        const destination_country =
-            GEO_LOOKUP[formData.destination_territory].country;
+        const D_REGION = GEO_LOOKUP[formData.destination_territory].region;
+        const D_COUNTRY = GEO_LOOKUP[formData.destination_territory].country;
 
         props.setSpecs((prev) => {
             return {
@@ -87,14 +84,14 @@ const Search = (props) => {
                     origin: {
                         city: formData.origin_city,
                         territory: formData.origin_territory,
-                        region: origin_region,
-                        country: origin_country,
+                        region: O_REGION,
+                        country: O_COUNTRY,
                     },
                     destination: {
                         city: formData.destination_city,
                         territory: formData.destination_territory,
-                        region: destination_region,
-                        country: destination_country,
+                        region: D_REGION,
+                        country: D_COUNTRY,
                     },
                     border: formData.border,
                     hazmat: formData.hazmat,
@@ -107,6 +104,7 @@ const Search = (props) => {
                     fast: formData.fast,
                     tanker_endorsement: formData.tanker_endorsement,
                 },
+                optional: props.BLANK_SPECS.optional,
             };
         });
 
@@ -133,14 +131,14 @@ const Search = (props) => {
         } else {
             e.target.classList.remove("show");
             document.getElementById(drop_menu).classList.remove("show");
-            setLocationSuggestions(default_location_suggestions);
+            setLocationSuggestions(BLANK_SUGGESTIONS);
         }
 
         e.target.addEventListener("focusout", () => {
             setTimeout(() => {
                 e.target.classList.remove("show");
                 document.getElementById(drop_menu).classList.remove("show");
-                setLocationSuggestions(default_location_suggestions);
+                setLocationSuggestions(BLANK_SUGGESTIONS);
             }, 400);
         });
     };
@@ -183,13 +181,6 @@ const Search = (props) => {
         }
     };
 
-    // effects
-    useEffect(() => {
-        if (!props.specs.mandatory.mode) {
-            setFormData(default_form_data);
-        }
-    }, [props.specs]);
-
     // render
     return (
         <form
@@ -213,6 +204,18 @@ const Search = (props) => {
                         } fs-2 brand-font`}
                     >
                         LOAD DETAILS
+                        {formData !== BLANK_FORM && (
+                            <a
+                                className="font-monospace link-secondary link-underline link-underline-opacity-0 link-underline-opacity-75-hover ms-2"
+                                style={{
+                                    fontSize: "0.85rem",
+                                    cursor: "pointer",
+                                }}
+                                onClick={() => setFormData(BLANK_FORM)}
+                            >
+                                clear form
+                            </a>
+                        )}
                     </h6>
                 </div>
             </div>
@@ -938,5 +941,6 @@ const Search = (props) => {
         </form>
     );
 };
+/* COMPONENT END */
 
 export default Search;

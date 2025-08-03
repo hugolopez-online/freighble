@@ -206,6 +206,7 @@ const UserDisplay = (props) => {
         }
     };
 
+    // early return
     if (!(view || edit || create)) {
         return (
             <Transition
@@ -250,14 +251,15 @@ const UserDisplay = (props) => {
                                     >
                                         Edit Profile
                                     </button>
-                                    <Link
+                                    <button
                                         className="btn btn-sm btn-secondary bg-gradient rounded-3 fw-medium me-2"
-                                        to="../"
+                                        data-bs-dismiss="offcanvas"
                                     >
-                                        Go to Dashboard
-                                    </Link>
+                                        Back to Dashboard
+                                    </button>
                                     <button
                                         className="btn btn-sm btn-danger bg-gradient rounded-3 fw-medium me-2"
+                                        data-bs-dismiss="offcanvas"
                                         onClick={() => {
                                             localStorage.removeItem("token");
                                             localStorage.removeItem("user");
@@ -267,8 +269,6 @@ const UserDisplay = (props) => {
                                                     localStorage.getItem("user")
                                                 )
                                             );
-
-                                            navigate("/login");
                                         }}
                                     >
                                         Log Out

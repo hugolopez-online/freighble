@@ -1,9 +1,11 @@
-// imports
-import { useState, useEffect, Fragment } from "react";
-import { Search, Directory, Banner, Console } from "./";
+/* IMPORTS START */
+import { useState, Fragment } from "react";
 
-// module
-const default_specs = {
+import { Search, Directory, AdditionalInfo, Console, UserProfile } from "./";
+/* IMPORTS END */
+
+/* MODULE START */
+const BLANK_SPECS = {
     mandatory: {
         mode: "",
         origin: {
@@ -37,10 +39,12 @@ const default_specs = {
         instructions: "",
     },
 };
+/* MODULE END */
 
-const DashboardMain = ({ theme }) => {
+/* COMPONENT START */
+const DashboardMain = ({ CONDITIONAL_RENDERING, theme }) => {
     // states
-    const [specs, setSpecs] = useState(default_specs);
+    const [specs, setSpecs] = useState(BLANK_SPECS);
     const [vendorList, setVendorList] = useState([]);
 
     // module
@@ -49,14 +53,14 @@ const DashboardMain = ({ theme }) => {
         specs.mandatory.origin.country &&
         specs.mandatory.destination.country;
 
-    const origin_scopes = [
+    const O_SCOPES = [
         `${specs.mandatory.origin.city}, ${specs.mandatory.origin.territory}`,
         specs.mandatory.origin.territory,
         specs.mandatory.origin.region,
         specs.mandatory.origin.country,
         "Anywhere",
     ];
-    const destination_scopes = [
+    const D_SCOPES = [
         `${specs.mandatory.destination.city}, ${specs.mandatory.destination.territory}`,
         specs.mandatory.destination.territory,
         specs.mandatory.destination.region,
@@ -66,9 +70,9 @@ const DashboardMain = ({ theme }) => {
 
     let route_aliases = [];
 
-    for (let scope_o of origin_scopes) {
-        for (let scope_d of destination_scopes) {
-            route_aliases.push(scope_o.concat(":", scope_d));
+    for (let o_scope of O_SCOPES) {
+        for (let d_scope of D_SCOPES) {
+            route_aliases.push(o_scope.concat(":", d_scope));
         }
     }
 
@@ -84,7 +88,7 @@ const DashboardMain = ({ theme }) => {
                 >
                     <Search
                         specs={specs}
-                        default_specs={default_specs}
+                        BLANK_SPECS={BLANK_SPECS}
                         setSpecs={setSpecs}
                         theme={theme}
                     />
@@ -96,10 +100,10 @@ const DashboardMain = ({ theme }) => {
                 >
                     <div className="row sticky-md-top under-navbar">
                         <div
-                            id="informativeBanner"
+                            id="additional_info"
                             className="col-12"
                         >
-                            <Banner
+                            <AdditionalInfo
                                 specs={specs}
                                 setSpecs={setSpecs}
                                 theme={theme}
@@ -110,14 +114,14 @@ const DashboardMain = ({ theme }) => {
                 <div className="col-12 col-md mb-3">
                     <Console
                         specs={specs}
-                        default_specs={default_specs}
+                        BLANK_SPECS={BLANK_SPECS}
                         setSpecs={setSpecs}
                         setVendorList={setVendorList}
                         theme={theme}
                     />
                     <Directory
                         specs={specs}
-                        default_specs={default_specs}
+                        BLANK_SPECS={BLANK_SPECS}
                         routes={routes}
                         vendorList={vendorList}
                         setVendorList={setVendorList}
@@ -125,8 +129,23 @@ const DashboardMain = ({ theme }) => {
                     />
                 </div>
             </div>
+            <div
+                id="user_profile"
+                className={`offcanvas offcanvas-end w-100 ${
+                    theme === "light" ? "" : "bg-black bg-opacity-75"
+                }`}
+                tabIndex="-1"
+            >
+                <div className="offcanvas-body">
+                    <UserProfile
+                        CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                        theme={theme}
+                    />
+                </div>
+            </div>
         </Fragment>
     );
 };
+/* COMPONENT END */
 
 export default DashboardMain;

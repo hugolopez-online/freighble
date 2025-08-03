@@ -1,10 +1,11 @@
-// imports
+/* IMPORTS START */
 import { useState, useEffect, Fragment } from "react";
-import { useNavigate } from "react-router-dom";
-import { Transition, UserDisplay } from "../../../_templates";
 
-// module
-const skeleton = {
+import { Transition, UserDisplay } from "../../../_templates";
+/* IMPORTS END */
+
+/* MODULE START */
+const BLANK_USER = {
     first_name: "",
     last_name: "",
     company: "",
@@ -18,47 +19,34 @@ const skeleton = {
         },
     },
 };
+/* MODULE END */
 
-// render
+/* COMPONENT START */
 const UserProfile = ({ CONDITIONAL_RENDERING, theme }) => {
     // state
     const [isFetching, setIsFetching] = useState(false);
-    const [user, setUser] = useState(skeleton);
-
-    // module
-    const user_session = localStorage.getItem("user");
-    const navigate = useNavigate();
+    const [user, setUser] = useState(BLANK_USER);
 
     // effects
     useEffect(() => {
-        if (user_session) {
-            const { id, role } = JSON.parse(user_session);
-            if (role === "vendor") {
-                navigate(`vendors/vendor/${id}`);
+        const findUser = async () => {
+            if (isFetching || user.email) {
                 return;
             }
 
-            const findUser = async () => {
-                if (isFetching || user.email) {
-                    return;
-                }
-                // async func to search vendors through API
-                const query_string = `/api/users/public/profile/${id}`;
+            const query_string = `/api/users/public/profile/${CONDITIONAL_RENDERING.USER_ID}`;
 
-                setIsFetching(true);
+            setIsFetching(true);
 
-                const found_user_promise = await fetch(query_string);
+            const found_user_promise = await fetch(query_string);
 
-                const found_user_doc = await found_user_promise.json();
-                const found_user = found_user_doc.user;
-                setUser(found_user);
-                setIsFetching(false);
-            };
+            const found_user_doc = await found_user_promise.json();
+            const found_user = found_user_doc.user;
+            setUser(found_user);
+            setIsFetching(false);
+        };
 
-            findUser();
-        } else {
-            navigate("/login");
-        }
+        findUser();
     }, []);
 
     // render
@@ -92,5 +80,6 @@ const UserProfile = ({ CONDITIONAL_RENDERING, theme }) => {
         </Fragment>
     );
 };
+/* COMPONENT END */
 
 export default UserProfile;

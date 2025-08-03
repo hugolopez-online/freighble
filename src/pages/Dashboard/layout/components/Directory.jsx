@@ -1,14 +1,13 @@
-// imports
-
+/* IMPORTS START */
 import { useEffect, useState, Fragment } from "react";
 import { Vendor, Placeholder } from "./";
 import { base_score, $VAST } from "../handlers/vast_system";
+/* IMPORTS END */
 
-// component
-
+/* COMPONENT START */
 const Directory = ({
     specs,
-    default_specs,
+    BLANK_SPECS,
     routes,
     vendorList,
     setVendorList,
@@ -18,14 +17,12 @@ const Directory = ({
     const [isFetching, setIsFetching] = useState(false);
 
     // module
-
     const MIN_DATA =
         specs.mandatory.mode &&
         specs.mandatory.origin.country &&
         specs.mandatory.destination.country;
 
     // effects
-
     useEffect(() => {
         const searchVendors = async () => {
             const QUERY = `/api/vendors/public/search?mode=${
@@ -136,10 +133,11 @@ const Directory = ({
                     })}
                 </div>
             )}
+
             {/* STATUS BAR START */}
             <div
                 className={`row justify-content-between fixed-bottom font-monospace text-bg-${
-                    specs === default_specs
+                    specs === BLANK_SPECS
                         ? "secondary"
                         : isFetching
                         ? "warning"
@@ -148,11 +146,11 @@ const Directory = ({
                         : "danger"
                 } px-4 py-0`}
             >
-                <div className="col-12 col-md-4">
+                <div className="col-12 col-md-6">
                     <small>
                         <b>app status:</b>{" "}
                     </small>
-                    {specs === default_specs ? (
+                    {specs === BLANK_SPECS ? (
                         <Fragment>
                             <small>system ready</small>
                             <div
@@ -185,7 +183,7 @@ const Directory = ({
                         </Fragment>
                     )}
                 </div>
-                <div className="col-4 d-none d-md-block text-end">
+                <div className="col-6 d-none d-md-block text-end">
                     <small>
                         <b>last app status update:</b>{" "}
                         {new Date().toLocaleString()}
@@ -196,5 +194,6 @@ const Directory = ({
         </Fragment>
     );
 };
+/* COMPONENT END */
 
 export default Directory;

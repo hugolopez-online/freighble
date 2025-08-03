@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { modes, borders } from "data/variables";
 
 const Console = (props) => {
@@ -31,7 +30,7 @@ const Console = (props) => {
                     >
                         <span className="fw-bold fs-6">current search: </span>
                         {MIN_DATA ? (
-                            <>{`${
+                            <i>{`${
                                 props.specs.mandatory.usa_bonded
                                     ? "U.S. bonded "
                                     : ""
@@ -84,9 +83,9 @@ const Console = (props) => {
                                           : "") +
                                       " certified)"
                                     : ""
-                            }`}</>
+                            }`}</i>
                         ) : (
-                            "none..."
+                            <i>none...</i>
                         )}
                     </span>
                 </div>
@@ -105,7 +104,7 @@ const Console = (props) => {
                                 left: 0,
                                 behavior: "smooth",
                             });
-                            props.setSpecs(props.default_specs);
+                            props.setSpecs(props.BLANK_SPECS);
                             props.setVendorList([]);
                         }}
                     >

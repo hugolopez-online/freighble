@@ -1,15 +1,13 @@
 /* IMPORTS START */
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import logo from "../../../../assets/img/logo_206x40.webp";
 import logo_light from "../../../../assets/img/logo-lighter_206x40.svg";
 import icon from "../../../../assets/img/logo-icon_40x40.webp";
+/* IMPORTS END */
 
-// component
-
+/* COMPONENT START */
 const Navbar = ({ CONDITIONAL_RENDERING, GREETING, theme, setTheme }) => {
-    const navigate = useNavigate();
-
     return (
         <nav className="navbar p-0">
             <div className="container-fluid">
@@ -59,22 +57,15 @@ const Navbar = ({ CONDITIONAL_RENDERING, GREETING, theme, setTheme }) => {
                                 style={{ zIndex: "1020" }}
                             >
                                 <li>
-                                    <Link
+                                    <button
                                         className="dropdown-item rounded"
-                                        to="/dashboard"
-                                    >
-                                        <i className="bi bi-display"></i>{" "}
-                                        Dashboard
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        className="dropdown-item rounded"
-                                        to="profile"
+                                        data-bs-toggle="offcanvas"
+                                        data-bs-target="#user_profile"
+                                        aria-controls="user_profile"
                                     >
                                         <i className="bi bi-person-rolodex"></i>{" "}
                                         Profile
-                                    </Link>
+                                    </button>
                                 </li>
                                 <li>
                                     <button
@@ -130,6 +121,9 @@ const Navbar = ({ CONDITIONAL_RENDERING, GREETING, theme, setTheme }) => {
                                     </button>
                                 </li>
                                 <li>
+                                    <hr className="dropdown-divider" />
+                                </li>
+                                <li>
                                     <button
                                         className="dropdown-item rounded text-bg-danger bg-gradient fw-medium"
                                         onClick={() => {
@@ -141,8 +135,6 @@ const Navbar = ({ CONDITIONAL_RENDERING, GREETING, theme, setTheme }) => {
                                                     localStorage.getItem("user")
                                                 )
                                             );
-
-                                            navigate("/login");
                                         }}
                                     >
                                         <i className="bi bi-box-arrow-right"></i>{" "}
@@ -157,5 +149,6 @@ const Navbar = ({ CONDITIONAL_RENDERING, GREETING, theme, setTheme }) => {
         </nav>
     );
 };
+/* COMPONENT END */
 
 export default Navbar;

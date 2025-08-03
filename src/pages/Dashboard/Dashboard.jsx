@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import { Outlet, Navigate } from "react-router-dom";
 import { Navbar } from "./layout/components";
 import Transition from "../_templates/Transition";
+import UserProfile from "./layout/components/UserProfile";
 /* IMPORTS END */
 
 /* COMPONENT START */

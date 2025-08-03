@@ -153,12 +153,8 @@ function App() {
                 >
                     <Route
                         index
-                        element={<DashboardMain theme={theme} />}
-                    />
-                    <Route
-                        path="profile"
                         element={
-                            <UserProfile
+                            <DashboardMain
                                 CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
                                 theme={theme}
                             />
