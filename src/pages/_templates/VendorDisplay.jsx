@@ -370,7 +370,11 @@ const VendorDisplay = (props) => {
             {!isFetching ? (
                 <div className="row justify-content-center pt-5">
                     <div className="col-11 col-md-9 py-4">
-                        <h5 className="display-5 py-4">
+                        <h5
+                            className={`display-5 ${
+                                props.theme === "light" ? "" : "text-light"
+                            } py-4`}
+                        >
                             {view ? (
                                 <Fragment>
                                     Vendor Profile
@@ -381,15 +385,19 @@ const VendorDisplay = (props) => {
                                         <Fragment>
                                             <br />
                                             <button
-                                                className="btn btn-secondary bg-gradient rounded-3 fw-medium me-2"
+                                                className={`btn btn-sm btn-${
+                                                    props.theme === "light"
+                                                        ? "dark"
+                                                        : "primary"
+                                                } bg-gradient rounded-3 fw-medium me-2`}
                                                 onClick={() => {
                                                     setVisibility("edit");
                                                 }}
                                             >
-                                                Edit
+                                                Edit Information
                                             </button>
                                             <button
-                                                className="btn btn-danger bg-gradient rounded-3 fw-medium me-2"
+                                                className="btn btn-sm btn-danger bg-gradient rounded-3 fw-medium me-2"
                                                 onClick={() => {
                                                     localStorage.removeItem(
                                                         "token"
@@ -423,7 +431,11 @@ const VendorDisplay = (props) => {
                                     Vendor Profile
                                     <br />
                                     <button
-                                        className="btn btn-dark bg-gradient fw-medium me-2"
+                                        className={`btn btn-sm btn-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "primary"
+                                        } bg-gradient rounded-3 fw-medium me-2`}
                                         onClick={(e) => {
                                             handleRegistration(e, data);
                                         }}
@@ -431,28 +443,44 @@ const VendorDisplay = (props) => {
                                         Save Changes
                                     </button>
                                     <button
-                                        className="btn btn-secondary bg-gradient fw-medium"
+                                        className="btn btn-sm btn-secondary bg-gradient rounded-3 fw-medium"
                                         onClick={() => {
                                             setData(props.data);
                                             setVisibility("view");
                                         }}
                                     >
-                                        Cancel
+                                        Cancel Edit
                                     </button>
                                 </Fragment>
                             )}
                         </h5>
                         <form
                             id="vendor_register"
-                            className="shadow-sm border rounded-4 p-4 bg-light needs-validation"
+                            className={`shadow-sm border rounded-4 p-4 bg-${
+                                props.theme === "light"
+                                    ? "light"
+                                    : "black bg-gradient border-secondary"
+                            } needs-validation`}
                             onSubmit={(e) => handleRegistration(e, data)}
                         >
                             {/* Auth details */}
                             {create && (
                                 <Fragment>
-                                    <div className="row border-bottom mb-4">
+                                    <div
+                                        className={`row border-bottom ${
+                                            props.theme === "light"
+                                                ? ""
+                                                : "border-secondary"
+                                        } mb-4`}
+                                    >
                                         <div className="col-12">
-                                            <h6 className="display-6 text-dark fw-bold brand-font">
+                                            <h6
+                                                className={`display-6 text-${
+                                                    props.theme === "light"
+                                                        ? "dark"
+                                                        : "light"
+                                                } fw-bold brand-font`}
+                                            >
                                                 SING-UP DETAILS
                                             </h6>
                                         </div>
@@ -462,7 +490,11 @@ const VendorDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="main_email_address"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 main email address{" "}
                                                 <strong
@@ -508,7 +540,11 @@ const VendorDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="vendor_password"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 password{" "}
                                                 <strong
@@ -564,7 +600,11 @@ const VendorDisplay = (props) => {
                                         <div className="col-12 mb-2">
                                             <label
                                                 htmlFor="confirm_vendor_password"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 confirm password{" "}
                                                 <strong
@@ -624,9 +664,21 @@ const VendorDisplay = (props) => {
                             )}
 
                             {/* Company details */}
-                            <div className="row border-bottom mb-4">
+                            <div
+                                className={`row border-bottom ${
+                                    props.theme === "light"
+                                        ? ""
+                                        : "border-secondary"
+                                } mb-4`}
+                            >
                                 <div className="col-12">
-                                    <h6 className="display-6 text-dark fw-bold brand-font">
+                                    <h6
+                                        className={`display-6 text-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "light"
+                                        } fw-bold brand-font`}
+                                    >
                                         COMPANY DETAILS
                                     </h6>
                                 </div>
@@ -636,7 +688,13 @@ const VendorDisplay = (props) => {
                                 <div className="col-12 col-md-6 mb-2">
                                     {view ? (
                                         <Fragment>
-                                            <h6 className="text-secondary">
+                                            <h6
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "secondary"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 company name
                                             </h6>
                                             <span className="badge text-bg-primary bg-gradient fs-4 brand-font">
@@ -647,7 +705,11 @@ const VendorDisplay = (props) => {
                                         <Fragment>
                                             <label
                                                 htmlFor="company_name"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 company name{" "}
                                                 <strong
@@ -689,11 +751,23 @@ const VendorDisplay = (props) => {
                                 <div className="col-12 col-md-6 mb-2">
                                     {view ? (
                                         <Fragment>
-                                            <h6 className="text-secondary">
+                                            <h6
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "secondary"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 company type
                                             </h6>
                                             {data.type.asset_based && (
-                                                <span className="badge text-bg-dark me-2">
+                                                <span
+                                                    className={`badge text-bg-${
+                                                        props.theme === "light"
+                                                            ? "dark"
+                                                            : "light"
+                                                    } me-2`}
+                                                >
                                                     asset-based{" "}
                                                     <i className="bi bi-check-lg"></i>
                                                 </span>
@@ -707,7 +781,13 @@ const VendorDisplay = (props) => {
                                         </Fragment>
                                     ) : (
                                         <Fragment>
-                                            <span className="fw-medium text-dark-emphasis">
+                                            <span
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 company type{" "}
                                                 <strong
                                                     className={`text-${
@@ -810,10 +890,22 @@ const VendorDisplay = (props) => {
                                 {view ? (
                                     <Fragment>
                                         <div className="col-12 col-md-6 mb-2">
-                                            <h6 className="text-secondary">
+                                            <h6
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "secondary"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 pricing contact
                                             </h6>
-                                            <ul>
+                                            <ul
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "body"
+                                                        : "light"
+                                                }`}
+                                            >
                                                 <li>{data.contact}</li>
                                                 <li>
                                                     <i className="bi bi-envelope-fill"></i>{" "}
@@ -827,10 +919,22 @@ const VendorDisplay = (props) => {
                                             </ul>
                                         </div>
                                         <div className="col-12 col-md-6 mb-2">
-                                            <h6 className="text-secondary">
+                                            <h6
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "secondary"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 domicile
                                             </h6>
-                                            <span>
+                                            <span
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "body"
+                                                        : "light"
+                                                }`}
+                                            >
                                                 {data.domicile.city},{" "}
                                                 {data.domicile.territory},{" "}
                                                 {data.domicile.country}
@@ -842,7 +946,11 @@ const VendorDisplay = (props) => {
                                         <div className="col-12 col-md-4 mb-2">
                                             <label
                                                 htmlFor="company_contact"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 pricing contact{" "}
                                                 <strong
@@ -885,7 +993,11 @@ const VendorDisplay = (props) => {
                                         <div className="col-12 col-md-4 mb-2">
                                             <label
                                                 htmlFor="contact_email"
-                                                className="fw-medium text-dark-emphasis"
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
                                             >
                                                 pricing contact email{" "}
                                                 <strong
@@ -928,7 +1040,13 @@ const VendorDisplay = (props) => {
                                             />
                                         </div>
                                         <div className="col-12 col-md-4 mb-2">
-                                            <span className="fw-medium text-dark-emphasis">
+                                            <span
+                                                className={`fw-medium text-${
+                                                    props.theme === "light"
+                                                        ? "dark-emphasis"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 pricing phone{" "}
                                                 <strong
                                                     className={`text-${
@@ -1017,7 +1135,13 @@ const VendorDisplay = (props) => {
                             {!view && (
                                 <fieldset className="row mb-4">
                                     <div className="col-12">
-                                        <span className="fw-medium text-dark-emphasis">
+                                        <span
+                                            className={`fw-medium text-${
+                                                props.theme === "light"
+                                                    ? "dark-emphasis"
+                                                    : "light text-opacity-75"
+                                            }`}
+                                        >
                                             domicile{" "}
                                             <strong
                                                 className={`text-${
@@ -1166,9 +1290,21 @@ const VendorDisplay = (props) => {
                             )}
 
                             {/* Transportation profile */}
-                            <div className="row border-bottom mb-4">
+                            <div
+                                className={`row border-bottom ${
+                                    props.theme === "light"
+                                        ? ""
+                                        : "border-secondary"
+                                } mb-4`}
+                            >
                                 <div className="col-12">
-                                    <h6 className="display-6 text-dark fw-bold brand-font">
+                                    <h6
+                                        className={`display-6 text-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "light"
+                                        } fw-bold brand-font`}
+                                    >
                                         TRANSPORTATION PROFILE
                                     </h6>
                                 </div>
@@ -1177,7 +1313,13 @@ const VendorDisplay = (props) => {
                             <fieldset className="row mb-4">
                                 {view ? (
                                     <Fragment>
-                                        <h5 className="text-secondary">
+                                        <h5
+                                            className={`text-${
+                                                props.theme === "light"
+                                                    ? "secondary"
+                                                    : "light text-opacity-75"
+                                            }`}
+                                        >
                                             modes of transportation
                                         </h5>
                                         <div className="col-12">
@@ -1196,7 +1338,13 @@ const VendorDisplay = (props) => {
                                     </Fragment>
                                 ) : (
                                     <Fragment>
-                                        <h5 className="text-dark-emphasis border-bottom pb-2">
+                                        <h5
+                                            className={`border-bottom text-${
+                                                props.theme === "light"
+                                                    ? "dark-emphasis"
+                                                    : "light border-secondary"
+                                            } pb-2`}
+                                        >
                                             modes of transportation
                                             <strong
                                                 className={`text-${
@@ -1262,11 +1410,23 @@ const VendorDisplay = (props) => {
 
                             <fieldset className="row mb-4">
                                 {view ? (
-                                    <h5 className="text-secondary">
+                                    <h5
+                                        className={`text-${
+                                            props.theme === "light"
+                                                ? "secondary"
+                                                : "light text-opacity-75"
+                                        }`}
+                                    >
                                         geographical coverage
                                     </h5>
                                 ) : (
-                                    <h5 className="text-dark-emphasis border-bottom pb-2">
+                                    <h5
+                                        className={`border-bottom text-${
+                                            props.theme === "light"
+                                                ? "dark-emphasis"
+                                                : "light border-secondary"
+                                        } pb-2`}
+                                    >
                                         geographical coverage
                                         <strong
                                             className={`text-${
@@ -1300,7 +1460,13 @@ const VendorDisplay = (props) => {
                                                 key={`country_code-${country_code}`}
                                                 className="col-12 col-md-4 mb-3"
                                             >
-                                                <h6 className="text-dark">
+                                                <h6
+                                                    className={`text-${
+                                                        props.theme === "light"
+                                                            ? "dark"
+                                                            : "light"
+                                                    }`}
+                                                >
                                                     {
                                                         COUNTRY_LABELS[
                                                             country_code
@@ -1325,7 +1491,12 @@ const VendorDisplay = (props) => {
                                                                 return (
                                                                     <span
                                                                         key={`view-mode_${territory}-${index}`}
-                                                                        className="badge text-bg-dark me-2"
+                                                                        className={`badge text-bg-${
+                                                                            props.theme ===
+                                                                            "light"
+                                                                                ? "dark"
+                                                                                : "light"
+                                                                        } me-2`}
                                                                     >
                                                                         {
                                                                             territory
@@ -1365,7 +1536,13 @@ const VendorDisplay = (props) => {
                             >
                                 {view ? (
                                     <Fragment>
-                                        <h5 className="text-secondary">
+                                        <h5
+                                            className={`text-${
+                                                props.theme === "light"
+                                                    ? "secondary"
+                                                    : "light text-opacity-75"
+                                            }`}
+                                        >
                                             border-crossing ports
                                         </h5>
                                         <div className="col-12">
@@ -1378,7 +1555,12 @@ const VendorDisplay = (props) => {
                                                     return (
                                                         <span
                                                             key={`view-border_${border}-${index}`}
-                                                            className="badge text-bg-dark me-2"
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
                                                         >
                                                             {borders[border]}{" "}
                                                             <i className="bi bi-check-lg"></i>
@@ -1389,7 +1571,13 @@ const VendorDisplay = (props) => {
                                     </Fragment>
                                 ) : (
                                     <Fragment>
-                                        <h5 className="text-dark-emphasis border-bottom pb-2">
+                                        <h5
+                                            className={`border-bottom text-${
+                                                props.theme === "light"
+                                                    ? "dark-emphasis"
+                                                    : "light border-secondary"
+                                            } pb-2`}
+                                        >
                                             border-crossing ports{" "}
                                             <strong
                                                 className={`text-${
@@ -1463,7 +1651,13 @@ const VendorDisplay = (props) => {
                             <fieldset className="row mb-4">
                                 {view ? (
                                     <Fragment>
-                                        <h5 className="text-secondary">
+                                        <h5
+                                            className={`text-${
+                                                props.theme === "light"
+                                                    ? "secondary"
+                                                    : "light text-opacity-75"
+                                            }`}
+                                        >
                                             additional services
                                         </h5>
                                         <div className="col-12">
@@ -1478,47 +1672,110 @@ const VendorDisplay = (props) => {
                                             data.tanker_endorsement ? (
                                                 <Fragment>
                                                     {data.hazmat && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             Hazmat
                                                         </span>
                                                     )}
                                                     {data.team_drivers && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             Team drivers
                                                         </span>
                                                     )}
                                                     {data.usa_bonded && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             U.S. bonded
                                                         </span>
                                                     )}
                                                     {data.can_bonded && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             Canada bonded
                                                         </span>
                                                     )}
                                                     {data.ctpat && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             C-TPAT certified
                                                         </span>
                                                     )}
                                                     {data.twic && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             TWIC drivers
                                                         </span>
                                                     )}
                                                     {data.tsa && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             TSA drivers
                                                         </span>
                                                     )}
                                                     {data.fast && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             FAST certified
                                                         </span>
                                                     )}
                                                     {data.tanker_endorsement && (
-                                                        <span className="badge text-bg-dark me-2">
+                                                        <span
+                                                            className={`badge text-bg-${
+                                                                props.theme ===
+                                                                "light"
+                                                                    ? "dark"
+                                                                    : "light"
+                                                            } me-2`}
+                                                        >
                                                             Tanker Endorsement
                                                             drivers
                                                         </span>
@@ -1533,7 +1790,13 @@ const VendorDisplay = (props) => {
                                     </Fragment>
                                 ) : (
                                     <Fragment>
-                                        <h5 className="text-dark-emphasis border-bottom pb-2">
+                                        <h5
+                                            className={`border-bottom text-${
+                                                props.theme === "light"
+                                                    ? "dark-emphasis"
+                                                    : "light border-secondary"
+                                            } pb-2`}
+                                        >
                                             additional services
                                         </h5>
                                         <div className="col-12 mb-3">
@@ -1593,11 +1856,11 @@ const VendorDisplay = (props) => {
                             {!view && (
                                 <fieldset className="row mb-4">
                                     <h5
-                                        className={`text-${
-                                            view
-                                                ? "secondary"
-                                                : "dark-emphasis border-bottom pb-2"
-                                        }`}
+                                        className={`border-bottom text-${
+                                            props.theme === "light"
+                                                ? "dark-emphasis"
+                                                : "light border-secondary"
+                                        } pb-2`}
                                     >
                                         lane preferences
                                     </h5>
@@ -1648,6 +1911,7 @@ const VendorDisplay = (props) => {
                                                     laneDestination
                                                 }
                                                 isBothWays={isBothWays}
+                                                theme={props.theme}
                                             />
                                             <AddLane
                                                 target={LANES.exclusive}
@@ -1658,6 +1922,7 @@ const VendorDisplay = (props) => {
                                                     laneDestination
                                                 }
                                                 isBothWays={isBothWays}
+                                                theme={props.theme}
                                             />
                                             <AddLane
                                                 target={LANES.banned}
@@ -1668,6 +1933,7 @@ const VendorDisplay = (props) => {
                                                     laneDestination
                                                 }
                                                 isBothWays={isBothWays}
+                                                theme={props.theme}
                                             />
                                         </div>
                                     </div>
@@ -1677,8 +1943,14 @@ const VendorDisplay = (props) => {
                             <fieldset className={`row${view ? "" : " mb-4"}`}>
                                 {view ? (
                                     <Fragment>
-                                        <div className="col-12 col-md-4 mb-4">
-                                            <h5 className="text-secondary">
+                                        <div className="col-12 col-md-4">
+                                            <h5
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "secondary"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 preferred lanes
                                             </h5>
                                             {data.core_lanes.length ? (
@@ -1701,7 +1973,13 @@ const VendorDisplay = (props) => {
                                             )}
                                         </div>
                                         <div className="col-12 col-md-4 mb-4">
-                                            <h5 className="text-secondary">
+                                            <h5
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "secondary"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 exclusive lanes
                                             </h5>
                                             {data.exclusive_lanes.length ? (
@@ -1724,7 +2002,13 @@ const VendorDisplay = (props) => {
                                             )}
                                         </div>
                                         <div className="col-12 col-md-4 mb-4">
-                                            <h5 className="text-secondary">
+                                            <h5
+                                                className={`text-${
+                                                    props.theme === "light"
+                                                        ? "secondary"
+                                                        : "light text-opacity-75"
+                                                }`}
+                                            >
                                                 banned lanes
                                             </h5>
                                             {data.banned_lanes.length ? (
@@ -1753,16 +2037,19 @@ const VendorDisplay = (props) => {
                                             target={LANES.core}
                                             data={data}
                                             setData={setData}
+                                            theme={props.theme}
                                         />
                                         <LaneList
                                             target={LANES.exclusive}
                                             data={data}
                                             setData={setData}
+                                            theme={props.theme}
                                         />
                                         <LaneList
                                             target={LANES.banned}
                                             data={data}
                                             setData={setData}
+                                            theme={props.theme}
                                         />
                                     </Fragment>
                                 )}
@@ -1803,7 +2090,10 @@ const VendorDisplay = (props) => {
                                             <label
                                                 className={`form-check-label text-${
                                                     data.auth.terms.accepted
-                                                        ? "dark"
+                                                        ? props.theme ===
+                                                          "light"
+                                                            ? "dark"
+                                                            : "light"
                                                         : "secondary"
                                                 }`}
                                                 htmlFor="accept_terms"
@@ -1837,7 +2127,11 @@ const VendorDisplay = (props) => {
                                     )}
                                     <button
                                         type="submit"
-                                        className="btn btn-dark bg-gradient shadow-sm fw-medium w-100 rounded-3"
+                                        className={`btn btn-${
+                                            props.theme === "light"
+                                                ? "dark"
+                                                : "primary"
+                                        } bg-gradient shadow-sm fw-medium w-100 rounded-3`}
                                     >
                                         {create ? "Sign Up" : "Save Changes"}
                                     </button>
@@ -1847,7 +2141,13 @@ const VendorDisplay = (props) => {
                                             <h5 className="text-danger text-uppercase">
                                                 danger zone!
                                             </h5>
-                                            <small className="text-danger-emphasis">
+                                            <small
+                                                className={`text-danger${
+                                                    props.theme === "light"
+                                                        ? "-emphasis"
+                                                        : ""
+                                                }`}
+                                            >
                                                 This is a{" "}
                                                 <b>one-click deletion</b>{" "}
                                                 button, and once deleted, all

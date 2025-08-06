@@ -41,11 +41,14 @@ const AddLane = (props) => {
             };
         });
     };
+
     // render
     return (
         <button
             type="button"
-            className="btn btn-sm btn-dark rounded-3 bg-gradient m-1"
+            className={`btn btn-sm btn-${
+                props.theme === "light" ? "dark" : "primary"
+            } rounded-3 bg-gradient m-1`}
             onClick={() => addLane(props.target.ref)}
         >
             Add to <em className="fw-semibold">{props.target.label} lanes</em>

@@ -51,7 +51,7 @@ const BLANK_USER = {
 };
 
 // render
-const VendorProfile = ({ CONDITIONAL_RENDERING }) => {
+const VendorProfile = ({ CONDITIONAL_RENDERING, theme }) => {
     const [isFetching, setIsFetching] = useState(false);
     const [vendor, setVendor] = useState(BLANK_USER);
     const { id } = useParams();
@@ -96,6 +96,7 @@ const VendorProfile = ({ CONDITIONAL_RENDERING }) => {
                     LaneBuilder={LaneBuilder}
                     AddLane={AddLane}
                     CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                    theme={theme}
                 />
             ) : (
                 <div className="row justify-content-center pt-5">

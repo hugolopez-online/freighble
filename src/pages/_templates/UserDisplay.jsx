@@ -533,7 +533,7 @@ const UserDisplay = (props) => {
                                 </div>
                             </div>
 
-                            <fieldset className={`row${view ? "" : " mb-4"}`}>
+                            <fieldset className={`row ${view ? "" : "mb-4"}`}>
                                 {view ? (
                                     <Fragment>
                                         <div className="col-12">

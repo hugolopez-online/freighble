@@ -1,13 +1,15 @@
-// imports
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+/* IMPORTS START */
+import { Fragment } from "react";
+import { Navigate } from "react-router-dom";
+
+import AddLane from "./layout/components/AddLane";
 import GeoCoverage from "./layout/components/GeoCoverage";
 import LaneBuilder from "./layout/components/LaneBuilder";
 import LaneList from "./layout/components/LaneList";
-import AddLane from "./layout/components/AddLane";
 import { Transition, VendorDisplay } from "../_templates";
+/* IMPORTS END */
 
-// module
+/* MODULE START */
 const data = {
     main_email: "",
     company: "",
@@ -59,28 +61,22 @@ const data = {
         },
     },
 };
+/* MODULE END */
 
-// component
-const VendorRegister = ({ CONDITIONAL_RENDERING }) => {
-    // module
-    const navigate = useNavigate();
-
-    // effects
-    useEffect(() => {
-        if (CONDITIONAL_RENDERING.session) {
-            navigate("/dashboard");
-        }
-    }, []);
-
+/* COMPONENT END */
+const VendorRegister = ({ CONDITIONAL_RENDERING, theme }) => {
     if (CONDITIONAL_RENDERING.session) {
         return (
-            <Transition
-                variables={{
-                    type: ["Authenticating", "Redirecting", "Loading"][1],
-                    loader: ["spinner-border", "spinner-grow"][0],
-                    message: "",
-                }}
-            />
+            <Fragment>
+                <Transition
+                    variables={{
+                        type: ["Authenticating", "Redirecting", "Loading"][1],
+                        loader: ["spinner-border", "spinner-grow"][0],
+                        message: "",
+                    }}
+                />
+                <Navigate to="/dashboard" />
+            </Fragment>
         );
     }
 
@@ -93,8 +89,10 @@ const VendorRegister = ({ CONDITIONAL_RENDERING }) => {
             LaneBuilder={LaneBuilder}
             AddLane={AddLane}
             CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+            theme={theme}
         />
     );
 };
+/* COMPONENT END */
 
 export default VendorRegister;

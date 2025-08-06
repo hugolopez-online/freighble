@@ -1,5 +1,5 @@
 //imports
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
     Dashboard,
@@ -7,7 +7,6 @@ import {
     Login,
     PageLayout,
     Register,
-    UserProfile,
     VendorLogin,
     VendorProfile,
     VendorRegister,
