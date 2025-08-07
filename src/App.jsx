@@ -104,7 +104,7 @@ function App() {
                     >
                         <Route
                             index
-                            element={<VendorsPortal />}
+                            element={<VendorsPortal theme={theme} />}
                         />
                         <Route
                             path="vendor"

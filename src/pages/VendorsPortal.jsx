@@ -1,68 +1,85 @@
 import { Link } from "react-router-dom";
 
-const VendorsPortal = () => {
+const VendorsPortal = ({ theme }) => {
     return (
-        <div className="row justify-content-center pt-5">
-            <div className="col-11 col-md-9 py-4">
-                <h1 className="display-1">Vendors Portal</h1>
-                <section className="container my-5">
-                    <h2 className="text-center mb-4">Vendors Portal</h2>
-                    <div className="row justify-content-center">
-                        <div className="col-md-8">
-                            <div className="p-4 border rounded shadow-sm bg-light">
-                                <p className="lead text-center">
-                                    Join our network and get matched with
-                                    shippers who need exactly what you offer.
-                                </p>
-                                <ul className="list-group my-3">
-                                    <li
-                                        className="list-group-item"
-                                        style={{ position: "inherit" }}
-                                    >
-                                        <i className="bi bi-geo-alt text-primary me-2"></i>{" "}
-                                        Set your coverage and specializations
-                                    </li>
-                                    <li
-                                        className="list-group-item"
-                                        style={{ position: "inherit" }}
-                                    >
-                                        <i className="bi bi-person-check text-primary me-2"></i>{" "}
-                                        Get discovered by verified clients
-                                    </li>
-                                    <li
-                                        className="list-group-item"
-                                        style={{ position: "inherit" }}
-                                    >
-                                        <i className="bi bi-toggle2-on text-primary me-2"></i>{" "}
-                                        Stay in full control of your
-                                        availability
-                                    </li>
-                                </ul>
-                            </div>
+        <section
+            id="vendors"
+            className="row justify-content-center pt-5 mb-2"
+        >
+            <div
+                className="col-10 col-md-9 mt-5 py-4"
+                style={{ minHeight: "100vh" }}
+            >
+                <h1
+                    className={`display-1 fw-semibold text-center text-${
+                        theme === "light" ? "dark" : "light"
+                    }`}
+                >
+                    Vendors Portal
+                </h1>
+                <div className="mt-5">
+                    <p className="fs-4 mb-4 opacity-75">
+                        Whether you're an asset-based carrier or a
+                        freight-forwarding operation, Freighble connects you
+                        with shippers and brokers who need exactly what you
+                        offer — no cold calls, no games.
+                    </p>
+
+                    {/* graphic: carrier-network */}
+                    <div className="my-5 text-center">
+                        <div className="placeholder-graphic">
+                            [Carrier network graphic]
                         </div>
                     </div>
-                </section>
+
+                    <p className="fs-5">
+                        Once you're registered, your company becomes
+                        discoverable via our intelligent load-matching engine —
+                        factoring in your modes, coverage, preferred lanes, and
+                        specialties.
+                    </p>
+
+                    <p className="fs-5">
+                        When a shipper finds your profile a good fit for a load,
+                        <strong> they reach out directly via email</strong>. No
+                        intermediary, no platform fees, no forced acceptance.
+                    </p>
+
+                    {/* graphic: vendor-inbox-preview */}
+                    <div className="my-5 text-center">
+                        <div className="placeholder-graphic">
+                            [Inbox or notification graphic]
+                        </div>
+                    </div>
+
+                    <p className="fs-5">
+                        You'll receive genuine inquiries for freight you're
+                        likely to want — based on actual compatibility, not just
+                        coverage maps.
+                    </p>
+
+                    <p className="fs-5 mb-4">
+                        Stay visible to the right people, reduce the noise, and
+                        fill your trucks with less friction.
+                    </p>
+
+                    <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-5">
+                        <Link
+                            to="/vendors/vendor"
+                            className="btn btn-dark fw-semibold bg-gradient rounded-3"
+                        >
+                            Register as a Vendor
+                        </Link>
+                        <Link
+                            to="/vendors/login"
+                            className="btn btn-primary fw-semibold bg-gradient rounded-3"
+                        >
+                            Already Registered? Log In
+                        </Link>
+                    </div>
+                </div>
             </div>
-            <div className="col-11 col-md-9 pb-4">
-                <p>
-                    If you're already a Freighble Vendor, log in to review and
-                    manage your information. Otherwise, you can register in just
-                    a few minutes.
-                </p>
-                <Link
-                    to="login"
-                    className="btn btn-primary bg-gradient fw-medium me-2"
-                >
-                    Vendor Login
-                </Link>
-                <Link
-                    to="vendor"
-                    className="btn btn-dark fw-medium bg-gradient"
-                >
-                    Register
-                </Link>
-            </div>
-        </div>
+        </section>
     );
 };
 

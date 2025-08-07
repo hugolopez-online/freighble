@@ -499,7 +499,7 @@ const UserDisplay = (props) => {
                                         </div>
                                         <div className="col-12 mb-2">
                                             <span className="text-secondary fw-normal">
-                                                already a Freighble user?{" "}
+                                                Already a Freighble user?{" "}
                                                 <Link
                                                     className="fw-medium"
                                                     to="/login"

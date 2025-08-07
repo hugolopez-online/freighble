@@ -650,7 +650,7 @@ const VendorDisplay = (props) => {
                                         </div>
                                         <div className="col-12 mb-2">
                                             <span className="text-secondary fw-normal">
-                                                already a Freighble vendor?{" "}
+                                                Already a Freighble vendor?{" "}
                                                 <Link
                                                     className="fw-medium"
                                                     to="/vendors/login"
