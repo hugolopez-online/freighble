@@ -283,7 +283,7 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING, theme }) => {
             </div>
 
             {/* Informative toast */}
-            <div className="toast-container rounded-3 position-fixed top-0 end-0 p-3">
+            <div className="toast-container rounded-3 position-fixed bottom-0 end-0 p-3">
                 <div
                     id="freighble_alert"
                     className="toast rounded-3"

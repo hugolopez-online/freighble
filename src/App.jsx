@@ -1,6 +1,7 @@
-//imports
+/* IMPORTS START */
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import {
     Dashboard,
     Home,
@@ -14,10 +15,9 @@ import {
     VendorsPortal,
     NotFound,
 } from "./pages";
+/* IMPORTS END */
 
-import DashboardMain from "./pages/Dashboard/layout/components/DashboardMain";
-
-// component
+/* COMPONENT START */
 function App() {
     // state
     const [anchor, setAnchor] = useState("");
@@ -45,14 +45,14 @@ function App() {
         localStorage.setItem("freighbleTheme", "light");
     }
 
-    if (theme === "dark") {
-        document.getElementById("body").classList.add("bg-black");
-
-        document.getElementById("body").classList.remove("bg-body");
-    } else {
+    if (theme === "light") {
         document.getElementById("body").classList.add("bg-body");
-
-        document.getElementById("body").classList.remove("bg-black");
+        document
+            .getElementById("body")
+            .classList.remove("bg-black", "text-light");
+    } else {
+        document.getElementById("body").classList.add("bg-black", "text-light");
+        document.getElementById("body").classList.remove("bg-body");
     }
 
     // render
@@ -73,7 +73,12 @@ function App() {
                 >
                     <Route
                         index
-                        element={<Home setAnchor={setAnchor} />}
+                        element={
+                            <Home
+                                setAnchor={setAnchor}
+                                theme={theme}
+                            />
+                        }
                     />
                     <Route
                         path="login"
@@ -149,20 +154,11 @@ function App() {
                             setTheme={setTheme}
                         />
                     }
-                >
-                    <Route
-                        index
-                        element={
-                            <DashboardMain
-                                CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
-                                theme={theme}
-                            />
-                        }
-                    />
-                </Route>
+                />
             </Routes>
         </BrowserRouter>
     );
 }
+/* COMPONENT END */
 
 export default App;

@@ -694,7 +694,7 @@ const Search = (props) => {
                 <div className="col-12">
                     <button
                         type="button"
-                        className={`btn btn-sm fw-medium ${
+                        className={`btn btn-sm fw-medium bg-gradient ${
                             formData.hazmat ||
                             formData.team_drivers ||
                             formData.usa_bonded ||
@@ -706,13 +706,13 @@ const Search = (props) => {
                             formData.tanker_endorsement
                                 ? "btn-primary"
                                 : "btn-secondary"
-                        } rounded-2 w-100`}
+                        } rounded-3 w-100`}
                         data-bs-toggle="collapse"
                         data-bs-target="#special-requirements"
                         aria-expanded="false"
                         aria-controls="special-requirements"
                     >
-                        Special Requirements
+                        Special Requirements...
                     </button>
                 </div>
                 <div
@@ -934,7 +934,7 @@ const Search = (props) => {
                 type="submit"
                 className={`btn btn-${
                     props.theme === "light" ? "dark" : "primary"
-                } bg-gradient shadow-sm fw-bold w-100 rounded-pill`}
+                } bg-gradient shadow-sm fw-semibold w-100 rounded-pill`}
             >
                 Search
             </button>

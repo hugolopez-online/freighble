@@ -1,35 +1,34 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
-const Home = ({ setAnchor }) => {
+const Home = ({ setAnchor, theme }) => {
     return (
         <Fragment>
+            {/* Hero */}
             <section
                 id="website_hero"
-                className="row website-hero justify-content-center pt-5"
+                className="row website-hero justify-content-center pt-5 mb-2"
             >
                 <div
                     className="col-10 text-light text-center"
                     style={{ minHeight: "100vh", paddingTop: "10em" }}
                 >
-                    <h2 className="display-2 fst-italic">
-                        <span className="fw-normal">Freigh</span>t made relia
-                        <span className="fw-normal">ble</span>
-                    </h2>
-                    <p className="fw-light mb-5">
-                        With Freighble, find qualified carriers effortlessly.
-                        Fast and efficient — so you can get back to what really
-                        matters.
+                    <h1 className="display-1 mb-4">
+                        <span className="fw-semibold">Freigh</span>t made relia
+                        <span className="fw-semibold">ble</span>
+                    </h1>
+                    <p className="fst-italic fs-2 mb-5">
+                        Smart carrier search. No noise, just matches.
                     </p>
                     <Link
                         to="/register"
-                        className="brand-font btn btn-lg btn-light bg-gradient-soft fw-medium rounded-pill me-2"
+                        className="brand-font btn btn-lg btn-primary bg-gradient fw-medium rounded-pill me-2"
                     >
                         GET STARTED
                     </Link>
                     <Link
                         to="/"
-                        className="brand-font btn btn-lg btn-outline-light fw-light rounded-pill"
+                        className="brand-font btn btn-lg btn-light fw-light rounded-pill"
                         onClick={() => {
                             setAnchor("about");
                         }}
@@ -38,96 +37,164 @@ const Home = ({ setAnchor }) => {
                     </Link>
                 </div>
             </section>
-            <div
+
+            {/* About */}
+            <section
                 id="about"
-                className="row justify-content-center pt-5 bg-primary bg-opacity-10"
+                className="row justify-content-center pt-5 mb-2"
             >
                 <div
-                    className="col-10 py-4"
+                    className="col-10 col-md-9 mt-5 py-4"
                     style={{ minHeight: "100vh" }}
                 >
-                    <h1 className="display-1">About</h1>
-                    <section className="container my-5">
-                        <h2 className="text-center mb-4">How It Works</h2>
-                        <div className="row text-center">
-                            <div className="col-md-4 mb-4">
-                                <div className="p-3 border rounded shadow-sm h-100 bg-light">
-                                    <div className="mb-3">
-                                        <i className="bi bi-ui-checks-grid fs-1 text-primary"></i>
-                                    </div>
-                                    <h5>Step 1</h5>
-                                    <p>
-                                        Tell us what you need — your shipping
-                                        lane and preferences.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-4 mb-4">
-                                <div className="p-3 border rounded shadow-sm h-100 bg-light">
-                                    <div className="mb-3">
-                                        <i className="bi bi-lightning-charge fs-1 text-warning"></i>
-                                    </div>
-                                    <h5>Step 2</h5>
-                                    <p>
-                                        We instantly match you with qualified
-                                        vendors using smart scoring.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="col-md-4 mb-4">
-                                <div className="p-3 border rounded shadow-sm h-100 bg-light">
-                                    <div className="mb-3">
-                                        <i className="bi bi-truck fs-1 text-success"></i>
-                                    </div>
-                                    <h5>Step 3</h5>
-                                    <p>
-                                        You choose your preferred match — no
-                                        chasing or guesswork.
-                                    </p>
-                                </div>
+                    <h1
+                        className={`display-1 fw-semibold text-center text-${
+                            theme === "light" ? "dark" : "light"
+                        }`}
+                    >
+                        About Freighble
+                    </h1>
+                    <div className="mt-5">
+                        <p className="fs-4 mb-4 opacity-75">
+                            Picture this: you've got a load ready to move —
+                            origin, destination, equipment type, special
+                            conditions, the works. You drop the details into
+                            Freighble, and you get a curated list of well suited
+                            vendors for your load.
+                        </p>
+
+                        {/* graphic: map-flow */}
+                        <div className="my-5 text-center">
+                            <div className="placeholder-graphic">
+                                [Map with arrows graphic]
                             </div>
                         </div>
-                    </section>
+
+                        <p className="fs-5">
+                            Using a custom-built matching engine that weighs
+                            over a dozen variables — from transport mode to
+                            geographic coverage and even route preferences — we
+                            surface the most suitable vendors for your shipment.
+                        </p>
+
+                        <p className="fs-5">
+                            But here's the twist: you remain in control. No
+                            hidden brokers, no forced funnels. Pick a vendor and
+                            you'll get an
+                            <strong> instant way to reach out via email</strong>
+                            .
+                        </p>
+
+                        {/* graphic: vendor-card */}
+                        <div className="my-5 text-center">
+                            <div className="placeholder-graphic">
+                                [Vendor card or profile preview graphic]
+                            </div>
+                        </div>
+
+                        <p className="fs-5">
+                            Whether you're moving cross-border freight from
+                            Toronto to Texas or a local dry van load within
+                            California, Freighble does the matchmaking so you
+                            don't have to dig through spreadsheets or outdated
+                            rolodexes.
+                        </p>
+
+                        <p className="fs-5 mb-0">
+                            No commitments, no middlemen — just transparency,
+                            speed, and the right carrier for the job.
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div
+            </section>
+
+            {/* Contact */}
+            <section
                 id="contact"
-                className="row justify-content-center pt-5 bg-primary bg-opacity-25"
+                className="row justify-content-center pt-5"
             >
                 <div
-                    className="col-10 py-4"
+                    className="col-10 col-md-9 mt-5 py-4"
                     style={{ minHeight: "100vh" }}
                 >
-                    <h1 className="display-1">Contact</h1>
-                    <section className="container my-5">
-                        <h2 className="text-center mb-4">Contact Us</h2>
-                        <div className="row justify-content-center">
-                            <div className="col-md-6 text-center">
-                                <p className="lead">
-                                    Got a question? Let's talk. We're happy to
-                                    help.
-                                </p>
-                                <ul className="list-unstyled mb-4">
-                                    <li>
-                                        <strong>Email:</strong>{" "}
-                                        support@freighble.com
-                                    </li>
-                                    <li>
-                                        <strong>Phone:</strong> (778) 350-9048
-                                    </li>
-                                    <li>
-                                        <strong>Hours:</strong> Mon to Fri, 8:00
-                                        AM to 4:00 PM (PDT)
-                                    </li>
-                                </ul>
-                                <button className="btn btn-primary">
-                                    Send a Message
-                                </button>
+                    <h1
+                        className={`display-1 fw-semibold text-center text-${
+                            theme === "light" ? "dark" : "light"
+                        }`}
+                    >
+                        Contact Us
+                    </h1>
+                    <div className="mt-5">
+                        <p className="fs-4 mb-4">
+                            Got questions, ideas, or found a bug we should know
+                            about?
+                            <br />
+                            Let's talk. We're all ears (and keyboards).
+                        </p>
+
+                        <p className="fs-5">
+                            Send us a message anytime — whether you're a broker
+                            looking to enhance your workflow, a carrier wanting
+                            to be listed, or just someone who likes freight tech
+                            a bit too much.
+                        </p>
+
+                        {/* graphic: email-icon */}
+                        <div className="my-4 text-center">
+                            <div className="placeholder-graphic">
+                                [Envelope or contact form icon]
                             </div>
                         </div>
-                    </section>
+
+                        <p className="fs-5">
+                            You can reach us directly at{" "}
+                            <a
+                                href="mailto:contact@freighble.com"
+                                target="_blank"
+                            >
+                                contact@freighble.com
+                            </a>
+                            , or use the contact form below (we promise it won't
+                            go into the void).
+                        </p>
+
+                        {/* Placeholder for contact form */}
+                        <div className="my-5 text-center">
+                            <form className="row g-3 justify-content-center">
+                                <div className="col-md-6">
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Name"
+                                    />
+                                </div>
+                                <div className="col-md-6">
+                                    <input
+                                        type="email"
+                                        className="form-control"
+                                        placeholder="Email"
+                                    />
+                                </div>
+                                <div className="col-12">
+                                    <textarea
+                                        className="form-control"
+                                        rows="5"
+                                        placeholder="Message"
+                                    ></textarea>
+                                </div>
+                                <div className="col-12 text-center">
+                                    <button
+                                        className="btn btn-primary bg-gradient fw-semibold rounded-3 px-5 w-100"
+                                        type="submit"
+                                    >
+                                        Send
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </section>
         </Fragment>
     );
 };

@@ -1,5 +1,6 @@
 import Navbar from "./Navbar";
 import Search from "./Search";
+import DashboardMain from "./DashboardMain";
 import Directory from "./Directory";
 import AdditionalInfo from "./AdditionalInfo";
 import Console from "./Console";
@@ -10,6 +11,7 @@ import UserProfile from "./UserProfile";
 export {
     Navbar,
     Search,
+    DashboardMain,
     Directory,
     AdditionalInfo,
     Console,

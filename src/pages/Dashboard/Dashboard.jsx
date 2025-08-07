@@ -1,7 +1,8 @@
 /* IMPORTS START */
 import { Fragment } from "react";
-import { Outlet, Navigate } from "react-router-dom";
-import { Navbar } from "./layout/components";
+import { Navigate } from "react-router-dom";
+
+import { Navbar, DashboardMain } from "./layout/components";
 import Transition from "../_templates/Transition";
 /* IMPORTS END */
 
@@ -68,7 +69,10 @@ const Dashboard = ({ CONDITIONAL_RENDERING, theme, setTheme }) => {
                     setTheme={setTheme}
                 />
             </div>
-            <Outlet />
+            <DashboardMain
+                CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
+                theme={theme}
+            />
         </Fragment>
     );
 };

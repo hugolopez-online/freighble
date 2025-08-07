@@ -873,6 +873,7 @@ const UserDisplay = (props) => {
                                             <button
                                                 type="button"
                                                 className="btn btn-danger bg-gradient fw-medium w-100 rounded-3 mt-2"
+                                                data-bs-dismiss="offcanvas"
                                                 onClick={(e) => handleDelete(e)}
                                             >
                                                 Delete Account
