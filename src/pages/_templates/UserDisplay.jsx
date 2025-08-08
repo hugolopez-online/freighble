@@ -1,5 +1,5 @@
 /* IMPORTS START */
-import { Toast } from "bootstrap";
+import { Toast, Offcanvas } from "bootstrap";
 import { useState, Fragment } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -64,17 +64,17 @@ const UserDisplay = (props) => {
 
             setIsFetching(true);
 
-            const RES = await fetch(URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(unit),
-            });
-
-            const RES_DATA = await RES.json();
-
             try {
+                const RES = await fetch(URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(unit),
+                });
+
+                const RES_DATA = await RES.json();
+
                 if (!RES.ok) {
                     throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
                 }
@@ -88,7 +88,7 @@ const UserDisplay = (props) => {
                 toast.show();
                 setTimeout(() => {
                     navigate("/login");
-                }, 2250);
+                }, 1750);
             } catch (error) {
                 setIsFetching(false);
                 const err_variables = Object.keys(RES_DATA.error.errors);
@@ -110,17 +110,17 @@ const UserDisplay = (props) => {
 
             setIsFetching(true);
 
-            const RES = await fetch(URL, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(unit),
-            });
-
-            const RES_DATA = await RES.json();
-
             try {
+                const RES = await fetch(URL, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(unit),
+                });
+
+                const RES_DATA = await RES.json();
+
                 if (!RES.ok) {
                     throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
                 }
@@ -161,35 +161,48 @@ const UserDisplay = (props) => {
 
         setIsFetching(true);
 
-        const RES = await fetch(URL, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        const RES_DATA = await RES.json();
-
         try {
+            const RES = await fetch(URL, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const RES_DATA = await RES.json();
+
             if (!RES.ok) {
                 throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
             }
 
+            setIsFetching(false);
+
             setToastMessage({
                 success: true,
-                message: [RES_DATA.msg],
+                message: [RES_DATA.msg, "You're being redirected."],
             });
             window.scrollTo(0, 0);
             setVisibility("view");
             toast.show();
             setTimeout(() => {
+                let USER_PROFILE = Offcanvas.getInstance(
+                    document.getElementById("user_profile")
+                );
+
+                if (!USER_PROFILE) {
+                    USER_PROFILE = new Offcanvas(
+                        document.getElementById("user_profile")
+                    );
+                }
+
+                USER_PROFILE.hide();
+
                 localStorage.removeItem("token");
                 localStorage.removeItem("user");
                 props.CONDITIONAL_RENDERING.setSession(
                     JSON.parse(localStorage.getItem("user"))
                 );
-                navigate("/");
-            }, 1250);
+            }, 2000);
         } catch (error) {
             setIsFetching(false);
             const err_variables = Object.keys(RES_DATA.error.errors);
@@ -873,7 +886,6 @@ const UserDisplay = (props) => {
                                             <button
                                                 type="button"
                                                 className="btn btn-danger bg-gradient fw-medium w-100 rounded-3 mt-2"
-                                                data-bs-dismiss="offcanvas"
                                                 onClick={(e) => handleDelete(e)}
                                             >
                                                 Delete Account
@@ -913,7 +925,7 @@ const UserDisplay = (props) => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body rounded-bottom-3 bg-light">
+                    <div className="toast-body rounded-bottom-3 text-bg-light">
                         {toastMessage.success ? (
                             <Fragment>
                                 <i className="bi bi-check-circle-fill text-success"></i>{" "}

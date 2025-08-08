@@ -300,7 +300,7 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING, theme }) => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body rounded-bottom-3 bg-light">
+                    <div className="toast-body rounded-bottom-3 text-bg-light">
                         {toastMessage.success ? (
                             <Fragment>
                                 <i className="bi bi-check-circle-fill text-success"></i>{" "}

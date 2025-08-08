@@ -211,17 +211,17 @@ const VendorDisplay = (props) => {
 
             setIsFetching(true);
 
-            const RES = await fetch(URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(unit),
-            });
-
-            const RES_DATA = await RES.json();
-
             try {
+                const RES = await fetch(URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(unit),
+                });
+
+                const RES_DATA = await RES.json();
+
                 if (!RES.ok) {
                     throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
                 }
@@ -235,7 +235,7 @@ const VendorDisplay = (props) => {
                 toast.show();
                 setTimeout(() => {
                     navigate("/vendors/login");
-                }, 2250);
+                }, 1750);
             } catch (error) {
                 setIsFetching(false);
                 const err_variables = Object.keys(RES_DATA.error.errors);
@@ -257,17 +257,17 @@ const VendorDisplay = (props) => {
 
             setIsFetching(true);
 
-            const RES = await fetch(URL, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(unit),
-            });
-
-            const RES_DATA = await RES.json(); // Parse the JSON RES
-
             try {
+                const RES = await fetch(URL, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(unit),
+                });
+
+                const RES_DATA = await RES.json();
+
                 if (!RES.ok) {
                     throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
                 }
@@ -306,23 +306,25 @@ const VendorDisplay = (props) => {
 
         setIsFetching(true);
 
-        const RES = await fetch(URL, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        const RES_DATA = await RES.json(); // Parse the JSON RES
-
         try {
+            const RES = await fetch(URL, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            const RES_DATA = await RES.json();
+
             if (!RES.ok) {
                 throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
             }
 
+            setIsFetching(false);
+
             setToastMessage({
                 success: true,
-                message: [RES_DATA.msg],
+                message: [RES_DATA.msg, "You're being redirected."],
             });
             window.scrollTo(0, 0);
             setVisibility("view");
@@ -334,7 +336,7 @@ const VendorDisplay = (props) => {
                     JSON.parse(localStorage.getItem("user"))
                 );
                 navigate("/");
-            }, 1250);
+            }, 2000);
         } catch (error) {
             setIsFetching(false);
             const err_variables = Object.keys(RES_DATA.error.errors);
@@ -773,7 +775,13 @@ const VendorDisplay = (props) => {
                                                 </span>
                                             )}
                                             {data.type.freight_broker && (
-                                                <span className="badge text-bg-dark me-2">
+                                                <span
+                                                    className={`badge text-bg-${
+                                                        props.theme === "light"
+                                                            ? "dark"
+                                                            : "light"
+                                                    } me-2`}
+                                                >
                                                     freight broker{" "}
                                                     <i className="bi bi-check-lg"></i>
                                                 </span>
@@ -1327,7 +1335,12 @@ const VendorDisplay = (props) => {
                                                 return (
                                                     <span
                                                         key={`view-mode_${mode}-${index}`}
-                                                        className="badge text-bg-dark me-2"
+                                                        className={`badge text-bg-${
+                                                            props.theme ===
+                                                            "light"
+                                                                ? "dark"
+                                                                : "light"
+                                                        } me-2`}
                                                     >
                                                         {modes[mode]}{" "}
                                                         <i className="bi bi-check-lg"></i>
@@ -2197,7 +2210,7 @@ const VendorDisplay = (props) => {
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div className="toast-body rounded-bottom-3 bg-light">
+                    <div className="toast-body rounded-bottom-3 text-bg-light">
                         {toastMessage.success ? (
                             <Fragment>
                                 <i className="bi bi-check-circle-fill text-success"></i>{" "}
