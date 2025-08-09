@@ -223,7 +223,9 @@ const VendorDisplay = (props) => {
                 const RES_DATA = await RES.json();
 
                 if (!RES.ok) {
-                    throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
+                    const error = new Error("Request failed.");
+                    error.data = RES_DATA.error.errors;
+                    throw error;
                 }
 
                 setData(props.data);
@@ -238,9 +240,9 @@ const VendorDisplay = (props) => {
                 }, 1750);
             } catch (error) {
                 setIsFetching(false);
-                const err_variables = Object.keys(RES_DATA.error.errors);
+                const err_variables = Object.keys(error.data);
                 const errors = err_variables.map((err) => {
-                    return RES_DATA.error.errors[err].message;
+                    return error.data[err].message;
                 });
 
                 setToastMessage({
@@ -269,7 +271,9 @@ const VendorDisplay = (props) => {
                 const RES_DATA = await RES.json();
 
                 if (!RES.ok) {
-                    throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
+                    const error = new Error("Request failed.");
+                    error.data = RES_DATA.error.errors;
+                    throw error;
                 }
 
                 setToastMessage({
@@ -282,9 +286,9 @@ const VendorDisplay = (props) => {
                 setIsFetching(false);
             } catch (error) {
                 setIsFetching(false);
-                const err_variables = Object.keys(RES_DATA.error.errors);
+                const err_variables = Object.keys(error.data);
                 const errors = err_variables.map((err) => {
-                    return RES_DATA.error.errors[err].message;
+                    return error.data[err].message;
                 });
 
                 setToastMessage({
@@ -317,7 +321,9 @@ const VendorDisplay = (props) => {
             const RES_DATA = await RES.json();
 
             if (!RES.ok) {
-                throw new Error(`${JSON.stringify(RES_DATA.error.errors)}`);
+                const error = new Error("Request failed.");
+                error.data = RES_DATA.error.errors;
+                throw error;
             }
 
             setIsFetching(false);
@@ -339,9 +345,9 @@ const VendorDisplay = (props) => {
             }, 2000);
         } catch (error) {
             setIsFetching(false);
-            const err_variables = Object.keys(RES_DATA.error.errors);
+            const err_variables = Object.keys(error.data);
             const errors = err_variables.map((err) => {
-                return RES_DATA.error.errors[err].message;
+                return error.data[err].message;
             });
 
             setToastMessage({

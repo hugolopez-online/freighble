@@ -1,26 +1,21 @@
-const AdditionalInfo = (props) => {
-    const MIN_DATA =
-        props.specs.mandatory.mode &&
-        props.specs.mandatory.origin.country &&
-        props.specs.mandatory.destination.country;
-
+const AdditionalInfo = ({ specs, setSpecs, theme }) => {
     return (
         <div
             className={`card border ${
-                props.theme === "light"
+                theme === "light"
                     ? "bg-light"
                     : "bg-dark bg-opacity-10 border-secondary"
             } bg-gradient shadow-sm rounded-4 p-4`}
         >
             <div
                 className={`row border-bottom ${
-                    props.theme === "light" ? "" : "border-secondary"
+                    theme === "light" ? "" : "border-secondary"
                 } mb-2`}
             >
                 <div className="col-12">
                     <h6
                         className={`text-${
-                            props.theme === "light"
+                            theme === "light"
                                 ? "dark-emphasis"
                                 : "light text-opacity-75"
                         } fs-2 brand-font`}
@@ -49,9 +44,9 @@ const AdditionalInfo = (props) => {
                         id="origin_date"
                         type="date"
                         className="form-control form-control-sm"
-                        value={props.specs.optional.origin_date}
+                        value={specs.optional.origin_date}
                         onChange={(e) => {
-                            props.setSpecs((prev) => {
+                            setSpecs((prev) => {
                                 return {
                                     ...prev,
                                     optional: {
@@ -61,15 +56,14 @@ const AdditionalInfo = (props) => {
                                 };
                             });
                         }}
-                        disabled={!MIN_DATA}
                     />
                     <input
                         id="destination_date"
                         type="date"
                         className="form-control form-control-sm"
-                        value={props.specs.optional.destination_date}
+                        value={specs.optional.destination_date}
                         onChange={(e) => {
-                            props.setSpecs((prev) => {
+                            setSpecs((prev) => {
                                 return {
                                     ...prev,
                                     optional: {
@@ -79,7 +73,6 @@ const AdditionalInfo = (props) => {
                                 };
                             });
                         }}
-                        disabled={!MIN_DATA}
                     />
                 </div>
             </div>
@@ -97,9 +90,9 @@ const AdditionalInfo = (props) => {
                         type="text"
                         placeholder="e.g., 53 ft dry van"
                         className="form-control form-control-sm"
-                        value={props.specs.optional.unit_type}
+                        value={specs.optional.unit_type}
                         onChange={(e) => {
-                            props.setSpecs((prev) => {
+                            setSpecs((prev) => {
                                 return {
                                     ...prev,
                                     optional: {
@@ -110,7 +103,6 @@ const AdditionalInfo = (props) => {
                             });
                         }}
                         autoComplete="off"
-                        disabled={!MIN_DATA}
                     />
                 </div>
             </div>
@@ -129,9 +121,9 @@ const AdditionalInfo = (props) => {
                         placeholder="e.g., 20 pallets / 44,000 lbs"
                         className="form-control form-control-sm"
                         rows="2"
-                        value={props.specs.optional.cargo_details}
+                        value={specs.optional.cargo_details}
                         onChange={(e) => {
-                            props.setSpecs((prev) => {
+                            setSpecs((prev) => {
                                 return {
                                     ...prev,
                                     optional: {
@@ -141,7 +133,6 @@ const AdditionalInfo = (props) => {
                                 };
                             });
                         }}
-                        disabled={!MIN_DATA}
                     ></textarea>
                 </div>
             </div>
@@ -160,9 +151,9 @@ const AdditionalInfo = (props) => {
                         placeholder="e.g., Call prior to arrival"
                         className="form-control form-control-sm"
                         rows="2"
-                        value={props.specs.optional.instructions}
+                        value={specs.optional.instructions}
                         onChange={(e) => {
-                            props.setSpecs((prev) => {
+                            setSpecs((prev) => {
                                 return {
                                     ...prev,
                                     optional: {
@@ -172,7 +163,6 @@ const AdditionalInfo = (props) => {
                                 };
                             });
                         }}
-                        disabled={!MIN_DATA}
                     ></textarea>
                 </div>
             </div>

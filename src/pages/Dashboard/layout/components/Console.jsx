@@ -65,23 +65,26 @@ const Console = (props) => {
                                 props.specs.mandatory.tsa ||
                                 props.specs.mandatory.fast ||
                                 props.specs.mandatory.tanker_endorsement
-                                    ? " (Extras:" +
-                                      (props.specs.mandatory.ctpat
-                                          ? " C-TPAT,"
-                                          : "") +
-                                      (props.specs.mandatory.twic
-                                          ? " TWIC,"
-                                          : "") +
-                                      (props.specs.mandatory.tsa
-                                          ? " TSA,"
-                                          : "") +
-                                      (props.specs.mandatory.fast
-                                          ? " FAST,"
-                                          : "") +
-                                      (props.specs.mandatory.tanker_endorsement
-                                          ? " Tanker endorsement,"
-                                          : "") +
-                                      " certified)"
+                                    ? " (" +
+                                      [
+                                          props.specs.mandatory.ctpat
+                                              ? "C-TPAT"
+                                              : "",
+                                          props.specs.mandatory.twic
+                                              ? "TWIC"
+                                              : "",
+                                          props.specs.mandatory.tsa
+                                              ? "TSA"
+                                              : "",
+                                          props.specs.mandatory.fast
+                                              ? "FAST"
+                                              : "",
+                                          props.specs.mandatory
+                                              .tanker_endorsement
+                                              ? "Tanker Endorsement"
+                                              : "",
+                                      ].join(", ") +
+                                      ")"
                                     : ""
                             }`}</i>
                         ) : (
