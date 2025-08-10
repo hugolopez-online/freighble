@@ -81,6 +81,34 @@ const UserSchema = new mongoose.Schema(
                 "Main email: invalid email format.",
             ],
             unique: true,
+            validate: {
+                validator: async function (value) {
+                    if (
+                        typeof this.getOptions === "function" &&
+                        this.getOptions().emailWillChange
+                    ) {
+                        const CREDENTIALS_TAKEN =
+                            await mongoose.models.User.findOne({
+                                email: value,
+                            });
+                        return !CREDENTIALS_TAKEN;
+                    }
+
+                    if (
+                        typeof this.isModified === "function" &&
+                        this.isModified("email")
+                    ) {
+                        const CREDENTIALS_TAKEN =
+                            await mongoose.models.User.findOne({
+                                email: value,
+                            });
+                        return !CREDENTIALS_TAKEN;
+                    }
+
+                    return true;
+                },
+                message: "Email already taken.",
+            },
             required: [true, "Email: required field."],
         },
         auth: {
@@ -107,6 +135,46 @@ UserSchema.pre("save", async function (next) {
     this.auth.password = await bcrypt.hash(this.auth.password, 6);
 
     next();
+});
+
+UserSchema.pre("findOneAndUpdate", async function (next) {
+    const UPDATE = this.getUpdate();
+    const NEW_EMAIL = UPDATE?.email || UPDATE?.$set?.email;
+    const DOCUMENT = await this.model.findOne(this.getQuery());
+
+    this.setOptions({
+        emailModified: Boolean(
+            NEW_EMAIL && DOCUMENT && DOCUMENT.email !== NEW_EMAIL
+        ),
+    });
+
+    next();
+});
+
+UserSchema.post(["save", "findOneAndUpdate"], function (err, doc, next) {
+    if (err && err.code === 11000) {
+        const ERROR = new mongoose.Error.ValidationError();
+
+        ERROR.addError(
+            "email",
+            new mongoose.Error.ValidatorError({
+                message: "Email already taken.",
+                path: "email",
+                kind: "unique",
+                value: err.keyValue?.email, // actual duplicate value
+                properties: {
+                    message: "Email already taken.",
+                    type: "unique",
+                    path: "email",
+                    value: err.keyValue?.email,
+                },
+            })
+        );
+
+        return next(ERROR);
+    }
+
+    return next(err);
 });
 
 UserSchema.methods.createToken = function () {

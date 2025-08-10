@@ -1,9 +1,7 @@
 /* === Vendor Assessment Segmentation Technology (VAST) === */
 
-// imports
 import suitability_weight from "./suitability_meta";
 
-// module
 const base_score = suitability_weight.mandatory;
 const origin_territory_weight =
     suitability_weight.desirable.origin_territory_weight;
@@ -108,8 +106,6 @@ const $VAST = (vendor, specs, routes) => {
             break;
         }
     }
-
-    // assign final adjusted suitability score and matching core/banned lanes
 
     return {
         ...vendor,

@@ -11,48 +11,37 @@ const Dashboard = ({ CONDITIONAL_RENDERING, theme, setTheme }) => {
     // module
     const GREETING = CONDITIONAL_RENDERING?.USER_NAME;
 
-    // early return
-    if (
-        !CONDITIONAL_RENDERING.session ||
-        CONDITIONAL_RENDERING.USER_ROLE === "vendor"
-    ) {
-        if (CONDITIONAL_RENDERING.USER_ROLE === "vendor") {
-            return (
-                <Fragment>
-                    <Transition
-                        variables={{
-                            type: [
-                                "Authenticating",
-                                "Redirecting",
-                                "Loading",
-                            ][1],
-                            loader: ["spinner-border", "spinner-grow"][0],
-                            message: "",
-                        }}
-                    />
-                    <Navigate
-                        to={`/vendors/vendor/${CONDITIONAL_RENDERING.USER_ID}`}
-                    />
-                </Fragment>
-            );
-        } else {
-            return (
-                <Fragment>
-                    <Transition
-                        variables={{
-                            type: [
-                                "Authenticating",
-                                "Redirecting",
-                                "Loading",
-                            ][1],
-                            loader: ["spinner-border", "spinner-grow"][0],
-                            message: "",
-                        }}
-                    />
-                    <Navigate to="/login" />
-                </Fragment>
-            );
-        }
+    // early returns
+    if (CONDITIONAL_RENDERING.USER_ROLE === "vendor") {
+        return (
+            <Fragment>
+                <Transition
+                    variables={{
+                        type: ["Authenticating", "Redirecting", "Loading"][1],
+                        loader: ["spinner-border", "spinner-grow"][0],
+                        message: "",
+                    }}
+                />
+                <Navigate
+                    to={`/vendors/vendor/${CONDITIONAL_RENDERING.USER_ID}`}
+                />
+            </Fragment>
+        );
+    }
+
+    if (!CONDITIONAL_RENDERING.session) {
+        return (
+            <Fragment>
+                <Transition
+                    variables={{
+                        type: ["Authenticating", "Redirecting", "Loading"][1],
+                        loader: ["spinner-border", "spinner-grow"][0],
+                        message: "",
+                    }}
+                />
+                <Navigate to="/login" />
+            </Fragment>
+        );
     }
 
     // render

@@ -1,5 +1,9 @@
 /* IMPORTS START */
+import { StatusCodes } from "http-status-codes";
+import mongoose from "mongoose";
+
 import User from "../db/models/User.js";
+import { BadRequest, NotFound } from "../errors/appErrors.js";
 /* IMPORTS END */
 
 /* CONTROLLERS START */
@@ -9,56 +13,33 @@ const USERS_API_FIND = async (req, res) => {
     try {
         const { id } = req.params;
 
-        if (!id) {
-            return res
-                .status(500)
-                .json({ msg: "Must provide ID to find user.", user: {} });
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new BadRequest("Invalid user ID");
         }
 
         const user = await User.findById(id);
 
         if (!user) {
-            return res
-                .status(500)
-                .json({ msg: "No user has been found.", user: {} });
+            throw new NotFound("No user has been found");
         }
 
-        return res.status(200).json({ msg: `Found user ${user.email}.`, user });
+        return res
+            .status(StatusCodes.OK)
+            .json({ msg: `Found user ${user.email}.`, user });
     } catch (err) {
-        console.error(err);
-
-        return res.status(200).json({ msg: err, user: {} });
+        return res.status(err.StatusCode).json({ msg: err.message, user: {} });
     }
 };
 
 const USERS_API_CREATE = async (req, res) => {
     try {
-        const { email } = req.body;
-
-        const repeated_user = await User.findOne({ email });
-
-        if (repeated_user) {
-            // TODOTASK: implement proper error handling, below is a temporal approach
-            return res.status(500).json({
-                error: {
-                    errors: {
-                        unique: {
-                            message: `Sign-up email "${email}" already taken.`,
-                        },
-                    },
-                },
-            });
-        }
-
         const user = await User.create({ ...req.body });
 
-        return res.status(201).json({
-            msg: `${user.first_name}, you have been successfuly registered!`,
+        return res.status(StatusCodes.CREATED).json({
+            msg: `${user.first_name}, you've been successfuly registered!`,
         });
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             msg: "Something went wrong.",
             error: err,
         });
@@ -69,10 +50,8 @@ const USERS_API_EDIT = async (req, res) => {
     try {
         const { id } = req.params;
 
-        if (!id) {
-            return res
-                .status(400)
-                .json({ msg: `Must provide user ID to edit.` });
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new BadRequest("Invalid user ID");
         }
 
         const user = await User.findOneAndUpdate(
@@ -91,8 +70,6 @@ const USERS_API_EDIT = async (req, res) => {
 
         return res.status(200).json({ msg: "Profile edited." });
     } catch (err) {
-        console.error(err);
-
         return res.status(500).json({
             msg: "Something went wrong.",
             error: err,
