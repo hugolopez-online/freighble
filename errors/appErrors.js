@@ -5,6 +5,11 @@ class NotFound extends Error {
         super(message);
         this.name = "NotFound";
         this.StatusCode = StatusCodes.NOT_FOUND;
+        this.errors = {
+            database: {
+                message,
+            },
+        };
     }
 }
 
@@ -13,6 +18,11 @@ class NotAuthenticated extends Error {
         super(message);
         this.name = "NotAuthenticated";
         this.StatusCode = StatusCodes.UNAUTHORIZED;
+        this.errors = {
+            auth: {
+                message,
+            },
+        };
     }
 }
 
@@ -21,15 +31,25 @@ class BadRequest extends Error {
         super(message);
         this.name = "BadRequest";
         this.StatusCode = StatusCodes.BAD_REQUEST;
+        this.errors = {
+            req: {
+                message,
+            },
+        };
     }
 }
 
-class CredentialsTaken extends Error {
+class NotSupported extends Error {
     constructor(message) {
         super(message);
-        this.name = "CredentialsTaken";
-        this.StatusCode = StatusCodes.CONFLICT;
+        this.name = "NotSupported";
+        this.StatusCode = StatusCodes.SERVICE_UNAVAILABLE;
+        this.errors = {
+            database: {
+                message,
+            },
+        };
     }
 }
 
-export { NotFound, NotAuthenticated, BadRequest, CredentialsTaken };
+export { NotFound, NotAuthenticated, BadRequest, NotSupported };

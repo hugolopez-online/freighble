@@ -3,7 +3,7 @@ import { StatusCodes } from "http-status-codes";
 import mongoose from "mongoose";
 
 import User from "../db/models/User.js";
-import { BadRequest, NotFound } from "../errors/appErrors.js";
+import { BadRequest, NotAuthenticated, NotFound } from "../errors/appErrors.js";
 /* IMPORTS END */
 
 /* CONTROLLERS START */
@@ -14,20 +14,22 @@ const USERS_API_FIND = async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new BadRequest("Invalid user ID");
+            throw new BadRequest("Invalid user ID.");
         }
 
         const user = await User.findById(id);
 
         if (!user) {
-            throw new NotFound("No user has been found");
+            throw new NotFound("No user has been found.");
         }
 
         return res
             .status(StatusCodes.OK)
             .json({ msg: `Found user ${user.email}.`, user });
     } catch (err) {
-        return res.status(err.StatusCode).json({ msg: err.message, user: {} });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ msg: err.message || "Something went wrong.", user: {} });
     }
 };
 
@@ -51,7 +53,7 @@ const USERS_API_EDIT = async (req, res) => {
         const { id } = req.params;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new BadRequest("Invalid user ID");
+            throw new BadRequest("Invalid user ID.");
         }
 
         const user = await User.findOneAndUpdate(
@@ -63,17 +65,17 @@ const USERS_API_EDIT = async (req, res) => {
         );
 
         if (!user) {
-            return res.status(400).json({
-                msg: "No user found: nothing to edit.",
-            });
+            throw new NotFound("No user has been found.");
         }
 
-        return res.status(200).json({ msg: "Profile edited." });
+        return res.status(StatusCodes.OK).json({ msg: "Profile edited." });
     } catch (err) {
-        return res.status(500).json({
-            msg: "Something went wrong.",
-            error: err,
-        });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({
+                msg: err.message || "Something went wrong.",
+                error: err,
+            });
     }
 };
 
@@ -81,28 +83,24 @@ const USERS_API_DELETE = async (req, res) => {
     try {
         const { id } = req.params;
 
-        if (!id) {
-            return res
-                .status(400)
-                .json({ msg: "Must provide user ID to delete." });
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new BadRequest("Invalid user ID.");
         }
 
         const user = await User.findOneAndDelete({ _id: id });
 
         if (!user) {
-            return res.status(400).json({
-                msg: "No user found: nothing to delete.",
-            });
+            throw new NotFound("No user has been found.");
         }
 
-        return res.status(200).json({ msg: "Profile deleted." });
+        return res.status(StatusCodes.OK).json({ msg: "Profile deleted." });
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({
-            msg: "Something went wrong.",
-            error: err,
-        });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({
+                msg: err.message || "Something went wrong.",
+                error: err,
+            });
     }
 };
 
@@ -111,49 +109,27 @@ const USERS_API_LOGIN = async (req, res) => {
         const { email, password } = req.body;
 
         const user = await User.findOne({ email: email.toLowerCase() });
+        const match = await user?.comparePassword(password);
 
-        if (user) {
-            const match = await user.comparePassword(password);
-            if (match) {
-                // TODOTASK: store token in httOnly cookie - localStorage is for development only
-                const token = user.createToken();
-                return res.status(200).json({
-                    token,
-                    user: {
-                        id: user._id,
-                        role: user.auth.role,
-                        name: user.first_name,
-                    },
-                    msg: "Login successful!",
-                });
-            } else {
-                return res.status(500).json({
-                    error: {
-                        errors: {
-                            auth: {
-                                message: "Invalid credentials.",
-                            },
-                        },
-                    },
-                });
-            }
-        } else {
-            return res.status(500).json({
-                error: {
-                    errors: {
-                        auth: {
-                            message: "Invalid credentials.",
-                        },
-                    },
+        if (user && match) {
+            // TODO: store token in httOnly cookie - localStorage is for development only
+            const token = user.createToken();
+            return res.status(StatusCodes.OK).json({
+                token,
+                user: {
+                    id: user._id,
+                    role: user.auth.role,
+                    name: user.first_name,
                 },
+                msg: "Login successful!",
             });
+        } else {
+            throw new NotAuthenticated("Invalid credentials.");
         }
     } catch (err) {
-        console.error(err);
-
         return res
-            .status(500)
-            .json({ msg: "Something went wrong.", error: err });
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ msg: err.message || "Something went wrong.", error: err });
     }
 };
 

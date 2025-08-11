@@ -1,6 +1,10 @@
 /* IMPORTS START */
-import TEST_VENDORS from "../data/vendors.js"; // <- TODOTASK: create some valid test vendors
+import mongoose from "mongoose";
+import { StatusCodes } from "http-status-codes";
+
+import TEST_VENDORS from "../data/vendors.js"; // <- TODO: create some valid test vendors
 import Vendor from "../db/models/Vendor.js";
+import { BadRequest, NotFound, NotSupported } from "../errors/appErrors.js";
 /* IMPORTS END */
 
 /* CONTROLLERS START */
@@ -12,14 +16,18 @@ const VENDORS_API_VIEW = async (req, res) => {
             ? await Vendor.find(req.body)
             : TEST_VENDORS;
 
-        return res.status(200).json({
+        if (!vendors) {
+            throw new NotFound("No vendors found.");
+        }
+
+        return res.status(StatusCodes.OK).json({
             msg: `Retrieved ${vendors.length} vendors successfully.`,
             vendors,
         });
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({ msg: err, vendors: [] });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ msg: err.message, vendors: [] });
     }
 };
 
@@ -58,10 +66,14 @@ const VENDORS_API_SEARCH = async (req, res) => {
             fast &&
             tanker_endorsement
         ) {
-            // TODOTASK: switch to find verified `true` vendors
+            // TODO: switch to find verified `true` vendors
             const vendors = DB_AVAILABLE
                 ? await Vendor.find({ verified: false })
                 : TEST_VENDORS;
+
+            if (!vendors) {
+                throw new NotFound("No vendors found.");
+            }
 
             const filtered_vendors = vendors.filter((vendor) => {
                 const vendor_coverage = DB_AVAILABLE
@@ -107,21 +119,17 @@ const VENDORS_API_SEARCH = async (req, res) => {
                 return is_qualified;
             });
 
-            return res.status(200).json({
+            return res.status(StatusCodes.OK).json({
                 msg: `Filtered ${filtered_vendors.length} vendors successfully.`,
                 filtered_vendors,
             });
         }
 
-        // TODOTASK: implement BAD_REQUEST error handling
-        return res.status(500).json({
-            msg: "Incorrect search query format. No vendors have been filtered.",
-            filtered_vendors: [],
-        });
+        throw new BadRequest("Incorrect search query format.");
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({ msg: err, filtered_vendors: [] });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ msg: err.message, filtered_vendors: [] });
     }
 };
 
@@ -129,28 +137,31 @@ const VENDORS_API_FIND = async (req, res) => {
     try {
         const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
 
-        const { id } = req.params;
-
         if (!DB_AVAILABLE) {
-            console.warn(
+            throw new NotSupported(
                 "No support for this feature with locally stored data."
             );
+        }
 
-            return res.status(500).json({
-                msg: "No support for this feature with locally stored data.",
-                vendor: {},
-            });
+        const { id } = req.params;
+
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new BadRequest("Invalid vendor ID.");
         }
 
         const vendor = await Vendor.findById(id);
 
+        if (!vendor) {
+            throw new NotFound("No vendor has been found.");
+        }
+
         return res
-            .status(200)
+            .status(StatusCodes.OK)
             .json({ msg: `Found vendor ${vendor.company}.`, vendor });
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({ msg: err, vendor: {} });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ msg: err.message, vendor: {} });
     }
 };
 
