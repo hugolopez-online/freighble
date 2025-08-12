@@ -4,7 +4,12 @@ import { StatusCodes } from "http-status-codes";
 
 import TEST_VENDORS from "../data/vendors.js"; // <- TODO: create some valid test vendors
 import Vendor from "../db/models/Vendor.js";
-import { BadRequest, NotFound, NotSupported } from "../errors/appErrors.js";
+import {
+    BadRequest,
+    NotAuthenticated,
+    NotFound,
+    NotSupported,
+} from "../errors/appErrors.js";
 /* IMPORTS END */
 
 /* CONTROLLERS START */
@@ -167,31 +172,22 @@ const VENDORS_API_FIND = async (req, res) => {
 
 const VENDORS_API_CREATE = async (req, res) => {
     try {
-        const { main_email } = req.body;
-        const repeated_user = await Vendor.findOne({ main_email });
+        const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
 
-        if (repeated_user) {
-            return res.status(500).json({
-                error: {
-                    errors: {
-                        unique: {
-                            message: `Sign-up email "${main_email}" has already been taken.`,
-                        },
-                    },
-                },
-            });
+        if (!DB_AVAILABLE) {
+            throw new NotSupported(
+                "No support for this feature with locally stored data."
+            );
         }
 
         const vendor = await Vendor.create({ ...req.body });
 
-        return res.status(201).json({
+        return res.status(StatusCodes.CREATED).json({
             msg: `Vendor ${vendor.company} created!`,
             id: vendor._id,
         });
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             msg: "Something went wrong.",
             error: err,
         });
@@ -200,12 +196,18 @@ const VENDORS_API_CREATE = async (req, res) => {
 
 const VENDORS_API_EDIT = async (req, res) => {
     try {
+        const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
+
+        if (!DB_AVAILABLE) {
+            throw new NotSupported(
+                "No support for this feature with locally stored data."
+            );
+        }
+
         const { id } = req.params;
 
-        if (!id) {
-            return res
-                .status(400)
-                .json({ msg: "Must provide vendor ID to edit." });
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new BadRequest("Invalid vendor ID.");
         }
 
         const vendor = await Vendor.findOneAndUpdate(
@@ -217,48 +219,54 @@ const VENDORS_API_EDIT = async (req, res) => {
         );
 
         if (!vendor) {
-            return res.status(400).json({
-                msg: "No vendor found: nothing to edit.",
-            });
+            throw new NotFound("No vendor has been found.");
         }
 
-        return res.status(200).json({ msg: `${vendor.company} edited.` });
+        return res
+            .status(StatusCodes.OK)
+            .json({ msg: `${vendor.company} edited.` });
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({
-            msg: "Something went wrong.",
-            error: err,
-        });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({
+                msg: err.message || "Something went wrong.",
+                error: err,
+            });
     }
 };
 
 const VENDORS_API_DELETE = async (req, res) => {
     try {
+        const DB_AVAILABLE = Boolean(process.env.MONGO_URI);
+
+        if (!DB_AVAILABLE) {
+            throw new NotSupported(
+                "No support for this feature with locally stored data."
+            );
+        }
+
         const { id } = req.params;
 
-        if (!id) {
-            return res
-                .status(400)
-                .json({ msg: "Must provide vendor ID to delete." });
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new BadRequest("Invalid vendor ID.");
         }
 
         const vendor = await Vendor.findOneAndDelete({ _id: id });
 
         if (!vendor) {
-            return res.status(400).json({
-                msg: "No vendor found: nothing to delete.",
-            });
+            throw new NotFound("No vendor has been found.");
         }
 
-        return res.status(200).json({ msg: `${vendor.company} deleted.` });
+        return res
+            .status(StatusCodes.OK)
+            .json({ msg: `${vendor.company} deleted.` });
     } catch (err) {
-        console.error(err);
-
-        return res.status(500).json({
-            msg: "Something went wrong.",
-            error: err,
-        });
+        return res
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({
+                msg: err.message || "Something went wrong.",
+                error: err,
+            });
     }
 };
 
@@ -269,45 +277,23 @@ const VENDORS_API_LOGIN = async (req, res) => {
         const vendor = await Vendor.findOne({
             main_email: email.toLowerCase(),
         });
+        const match = await vendor?.comparePassword(password);
 
-        if (vendor) {
-            const match = await vendor.comparePassword(password);
-            if (match) {
-                // TODOTASK: store token in httOnly cookie - localStorage is for development only
-                const token = vendor.createToken();
-                return res.status(200).json({
-                    token,
-                    user: { id: vendor._id, role: vendor.auth.role },
-                    msg: "Login successful!",
-                });
-            } else {
-                return res.status(500).json({
-                    error: {
-                        errors: {
-                            auth: {
-                                message: "Invalid credentials.",
-                            },
-                        },
-                    },
-                });
-            }
-        } else {
-            return res.status(500).json({
-                error: {
-                    errors: {
-                        auth: {
-                            message: "Invalid credentials.",
-                        },
-                    },
-                },
+        if (vendor && match) {
+            // TODO: store token in httOnly cookie - localStorage is for development only
+            const token = vendor.createToken();
+            return res.status(StatusCodes.OK).json({
+                token,
+                user: { id: vendor._id, role: vendor.auth.role },
+                msg: "Login successful!",
             });
+        } else {
+            throw new NotAuthenticated("Invalid credentials.");
         }
     } catch (err) {
-        console.error(err);
-
         return res
-            .status(500)
-            .json({ msg: "Something went wrong.", error: err });
+            .status(err.StatusCode || StatusCodes.INTERNAL_SERVER_ERROR)
+            .json({ msg: err.message || "Something went wrong.", error: err });
     }
 };
 
