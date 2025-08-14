@@ -84,7 +84,7 @@ const DashboardMain = ({ CONDITIONAL_RENDERING, theme }) => {
             <div className="row">
                 <div
                     id="searchForm"
-                    className="col-12 col-md-3 mb-3"
+                    className="col-12 col-md-6 col-lg-4 col-xl-3 mb-3"
                 >
                     <Search
                         specs={specs}
@@ -94,11 +94,11 @@ const DashboardMain = ({ CONDITIONAL_RENDERING, theme }) => {
                     />
                 </div>
                 <div
-                    className={`col-12 col-md-3 mb-3${
+                    className={`col-12 col-md-6 col-lg-4 col-xl-3 mb-3${
                         !MIN_DATA ? " d-none" : ""
                     }`}
                 >
-                    <div className="row sticky-md-top under-navbar">
+                    <div className="row sticky-lg-top under-navbar">
                         <div
                             id="additional_info"
                             className="col-12"

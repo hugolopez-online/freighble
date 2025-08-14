@@ -17,13 +17,33 @@ const VendorsPortal = ({ theme }) => {
                 >
                     Vendors Portal
                 </h1>
+
                 <div className="mt-5">
-                    <p className="fs-4 mb-4 opacity-75">
+                    <p className="fs-4 mb-4 opacity-75 fw-light">
                         Whether you're an asset-based carrier or a
                         freight-forwarding operation, Freighble connects you
                         with shippers and brokers who need exactly what you
                         offer — no cold calls, no games.
                     </p>
+
+                    <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-5">
+                        <Link
+                            to="/vendors/vendor"
+                            className={`btn btn-${
+                                theme === "light"
+                                    ? "dark bg-gradient"
+                                    : "light bg-gradient-soft"
+                            } fw-semibold rounded-3`}
+                        >
+                            Vendor Registration
+                        </Link>
+                        <Link
+                            to="/vendors/login"
+                            className="btn btn-primary fw-semibold bg-gradient rounded-3"
+                        >
+                            Vendor Login
+                        </Link>
+                    </div>
 
                     {/* graphic: carrier-network */}
                     <div className="my-5 text-center">
@@ -62,21 +82,6 @@ const VendorsPortal = ({ theme }) => {
                         Stay visible to the right people, reduce the noise, and
                         fill your trucks with less friction.
                     </p>
-
-                    <div className="d-flex flex-column flex-md-row justify-content-center gap-3 mt-5">
-                        <Link
-                            to="/vendors/vendor"
-                            className="btn btn-dark fw-semibold bg-gradient rounded-3"
-                        >
-                            Register as a Vendor
-                        </Link>
-                        <Link
-                            to="/vendors/login"
-                            className="btn btn-primary fw-semibold bg-gradient rounded-3"
-                        >
-                            Already Registered? Log In
-                        </Link>
-                    </div>
                 </div>
             </div>
         </section>

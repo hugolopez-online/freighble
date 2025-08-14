@@ -190,7 +190,7 @@ const Search = (props) => {
                 props.theme === "light"
                     ? "bg-light"
                     : "bg-dark bg-opacity-10 border-secondary"
-            } bg-gradient needs-validation sticky-md-top under-navbar`}
+            } bg-gradient needs-validation sticky-lg-top under-navbar`}
             onSubmit={handleSpecs}
         >
             <div

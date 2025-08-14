@@ -18,17 +18,17 @@ const Home = ({ setAnchor, theme }) => {
                         <span className="fw-semibold">ble</span>
                     </h1>
                     <p className="fst-italic fs-2 mb-5">
-                        Smart carrier search. No noise, just matches.
+                        Smart carrier search. No clutter, just matches.
                     </p>
                     <Link
                         to="/register"
-                        className="brand-font btn btn-lg btn-primary bg-gradient fw-medium rounded-pill me-2"
+                        className="brand-font btn btn-lg btn-primary bg-gradient fw-medium rounded-3 me-2"
                     >
                         GET STARTED
                     </Link>
                     <Link
                         to="/"
-                        className="brand-font btn btn-lg btn-light fw-light rounded-pill"
+                        className="brand-font btn btn-lg btn-light fw-light rounded-3"
                         onClick={() => {
                             setAnchor("about");
                         }}
@@ -55,7 +55,7 @@ const Home = ({ setAnchor, theme }) => {
                         About Freighble
                     </h1>
                     <div className="mt-5">
-                        <p className="fs-4 mb-4 opacity-75">
+                        <p className="fs-4 mb-4 opacity-75 fw-light">
                             Picture this: you've got a load ready to move —
                             origin, destination, equipment type, special
                             conditions, the works. You drop the details into
@@ -125,7 +125,7 @@ const Home = ({ setAnchor, theme }) => {
                         Contact Us
                     </h1>
                     <div className="mt-5">
-                        <p className="fs-4 mb-4">
+                        <p className="fs-4 mb-4 opacity-75 fw-light">
                             Got questions, ideas, or found a bug we should know
                             about?
                             <br />

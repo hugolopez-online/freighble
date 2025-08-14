@@ -1013,7 +1013,7 @@ const VendorDisplay = (props) => {
                                                         : "light text-opacity-75"
                                                 }`}
                                             >
-                                                pricing contact email{" "}
+                                                pricing email{" "}
                                                 <strong
                                                     className={`text-${
                                                         data.email &&
