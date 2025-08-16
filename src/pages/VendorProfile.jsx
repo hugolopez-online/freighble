@@ -1,13 +1,15 @@
-// imports
+/* IMPORTS START */
 import { useState, useEffect, Fragment } from "react";
 import { useParams } from "react-router-dom";
+
 import GeoCoverage from "./VendorRegister/layout/components/GeoCoverage";
 import LaneList from "./VendorRegister/layout/components/LaneList";
 import LaneBuilder from "./VendorRegister/layout/components/LaneBuilder";
 import AddLane from "./VendorRegister/layout/components/AddLane";
 import { Transition, VendorDisplay } from "./_templates";
+/* IMPORTS END */
 
-// module
+/* MODULE START */
 const BLANK_USER = {
     company: "",
     type: {
@@ -49,24 +51,23 @@ const BLANK_USER = {
     exclusive_lanes: [],
     banned_lanes: [],
 };
+/* MODULE END */
 
-// render
+/* COMPONENT START */
 const VendorProfile = ({ CONDITIONAL_RENDERING, theme }) => {
+    // status
     const [isFetching, setIsFetching] = useState(false);
     const [vendor, setVendor] = useState(BLANK_USER);
     const { id } = useParams();
 
+    // effect
     useEffect(() => {
         const findVendor = async () => {
-            if (isFetching || vendor.company) {
-                return;
-            }
-            // async func to search vendors through API
-            const query_string = `/api/vendors/public/profile/${id}`;
+            const QUERY = `/api/vendors/public/profile/${id}`;
 
             setIsFetching(true);
 
-            const found_vendor_promise = await fetch(query_string);
+            const found_vendor_promise = await fetch(QUERY);
 
             const found_vendor_doc = await found_vendor_promise.json();
             const found_vendor = found_vendor_doc.vendor;
@@ -77,6 +78,7 @@ const VendorProfile = ({ CONDITIONAL_RENDERING, theme }) => {
         findVendor();
     }, []);
 
+    // render
     return (
         <Fragment>
             {isFetching ? (
@@ -113,5 +115,6 @@ const VendorProfile = ({ CONDITIONAL_RENDERING, theme }) => {
         </Fragment>
     );
 };
+/* COMPONENT END */
 
 export default VendorProfile;
