@@ -65,6 +65,8 @@ const data = {
 
 /* COMPONENT END */
 const VendorRegister = ({ CONDITIONAL_RENDERING, theme }) => {
+    window.scrollTo(0, 0);
+
     if (CONDITIONAL_RENDERING.session) {
         return (
             <Fragment>

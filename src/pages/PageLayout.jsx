@@ -16,14 +16,9 @@ const PageLayout = ({
                 anchor={anchor}
                 setAnchor={setAnchor}
                 CONDITIONAL_RENDERING={CONDITIONAL_RENDERING}
-                theme={theme}
-                setTheme={setTheme}
             />
             <Outlet />
-            <Footer
-                anchor={anchor}
-                setAnchor={setAnchor}
-            />
+            <Footer />
             <button
                 className="btn btn-lg text-warning position-fixed bottom-0 end-0"
                 onClick={() => {

@@ -6,6 +6,9 @@ import { Transition, LoginForm } from "./_templates";
 
 /* COMPONENT START */
 const Login = ({ CONDITIONAL_RENDERING, theme }) => {
+    // module
+    window.scrollTo(0, 0);
+
     // early return
     if (CONDITIONAL_RENDERING.session) {
         return (

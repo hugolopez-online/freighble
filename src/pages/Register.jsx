@@ -1,6 +1,6 @@
 // imports
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Fragment } from "react";
+import { Navigate } from "react-router-dom";
 import { Transition, UserDisplay } from "./_templates";
 
 // module
@@ -22,24 +22,21 @@ const data = {
 // component
 const Register = ({ CONDITIONAL_RENDERING, theme }) => {
     // module
-    const navigate = useNavigate();
+    window.scrollTo(0, 0);
 
-    // effects
-    useEffect(() => {
-        if (CONDITIONAL_RENDERING.session) {
-            navigate("/dashboard");
-        }
-    }, []);
-
+    // early return
     if (CONDITIONAL_RENDERING.session) {
         return (
-            <Transition
-                variables={{
-                    type: ["Authenticating", "Redirecting", "Loading"][1],
-                    loader: ["spinner-border", "spinner-grow"][0],
-                    message: "",
-                }}
-            />
+            <Fragment>
+                <Transition
+                    variables={{
+                        type: ["Authenticating", "Redirecting", "Loading"][1],
+                        loader: ["spinner-border", "spinner-grow"][0],
+                        message: "",
+                    }}
+                />
+                <Navigate to="/dashboard" />
+            </Fragment>
         );
     }
 

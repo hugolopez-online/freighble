@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 
 const VendorsPortal = ({ theme }) => {
+    window.scrollTo(0, 0);
+
     return (
         <section
             id="vendors"
