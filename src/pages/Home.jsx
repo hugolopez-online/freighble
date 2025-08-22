@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
+import searching_graphic from "../assets/img/pictures/searching_graphic.svg";
+import mailbox_graphic from "../assets/img/pictures/mailbox_graphic.svg";
+import compose_email from "../assets/img/pictures/compose_email.svg";
+
 const Home = ({ setAnchor, theme }) => {
     return (
         <Fragment>
@@ -64,9 +68,14 @@ const Home = ({ setAnchor, theme }) => {
                         </p>
 
                         {/* graphic: map-flow */}
-                        <div className="my-5 text-center">
+                        <div className="my-5">
                             <div className="placeholder-graphic">
-                                [Map with arrows graphic]
+                                <img
+                                    src={searching_graphic}
+                                    width={400}
+                                    className="img-fluid mx-auto d-block"
+                                    alt="searching graphic"
+                                />
                             </div>
                         </div>
 
@@ -86,9 +95,14 @@ const Home = ({ setAnchor, theme }) => {
                         </p>
 
                         {/* graphic: vendor-card */}
-                        <div className="my-5 text-center">
+                        <div className="my-5">
                             <div className="placeholder-graphic">
-                                [Vendor card or profile preview graphic]
+                                <img
+                                    src={compose_email}
+                                    width={400}
+                                    className="img-fluid mx-auto d-block"
+                                    alt="workflow graphic"
+                                />
                             </div>
                         </div>
 
@@ -126,13 +140,6 @@ const Home = ({ setAnchor, theme }) => {
                     </h1>
                     <div className="mt-5">
                         <p className="fs-4 mb-4 opacity-75 fw-light">
-                            Got questions, ideas, or found a bug we should know
-                            about?
-                            <br />
-                            Let's talk. We're all ears (and keyboards).
-                        </p>
-
-                        <p className="fs-5">
                             Send us a message anytime — whether you're a broker
                             looking to enhance your workflow, a carrier wanting
                             to be listed, or just someone who likes freight tech
@@ -140,9 +147,14 @@ const Home = ({ setAnchor, theme }) => {
                         </p>
 
                         {/* graphic: email-icon */}
-                        <div className="my-4 text-center">
+                        <div className="my-5">
                             <div className="placeholder-graphic">
-                                [Envelope or contact form icon]
+                                <img
+                                    src={mailbox_graphic}
+                                    width={200}
+                                    className="img-fluid mx-auto d-block"
+                                    alt="workflow graphic"
+                                />
                             </div>
                         </div>
 

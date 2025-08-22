@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 
+import steps_graphic from "../assets/img/pictures/steps_graphic.svg";
+
 const VendorsPortal = ({ theme }) => {
     window.scrollTo(0, 0);
 
@@ -48,9 +50,14 @@ const VendorsPortal = ({ theme }) => {
                     </div>
 
                     {/* graphic: carrier-network */}
-                    <div className="my-5 text-center">
+                    <div className="my-5">
                         <div className="placeholder-graphic">
-                            [Carrier network graphic]
+                            <img
+                                src={steps_graphic}
+                                width={200}
+                                className="img-fluid mx-auto d-block"
+                                alt="workflow graphic"
+                            />
                         </div>
                     </div>
 
@@ -66,13 +73,6 @@ const VendorsPortal = ({ theme }) => {
                         <strong> they reach out directly via email</strong>. No
                         intermediary, no platform fees, no forced acceptance.
                     </p>
-
-                    {/* graphic: vendor-inbox-preview */}
-                    <div className="my-5 text-center">
-                        <div className="placeholder-graphic">
-                            [Inbox or notification graphic]
-                        </div>
-                    </div>
 
                     <p className="fs-5">
                         You'll receive genuine inquiries for freight you're
