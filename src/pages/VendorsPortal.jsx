@@ -15,7 +15,7 @@ const VendorsPortal = ({ theme }) => {
                 style={{ minHeight: "100vh" }}
             >
                 <h1
-                    className={`display-1 fw-semibold text-center text-${
+                    className={`display-1 fw-semibold text-${
                         theme === "light" ? "dark" : "light"
                     }`}
                 >
@@ -23,7 +23,7 @@ const VendorsPortal = ({ theme }) => {
                 </h1>
 
                 <div className="mt-5">
-                    <p className="fs-4 mb-4 opacity-75 fw-light">
+                    <p className="fs-4 mb-4">
                         Whether you're an asset-based carrier or a
                         freight-forwarding operation, Freighble connects you
                         with shippers and brokers who need exactly what you

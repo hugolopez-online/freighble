@@ -59,7 +59,7 @@ const Home = ({ setAnchor, theme }) => {
                         About Freighble
                     </h1>
                     <div className="mt-5">
-                        <p className="fs-4 mb-4 opacity-75 fw-light">
+                        <p className="fs-4">
                             Picture this: you've got a load ready to move —
                             origin, destination, equipment type, special
                             conditions, the works. You drop the details into
@@ -139,7 +139,7 @@ const Home = ({ setAnchor, theme }) => {
                         Contact Us
                     </h1>
                     <div className="mt-5">
-                        <p className="fs-4 mb-4 opacity-75 fw-light">
+                        <p className="fs-4 mb-4">
                             Send us a message anytime — whether you're a broker
                             looking to enhance your workflow, a carrier wanting
                             to be listed, or just someone who likes freight tech

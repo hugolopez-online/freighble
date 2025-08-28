@@ -58,6 +58,10 @@
     top: 4rem !important;
 }
 
+.below-navbar {
+    top: 3rem !important;
+}
+
 .bg-gradient-deep {
     background-image: var(--gradient-deep) !important;
 }

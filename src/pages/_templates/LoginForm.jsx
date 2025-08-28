@@ -90,13 +90,13 @@ const LoginForm = ({ role, CONDITIONAL_RENDERING, theme }) => {
             <div className="row justify-content-center pt-5">
                 {!authenticating ? (
                     <div className="col-11 col-md-7 py-4">
-                        <h5
-                            className={`display-5 ${
-                                theme === "light" ? "" : "text-light"
-                            } text-capitalize py-4`}
+                        <h1
+                            className={`display-1 fw-semibold text-capitalize my-5 text-${
+                                theme === "light" ? "dark" : "light"
+                            }`}
                         >
                             {role} portal
-                        </h5>
+                        </h1>
                         {role === "vendor" && (
                             <div
                                 className={`border border-warning bg-warning bg-opacity-25 text-warning${

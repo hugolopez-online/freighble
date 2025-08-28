@@ -249,10 +249,10 @@ const UserDisplay = (props) => {
                     }`}
                 >
                     <div className="col-11 col-md-9 py-4">
-                        <h5
-                            className={`display-5 ${
-                                props.theme === "light" ? "" : "text-light"
-                            } py-4`}
+                        <h1
+                            className={`display-1 fw-semibold my-5 text-${
+                                props.theme === "light" ? "dark" : "light"
+                            }`}
                         >
                             {view ? (
                                 <Fragment>
@@ -322,7 +322,7 @@ const UserDisplay = (props) => {
                                     </button>
                                 </Fragment>
                             )}
-                        </h5>
+                        </h1>
                         <form
                             id="user_register"
                             className={`shadow-sm border rounded-4 p-4 bg-${
