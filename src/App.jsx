@@ -14,6 +14,7 @@ import {
     Vendors,
     VendorsPortal,
     NotFound,
+    TermsAndConditions,
 } from "./pages";
 /* IMPORTS END */
 
@@ -140,6 +141,10 @@ function App() {
                             }
                         />
                     </Route>
+                    <Route
+                        path="general-terms-and-conditions"
+                        element={<TermsAndConditions theme={theme} />}
+                    />
                     <Route
                         path="*"
                         element={<NotFound />}

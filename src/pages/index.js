@@ -12,6 +12,7 @@ import VendorProfile from "./VendorProfile";
 import VendorRegister from "./VendorRegister";
 import Vendors from "./Vendors";
 import VendorsPortal from "./VendorsPortal";
+import TermsAndConditions from "./TermsAndConditions";
 
 export {
     Dashboard,
@@ -28,4 +29,5 @@ export {
     VendorRegister,
     Vendors,
     VendorsPortal,
+    TermsAndConditions,
 };
