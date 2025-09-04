@@ -7,17 +7,17 @@ const Footer = ({ anchor, setAnchor }) => {
                 <div className="row">
                     {/* Left: Branding and tagline */}
                     <div className="col-md-6 mb-4 mb-md-0">
-                        <h4 className="fw-bold">Freighble</h4>
+                        <h4 className="fw-bold">Freighble Technologies</h4>
                         <p className="fw-light small">
-                            Freight made reliable. Your trusted carrier search
-                            solution.
+                            Freight made reliable. Smart carrier search. No
+                            clutter, just matches.
                         </p>
                     </div>
 
                     {/* Right: Quick links */}
-                    <div className="col-md-6 d-flex flex-column align-items-md-end">
-                        <h6 className="fw-bold mb-3">Quick Links</h6>
-                        <ul className="list-unstyled">
+                    <div className="col-md-6 d-flex flex-column align-items-md-end text-md-end">
+                        <h4 className="fw-bold mb-3">Quick Links</h4>
+                        <ul className="list-unstyled small">
                             <li className="mb-2">
                                 <Link
                                     to="/"
@@ -47,10 +47,26 @@ const Footer = ({ anchor, setAnchor }) => {
                             </li>
                             <li className="mb-2">
                                 <Link
-                                    to="/register"
+                                    to="/login"
                                     className="text-decoration-none link-light"
                                 >
-                                    Get Started
+                                    User Portal
+                                </Link>
+                            </li>
+                            <li className="mb-2">
+                                <Link
+                                    to="/vendors/login"
+                                    className="text-decoration-none link-light"
+                                >
+                                    Vendor Portal
+                                </Link>
+                            </li>
+                            <li className="mb-2">
+                                <Link
+                                    to="/general-terms-and-conditions"
+                                    className="text-decoration-none link-light"
+                                >
+                                    Terms and Conditions
                                 </Link>
                             </li>
                         </ul>
@@ -60,8 +76,8 @@ const Footer = ({ anchor, setAnchor }) => {
                 <hr className="border-light my-4" />
 
                 <div className="text-center small">
-                    &copy; {new Date().getFullYear()} Freighble. All rights
-                    reserved.
+                    &copy; {new Date().getFullYear()} Freighble Technologies.
+                    All rights reserved.
                 </div>
             </div>
         </footer>

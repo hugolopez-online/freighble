@@ -87,10 +87,13 @@ const Home = ({ setAnchor, theme }) => {
                         </p>
 
                         <p className="fs-5">
-                            But here's the twist: you remain in control. No
-                            hidden brokers, no forced funnels. Pick a vendor and
-                            you'll get an
-                            <strong> instant way to reach out via email</strong>
+                            Here's the twist: you remain in full control. No
+                            hidden brokers, no forced funnels. Pick any vendor
+                            and get an
+                            <strong>
+                                {" "}
+                                instant way to directly reach out via email
+                            </strong>
                             .
                         </p>
 

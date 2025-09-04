@@ -50,7 +50,7 @@ const TermsAndConditions = ({ theme }) => {
                             Vendors for potential transportation services.
                         </li>
                         <li>
-                            <strong>“Profile”</strong> means a Vendor’s company
+                            <strong>“Profile”</strong> means a Vendor's company
                             record on the Platform, including coverage,
                             capabilities, lanes, and contact details.
                         </li>
@@ -164,7 +164,7 @@ const TermsAndConditions = ({ theme }) => {
                     </h2>
                     <ol className="fs-6">
                         <li>
-                            Freighble’s matching engine surfaces Vendors based
+                            Freighble's matching engine surfaces Vendors based
                             on multiple factors (e.g., modes, coverage, lanes,
                             certifications). Results are best-effort and not
                             guarantees of suitability or availability.
@@ -315,7 +315,7 @@ const TermsAndConditions = ({ theme }) => {
                         FREIGHBLE TECHNOLOGIES and its officers, directors,
                         employees, and agents from any claims, damages,
                         liabilities, costs, and expenses (including reasonable
-                        attorneys’ fees) arising out of or related to: (a) your
+                        attorneys' fees) arising out of or related to: (a) your
                         Content; (b) your use or misuse of the Platform; (c)
                         your violation of these Terms; or (d) your violation of
                         applicable laws or third-party rights.
@@ -326,9 +326,12 @@ const TermsAndConditions = ({ theme }) => {
                     <p className="fs-6">
                         For account deletion, support, or legal notices, contact
                         us at{" "}
-                        <span className="fw-semibold">
+                        <a
+                            href="mailto:support@freighble.com"
+                            target="_blank"
+                        >
                             support@freighble.com
-                        </span>
+                        </a>
                         . Notices will be deemed received when sent to your
                         account email or delivered via the Platform.
                     </p>
