@@ -55,6 +55,11 @@ const UserAuth = new mongoose.Schema(
             type: UserTerms,
             required: [true, "Terms information must be provided."],
         },
+        active: {
+            type: Boolean,
+            default: true,
+            required: [true, "Account status must be provided."],
+        },
     },
     { _id: false }
 );

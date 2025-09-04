@@ -87,7 +87,14 @@ const USERS_API_DELETE = async (req, res) => {
             throw new BadRequest("Invalid user ID.");
         }
 
-        const user = await User.findOneAndDelete({ _id: id });
+        const user = await User.findOneAndUpdate(
+            { _id: id },
+            { $set: { "auth.active": false } },
+            {
+                new: true,
+                runValidators: true,
+            }
+        );
 
         if (!user) {
             throw new NotFound("No user has been found.");
@@ -111,7 +118,7 @@ const USERS_API_LOGIN = async (req, res) => {
         const user = await User.findOne({ email: email.toLowerCase() });
         const match = await user?.comparePassword(password);
 
-        if (user && match) {
+        if (user && user.auth.active && match) {
             // TODO: store token in httOnly cookie - localStorage is for development only
             const token = user.createToken();
             return res.status(StatusCodes.OK).json({
