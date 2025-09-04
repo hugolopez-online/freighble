@@ -306,6 +306,11 @@ const VendorDisplay = (props) => {
         const toast = Toast.getOrCreateInstance(FREIGHBLE_ALERT);
         e.preventDefault();
 
+        if (e.target.innerHTML === "Delete Account") {
+            e.target.innerHTML = "Confirm Account Deletion";
+            return;
+        }
+
         const URL = `/api/vendors/public/delete/${data._id}`;
 
         setIsFetching(true);
@@ -2160,20 +2165,6 @@ const VendorDisplay = (props) => {
                                             <h5 className="text-danger text-uppercase">
                                                 danger zone!
                                             </h5>
-                                            <small
-                                                className={`text-danger${
-                                                    props.theme === "light"
-                                                        ? "-emphasis"
-                                                        : ""
-                                                }`}
-                                            >
-                                                This is a{" "}
-                                                <b>one-click deletion</b>{" "}
-                                                button, and once deleted, all
-                                                your account's information is
-                                                irrevocably removed from our
-                                                database.
-                                            </small>
                                             <button
                                                 type="button"
                                                 className="btn btn-danger bg-gradient fw-medium w-100 rounded-3 mt-2"

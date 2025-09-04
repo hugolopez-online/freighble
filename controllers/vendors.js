@@ -251,7 +251,14 @@ const VENDORS_API_DELETE = async (req, res) => {
             throw new BadRequest("Invalid vendor ID.");
         }
 
-        const vendor = await Vendor.findOneAndDelete({ _id: id });
+        const vendor = await Vendor.findOneAndUpdate(
+            { _id: id },
+            { $set: { "auth.active": false } },
+            {
+                new: true,
+                runValidators: true,
+            }
+        );
 
         if (!vendor) {
             throw new NotFound("No vendor has been found.");
