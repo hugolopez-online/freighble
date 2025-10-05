@@ -88,6 +88,12 @@ const Vendor = (props) => {
 
     const MAILTO_LINK = `mailto:${props.email}?subject=${EMAIL_SUBJECT}&body=${EMAIL_BODY}`;
 
+    const VENDOR_TYPE = props.type.asset_based
+        ? props.type.freight_broker
+            ? "asset-based carrier/broker"
+            : "asset-based carrier"
+        : "broker";
+
     // render
     return (
         <div className="col-12">
@@ -127,17 +133,6 @@ const Vendor = (props) => {
                                     >
                                         {props.company}
                                     </Link>
-                                </span>
-                                <span style={{ fontSize: "0.7em" }}>
-                                    <i
-                                        className={`bi bi-circle-fill text-${
-                                            props.type.asset_based
-                                                ? props.type.freight_broker
-                                                    ? "warning"
-                                                    : "success"
-                                                : "danger"
-                                        } ms-2`}
-                                    ></i>
                                 </span>
                                 <button
                                     type="button"
@@ -195,6 +190,19 @@ const Vendor = (props) => {
                             className="collapse"
                             id={`${props.dispatched_key}-extra-info`}
                         >
+                            <span
+                                className={`badge rounded-pill text-bg-${
+                                    props.type.asset_based
+                                        ? props.type.freight_broker
+                                            ? "warning"
+                                            : "primary"
+                                        : "danger"
+                                } bg-gradient me-1 mb-2`}
+                                style={{ fontSize: "0.75rem" }}
+                            >
+                                {VENDOR_TYPE}
+                            </span>
+                            <br />
                             <a
                                 href={`https://www.google.com/maps/search/${props.domicile.city},+${props.domicile.territory},+${props.domicile.country}`}
                                 target="_blank"
