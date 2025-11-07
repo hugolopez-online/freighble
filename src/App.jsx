@@ -12,7 +12,7 @@ import {
     VendorProfile,
     VendorRegister,
     Vendors,
-    VendorsPortal,
+    VendorPortal,
     NotFound,
     TermsAndConditions,
 } from "./pages";
@@ -105,7 +105,7 @@ function App() {
                     >
                         <Route
                             index
-                            element={<VendorsPortal theme={theme} />}
+                            element={<VendorPortal theme={theme} />}
                         />
                         <Route
                             path="vendor"

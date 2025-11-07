@@ -11,7 +11,7 @@ import VendorLogin from "./VendorLogin";
 import VendorProfile from "./VendorProfile";
 import VendorRegister from "./VendorRegister";
 import Vendors from "./Vendors";
-import VendorsPortal from "./VendorsPortal";
+import VendorPortal from "./VendorPortal";
 import TermsAndConditions from "./TermsAndConditions";
 
 export {
@@ -28,6 +28,6 @@ export {
     VendorProfile,
     VendorRegister,
     Vendors,
-    VendorsPortal,
+    VendorPortal,
     TermsAndConditions,
 };

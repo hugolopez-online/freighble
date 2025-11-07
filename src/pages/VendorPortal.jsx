@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import steps_graphic from "../assets/img/pictures/steps_graphic.svg";
 
-const VendorsPortal = ({ theme }) => {
+const VendorPortal = ({ theme }) => {
     window.scrollTo(0, 0);
 
     return (
@@ -19,7 +19,7 @@ const VendorsPortal = ({ theme }) => {
                         theme === "light" ? "dark" : "light"
                     }`}
                 >
-                    Vendors Portal
+                    Vendor Portal
                 </h1>
 
                 <div className="mt-5">
@@ -90,4 +90,4 @@ const VendorsPortal = ({ theme }) => {
     );
 };
 
-export default VendorsPortal;
+export default VendorPortal;
